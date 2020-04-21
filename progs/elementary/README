@@ -1,8 +1,0 @@
-README
-
-Elementary functions and its relatives.
-This is still being developed.
-The basic idea is to build upon Mpfr's implementation
-of the basic functions.   
-
-See, for instance, testIO/testMpfr.cpp for simple examples.
