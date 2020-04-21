@@ -1,0 +1,13 @@
+1. UI/UX features
+  1.1. Zooming
+  1.2. Saving images
+2. Mathematical features
+  2.1. Implement the MK test
+    2.1.1 Use the MK-based construction algorithm
+  2.2. Use box predicates at appropriate scales
+  2.3. Handle geometric accuracy (when ensuring topological correctness fails)
+  2.4. Ensure numerical accuracy
+3. Other features
+  3.1. Output Voronoi graph (in .dot format)
+4. Other 
+  4.1. Extensive testing

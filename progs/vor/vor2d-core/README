@@ -1,0 +1,85 @@
+============================================================
+README file for $(CORELIB)/progs/vor/vor2d
+Since Core Library Version 2.2.
+	$Id: README 924 2012-05-21 22:04:00Z jmlien $
+============================================================
+Files in this directory:
+	README			-- this file
+	Makefile		-- Type "make LEV=n" to compile programs in different
+					levels, or "make eg1" to run examples.
+	vor2d.cpp		-- main program
+	Box.{h,cpp}		-- box functions
+	QuadTree.{h,cpp}	-- quad tree data structure
+	Corner.{h,cpp}		-- corner features
+	Wall.{h,cpp}		-- wall features
+	PriorityQueue.h		-- priority queue for search strategy
+	Graph.h			-- graph searching based on Dijkstra and Astar 
+	fileProcessor.cpp	-- for parsing input files
+	Timer.{h,cpp}		-- for timing
+	Feature.h		-- 
+
+	envGenerator.py		-- Python script to generate large environments
+Directories:
+	inputs			-- various sample input environment
+============================================================
+
+OVERVIEW:
+
+	This is an implementation of a subdivision algorithm for
+	the Voronoi complex of a polygonal set Omega.  
+	The boundary of Omega is assumed to be decomposed into a set Phi(Omega)
+	of "features", either corners (points) or edges (open line segments).
+
+	THEORY:
+	The "Voronoi complex" of Omega is a 1-dimensional complex
+			Vor(Omega) 
+	is a set comprising Voronoi vertices and curves connecting
+	Voronoi vertices (or going to infinity) such that the support
+	of this complex is the geometric Voronoi diagram.
+	Elements of Vor(Omega) are called Voronoi features.
+
+	An epsilon-approximation of Vor(Omega) is a
+	a PSLG (planar straightline graph)
+			G=(N,A)
+	where N is the set of nodes and A the set of arcs.
+	Nodes of degree 2 are called via points.
+	A node of degree 3 represents a Voronoi vertex in Vor(Omega).
+	A maximal path along via points and arcs represents a Voronoi curve in Vor(Omega).
+	Thus, G=(N,A) is an exact representation of Vor(Omega).
+	
+	Moreover, if v' is a node representing a
+	Voronoi vertex v, then d(v,v')< epsilon, and if e' is a maximum polygonal
+	curve representing a Voronoi curve, then the Hausdorff distance d(e,e')<epsilon.
+	For each node v', we determine the set of features that
+	are closest to v, and for each edge
+
+	Termination of our algorithm depends on NON-DEGENERACY of the Voronoi
+	diagram (i.e., every Voronoi vertex is closest to exact 3 features).
+	In implementation, we can circumvent this possible non-termination
+	by using an arbitrary epsilon cut-off.
+
+	ALGORITHMIC FRAMEWORK:
+	The framework we are developing is based on the Subdivision Method
+	-- starting from an initial box, we keep subdividing any leaf B that does
+	not satisfy a predicate C(B).   Upon termination, we balance
+	the subdivision, and then process each box in turn to construct
+	our Voronoi complex.  
+	
+	WHAT IS NEW?
+	(1) This seems to be the first complete algorithm for the Voronoi complex,
+	based on purely numerical primitives.   
+	All previous methods ultimately rely on some exact predicates.
+
+	(2) Our main contribution is the emphasis on purely numerical,
+	soft predicates.   Essentially, they ultimately reduce
+	to distance computation between pairs of features or points.
+
+	The current implementation is based on Machine arithmetic.
+	We plan to convert these algorithms to run in Core Library
+	in the 3 levels of accuracy.
+
+	--Jyh-Ming Lien, Chee Yap, Vikram Sharma
+	May 20, 2012.
+
+============================================================
+

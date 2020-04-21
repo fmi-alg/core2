@@ -1,0 +1,26 @@
+README file for CHULL
+
+The following files and subdirectories are in the chull directory:
+
+  README	This file.
+
+  Makefile	To compile and test programs
+
+  inputs/	subdirectory containing sample input files 
+			(see README file in this subdirectory)
+
+  outputs/	subdirectory for output
+
+  chull.cc	CORE-ized version of O'Rourke's chull.c
+		Input and output are 3-D points
+			(non-homogeneous coordinates)
+
+  chull4.cc	Similar to chull.cc, but with different input format.
+		Input and output are integer points
+			in homogenous coordinates.
+
+  chull-orig.c	O'Rourke's original C source code
+		Input are integer 3D points.
+		Read leading comments there.
+
+  macros.h	Include file for O'Rourke's original program.

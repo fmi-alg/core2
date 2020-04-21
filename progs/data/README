@@ -1,0 +1,36 @@
+file: progs/data/README
+	$Id: README,v 1.3 2010/06/28 15:58:19 exact Exp $
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Contents of this directory:
+	README:
+		this file
+	frisco:
+		this directory contains the "FRISCO Test Suite"
+		comprising 165 polynomials from Bini and Fiorentino.  It 
+		accompanies their well-known MPSolve software for root
+		isolation:
+		    http://www.dm.unipi.it/cluster-pages/mpsolve/.
+	friscore:
+		version of frisco suite in Core Format.
+	FriscoFormat:
+		Description of the Frisco File format
+	friscoFilter.sh:
+		Irena Voiculescu's shell script
+	Collection:
+		Each file is a list of frisco files of a certain characteristic.
+		E.g., all real polynomials with integer coefficients
+	simplepolynomials:
+		They include constant polynomials, polynomials
+		with no real roots, linear polynomials, etc.
+	specialpolynomials:
+		They include polynomials with double or triple roots,
+		polynomials with integer or rational roots only,
+		well-known polynomials like golden ratio, or n-th roots
+		of unity.
+
+Chee Yap (June 2012)
+Since Core 2.1
+++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++
+

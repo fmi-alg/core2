@@ -1,0 +1,12 @@
+READFIRST
+
+There is a README file in most subdirectories of (CORE)/progs.
+
+But if you browse the subdirectory through our download
+pages, it may not show up.  You can explicitly 
+point your browser at the README file to get it:
+
+E.g., for the README file in (CORE)/progs/pi/, use
+
+  http://cs.nyu.edu/exact/core/download/core_v2.0/core_v2.0/progs/pi/README
+

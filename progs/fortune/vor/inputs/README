@@ -1,0 +1,9 @@
+Sample files for Fortune's algorithm
+
+point100:	random set of 100 points
+lattice9: 	9 points that form a 3x3 lattice
+circle8:	8 points on a circle
+circle10:	10 points on a circle (produced by pythagorean program)
+circle100:	100 points on a circle (produced by pythagorean program)
+degen6:		6 points almost cocircular, causing wrong output 
+		(where did it go wrong?)

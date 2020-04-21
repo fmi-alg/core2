@@ -1,0 +1,147 @@
+
+
+This file explains the tests designed in the test program.
+The triangle-triangle intersection functionss is extensively
+tested in this program. Here are some cases that has been
+tested.
+
+##### TEST 1: Share one vertex #####
+
+T1:
+0,1,0
+1,2,1
+4,4,1
+
+T2:
+3,0,0
+0,1,0
+3,1,2
+
+Intersection: Point3d(0 1 0)
+
+##### TEST 2: non-coplanar intersection symetric test #####
+T1:
+1,1,-1
+1,1,1
+4,0,-1
+
+T2:
+3,0,0
+0,1,0
+3,1,2
+
+Intersection: Segment3d (1, 1, 2/3) -- (1.5, 5/6, 2/3)
+
+##### TEST 3: Touch at one vertex #####
+T1:
+0,0,-1
+6,0,-1
+4,5,-1
+ 
+T2:
+4,0,-1
+5,0,5
+3,1,4
+
+Intersection Point3d(4,0,-1)
+
+##### TEST 4: Coplanar share one vertex ######
+T1:
+4,5,1
+2,3,1
+5,4,1
+
+T2:
+9,6,1
+6,7,1
+4,5,1
+
+Intersection: Point3d(4,5,1)
+
+##### TEST 5: ######
+T1:
+1,1,-1
+4,1,-1
+5,6,-1
+
+T2:
+3,1,-1
+6,1,-1
+4,4,3
+
+Intersection Segment3d (3,1,-1) -- (4,1,-1)
+
+##### TEST 6: Intersect on one vertex(inside another T) #########
+T1:
+1,1,1
+7,1,1
+5,6,1
+
+T2:
+4,3,1
+3,5,4
+4,5,6
+
+Intersection: Point3d(4, 3, 1)
+
+##### TEST 7: One vertex is on another edge #######
+T1:
+1,2,3
+7,2,3
+5,7,3
+
+T2:
+4,2,3
+3,6,6
+4,2,8
+
+Intersection: Point3d(4, 2, 3)
+
+##### TEST 8: intersect on one edge #####
+T1:
+1,0,1
+6,0,1
+5,6,1
+
+T2:
+1,0,-1
+5,6,3
+4,0,5
+
+Intersection: Segment3d (2,0,1)-- (3,3,1)
+
+##### TEST 9: coplanar symmetric test #####
+T1:
+3,2,2
+9,2,2
+7,7,2
+	
+T2:
+6,4,2
+5,9,2
+9,8,2
+
+T1<>T2 == T2<>T1
+
+##### TEST 10: #####
+T1:
+1,0,2
+6,0,2
+5,6,2
+
+T2:
+2,0,2
+1,2,5
+4,6,2
+
+Intersection:  Segment3d (2,0,2) -- (3,3,2)
+
+##### TEST 11: reflective test #####
+T1:
+1,0,2
+6,0,2
+5,6,2
+
+T1<>T1 == T1
+
+##### END OF TEST #####

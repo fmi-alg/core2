@@ -1,0 +1,45 @@
+
+The 22 roots in the file chrmc23.res
+are obtained by MPSOLVE using the command:
+
+	> unisolve -Ga -Db -o100 Data/chrmc23.pol > Results/ch
+
+DISCUSSION:
+	This is impressive, because the current implementation of
+	CEVAL (June 2012) using LEVEL 1 accuracy, could only identified 12 roots
+	and give 72 ambiguous boxes).
+	NOTE that CEVAL is guaranteed correct UNLESS there is overflow
+	or underflow during the computation.   Of course, we did not check
+	this (TODO), so even the 12 purported roots might have some problems if this happens.
+	For instance, when we zoom into the ambiguous region to higher accuracy, the
+	ambiguity vanishes and no roots are found.   Clearly, over/underflow occurred.
+	
+	On closer look at MPSolve's output, we can see at once that four of the roots
+	are numerically identical:
+	
+	(0.2e1, 0.e-124)
+	
+	which may be interpreted to be (2, 0). 
+	
+	MPSolve does not tell us whether these
+	are four identical roots, or four distinct roots (or anything in between).
+	
+	There are other "potential multiple roots" in this MPSolve output:
+	just look at the pair of roots just before (2,0).
+	
+	I believe it is inherently impossible for a "numerical algorithm"
+	like MPSolve to decide multiple roots  (of course CEVAL is no better in this regards).
+	
+	STILL, I am impressed that MPSolve COULD tell us that there is
+	a cluster of four roots here.  
+	
+	HERE is what CEVAL can do that MPSolve cannot:
+	it is possible in Level 2, to decide whether these "potential multiple roots"
+	are multiple roots or distinct ones  -- I can compute
+	a root separation bound, and compute the that accuracy.
+	It might take a long time, but eventually we will know.
+	(TODO).
+	
+	--Chee and Irina (June 2012)
+	
+	

@@ -1,0 +1,30 @@
+Debug:
+
+(FIXED) PROBLEM: "make eg6"
+	is buggy -- it does not seem to be reading the Laguerre6 polynomial
+	(which should have 6 real POSITIVE roots lying in [0,20].
+	I think the code is not reading the polynomial.
+
+PROBLEM: "make eg6b"
+	where the box is not square.  Then somehow,
+	the program revert to the default polynomials, not Laguerre6.
+	This is strange behavior....
+
+PROBLEM: Suddenly, nothing works (April 13, 2012), reading error!!!
+
+	cheeyap@miranda[748] make
+	g++ -c -O3 -Wfatal-errors -g -Wall -Dmac  -I. -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ -I/opt/local/include -I../../third_party/ main.cpp -o main.o
+	g++ -c -O3 -Wfatal-errors -g -Wall -Dmac  -I. -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ -I/opt/local/include -I../../third_party/ tmp-display.cpp -o tmp-display.o
+	g++  main.o tmp-display.o -L../../../lib -L../../../mpfr/lib -L../../../gmp/lib -L/opt/local/lib -lGL -lGLU -lglut -lgl -lglu -lcore++Debug -lmpfr -lgmp -o mk
+	cheeyap@miranda[749] make
+	make: Nothing to be done for `all'.
+	cheeyap@miranda[749] make test
+	./mk -f "y - (x-1)^2 - 1" -g "x^2 + y^2 - 4" -x -10 -X 10 -y -10 -Y 10 -m 0.00001
+	error reading 
+	make: *** [test] Segmentation fault
+	cheeyap@miranda[750] make eg1
+	./mk --fxy "y-x^2" --gxy "x^2+y^2-1" \
+	    --x_min -10 --x_max 10 --y_min -10 --y_max 10 --minsize 0.00001 --maxsize 0.01 --maxgen 15 
+	error reading 
+	make: *** [eg1] Segmentation fault
+	

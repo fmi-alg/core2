@@ -1,0 +1,24 @@
+README file
+Core Library: $Id: README,v 1.1 2006/03/07 04:51:24 exact Exp $
+
+1) These are simple programs to test the geometric primitives
+   in Core Extensions,  LinearAlg and Geometry
+
+2) To make and test all the (non-LEDA) test program, do
+
+	% make 
+	% make test
+
+3) In the above, the default Accuracy CORE_LEVEL is 3, but
+   you can compile and test the same programs at CORE_LEVEL 1 by doing
+
+	% make veryclean
+	% make LEV=1
+	% make test
+
+4) Some of the programs here need LEDA.  If you want
+   to make and test these, do:
+
+	% make allLeda
+	% make testLeda
+

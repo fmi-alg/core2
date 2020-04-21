@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.macosx.base.552489715/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.macosx.base.552489715/appendContributed=true
+environment/project/cdt.managedbuild.toolchain.gnu.macosx.base.552489715/path/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.macosx.base.552489715/path/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.macosx.base.552489715/path/value=/opt/local/bin\:${PATH}

@@ -1,0 +1,20 @@
+#
+#  This file describe a robot.	
+#	 The file formats like following:
+#	 N, number of vertices, followed by N lines of coordinates.
+#  M, number of trianlges, followed by M lines of triangles, defiend by indices its vertices
+#  Currently, the triangles must be NICE, and the vertices must ordered CCW.
+#
+
+6
+0 0
+1 0
+1 0.3
+0.3 0.3
+0.3 1
+0 1
+4
+0 1 2
+0 2 3
+0 3 4
+0 4 5

@@ -1,0 +1,167 @@
+************************************************************
+ file: README for prover
+ author: Daniela Tulone (tulone@cs.nyu.edu)
+	Chee Yap (yap@cs.nyu.edu)
+	Chen Li (chenli@cs.nyu.edu)
+ Core Library 
+ $Id: README,v 1.1 2006/03/07 04:51:25 exact Exp $
+************************************************************
+
+Files in this directory
+-----------------------
+	README		-- this file
+	Makefile
+	prover.cc	-- main program
+	prover2.cc	-- verbose output version
+	prover.h
+	terms.h
+	inputs/		-- directory with sample theorems and non-theorems
+
+What prover does
+----------------
+The program "prover" proves the validity of a given geometric
+conjecture, probabilistically.  Such a conjecture has two parts:
+hypothesis (H) and thesis (T).
+(H) is represented by a system of polynomial equations 
+in parameters (u_1, u_2, ..., u_m)
+and dependent variables (x_1, x_2, ..., x_n).
+[Terminology: parameters means "independent variables",
+and "variables" cover both dependent and independent variables.]
+The thesis (T) is a polynomial in these variables.
+The conjecture is true if
+the vanishing of (H) implies the vanishing of (T).
+
+Because the geometric conjecture is about a "zero-dimensional"
+ruler-and-compass construction, we can replace the dependent
+variables by radical expressions involving only the parameters.
+By definition, a "radical expression" is an algebraic expression
+involving variables, rational constants,
+the 4 arithmetic operations and square-roots.
+
+Our method of proving a theorem
+is to choose values for the parameters randomly in 
+a specific S set of integers,
+compute numerically a set of corresponding dependent variables,
+and check if the thesis polynomial
+is satisfied by these numerical values.
+If the size of S is large enough, then the
+theory tells us that the probability of the
+conjecture being false and our random test
+failing to detect this is <0.5 (say). 
+
+Connection Between This Prover and One Described in our Paper
+-------------------------------------------------------------
+``Randomized Zero Testing of Radical Expressions and Elementary 
+Geometry Theorem Proving'', by D. Tulone, C. Yap and C. Li,
+Proc. ADG'00, Zurich Sep 25-27, 2000 (Lecture Notes in Comp.Sci.
+and A.I., No. 2061, Springer 2001)
+
+The above paper describes the underlying theory.
+The timings reported there are based on CORE 1.3.  But more importantly,
+it used a specially modified version of the Expr class to compute a
+sharp upper bound on the "rational degree" of a radical expression.
+This ability is not found in the Expr class of the normal Core Library.
+Therefore, in the absence of such ability, the prover in this demo uses
+a crude estimate of the "rational degree", with the result that
+the prover here is slower than it need to be.  This crude bound is also
+described in the paper, based only on counting the number of operations
+instead of taking the structure of the dag into account.  In the Core 1.3,
+it was not feasible to verify Pascal's theorem using this crude estimage,
+even for c=1.  In CORE 1.5 (Aug 2002), this is no longer a problem.
+
+How to run
+----------
+	% prover <inputfile> N 
+
+where N is the number of tests that we want to perform.
+This gives an error probability of at most 2^{-N}.
+The prover prints in the standard output the following
+information:
+	-- The cardinality of the test set S
+	-- The algebraic formulation of the theorem
+	-- For each of the N tests, the
+		random values chosen for the parameters
+	        and the corresponding values computed
+		for the dependent variables.
+	-- Whether the conjecture is true (probably)
+		or false (surely)
+	-- Auxilliary information related to failed
+		examples -- when the degeneracy
+		conditions are not met
+		(e.g., division by 0,
+		square-root of negative numbers, etc)
+
+Actually, "prover" is linked to "prover_level_3";
+we also compile the level 1 version, "prover_level_1".
+
+Sample Input Files
+------------------
+Here are some examples of theorems in the inputs
+subdirectory:
+
+	input/pappus
+	input/simson
+	input/pascal  (slow!)
+
+The following are reducible theorems: 
+
+	inputs/butterfly
+
+We also include corrupted versions of these
+theorems (input/pappusBad, etc).  The corruptions are
+always "minor" (single change of sign, increment of a coefficient, etc).
+The point is the our prover will detect this instantly.
+
+See the README file under the "inputs" subdirectory
+for a description of these theorems.
+
+Input File Format
+-----------------
+Comments may be inserted in the input files:
+	the character '#' and any following characters 
+	in the same line are discarded.
+The first row of an input file contains 2 integers:
+	m, the number of parameters,
+	n, the number of (dependent) variables.
+The parameters are indexed 0 to m-1, and the
+dependent variables are indexed m to n+m-1.
+
+We also assume that the number of polynomials in the
+hypothesis is equal to n.  We index the hypothesis
+polynomials from 0 to n-1.  The rest of the polynomials
+form the thesis and these are numbered from n and upwards.
+[This version does not treat non-degeneracy condition]
+
+The remaining rows in the input file define the terms
+of the input polynomials (each polynomial is viewed as
+a sum of terms).  We exploit the fact that
+each term is constant, linear or quadratic in the variables.
+Each row has 5 integers, say,
+	index coef expo var1 var2
+where
+   - index is the index of the polynomial that the term belongs to
+   - coef is the coefficent of the term
+   - expo is the exponent of var1 (so expo = 0, 1 or 2)
+   - var1 is the index of one of the variables
+   - var2 is the index of the other variable (if any).
+	If there are no other variables, var2 = -1.
+	Note that if var2 is not -1, then expo must be 1
+	(so that the exponent of var2 is also 1, implicitly)
+
+For further information please see terms.h
+Example: assume the parameters are u[0], u[1]
+and the dependent variables are x[0], x[1],...
+
+	1 1
+	0 2 2 0 -1  ---------> 2.u[0]
+	0 3 0 -1 -1 ---------> 3
+	0 4 1 2 -1  ---------> 4.x[0]
+	0 1 1 1 3   ---------> u[1].x[1]
+
+Additional Comments
+-------------------
+
+We prove the conjecture over the reals.
+If we get complex values, we discard the example and output
+"ComputeConfiguration FAILED" as well as the reason (e.g. delta < 0)
+

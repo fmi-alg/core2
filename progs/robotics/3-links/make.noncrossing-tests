@@ -1,0 +1,119 @@
+# README
+# Author Zhongdi Luo
+# Feb 1, 2014
+#
+# This file is a backup for all the cases of experiment shown in
+# 	the non-crossing 2-link paper.
+
+eg2a-paper: ./2-links
+	@echo "Target eg2: 8-way junction non-crossing test" 
+	./2-links $(interactive) 216 297 155 115 210 220 260 200\
+		4 85 80 8 zigzagrotation.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		2 $(seed)  $(inputDir) \
+		0 0 1 \
+		$(verbose) "Eg2: 8-ways with 3 more obstacles" \
+		$(smarterStrategy) \
+		$(threshold) \
+		$(crossing) \
+		$(bandwidth) \
+		&
+
+# eg2b has smaller epsilon and longer links. It generates a more interesting path
+
+eg2b-paper: ./2-links
+	@echo "Target eg2: 8-way junction" 
+	./2-links $(interactive) 216 297 95 175 210 220 270 190\
+		2 88 98 8 zigzagrotation.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		3 $(seed)  $(inputDir) \
+		0 0 1 \
+		$(verbose) "Eg2: 8-ways with 3 more obstacles" \
+		$(smarterStrategy) \
+		$(threshold) \
+		$(crossing) \
+		79 \
+		&
+		
+# Bugtrap2 example -- Existance of path.
+eg5-paper bug2-paper: ./2-links
+	@echo "Target 'eg5 or bug2':  Double bugtrap -- path!"
+	@echo "--  this examples shows there is PATH, but barely so!"
+	./2-links $(interactive) 190 210 180 300 30 30 90 340\
+		4 55 50 $(thickness) bugtrap2.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		2 $(seed) $(inputDir) \
+		$(xtrans) $(ytrans) $(scale) \
+		$(verbose) "Eg5: Double Bugtrap (bandwidth=95/100 => path/NOPATH)"\
+		$(smarterStrategy) \
+		$(threshold) \
+		$(crossing) \
+		95 \
+		&
+		
+# eg8: from Paper of Hsu-Lathombe-Kurniawati
+eg8-paper hsu-paper: ./2-links
+	@echo "Target eg8: example from paper of Hsu, Latombe, Kurniawati (2006)"
+	@echo "	There is a path passage... when bandwidth=7, epsilon=2"
+	@echo " 	There is NO PATH... when bandwidth=8, epsilon=2"
+	./2-links $(interactive) 20 390 0 270 275 180 270 0\
+		2 30 25 $(thickness) hsu-latombe-kurniawati3.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		2 $(seed)  $(inputDir) \
+		-70 -70 0.065 \
+		$(verbose) "Eg8: From Hsu, Latombe, Kurniawatti (2006), path" \
+		$(smarterStrategy) \
+		$(threshold) \
+		$(crossing) \
+		7 \
+		&
+		
+# maze example!
+eg12-paper maze-paper: ./2-links
+	./2-links $(interactive) 375 400 180 0 105 60 0 180\
+		4 30 33 0 input4.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		3 $(seed) $(inputDir) \
+		$(xtrans) $(ytrans) $(scale) \
+		$(verbose) "Eg 12: Maze " \
+		$(smarterStrategy) \
+		$(threshold) \
+		$(crossing) \
+		146 \
+		&
+
+# eg13:  T-Room example -- to show clearly the difference between
+# 		self-crossing and non-crossing  
+eg13-paper troom-paper: ./2-links
+	./2-links $(interactive) 257 230 251 294 252 420 294 251\
+		4 94 85 \
+		0 T-room2.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		3 $(seed)  $(inputDir) \
+		25 -120 0.08 \
+		$(verbose) "Eg13: T-room with path (bandwidth=10/11=>path/NOPATH)" \
+		$(smarterStrategy) \
+		$(threshold) \
+		1 \
+		10 \
+		&
+		
+# eg300: 300 random 2-links
+#
+eg300-paper: ./2-links
+	@echo "Target eg300:  runs 2-links amidst 300 randomly generated 2-links"
+	@echo "--  This may take a noticeable amount bit of time "
+	@echo "    depending on the search strategy"
+	./2-links $(interactive) \
+	    	10 400 90 270 \
+		270 190 270 90 \
+		4 40 35 $(thickness) input300.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		2 1111 $(inputDir) \
+		$(xtrans) $(ytrans) $(scale) \
+		$(verbose) "Eg 300: 300 randomly generated triangles" \
+		$(smarterStrategy) \
+		$(threshold) \
+		$(crossing) \
+		127 \
+		&

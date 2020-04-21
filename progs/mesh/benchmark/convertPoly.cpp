@@ -1,0 +1,581 @@
+/* **************************************
+   File: convertPoly.cpp
+
+   Description: 
+	Given an input polynomial p(z) with real coefficients,
+	we construct the real and complex bivariate polynomials,
+	u(x,y) and v(x,y) where p(x+iy)=u(x,y)+i v(x,y).
+	We then compute the real and complex curves u=0 and v=0
+	in the complex plane, using the cxy algorithm.
+
+   Usage:
+        > ./convertPoly  [curve="x^2-x-1"]   [ofile="output/out"] [verbose=0]
+
+	The input is a univariate polynomial p(z).
+	The output is written to the four files:
+
+		$(ofile).poly		-- original poly
+		$(ofile)_u.poly 	-- the u-poly
+		$(ofile)_v.poly 	-- the v-poly
+		$(ofile)_uv.poly 	-- the uv-poly
+
+	The format is the "natural monomial format".
+	E.g.,	 z^2 -z -1,    x^2y + 2y^3 + 11xy + 2.
+
+
+   Author: Chee Yap
+   Since Nov, 2010, Core Library  Version 2.1
+   $Id: convertPoly.cpp,v 1.1 2010/11/09 04:26:29 exact Exp $
+ ************************************** */
+
+#define CORE_LEVEL 4
+#include "CORE/CORE.h"
+#include "CORE/poly/Curves.h"
+#include "CORE/ComplexT.h"
+//#include "benchmark.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+
+// ##################################################
+// typedefs
+// ##################################################
+	//typedef double NT; // does not work -- Curves.tcc:: getnumber cannot convert
+	typedef BigInt NT; 
+	//typedef ComplexT<double> Complex;
+	typedef Polynomial<NT> PolyNT;
+	typedef BiPoly<NT> BiPolyNT;
+
+// ##################################################
+// Argument processing
+	// 1
+	PolyNT p = PolyNT("(x-1)^4");	// default input polynomial 
+	// 2
+	string ofile = "output/out"; 	// output file (to be appended with u,v,uv)
+	// 3
+	int verbose = 0;		// verbose mode
+
+// ##################################################
+// Routines to be defined:
+//
+	// convertPoly(p, *u, *v)
+	template <typename T>
+	void ConvertPoly(const Polynomial<T> &p, BiPoly<T> *real, BiPoly<T> *im);
+
+	// write to file in std monomial format
+	template <typename T>
+	bool write_poly(Polynomial<T>& p, const char* filename = "output/out");
+	
+	// read from file in std monomial format
+	template <typename T>
+	bool read_poly(Polynomial<T>& p, const char* ifilename = "data2/golden.poly");
+
+	// read from frisco file
+	template <typename T>
+	//	void read_poly_frisco(FILE *instr, Polynomial<T>& p);
+	void read_poly_frisco(Polynomial<T>& p, FILE *instr);
+
+	// read from frisco file
+	template <typename T>
+	bool read_poly_frisco(Polynomial<T>& p, const char* filename);
+
+	// Generate random polynomials.
+	void GenerateRandom(Polynomial<double> *d, const unsigned int degree,
+                    const unsigned int max_coeff, const unsigned int seed);
+	void GenerateRandom(BiPoly<double> *u, BiPoly<double> *v,
+                    const unsigned int degree, const unsigned int max_coeff,
+                    const unsigned int seed);
+
+	// read files
+void GetPoly(Polynomial<double> *d, const char *file_name);
+	void GetBiPoly(const char *filename,
+               BiPoly<double> *u,
+               BiPoly<double> *v);
+
+	// get root bounds
+	void GetRootBounds(const Polynomial<double> &poly,
+                   double *lb,
+                   double *ub);
+
+	// show(msg)
+	void show(string msg);
+// ##################################################
+// MAIN
+int main(int argc, char **argv) {
+
+  // Get the input polynomial a (from file or randomly generated)
+  /*
+    Polynomial<NT> polys[] ={
+    PolyNT("x^2 -x -1"), PolyNT("(x-1)^5"), PolyNT("(x-1)^2 (x+1)^2") };
+    string names[] = {
+    "golden ratio", "5th roots of unity" "multiple roots" };
+  */
+  
+  PolyNT p="x^3-1";
+
+  // If only one command line argument then use default polynomial above
+  if (argc==1) 
+    cout << "Using default arguments; see output under output/out*" << endl;
+
+  // First argument indicates the format of input:  only the first letter of the
+  // argument string is used:
+  // F or f = FRISCO file format (next arg is a file name)
+  // H or h = human-readable file format (next arg is a file name)
+  // D or d = directly-given human-readable format (next arg is a string)
+  //
+  if (argc > 1) {
+    // Select first character of first argument
+    assert(argc > 2);
+    char firstchar = argv[1][0]; 
+    firstchar = toupper(firstchar);
+
+    if ((firstchar=='F') | (firstchar=='f')) { // FRISCO file format polynomial
+      read_poly_frisco (p, argv[2]);
+    } else   
+      if ((firstchar=='H') | (firstchar=='h')) {  // human-readable polynomial in a file
+      if (argc > 2) read_poly(p, argv[2]); 
+    } else 
+      if ((firstchar=='D') | (firstchar=='d')) {  // human-readable poly given directly 
+      p = string(argv[2]);
+    } else  { // neither human readable nor FRISCO
+      cerr << "First command line argument should begin with one of "
+           << " F, f, H, h, D, d (indicating input polynomial format)" << endl;
+    }
+  }
+  
+  if (argc > 3) ofile= string(argv[3]); // name of output file
+  if (argc > 4) verbose=atoi(argv[4]);  // verbose (1) or not (0)
+  
+  show("Input Polynomial is: " + p.toString('z'));
+  show("ofile = " + ofile);
+  
+  // Convert input polynomial to the real and complex parts, u, v (and uv):
+	BiPoly<NT> u, v;
+  	ConvertPoly(p,&u,&v); 
+	    show("\n --- Real Part Polynomial is u(x,y): " + u.toString());
+	    show("\n --- Complex Part Polynomial is v(x,y): " + v.toString());
+	Curve<NT> uv = u*v;
+  // Output to file
+	ofstream ofs;
+	string ofilename;
+	
+	ofilename = ofile + "_u.poly";
+	ofs.open(ofilename.c_str());		// open "out_u.poly"
+	if (!ofs.is_open()) {
+	    cerr << "error reading " << ofilename << endl;
+	    return 1;
+  	} else {
+	    ofs << "# output u-polynomial from convertPoly for " << ofile << endl;
+	    ofs << u.toString() << endl;
+	    ofs.close();
+	}
+
+	ofilename = ofile + "_v.poly";
+	ofs.open(ofilename.c_str());	// open "out_v.poly"
+	if (!ofs.is_open()) {
+	    cerr << "error reading " << ofilename << endl;
+	    return 1;
+  	} else {
+	    ofs << "# output v-polynomial from convertPoly for " << ofile << endl;
+	    ofs << v.toString() << endl;
+	    ofs.close();
+	}
+	
+	ofilename = ofile + "_uv.poly";
+	ofs.open(ofilename.c_str());	// open "out_uv.poly"
+	if (!ofs.is_open()) {
+	    cerr << "error reading " << ofilename << endl;
+	    return 1;
+  	} else {
+	    ofs << "# output uv-polynomial from convertPoly for " << ofile << endl;
+	    ofs << uv.toString() << endl;
+	    ofs.close();
+	}
+	
+	ofilename = ofile + ".poly";
+	ofs.open(ofilename.c_str());	// open "out.poly"
+	if (!ofs.is_open()) {
+	    cerr << "error reading " << ofilename << endl;
+	    return 1;
+  	} else {
+	    ofs << "# original polynomial from convertPoly for " << ofile << endl;
+	    ofs << p.toString('z') << endl;
+	    ofs.close();
+	}
+	
+	return 0;
+}//main
+
+// ##################################################
+// Routines needed
+
+/// Converts a complex polynomial p(z) into two real
+/// bivariate polynomials u(x, y) & v(x, y) such that
+/// p(z) = u(x, y) + iv(x, y)
+
+template <typename T>
+void ConvertPoly(const Polynomial<T> &p,
+                 BiPoly<T> *real,
+                 BiPoly<T> *im) {
+	  BiPoly<T> subst = "x + y";
+	  // p.eval<BiPoly<T> >(subst) would also do the
+	  // trick.
+	  //
+	  // composeHorner is defined in composeBiPoly.h. Note that
+	  // it is not always required.
+	  BiPoly<T> subst_result = composeHorner<T>(p, subst);
+	  unsigned int degree = subst_result.getYdegree();
+	
+	  vector<Polynomial<T> > real_coeff;
+	  vector<Polynomial<T> > im_coeff;
+	
+	  bool negate = true;
+	  const vector<Polynomial<T> > &c = subst_result.coeffX;
+	
+	  for (unsigned int i = 0; i <= degree; ++i) {
+	    if (i % 2 == 0) {
+	      negate = negate ? false : true;	// flip sign
+	      real_coeff.push_back(c[i]);
+	      im_coeff.push_back(Polynomial<T>());
+	      if (negate) {
+	        real_coeff.back().negate();
+	      }
+	    } else {
+	      im_coeff.push_back(c[i]);
+	      real_coeff.push_back(Polynomial<T>());
+	      if (negate) {
+	        im_coeff.back().negate();
+	      }
+	    }
+	  }
+	  *real = BiPoly<T>(real_coeff);
+	  *im = BiPoly<T>(im_coeff);
+	}//
+
+/// Reads a polynomial from file, in FRISCO format
+template <typename T>
+//void read_poly_frisco(FILE *instr, Polynomial<T>& p) {
+void read_poly_frisco(Polynomial<T>& p, FILE *instr) {
+	  int indx, num_coeff, i;
+	
+	  /* skip blank or comment lines */
+	  while ((i = fgetc(instr)) == '!' || isspace(i))
+	    if(i == '!')
+	      while (fgetc(instr) != '\n')
+	        /* skip */ ;
+	  ungetc(i, instr);
+	
+	  /* read data type */
+	  char data_type[3];
+	  fscanf(instr, "%3s", data_type);
+	
+	  /* read and convert prec_in from base 10 to base 2 */
+	  long prec_in = -1;
+	  if (prec_in == -1) {
+	    fscanf(instr, "%ld", &(prec_in));
+	    prec_in = (long) (prec_in * log(10.00)/log(2.0));// LOG2_10);
+	  } else {    /* override input precision */
+	    fscanf(instr, "%*d");
+	    prec_in = prec_in; /* load default */
+	  }
+	
+	  /* read degree */
+	  int deg;
+	  fscanf(instr, "%d", &(deg));
+	
+	  /* if sparse read num of coeff */
+	  if (data_type[0] == 's')
+	    fscanf(instr, "%d", &num_coeff);
+	  else
+	    num_coeff = deg + 1;
+	
+	  /* no need to read coefficients if user polynomial */
+	  if (data_type[0] == 'u')
+	    return;
+	
+	  /* read coefficients */
+	  T* coeffs = new T[deg+1]; // we always assume dense representation!
+	
+	  for (int i = 0; i < deg + 1; ++i) {
+	    coeffs[i] = 0;
+	  }
+	
+	  //char new_line;
+	  for (i = 0; i < num_coeff; i++) {
+	
+	    if (data_type[0] == 's') {
+	      fscanf(instr, "%d", &indx);
+	    } else {
+	      indx = i;
+	    }
+	
+	    if (data_type[1] == 'r') {
+		switch( data_type[2] ) {
+		    case 'i': { // integer coefficient
+			BigInt temp;
+			char is[80];
+			/*
+		        if (!mpz_inp_str(temp.mp(), instr, 10)) {
+		          // Exit if something happens.
+		          assert(false);
+		        }
+			*/
+			fscanf(instr, "%s", is);
+			temp = BigInt(string(is));
+		        coeffs[indx]=T(temp);
+			break;
+			}
+		    case 'f': { // float coefficient
+			BigFloat temp; 
+			char f[80];	  
+			fscanf(instr, "%s", f);
+			temp = BigFloat(string(f));
+			// cerr << "input float string = " << f << endl;
+			// cerr << "converted float = " << temp.get_str() << endl;
+		        coeffs[indx]=temp.doubleValue();
+			break;
+			}
+		    default: 
+			cerr << "We support only integer/float coeffs currently" << endl;
+	        	assert(false);
+		}//switch
+	    } else {
+	      cerr << "We support only real coefficients currently" << endl;
+	      assert(false);
+	    }
+#ifdef DEBUG
+	    cerr <<" just read coeff "<< coeffs[indx] <<", at index=" << indx << endl ;
+#endif
+	  }
+	
+	  p = Polynomial<T>(deg, coeffs);
+	  delete[] coeffs;
+	}
+
+/// Reads a templated polynomial from a filename, in natural string format
+/// file format: a univariate polynomial in natural format
+//	is stored in a single line.  Comment lines
+//	preceding this line are indicated by first char of '#'
+template <typename T>
+//bool read_poly(const char* ifilename, Polynomial<T>& p) {
+//bool read_poly(Polynomial<T>& p, const char* ifilename = "data/in") {
+bool read_poly(Polynomial<T>& p, const char* ifilename = "data2/golden.poly") {
+	ifstream ifs(ifilename);
+	if (!ifs.is_open()) {
+	    cerr << "error reading " << ifilename << endl;
+	    return false;
+	}
+	string line;
+	// we read lines until the first character is not '#'
+	bool found=false;
+	while (!found && ifs.good()) {
+	  	getline (ifs,line);
+		if (line.at(0) != '#') found=true;
+	}
+cout << "\n\n\n line = " << line << endl<< endl;
+	p = Polynomial<T>(line);
+	ifs.close();
+	return true;
+}// read_poly
+
+/// Reads a templated polynomial from a filename, in FRISCO format
+template <typename T>
+bool read_poly_frisco(Polynomial<T>& p, const char* filename) {
+	  FILE* f;
+	  if ((f = fopen(filename, "r")) == NULL) {
+	    cerr << "error reading " << filename << endl;
+	    return false;
+	  }
+	  read_poly_frisco(p,f);
+	  fclose(f);
+	  return true;
+	}
+
+/// Write a templated polynomial to a filename, in std monomial format:
+template <typename T>
+//bool write_poly(Polynomial<T>& p, const char* filename = "data/out.poly") {
+bool write_poly(Polynomial<T>& p, const char* filename = "output/out.poly") {
+	  ofstream ofs;
+	  ofs.open(filename);
+	  if (ofs.is_open()) {
+		  ofs << p.toString() << endl;
+	  } else {
+	    cerr << "error writing " << filename << endl;
+	    return false;
+	  }
+	  ofs.close();
+	  return true;
+	}
+
+/// Reads a BigInt polynomial from a filename
+void GetPoly(Polynomial<BigInt> *poly, const char *filename) {
+  read_poly_frisco<BigInt>(*poly, filename);
+}
+
+/// Reads a BigFloat polynomial from a filename
+void GetPoly(Polynomial<BigFloat> *poly, const char *filename) {
+  read_poly_frisco<BigFloat>(*poly, filename);
+}
+
+/// Reads a DoubleWrapper polynomial from a file name
+void GetPoly(Polynomial<DoubleWrapper> *poly, const char *filename) {
+	 // cout << "********************************************************************" << endl;
+	 // cout << "WARNING : You might lose precision in the polynomial coefficients " << endl
+	 //     << "while operating at this core level. The polynomial you are operating " << endl
+	 //     << "on might not be the polynomial you intended." << endl;
+	 // cout << "********************************************************************" << endl;
+	
+	  Polynomial<BigInt> p_bi;
+	  GetPoly(&p_bi, filename);
+	  const int deg = p_bi.getDegree();
+	  DoubleWrapper *dr = new DoubleWrapper[deg + 1];
+	  for (int i = 0; i <= deg; ++i) {
+	    dr[i] = p_bi.coeff()[i].doubleValue();
+	  }
+	  *poly = Polynomial<DoubleWrapper>(deg, dr);
+	  delete[] dr;
+	}
+
+void GetPoly(Polynomial<Expr> *poly, const char *filename) {
+  read_poly_frisco<Expr>(*poly, filename);
+}
+
+/// Reads a complex valued polynomial p(z) from file name, and returns
+/// its real and complex bivariate BigInt polynomials: u(x,y), v(x,y)
+void GetBiPoly(const char *filename,
+               BiPoly<BigInt> *u,
+               BiPoly<BigInt> *v) {
+	  Polynomial<BigInt> poly;
+	  GetPoly(&poly, filename);
+	  ConvertPoly<BigInt>(poly, u, v);
+	}
+
+/// Reads a complex valued polynomial p(z) from file name, and returns
+/// its real and complex bivariate BigFloat polynomials: u(x,y), v(x,y)
+void GetBiPoly(const char *filename,
+               BiPoly<BigFloat> *u,
+               BiPoly<BigFloat> *v) {
+	  Polynomial<BigFloat> poly;
+	  GetPoly(&poly,filename);
+	  ConvertPoly<BigFloat>(poly, u, v);
+	}
+
+/// Reads a complex valued polynomial p(z) from file name, and returns
+/// its real and complex bivariate DoubleWrapper polynomials: u(x,y), v(x,y)
+void GetBiPoly(const char *filename,
+               BiPoly<DoubleWrapper> *u,
+               BiPoly<DoubleWrapper> *v) {
+	  Polynomial<DoubleWrapper> poly;
+	  GetPoly(&poly,filename);
+	  ConvertPoly<DoubleWrapper>(poly, u, v);
+	}
+
+/// Reads a complex valued polynomial p(z) from file name, and returns
+/// its real and complex bivariate Expr polynomials: u(x,y), v(x,y)
+void GetBiPoly(const char *filename,
+               BiPoly<Expr> *u,
+               BiPoly<Expr> *v) {
+	  Polynomial<Expr> poly;
+	  GetPoly(&poly, filename);
+	  ConvertPoly<Expr>(poly, u, v);
+	}
+
+void GetRootBounds(const Polynomial<Expr> &poly,
+                   Expr *lb,
+                   Expr *ub) {
+	  (*lb) = CORE::CauchyLowerBound<Expr>(poly);
+	  (*ub) = CORE::CauchyUpperBound<Expr>(poly);
+	}
+
+void GetRootBounds(const Polynomial<BigFloat> &poly,
+                   BigFloat *lb,
+                   BigFloat *ub) {
+	  BigInt temp = CORE::CauchyBound<BigFloat>(poly);
+	  cout << "Root bound : " << temp << endl;
+	  (*lb) = temp * -1;//CORE::CauchyLowerBound<BigFloat>(poly);
+	  (*ub) = temp;//CORE::CauchyUpperBound<BigFloat>(poly);
+	}
+
+template <typename T>
+void ConvertPoly(Polynomial<BigFloat> *output,
+    const Polynomial<T> &in) {
+  vector<BigFloat> coeff_array;
+  for (int i = 0; i < in.getDegree() + 1; ++i) {
+    coeff_array.push_back(in.coeff()[i]);
+  }
+  (*output) = Polynomial<BigFloat>(coeff_array);
+}
+
+void GetRootBounds(const Polynomial<DoubleWrapper> &poly,
+                   DoubleWrapper *lb,
+                   DoubleWrapper *ub) {
+  Polynomial<BigFloat> poly_2;
+  ConvertPoly(&poly_2, poly);
+
+  BigInt temp = CORE::CauchyBound<BigFloat>(poly);
+
+  (*lb) = DoubleWrapper((temp * -1).doubleValue());
+  (*ub) = DoubleWrapper(temp.doubleValue());
+}
+
+void GenerateRandom(Polynomial<DoubleWrapper> *d,
+                    const unsigned int degree,
+                    const unsigned int max_coeff,
+                    const unsigned int seed) {
+	  srand(seed);
+	  const unsigned int MAX = 2*max_coeff;
+	  machine_long max = max_coeff;
+	  vector<DoubleWrapper> vec;
+	  for (unsigned int i = 0; i <= degree; ++i) {
+	    machine_long random = rand() % MAX;
+	    vec.push_back(random - max);
+	  }
+	  (*d) = Polynomial<DoubleWrapper>(vec);
+	}
+
+void GenerateRandom(Polynomial<BigFloat> *d,
+                    const unsigned int degree,
+                    const unsigned int max_coeff,
+                    const unsigned int seed) {
+	  srand(seed);
+	  const unsigned int MAX = 2*max_coeff;
+	  BigFloat max = max_coeff;
+	  vector<BigFloat> vec;
+	  for (unsigned int i = 0; i <= degree; ++i) {
+	    machine_long random = rand() % MAX;
+	    vec.push_back(BigFloat(random) - max);
+	  }
+	  (*d) = Polynomial<BigFloat>(vec);
+	}
+
+void GenerateRandom(BiPoly<DoubleWrapper> *u,
+                    BiPoly<DoubleWrapper> *v,
+                    const unsigned int degree,
+                    const unsigned int max_coeff,
+                    const unsigned int seed) {
+  Polynomial<DoubleWrapper> b;
+  GenerateRandom(&b, degree, max_coeff, seed);
+  ConvertPoly(b, u, v);
+}
+
+void GenerateRandom(BiPoly<BigFloat> *u,
+                    BiPoly<BigFloat> *v,
+                    const unsigned int degree,
+                    const unsigned int max_coeff,
+                    const unsigned int seed) {
+  Polynomial<BigFloat> b;
+  GenerateRandom(&b, degree, max_coeff, seed);
+  ConvertPoly(b, u, v);
+}
+
+
+// Show
+	void show(string msg){
+		if (verbose>0) cout << msg << endl;
+	}
+// ##################################################
+// END
+// ##################################################

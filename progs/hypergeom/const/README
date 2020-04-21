@@ -1,0 +1,30 @@
+file: README CORE/progs/hyperGeom/const
+Since Core Library Version 1.4
+
+$Id: README,v 1.1 2006/03/07 04:54:38 exact Exp $
+
+Synopsis:
+	Facility to compute various mathematical constants:
+		-- Pi
+		-- Log(2)
+		-- e (not done here, but easily done)
+		-- 1/e (unimplemented)
+		-- 1/Pi (unimplemented)
+
+	and store them in a file.
+
+History:
+	Aug, 2001: The Hypergeometry Package was Originally designed by
+		Maria Eleftheriou, <mariae@us.ibm.com> and
+		Jose Moreira, <jmoreira@us.ibm.com>
+		IBM T.J. Watson Research Center
+	May, 2002: Improvements and additional contributions
+		(preprocessing of hypergeometric arguments,
+		file input of arbitrary precision constants,
+		improved automatic error analysis) by
+		Chee Yap <yap@cs.nyu.edu>
+		Zilin Du <zilin@cs.nyu.edu>
+
+
+
+

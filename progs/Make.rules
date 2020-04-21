@@ -1,0 +1,62 @@
+# file: Make.rules
+#
+# Since Core Library 2.0
+# $Id: Make.rules,v 1.4 2010/07/12 14:02:32 exact Exp $
+
+#====================================================================
+# The Makefile rules here are quite generic and so may
+# be included by Makefiles by subdirectories
+#
+#	in $(CORE_PATH)/progs.
+#
+# NOTES: 
+# $@ -- The file name of the target of the rule
+#		So $@ is just "%" in the rules below,
+#		and the typical use of $@ is	"-o $@"
+# $< -- The name of the first prerequisite 
+# $^ -- The names of all the prerequisites, with spaces between them.
+# $? -- The names of all the prerequisites that are newer than the 
+#       target, with spaces between them.
+#
+# Chee, 3Jan2017:
+#		added "-std=c++11" flags
+#
+#====================================================================
+
+# CHOOSE CORE_LEVEL:
+ifndef LEV
+   LEV=3
+endif
+
+# Original:
+#%: %.o
+#	${CXX} $(LDFLAGS) $< $(CORE_LIB) -o $@
+
+%: %.o
+	${CXX} -std=c++11 \
+		$(LDFLAGS) $< -lcorex++$(VAR)_level${LEV} $(CORE_LIB) -o $@
+
+
+#
+# In the above, $< is the same as %.o, and $@ the same as % 
+#
+
+.cpp.o:
+	${CXX} -std=c++11 \
+		-c $(CXXFLAGS) $(CORE_INC) -DCORE_LEVEL=${LEV} $< -o $@
+
+#=================================================
+# Cleaning directory
+#=================================================
+clean:
+	-@test -z "*.o" || rm -f *.o
+
+ALL=$(TARGETS) $(MORE_TARGETS)
+EXEPROGS=$(ALL:=$(EXETYPE))
+
+vclean veryclean: clean
+	-@test -z "$(EXEPROGS)" || rm -f $(EXEPROGS)
+
+#=================================================
+# END 
+#=================================================

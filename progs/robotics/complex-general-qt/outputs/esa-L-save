@@ -1,0 +1,242 @@
+ESA EXPERIMENTS 1 to 6 ==========\n
+ESA 1 ===========================\n
+make[1]: Entering directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+./complex 1 \
+	L_parking.cfg  @filename  @inputDir \
+	@robotDir  @robotName \
+	@alpha0 @alpha1  @alpha2 \
+	@beta0 @beta1 @beta2 \
+	@epsilon @R0 \
+	512			 512			 \
+	320		 20			 \
+	2			 111			 \
+	0			 0			 1			 \
+	1			 \
+
+	Non Interactive Run of Complex Robot	Run No. 1
+	robot file name = robots/L.rob
+	Robot has 6 verts, 4 triangles.
+	   radius = 85, eps = 4
+	   alpha = (400, 320, 0)
+	    beta = (100, 70, 0)
+	input file name = inputs/map_parking.txt
+	nPt=12
+	nPolygons=1
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	>>
+	>>      ----->>  Path Found !
+	>>
+	>>      ----->>  Time used: 99.942 ms
+	>>
+	>>      ----->>  Search Strategy: 	Greedy Strategy
+	>>
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	    Expanded 722 times
+	    total Free boxes: 1603
+	    total Stuck boxes: 0
+	    total Mixed boxes smaller than epsilon: 1800
+	    total Mixed boxes bigger than epsilon: 5994
+	############## END of RUN #########
+	Path was Found!
+make[1]: Leaving directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+ESA 2 ===========================\n
+make[1]: Entering directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+./complex 1 \
+	L_gateway.cfg  @filename  @inputDir \
+	@robotDir  @robotName \
+	@alpha0 @alpha1  @alpha2 \
+	@beta0 @beta1 @beta2 \
+	@epsilon @R0 \
+	512			 512			 \
+	320		 20			 \
+	2			 111			 \
+	0			 0			 1			 \
+	1			 \
+
+	Non Interactive Run of Complex Robot	Run No. 1
+	robot file name = robots/L.rob
+	Robot has 6 verts, 4 triangles.
+	   radius = 40, eps = 2
+	   alpha = (18, 98, 1.88889)
+	    beta = (458, 119, 1.38889)
+	input file name = inputs/input3.txt
+	nPt=24
+	nPolygons=6
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	>>
+	>>      ----->>  Path Found !
+	>>
+	>>      ----->>  Time used: 2168.38 ms
+	>>
+	>>      ----->>  Search Strategy: 	Greedy Strategy
+	>>
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	    Expanded 110210 times
+	    total Free boxes: 122091
+	    total Stuck boxes: 0
+	    total Mixed boxes smaller than epsilon: 90043
+	    total Mixed boxes bigger than epsilon: 109919
+	############## END of RUN #########
+	Path was Found!
+make[1]: Leaving directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+ESA 3 ===========================\n
+make[1]: Entering directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+./complex 1 \
+	L_rand100.cfg  @filename  @inputDir \
+	@robotDir  @robotName \
+	@alpha0 @alpha1  @alpha2 \
+	@beta0 @beta1 @beta2 \
+	@epsilon @R0 \
+	512			 512			 \
+	320		 20			 \
+	2			 111			 \
+	0			 0			 1			 \
+	1			 \
+
+	Non Interactive Run of Complex Robot	Run No. 1
+	robot file name = robots/L.rob
+	Robot has 6 verts, 4 triangles.
+	   radius = 40, eps = 2
+	   alpha = (245, 25, 1)
+	    beta = (319, 350, 1.38889)
+	input file name = inputs/randTri100.txt
+	nPt=300
+	nPolygons=100
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	>>
+	>>      ----->>  Path Found !
+	>>
+	>>      ----->>  Time used: 661.521 ms
+	>>
+	>>      ----->>  Search Strategy: 	Greedy Strategy
+	>>
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	    Expanded 4349 times
+	    total Free boxes: 6547
+	    total Stuck boxes: 4
+	    total Mixed boxes smaller than epsilon: 6366
+	    total Mixed boxes bigger than epsilon: 15252
+	############## END of RUN #########
+	Path was Found!
+make[1]: Leaving directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+ESA 4 ===========================\n
+make[1]: Entering directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+./complex 1 \
+	L_rand200.cfg  @filename  @inputDir \
+	@robotDir  @robotName \
+	@alpha0 @alpha1  @alpha2 \
+	@beta0 @beta1 @beta2 \
+	@epsilon @R0 \
+	512			 512			 \
+	320		 20			 \
+	2			 111			 \
+	0			 0			 1			 \
+	1			 \
+
+	Non Interactive Run of Complex Robot	Run No. 1
+	robot file name = robots/L.rob
+	Robot has 6 verts, 4 triangles.
+	   radius = 20, eps = 2
+	   alpha = (363, 324, 1.27778)
+	    beta = (318, 140, 0)
+	input file name = inputs/randTri200.txt
+	nPt=600
+	nPolygons=200
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	>>
+	>>      ----->>  Path Found !
+	>>
+	>>      ----->>  Time used: 5536.33 ms
+	>>
+	>>      ----->>  Search Strategy: 	Greedy Strategy
+	>>
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	    Expanded 140560 times
+	    total Free boxes: 161207
+	    total Stuck boxes: 100
+	    total Mixed boxes smaller than epsilon: 169601
+	    total Mixed boxes bigger than epsilon: 129817
+	############## END of RUN #########
+	Path was Found!
+make[1]: Leaving directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+ESA 5 ===========================\n
+make[1]: Entering directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+./complex 1 \
+	L_bugtrap2.cfg  @filename  @inputDir \
+	@robotDir  @robotName \
+	@alpha0 @alpha1  @alpha2 \
+	@beta0 @beta1 @beta2 \
+	@epsilon @R0 \
+	512			 512			 \
+	320		 20			 \
+	2			 111			 \
+	0			 0			 1			 \
+	1			 \
+
+	Non Interactive Run of Complex Robot	Run No. 1
+	robot file name = robots/L.rob
+	Robot has 6 verts, 4 triangles.
+	   radius = 15, eps = 2
+	   alpha = (189, 120, 0.333333)
+	    beta = (60, 370, 1.25)
+	input file name = inputs/bugtrap2.txt
+	nPt=72
+	nPolygons=2
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	>>
+	>>      ----->>  Path Found !
+	>>
+	>>      ----->>  Time used: 7378.08 ms
+	>>
+	>>      ----->>  Search Strategy: 	Greedy Strategy
+	>>
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	    Expanded 334092 times
+	    total Free boxes: 405962
+	    total Stuck boxes: 0
+	    total Mixed boxes smaller than epsilon: 374096
+	    total Mixed boxes bigger than epsilon: 278295
+	############## END of RUN #########
+	Path was Found!
+make[1]: Leaving directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+ESA 6 ===========================\n
+make[1]: Entering directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+./complex 1 \
+	L_bugtrap2_nopath.cfg  @filename  @inputDir \
+	@robotDir  @robotName \
+	@alpha0 @alpha1  @alpha2 \
+	@beta0 @beta1 @beta2 \
+	@epsilon @R0 \
+	512			 512			 \
+	320		 20			 \
+	2			 111			 \
+	0			 0			 1			 \
+	1			 \
+
+	Non Interactive Run of Complex Robot	Run No. 1
+	robot file name = robots/L.rob
+	Robot has 6 verts, 4 triangles.
+	   radius = 18, eps = 2
+	   alpha = (189, 120, 0.333333)
+	    beta = (60, 370, 1.25)
+	input file name = inputs/bugtrap2.txt
+	nPt=72
+	nPolygons=2
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	>>
+	>>      ----->>  No Path !
+	>>
+	>>      ----->>  Time used: 1758.24 ms
+	>>
+	>>      ----->>  Search Strategy: 	Greedy Strategy
+	>>
+	>>>>>>>>>>>>>>> > > > > > > >>>>>>>>>>>>>>>>>>
+	    Expanded 57955 times
+	    total Free boxes: 66835
+	    total Stuck boxes: 0
+	    total Mixed boxes smaller than epsilon: 63928
+	    total Mixed boxes bigger than epsilon: 51934
+	############## END of RUN #########
+	No Path Found!
+make[1]: Leaving directory '/home/yap/svn-exact/corelib2/trunk/progs/robotics/complex-qt'
+ESA end =========================\n

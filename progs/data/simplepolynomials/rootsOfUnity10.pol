@@ -1,0 +1,11 @@
+! file: rootsOfUnity10.pol
+! This is the linear polynomial p(x)=x^10-1. 
+
+sri
+0
+10
+2
+0
+-1
+10
+1

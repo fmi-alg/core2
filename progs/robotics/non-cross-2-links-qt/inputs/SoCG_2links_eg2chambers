@@ -1,0 +1,44 @@
+# 2-links Motion Planning example for SoCG
+# 2 chambers input
+
+interactive = 0		# 0=interactive, >0 is non-interactive
+
+startX = 415		# start configuration
+startY = 400
+startTheta1 = 180	# in degrees
+startTheta2 = 270	# in degrees
+goalX = 105		# goal configuration
+goalY = 90
+goalTheta1 = 90		# in degrees
+goalTheta2 = 0		# in degrees
+
+epsilon = 4		# resolution parameter
+
+len1 = 15		# link1 length
+len2 = 20		# link2 length
+
+inputDir = inputs	# where to find input files
+fileName = 2chambers.txt	# input environment file
+
+boxWidth = 512		# initial configuration box size
+boxHeight = 512
+
+windowPosX = 320	# initial Window position
+windowPosY = 20	
+
+Qtype = 2		# type of priority queue
+			#  (0=random, 1=BFS, 2=Greedy Best First, 3=Dist+size, 4=Vor?) 
+seed = 11		# seed for random
+step = 0		# number of steps to run
+			#	(step=0 means run to completion)
+xtrans = -220		# x-translation of input file
+ytrans = 0		# y-translation of input file
+scale = 0.065		# scaling of input file
+
+verbose = 0		# if true, display statistics
+# title = 2-links Motion Planning		# Title of control panel
+
+#s marterStrategy = 0 # Two-Strategy Option    0: original 1: smarter
+# smarterStrategy = 1 # Two-Strategy Option    0: original 1: smarter
+
+# threshold = 4		# threshold for angular split: if |phi(B)| <= threshold,

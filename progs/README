@@ -1,0 +1,98 @@
+************************************************************
+file: README for  $(CORE_PATH)/progs
+$Id: README,v 1.3 2010/06/25 10:15:48 exact Exp $
+************************************************************
+
+Files in this subdirectory, $(CORE_PATH)/progs:
+	  README	-- this file
+	  FAQs		-- information on writing Core Programs
+	  Makefile	-- to make all examples
+	  Make.sh	-- shell script called by Makefile
+
+Subdirectories in $(CORE_PATH)/progs contain sample
+programs that use the Core library, testing and
+illustrating usage and features of our library.
+Not all subdirectories are populated automatically if you
+downloaded using our SVN instructions.  But you can download
+them using the instructions found in the FAQs file (item 41).
+
+If you want to compile and build your own CORE programs,
+take a look at the sample files in the "generic" subdirectory.
+
+  bareiss/	-- implementation of Bareiss's algorithm for determinants
+  cgal/		-- sample CGAL program based on Core numbers
+  chull/	-- O'Rourke's 3D convex hull program
+  chullGraham/	-- O'Rourke's implementation of Graham scan
+  compare/	-- compares some identities involving sqrts
+  demos/	-- basic demos for Core Library
+  delaunay/	-- O'Rourke's delaunay triangulation programs
+  fileIO/	-- file I/O for numerical constants (BigInt, BigFloat, BigRat)
+  fortune/	-- Fortune's implementation of his sweepline algorithm
+		   for the Voronoi diagram of a set of points in the plane
+  gaussian/	-- simple gaussian elimination without pivoting
+  generic/	-- contains generic files (mainly, Makefile) to illustrate
+		   how to compile and build your own CORE programs
+  geom2d/	-- exercises the 2D geometry COREX
+  geom3d/	-- exercises the 3D geometry COREX
+  heron/	-- a simple CORE program to compute the area of a triangle
+		   using Heron's formula.  Results are compared to a table
+		   from W.Kahan who has a special method for this computation.
+  hypergeom/	-- implementation of hypergeometric series, with automatic
+		   error analysis, parameter processing, argument reduction
+		   and precomputed constants.  
+  kahan/	-- A challenge for Core Library by W.Kahan
+  nestedSqrt/	-- example of BFMS to compares two (very nearly equal)
+		   nested sqrt expressions 
+  pentagon/	-- The IN/OUT family of identity operations on pentagons. 
+  		   Any fixed precision arithmetic implementation will be
+		   severely challenged  by this (taken from Dobkin and Silver)
+  pi/		-- computes Pi and sqrt(Pi) to any number of digits.  The
+		   computed values are automatically valided to 250 and
+		   100 digits, resp.
+  poly/		-- univariate polynomial class, with application classes
+		   such as Sturm and Newton for real root finding
+  prover/	-- probabilistic geometric theorem proving for ruler-and-
+		   compass constructions, based on a generalization of
+		   Schwartz's Lemma for polynomial zero testing.
+  mesh/		-- we have several subdirectories here of our work on
+  		   subdivision methods to approximate curves and surfaces,
+		   to isolate complex roots, and solving bivariate systems
+		   (PV, CXY, Krawcyzk, etc)
+  robotics/	-- subdivision algorithms for motion planning
+  		   (disc, triange)
+  sumOfSqrts/	-- examples of Graham and O'Rourke comparing sums of sqrts 
+  testFilter/	-- testing our filter implementation 
+  testIdent/	-- various identity tests of arithmetic expressions
+  testIO/	-- tests a critical function of CORE: the various numerical
+		   input and output routines as well as precision mechanism
+  tutorial/	-- programs used in the Core Library Tutorial
+  vor/		-- subdivision algorithms for Voronoi diagrams (vor2d, vor3d)
+
+Standards for these directories:
+================================
+	Basically, the Makefile found in each directory tells you how
+	to compile and run the programs.  The following targets are
+	always supported:
+		% make all	-- default make for the directory
+		% make		-- MUST be equivalent to "make all"
+		% make test	-- tests the programs compiled by "make all"
+		% make more	-- compiles additional programs 
+		% make moretest	-- runs the additional programs 
+		% make clean	-- remove the object files 
+		% make veryclean -- includes make clean, and removes executables
+	The following are sometimes available:
+	
+	The output often contains self-valided results, and according to the
+	outcome, the words "CORRECT" or "ERROR" will be printed.
+
+================================
+We welcome your contributions or improvements to this subdirectory.
+
+-- Chee Yap (yap@cs.nyu.edu)
+   Chen Li (chenli@cs.nyu.edu)
+   Sylvain (pion@cs.nyu.edu)
+   Zilin Du (zilin@cs.nyu.edu)
+   Vikram Sharma (sharma@cs.nyu.edu)
+   Jihun Yu (jihun@cs.nyu.edu)
+   Long Lin (llin@cs.nyu.edu)
+================================

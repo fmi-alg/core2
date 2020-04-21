@@ -1,0 +1,22 @@
+README file in ${CORE_DIR}/tmp
+==============================
+
+This tmp directory stores the files containing diagnostics 
+	outputs from the compilation and testing of CORE
+	(i.e., "make first", "make second", etc).
+
+Many of our programs are self-validating: 
+	if its computation or output is CORRECT,
+	it will print "CORRECT"; if incorrect, it could prints
+	either "INCORRECT" or "ERROR".  We print "INCORRECT" if
+	this wrong answer is expected (e.g., we run a program
+	at Level 1 accuracy).  But "ERROR" is more serious.
+
+To check for errors: grep these diagnostic files 
+	-- grep "ERROR" to see if CORE has any errors;
+	-- grep "error:" to see if there are compiler errors;
+	-- grep "cannot" to see if there are missing files. 
+
+Also, Core may create and write messages in 
+	the file "Core_Diagnostics" in the individual directories
+	where the program is run.

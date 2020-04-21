@@ -1,0 +1,9 @@
+README for fortune/pred(icates)
+===============================
+
+pred.cpp : test the expression
+		(a + sqrt(b)) / d - (a' + sqrt(b')) / d'.
+
+pred2.cpp : test a generalized expression
+		(a + sqrt[2^k](b)) / d - (a' + sqrt[2^k](b')) / d'.
+

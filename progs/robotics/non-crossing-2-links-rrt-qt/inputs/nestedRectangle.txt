@@ -1,0 +1,46 @@
+# file: nestedRectangle.txt
+#
+# 	This produces an interesting environment for a 2-link robot.
+#	It consists of two nested rectangle:
+#	S: start point
+#   E: end point
+#	    ------------------
+#	    |  ____________ S|
+#	    |  |          |  |
+#	    |  |          |  |
+#	    |E ------------  |
+#	    |________________|
+#
+# 	-- Chee Yap, July 22, 2013.
+#
+# 	Notes:
+#	I have not yet checked that the orientations
+#	of the polygons are correct.
+#
+##################################################
+
+# Here is the conversion into our file format:
+#
+# Number of Points:
+8
+# Definition of Points:
+
+# (1) 4 points for the outer polygon:
+
+4600 1200 4600 6200 10200 6200 10200 1200
+
+
+# (2) 4 points for another inner polygon:
+
+5000 1600 5000 5800 9800 5800 9800 1600 
+
+# NUMBER OF POLYGONS:
+2
+
+# First Polygon:
+1 2 3 4 1
+
+# Second Polygon:
+5 8 7 6 5
+
+##################################################

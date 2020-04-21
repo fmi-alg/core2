@@ -1,0 +1,57 @@
+README file
+
+The two main programs in this directory are tEscape.cpp
+and tCutOffBound.cpp, to test our cut-off and escape bound
+facilities.
+
+Subtleties of Friend Function: A Known Bug
+==========================================
+
+Some compilers cannot compile tEscape.cpp,
+claiming that the functions pi() and e() is not declared.
+Note that pi() and e() are friends of the templated ExprT class.
+
+This error occurs with cygwin g++ 4.3.4 and solaris g++ 4.1.1.
+But compilers like g++ 4.0.1 has no problems.
+
+The real issue behind this is quite complex, and is related to
+an obsolete language feature called "friend name injection". 
+This is detailed in the following wikipedia article :
+
+	http://en.wikipedia.org/wiki/Barton-Nackman_trick#
+
+We fix it for now by adding the compiler option
+	-ffriend-injection
+for the GCC family compilers
+The above fix is only temporary, as the documentation warns:
+	"This option is for compatibility,
+	and may be removed in a future release of G++."
+
+Ideally pi() and e() or any other function that does not have an argument
+dependant lookup should not be friend injected. The other operators that are
+defined as friends inside Expr (e.g., sin(x), + , - , *) are fine
+because their arguments are a template class, and therefore will undergo ADL.
+pi() and e() are not fine because they have no arguments. 
+Here is a brief argument why this should be illegal: if it were legal, you could
+have two functions pi() which differ only in their return type.
+This is illegal according to C++ overloading rules.
+
+For a more permanent solution, here is a sketch.
+We create a template function say t_pi and define specializations of t_pi()
+for Expr and BigFloat and any other level.  That way you'd have to call it
+like t_pi<BigFloat>() or t_pi<Expr>().
+We then can write a wrapper function called pi defined so:
+
+	double pi() {
+	 return t_pi<double>();
+	}
+
+which is included after the CORE level definitions. Now double will be #defined
+to the correct type, either Expr or BigFloat, and the correct function will be
+called.
+
+Another solution, which we implemented is
+based on defining a static function pi(Expr).  See file Expr.h.
+
+--Narayan, Jihun, Chee (May 20, 2010)
+

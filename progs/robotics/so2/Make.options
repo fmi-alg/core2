@@ -1,0 +1,59 @@
+# file: Make.options
+#	This file in included by all the makefiles
+#	below this subdirectory
+# $Id: Make.options,v 1.8 2010/10/25 21:40:20 exact Exp $
+
+ifndef CORE_PATH
+	CORE_PATH=~/corelib2
+	CORE_PATH=/Users/cheeyap/svn-exact-local/corelib2/trunk
+endif
+
+
+
+include $(CORE_PATH)/Make.config
+
+#CXXFLAGS =  -Wall  -mno-cygwin -DCYGWIN
+#ifeq ($(PLATFORM), mac)
+ifeq ($(myOS), mac)
+   # Mac OS configuration, Mesa is assumed to have been installed
+   # and built. This can be done using Macports. Change the
+   # mesaVersion variable as appropriate.
+   MESA_VERSION=7.8.1_1+hw_render
+   MESA_VERSION=7.4.3_0+hw_render
+   MESA_PATH=/opt/local/var/macports/software/mesa/$(MESA_VERSION)
+   MESA_INC_PATH=$(MESA_PATH)/opt/local/include
+   MESA_INC_PATH=/opt/local/include
+   MESA_LIB_PATH=$(MESA_PATH)/opt/local/lib
+   MESA_LIB_PATH=/opt/local/lib 
+   TCLAP_INC_PATH=../ceval/third_party/
+   TCLAP_INC_PATH=../../third_party/
+   CORE_INC=-I. -I$(CORE_PATH)/inc -I$(CORE_PATH)/mpfr/include \
+	 -I$(CORE_PATH)/gmp/include -I/usr/include/ \
+	 -I$(MESA_INC_PATH) -I$(TCLAP_INC_PATH) 
+   CORE_LIB=-L$(CORE_PATH)/lib -L$(CORE_PATH)/mpfr/lib -L$(CORE_PATH)/gmp/lib \
+	 -L$(MESA_LIB_PATH) -lglui \
+	 -lcore++$(VAR) -lmpfr -lgmp  -framework OpenGL -framework GLUT 
+else
+   CORE_INC=-I. -I../ceval/third_party -I$(CORE_PATH)/inc -I$(CORE_PATH)/mpfr/include \
+	 -I$(CORE_PATH)/gmp/include -I/usr/include/
+   CORE_INC=-I. -I../../third_party -I$(CORE_PATH)/inc -I$(CORE_PATH)/mpfr/include \
+	 -I$(CORE_PATH)/gmp/include -I/usr/include/
+
+   # Temporarily removed -lcore++$(VAR) due to linker problems  
+   CORE_LIB=-L$(CORE_PATH)/lib -L$(CORE_PATH)/mpfr/lib -L$(CORE_PATH)/gmp/lib \
+	-lglut -lglui -lGLU -lGL
+   #lmpfr -lgmp -lm -lglut32 -lglu32 -lopengl32
+endif
+
+COREX_LIB_LEVEL=-lcoreex++$(VAR)_level
+
+COREX_LIB_LEVEL3=-lcorex++$(VAR)_level3
+COREX_LIB_LEVEL2=-lcorex++$(VAR)_level2
+COREX_LIB_LEVEL1=-lcorex++$(VAR)_level1
+
+
+# This works for GCC 3.x, but not for 2.9x, so I removed it
+# The user have to set LD_LIBRARY_PATH environment variable.
+#ifeq (${LINKAGE}, shared)
+#	LDFLAGS+=-R${CORE_PATH}/lib -R${CORE_PATH}/gmp/lib
+#endif

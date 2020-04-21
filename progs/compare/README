@@ -1,0 +1,137 @@
+file: README for compare
+Core Library, $Id: README,v 1.1 2006/03/07 04:51:23 exact Exp $
+August 1999
+=====================================================================
+
+1) NOTES on Progressive Evaluation Mode:
+	Progressive evaluation of an expression E means we
+	evaluate E to p bits of precision for p=2, p=4,
+	p=8, ..., or p=2^i in the i-th iteration.
+	We stop when E is shown to be non-zero
+	or when p exceeds a computed root bound.  In the
+	latter case, we declare E zero.  This mode is ONLY used
+	when an operator is a addition or subtraction operator.
+
+	When comparing two identical expressions,
+	the above algorithm will surely reach  
+	the computed root bound.  This can
+	be slow, and good root bounds are absolutely
+	necessary.  We have now implemented (July 1999)
+	the improved root bound from Mehlhorn, et al. ("MPI Bound").
+	This is the best known bound for radical expressions.
+	Our original root bound is applicable to any algebraic
+	number; it is still available (in anticipation of a future
+	implmentation of general algebraic numbers).
+	The choice of which root bound to use can be set
+	with the appropriate option when
+	compiling the library (-DMPI versus -DDEGREE_LENGTH).
+	See the Makefiles under ${CORE}/src for details.
+
+	When we suspect that an expression being
+	compared is highly likely to be zero,
+	then we might want to turn off 
+	the progressive evaluation mode, and evaluate
+	to the maximum root bound immediately.  Remember
+	that, in general, it is dangerous to do this,
+	as the best root bounds are still not very good.
+	That is an important research problem in this area.
+
+	In view of the above, our library provides a dynamic means
+	to turn on or off the pregressive evaluation mechanism.
+	Here is how to do it:
+
+		bool flag = false;	// to turn off Inc. Eval.
+		bool oldflag;		// previous flag value
+
+		oldflag = setProgressiveEvalFlag(flag);
+
+	However, this feature is not an obvious win in our
+	current system even in the equality case, as
+	the timings below show.  This is because when the 
+	user requests a certain precision, our system may actually
+	compute to considerably higher precision.  So taking
+	the root bound precision as our target may considerably
+	overshoot the necessary precision.  On the other hand,
+	progressive evaluation, despite its obvious overhead, seems
+	to win by reducing the amount of overshoot.  What we have
+	exploited here (in CORE 1.2, not in CORE 1.1)
+	is the ability to test the ACTUAL number of bits in the
+	current approximate that is significant. 
+
+
+2) Four timings to illustrate the effects of
+	expressions with/without division, and the use/non-use
+	of progressive evaluation
+
+2.1)     For division-free expression with incremental evaluation:
+
+ > courses2[289]% time compare
+ >          x  : 1234567890.
+ >          y  : 9876543210.
+ >          e = sqrt(x) + sqrt(y)
+ >          f = sqrt(x + y + 2 * sqrt(x) * sqrt(y))
+ >   -- Be patient: some tests (esp. equality) may be slow...
+ >          e == (f+1) ? no (CORRECT)
+ >          e == f ? yes (CORRECT)
+ >   -- NOTE: A slower test is to call "compare" with any single 
+ >      argument, e.g., compare 1.  To input your own rational values of
+ >      x and y, call "compare" with any two arguments, e.g., compare 1 1
+ > 1.06u 0.03s 0:01.11 98.1%
+
+2.2)     For expression with simple division with incremental evaluation:
+ > 
+ > courses2[290]% time compare 1
+ >          x (1/3) : 0.333333333
+ >          y (5/7) : 0.714285714
+ >          e = sqrt(x) + sqrt(y)
+ >          f = sqrt(x + y + 2 * sqrt(x) * sqrt(y))
+ >   -- Be patient: some tests (esp. equality) may be slow...
+ >          e == (f+1) ? no (CORRECT)
+ >          e == f ? yes (CORRECT)
+ > 2.27u 0.03s 0:02.32 99.1%
+
+2.3)     For division-free expression with non-incremental 
+	evaluation for equality test:
+
+ > courses2[293]% time compare
+ >          x  : 1234567890.
+ >          y  : 9876543210.
+ >          e = sqrt(x) + sqrt(y)
+ >          f = sqrt(x + y + 2 * sqrt(x) * sqrt(y))
+ >   -- Be patient: some tests (esp. equality) may be slow...
+ >          e == (f+1) ? no (CORRECT)
+ > Next, turn off Progressive Evaluation feature to speed up
+ >    an equality test
+ >          e == f ? yes (CORRECT)
+ >   -- NOTE: A slower test is to call "compare" with any single 
+ >      argument, e.g., compare 1.  To input your own rational values of
+ >      x and y, call "compare" with any two arguments, e.g., compare 1 1
+ > 17.31u 0.03s 0:17.38 99.7%
+
+2.4)     For expression with simple division with non-progressive 
+	evaluation for equality test:
+
+ > courses2[294]% time compare 1
+ >          x (1/3) : 0.333333333
+ >          y (5/7) : 0.714285714
+ >          e = sqrt(x) + sqrt(y)
+ >          f = sqrt(x + y + 2 * sqrt(x) * sqrt(y))
+ >   -- Be patient: some tests (esp. equality) may be slow...
+ >          e == (f+1) ? no (CORRECT)
+ > Next, turn off Progressive Evaluation feature to speed up
+ >    an equality test
+ >          e == f ? yes (CORRECT)
+ > 20.77u 0.04s 0:20.87 99.7%
+
+
+3) For further notes on this topic, see also the
+	subdirectory ${CORE}/progs/sumOfSqrts.
+
+==================================================================
+POSTSCRIPT (July, 2000):
+Some of the issues with speed has been resolved with
+CORE 1.3, thanks to two factors:
+	(1) a greatly improved root bounds for expressions
+		with radicals, and
+	(2) the use of a fast big number package (LiDIA/CLN).
+

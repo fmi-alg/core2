@@ -1,0 +1,64 @@
+# file input2f.txt
+#
+# This is a variant of input2.txt in which
+# 	we want to split the concave polygon P2 into two
+# 	convex parts to allow proper shading of obstacles!!!
+#
+#   rest-of-line comment character is '#'
+#   initial space and tabs ignored
+#
+#   NOTE: the polygons should be counter-clockwise if they
+#         enclose a bounded interior:
+#	 __________________________________________________
+#	|                                                  |
+#	| 1 ________ 2                                     |
+#	|  |        |                                      |
+#	|  |  P1    |                                      |
+#	|  |        |                                      |
+#	| 4 -------- 3                                     |
+#	|                       6                          |
+#	|                      - -                         |
+#	|                    -       -                     |
+#	|                5 -    P2      -7                 |
+#	|                   -         -                    |
+#	|                    -      -                      |
+#	|                    9-   -                        |
+#	|                    -  -                          |
+#	|                   - -                            |
+#	|          11      -                               |
+#	|           -      8                               |
+#	|         -   -                                    |
+#	|       -  P3   -                                  |
+#	|   10------------12                               |
+#	|                                                  |
+#	|                                                  |
+#	 --------------------------------------------------
+# NUMBER OF POINTS:
+12
+
+# P1: square (1,4,3,2,1):
+10 502
+110 502
+110 402
+10 402
+# P2: concave pentagon (5,9,8,7,6,5)
+#          BUT we will split it into 2 convex ones:
+#          P2a = (5,9,7,6,5) and P2b = (7,9,8,7):
+200 312
+300 400
+350 260
+210 162
+240 252
+# P3: triangle:
+50 112
+100 200
+150 92
+
+# NUMBER OF POLYGONS:
+4
+1 4 3 2 1
+5 9 7 6 5
+7 9 8 7
+10 12 11 10
+
+# END

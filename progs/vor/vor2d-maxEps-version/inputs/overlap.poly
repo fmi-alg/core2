@@ -1,0 +1,46 @@
+# file overlap.poly
+#
+# 	This contains overlapping polygons,
+#	To show how our predicates work even in this setting
+#
+#	Polygons 1 and 2 are two intersecting triangles
+#
+#	Polygon 3 and 4 form two concentric squares,
+#		but both are counter clockwise.   The
+#		code is now confused about inside and outside...
+#
+#
+# this is a sample file format for input
+#	-- rest-of-line comment character is '#'
+# 	-- initial space and tabs ignored
+#
+# See the file input.txt for a detailed description of format
+#
+
+14
+# first triangle:
+100 100
+300 100
+200 200
+# second triangle:
+100 300
+200 150
+300 300
+# first square:
+250 250
+400 250
+400 400
+250 400
+# first square:
+280 280
+370 280
+370 370
+280 370
+
+# Polygons:
+4
+1 2 3 1
+4 5 6 4
+7 8 9 10 7
+11 12 13 14 11
+11 14 13 12 11

@@ -1,0 +1,376 @@
+<comemnt Chee=" This is the sample environment from Kavraki's OOPSMP">
+<comemnt Chee=" It is converted it to the xfig polygons, June 2012">
+
+<factory instance="GGLUTEventManager">
+<call fn="setProgram">
+<arg type="pointer">
+
+<factory instance="GMotionPlannerProgram">    
+
+   <comment>
+   This program reads queries from the file
+   Core/Query/Queries.xml and then runs the selected
+   motion planner interactively. 
+   </comment>
+
+   <call fn="setGViewerController"><arg type="pointer">
+       <factory instance="GViewerController">
+
+    <call fn="setGViewer"><arg type="pointer">
+      <factory instance="GViewer">
+
+  <call fn="setViewportWidth">         <arg type="double">600</arg></call>
+  <call fn="setViewportHeight">        <arg type="double">600</arg></call>
+
+  <call fn="setProjectionTypeByName">  <arg type="string">Perspective</arg></call>
+  <call fn="setProjectionLeftPlane">   <arg type="double">-0.551</arg></call>
+  <call fn="setProjectionRightPlane">  <arg type="double"> 0.551</arg></call>
+  <call fn="setProjectionBottomPlane"> <arg type="double">-0.591</arg></call>
+  <call fn="setProjectionTopPlane">    <arg type="double"> 0.551</arg></call>
+  <call fn="setProjectionNearPlane">   <arg type="double"> 0.05</arg></call>
+  <call fn="setProjectionFarPlane">    <arg type="double">5.000</arg></call>
+  <call fn="setProjectionAspectRatio"> <arg type="double">1.33333333333333</arg></call>
+  <call fn="setProjectionViewingAngleInDegrees"> <arg type="double">60</arg></call>
+
+</factory>
+
+    </arg></call>
+
+</factory>
+
+   </arg></call>
+ 
+   <call fn="setGIllumination"><arg type="pointer">
+      <factory instance="GIllumination">
+
+    <call fn="setAmbient"><arg type="float_array">0.2 0.2 0.2 1.0</arg></call>
+
+    <call fn="addGLight"><arg type="pointer">
+       <factory instance="GLight">
+          <call fn="setAmbient">    <arg type="float_array">1.0 1.0 1.0 1.0</arg></call>
+          <call fn="setDiffuse">    <arg type="float_array">1.0 1.0 1.0 1.0</arg></call>
+	  <call fn="setSpecular">   <arg type="float_array">0.8 0.8 0.8 1.0</arg></call>
+	  <call fn="setAttenuation"><arg type="float_array">0.0 0.03 0.003</arg></call>
+	  <call fn="setPosition">   <arg type="float_array">14.0 14.0 15.2 0.0</arg></call>
+       </factory>
+    </arg></call>
+
+
+</factory>
+
+   </arg></call>
+  
+   <call fn="setFileNames"><arg type="pointer">
+      <factory instance="FileNames">
+
+   <comment>
+   Catalog of input/output files used by different OOPSMP programs.
+                                                                    
+   Each file name/path is associated with a keyword that is
+   used by OOPSMP programs to retrieve the appropriate file
+   name/path. Each OOPSMP program may use zero or more files.
+   </comment>
+
+   <call fn="addFileName">
+     <arg type="string">MotionPlanningDataFile </arg>
+     <arg type="string">MotionPlanningDataFile.txt</arg>
+   </call>
+
+   <call fn="addFileName">
+     <arg type="string">MotionPlanningSolutionsFile</arg>
+     <arg type="string">MotionPlanningSolutionsFile.txt</arg>
+   </call>
+
+   <call fn="addFileName">
+     <arg type="string">MotionPlanningQueriesFile</arg>
+     <arg type="string">Core/Query/Queries.xml</arg>
+   </call>
+
+   <call fn="addFileName">
+     <arg type="string">GraphicsFile</arg>
+     <arg type="string">graphics.ps</arg>
+   </call>
+
+
+</factory>
+
+   </arg></call>
+
+   <call fn="setQueries"><arg type="pointer">
+      <factory instance="Queries">
+<call fn="addQueries">
+ <arg type="int">10</arg>
+ <arg type="int">3</arg>
+ <arg type="double_array">
+   -0.022911 -0.115962 -0.729750 
+   -0.335974 0.286217 1.640217 
+   -0.361374 0.322786 2.294763 
+   -0.203585 -0.072764 -1.362865 
+   0.198168 0.257312 2.805693 
+   -0.324529 0.097850 -0.686631 
+   -0.057077 -0.080242 0.110432 
+   -0.173286 -0.009210 2.089135 
+   -0.343539 0.095785 -2.002475 
+   -0.409063 -0.173848 1.986725 
+   -0.264045 -0.006819 -1.082215 
+   0.318550 0.243364 -1.825064 
+   0.185902 0.152179 1.352573 
+   0.451223 -0.345312 1.564598 
+   0.261631 -0.357379 0.689668 
+   -0.265128 -0.206642 -1.943079 
+   0.131854 0.235373 1.780531 
+   -0.126285 -0.337387 2.394696 
+   0.308908 -0.300999 2.521294 
+   -0.366078 -0.005306 1.002830 
+ </arg>
+</call></factory>
+
+   </arg></call>
+
+   <call fn="setCoreRobotData"><arg type="pointer">
+      <factory instance="CoreRobotData">
+
+    <comment>
+    Setting up core components for single-robot problems.
+
+    User sets up workspace, collision detector, robot state space,
+    robot valid state sampler, robot path generator, and local
+    planner. 
+ 
+    The workspace should have at least one moving part.
+    The geometry of the robot is assumed to be that of
+    the first moving part in the workspace.
+    </comment>  
+
+   <call fn="setWorkspace"><arg type="pointer">
+      <factory instance="Workspace2D">
+
+  <comment>
+Set the number of moving parts (robots).
+Each call adds one moving part.
+</comment>
+
+
+<call fn="addMovingPart"><arg type="pointer">
+ <factory instance="Part2D">
+   <comment>
+   Geometry for a rigid-body 2D robot. A call to centerAtZero function
+   centers the geometry at zero, which is necessary for the
+   SE2Topology and SE2StateSpace to work correctly. This call must be
+   after setting all the vertices.    
+
+   CHEE COMMENT: I have converted the following Robot into
+   xfig format (see robotConfig.fig)
+   </comment>
+
+         <call fn="setVertices">
+          <arg type="int">8</arg>
+          <arg type="double_array">
+             -0.184126 0.020729
+             -0.184126 -0.040921
+             0.085864 -0.040921
+             0.085864 0.008564
+             0.071171 0.008564
+             0.071171 -0.021888
+             -0.165759 -0.021888
+             -0.165759 0.020729
+          </arg>
+        </call>
+ 
+	<call fn="centerAtZero"></call>
+	
+</factory>
+
+</arg></call>
+
+
+
+    <call fn="addStaticPart"><arg type="pointer">
+      <factory instance="Part2D">
+        <call fn="setVertices">
+          <arg type="int">4</arg>
+          <arg type="double_array">
+             -0.550000 -0.550000
+             0.550000 -0.550000
+             0.550000 -0.500000
+             -0.550000 -0.500000
+          </arg>
+        </call>
+       </factory>
+    </arg></call>
+
+    <call fn="addStaticPart"><arg type="pointer">
+      <factory instance="Part2D">
+        <call fn="setVertices">
+          <arg type="int">4</arg>
+          <arg type="double_array">
+             -0.550000 0.500000
+             0.550000 0.500000
+             0.550000 0.550000
+             -0.550000 0.550000
+          </arg>
+        </call>
+       </factory>
+    </arg></call>
+
+    <call fn="addStaticPart"><arg type="pointer">
+      <factory instance="Part2D">
+        <call fn="setVertices">
+          <arg type="int">4</arg>
+          <arg type="double_array">
+             -0.550000 -0.500000
+             -0.500000 -0.500000
+             -0.500000 0.500000
+             -0.550000 0.500000
+          </arg>
+        </call>
+       </factory>
+    </arg></call>
+
+    <call fn="addStaticPart"><arg type="pointer">
+      <factory instance="Part2D">
+        <call fn="setVertices">
+          <arg type="int">4</arg>
+          <arg type="double_array">
+             0.500000 -0.500000
+             0.550000 -0.500000
+             0.550000 0.500000
+             0.500000 0.500000
+          </arg>
+        </call>
+       </factory>
+    </arg></call>
+
+    <call fn="addStaticPart"><arg type="pointer">
+      <factory instance="Part2D">
+        <call fn="setVertices">
+          <arg type="int">5</arg>
+          <arg type="double_array">
+             0.005510 -0.505350
+             0.066120 -0.505350
+             0.281010 0.086587
+             0.233257 0.107523
+             0.009183 -0.495833
+          </arg>
+        </call>
+       </factory>
+    </arg></call>
+
+    <call fn="addStaticPart"><arg type="pointer">
+      <factory instance="Part2D">
+        <call fn="setVertices">
+          <arg type="int">5</arg>
+          <arg type="double_array">
+             -0.091833 0.499610
+             -0.091833 0.316890
+             -0.007347 -0.033323
+             0.121220 0.052327
+             -0.040407 0.501513
+          </arg>
+        </call>
+       </factory>
+    </arg></call>
+
+
+</factory>
+
+
+
+   </arg></call>
+
+   <call fn="setCollisionDetector"><arg type="pointer">
+      <factory instance="PQPCollisionDetector2D">
+</factory>
+
+   
+   </arg></call>
+
+   <call fn="setStateSpace"><arg type="pointer">
+      <factory instance="SE2StateSpace">
+
+   <call fn="setDistanceStateCoeffPosX"><arg type="double">1.0</arg></call>
+   <call fn="setDistanceStateCoeffPosY"><arg type="double">1.0</arg></call>
+   <call fn="setDistanceStateCoeffOrientation"><arg type="double">0.2</arg></call>
+
+</factory>
+   </arg></call>
+
+   <call fn="setValidStateSampler"><arg type="pointer">
+      <factory instance="UniformValidStateSampler">
+</factory>
+   </arg></call>
+
+   <call fn="setPathGenerator"><arg type="pointer">
+      <factory instance="SE2DecoupledGeodesicPathGenerator">
+</factory>
+   </arg></call>
+  
+   <call fn="setLocalPlanner"><arg type="pointer">
+      <factory instance="SubdivisionLocalPlanner">
+
+   <comment>
+Setup parameters for local planner
+</comment>
+
+<call fn="setCheckResolution">
+   <arg type="double">0.01</arg>
+</call>
+
+<call fn="setMinDurationForExtendPaths">
+   <arg type="double">0.01</arg>
+</call>
+
+<call fn="setKeepFractionForExtendPaths">
+   <arg type="double">0.9</arg>
+</call>
+
+
+</factory>
+   </arg></call>
+    
+</factory>
+      
+ 
+   </arg></call> 
+ 
+   <call fn="setMotionPlanner"><arg type="pointer">
+      <factory instance="PRM">
+
+   <call fn="setProximity"><arg type="pointer">
+      <factory instance="GNATProximityKeyPointer">
+</factory>
+
+
+   </arg></call> 
+
+   <call fn="setNrNeighborsSample"><arg type="int">15</arg></call>
+   <call fn="setNrNeighborsQuery"> <arg type="int">50</arg></call>
+
+   <call fn="allowCycles"><arg type="bool">false</arg></call>
+ 
+   <call fn="setFractionSamplingTime">
+      <arg type="double">0.2</arg>
+   </call>
+ 
+   <call fn="setMinMaxNrSamples">
+      <arg type="int">2000</arg>
+      <arg type="int">5000</arg>
+   </call>
+  
+</factory>
+
+
+   </arg></call>
+
+   <call fn="setGMotionPlanner"><arg type="pointer">
+      <factory instance="GPRM">
+</factory>
+
+
+   </arg></call>
+  
+</factory>
+
+</arg>
+</call>
+</factory>

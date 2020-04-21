@@ -1,0 +1,5 @@
+README
+
+This is for local testing of geometry package
+Something seems funny about the pentagon example -- it
+is always correct even at level 1 with degenerate input?

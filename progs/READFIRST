@@ -1,0 +1,12 @@
+READFIRST
+
+Please read the README file in this folder, $(CORE)/progs.
+
+But if you browse the subdirectories through our download
+pages, these files may not show up.  You can explicitly 
+point your browser at the README file to get it:
+
+E.g., for the README file in (CORE)/progs/, use
+
+  http://cs.nyu.edu/exact/core/download/core_v2.0/core_v2.0/progs/README
+

@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.0 (25/8/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside,twocolumn]{article}
+
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+\usepackage{graphicx}
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+%\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\titleformat{\section}[block]{\large\scshape\centering{\Roman{section}.}}{}{1em}{} % Change the look of the section titles 
+\usepackage{verbatim}
+\usepackage{fancyhdr} % Headers and footers
+\begin{comment}
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{ $\bullet$ November 2012 $\bullet$ } % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+\end{comment}
+%----------------------------------------------------------------------------------------
+%	Kai's 	Macro
+%----------------------------------------------------------------------------------------
+\usepackage{verbatim}
+\usepackage{tikz}
+\usepackage{pstricks}
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{\vspace{-15mm}\fontsize{20pt}{10pt}\selectfont\textbf{3-Level Geometric Modeler: CSG, Subdivision Trees and Boundary Representation}} % Article title
+
+\author{
+\large
+\textsc{Kai Cao}\iffalse \thanks{Thanks to Chee Yap for his help}\fi \\[2mm] % Your name
+\normalsize New York University \\ % Your institution
+\normalsize \href{mailto:kcao@cs.nyu.edu}{kcao@cs.nyu.edu} % Your email address
+\vspace{-5mm}
+}
+\date{}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{comment}
+\maketitle % Insert title
+
+\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+
+\noindent The problem of computing geometry modeling in 3D is fundamental to computer graphics, path finding, motion planning and numerous branches of computer science. Given a polyhedron P defined by CSG (Constructive Solid Geometry) model, we raise a new idea to present the boundary features (vertices, edges and faces) of P using subdivision method; it has the following steps: 1) define a polyhedron P in CSG model, 2) predicate and subdivide a given box $B_0$ recursively until all sub-boxes are elementary 3) generate the adequate Subdivision Tree, 4) represent the boundary features based on the Subdivision Tree. Since the great generality and scalability of subdivision method, this idea can also be expanded to support more complex shape with higher order surfaces in 3D.
+
+\end{abstract}
+\end{comment}
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\begin{multicols}{2} % Two-column layout throughout the main article text%
+%\input{cube.tex}\\
+%\begin{comment}
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+					\input{tricube.tex}
+                \caption{1}
+                \label{fig:triangle}
+        \end{subfigure}
+		\begin{comment}
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+				\input{equitricube.tex}
+                \caption{2}
+                \label{fig:equitriangle}
+        \end{subfigure}
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. 
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+				\input{trapecube.tex}
+                \caption{3}
+                \label{fig:trape}
+        \end{subfigure}
+		\end{comment}
+        \caption{Face boxes}\label{fig:face}
+\end{figure}
+
+\begin{figure}
+\input{cube.tex}
+\end{figure}
+%\end{comment}
+
+
+%----------------------Facebox---------------------------
+
+
+%--------------------------------------------------------------
+
+\input{cube.tex}
+\input{equitricube.tex}
+\input{trapecube.tex}
+\input{parallelcube.tex}
+\input{rectcube.tex}
+\input{squarecube.tex}
+\input{pentacube.tex}
+%\input{hexacube.tex}
+\input{examples/kai_octree.tex}
+\input{solidcube.tex}
+\input{firstsubcube.tex}
+\input{secondsubcube.tex}
+\input{f2ebox.tex}
+\input{f2vbox.tex}
+\input{f2nbox.tex}
+\input{f3vbox.tex}
+\input{fenbox.tex}
+\input{fe1ebox.tex}
+\input{fe2ebox.tex}
+\input{fe3ebox.tex}
+\input{e2nbox.tex}
+
+%\end{multicols}
+
+
+

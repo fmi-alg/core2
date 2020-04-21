@@ -1,0 +1,8 @@
+! file: linear.pol
+! This is the linear polynomial p(x)=x-1. 
+
+dri
+0
+1
+-1
+1

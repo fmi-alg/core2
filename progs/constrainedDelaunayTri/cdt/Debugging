@@ -1,0 +1,93 @@
+COMPILER WARNINGS TO REMOVE:
+
+cheeyap@cdt[1868] make
+g++ -Wfatal-errors -O3 -Wall -DNDEBUG -Dmac  -c  cdt.cpp -o cdt.o
+In file included from cdt.cpp:78:0:
+cdt.h: In function 'int pointInAngle(double, double, double, double, double, double, double, double)':
+cdt.h:590:43: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+	This is the line:
+			 return( yq>0 &&(xq>=0 || xq<0 && sign>0));
+
+cdt.h:599:43: warning: suggest parentheses around '&&' within '||' [-Wparentheses]
+	This is the line:
+			 return( yq>=0 || yq<0 && xq<0 && sign>0);
+
+cdt.h: In function 'int partition(Vertex**, int, int)':
+cdt.h:637:87: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.h:637:87: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp: In member function 'void Vertex::addToOutHalfedgeList(HePointer)':
+cdt.cpp:304:60: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:304:60: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp: In member function 'void Quad::updateLongEdge(EPointer)':
+cdt.cpp:475:61: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:475:61: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp: In member function 'int Mesh::import2OFFFile(char*)':
+cdt.cpp:615:61: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:615:61: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:633:67: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:633:67: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:643:62: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:643:62: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:654:74: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:654:74: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:734:154: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:734:154: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp: In member function 'int Mesh::export2OFFFile(char*, char*)':
+cdt.cpp:754:13: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:765:76: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp:765:76: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+cdt.cpp: In member function 'Halfedge* Mesh::getHullHalfedge(VPointer, int, bool)':
+cdt.cpp:926:10: warning: variable 'v_j' set but not used [-Wunused-but-set-variable]
+cdt.cpp: In member function 'Halfedge* Mesh::getHullHalfedgeNextTo(HePointer, VPointer, int, int, int, bool)':
+cdt.cpp:1032:10: warning: variable 'v_j' set but not used [-Wunused-but-set-variable]
+cdt.cpp: In member function 'void Mesh::mergeSlabPair(SPointer)':
+cdt.cpp:1971:13: warning: variable 'm' set but not used [-Wunused-but-set-variable]
+g++  cdt.o -o cdt
+Undefined symbols for architecture x86_64:
+  "_glBegin", referenced from:
+      Mesh::display()     in cdt.o
+  "_glColor3f", referenced from:
+      Mesh::display()     in cdt.o
+  "_glVertex2d", referenced from:
+      Mesh::display()     in cdt.o
+  "_glEnd", referenced from:
+      Mesh::display()     in cdt.o
+  "_glPointSize", referenced from:
+      Mesh::display()     in cdt.o
+  "_glClear", referenced from:
+      display()    in cdt.o
+      olddisplay()     in cdt.o
+  "_glLoadIdentity", referenced from:
+      display()    in cdt.o
+      olddisplay()     in cdt.o
+  "_gluOrtho2D", referenced from:
+      display()    in cdt.o
+      olddisplay()     in cdt.o
+  "_glFlush", referenced from:
+      display()    in cdt.o
+      olddisplay()     in cdt.o
+  "_glViewport", referenced from:
+      reshape(int, int) in cdt.o
+  "_glClearColor", referenced from:
+      init()    in cdt.o
+  "_glShadeModel", referenced from:
+      init()    in cdt.o
+  "_glutInit", referenced from:
+      _main in cdt.o
+  "_glutInitDisplayMode", referenced from:
+      _main in cdt.o
+  "_glutInitWindowSize", referenced from:
+      _main in cdt.o
+  "_glutInitWindowPosition", referenced from:
+      _main in cdt.o
+  "_glutCreateWindow", referenced from:
+      _main in cdt.o
+  "_glutDisplayFunc", referenced from:
+      _main in cdt.o
+  "_glutMainLoop", referenced from:
+      _main in cdt.o
+ld: symbol(s) not found for architecture x86_64
+collect2: error: ld returned 1 exit status
+make: *** [cdt] Error 1
+cheeyap@cdt[1869] 
+

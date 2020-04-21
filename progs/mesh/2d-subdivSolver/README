@@ -1,0 +1,181 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Sub-division solver for bivarate polynomial system
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Header search path:	$(CORE_PATH)/inc
+		    	$(CORE_PATH)/gmp/include
+		    	$(CORE_PATH)/progs/mesh/arrangements-gui
+
+Library search path:	$(CORE_PATH)/lib
+		   	$(CORE_PATH)/gmp/lib
+
+
+--------------------------------------------------------------
+This folder include a "main" cpp file and a "src" header file.
+algorithms for isolation and refinement are located in src.h
+
+For Isolation:
+	I use the method from Juan Xu's notes based on MKtest.
+	Please check file named "Algorithm for Isolation." 
+For Refinement:
+	Please check file named "Algorithms for Refinement."
+--------------------------------------------------------------
+
+
+
+
+
+
+--------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			MUST change of CORE
+			MUST change of CORE
+			MUST change of CORE
+			MUST change of CORE
+			MUST change of CORE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*1. (DONE!)
+	It seems for new version C++11, the template methods defined 
+in class should use template notation if methods was used. Thus in file 
+
+	$(CORE_PATH)/progs/mesh/arrangements-gui/mk-inl.h
+
+line141-144 should be revised as
+    j00 = jacobian_(0, 0).template eval<NT>(x_mid, y_mid);
+    j01 = jacobian_(0, 1).template eval<NT>(x_mid, y_mid);
+    j10 = jacobian_(1, 0).template eval<NT>(x_mid, y_mid);
+    j11 = jacobian_(1, 1).template eval<NT>(x_mid, y_mid);
+
+line 309-312 should be revised as
+      temp(0, 0) = jacobian_(0, 0).template eval<NT>(x_mid, y_mid);
+      temp(0, 1) = jacobian_(0, 1).template eval<NT>(x_mid, y_mid);
+      temp(1, 0) = jacobian_(1, 0).template eval<NT>(x_mid, y_mid);
+      temp(1, 1) = jacobian_(1, 1).template eval<NT>(x_mid, y_mid);
+
+
+P.S. "eval" is template function in template class "Curve" in 
+	$(CORE_PATH)/inc/CORE/poly/Curves.h
+
+*2.
+  If you want to compile subdivision_solver under different CORE_LEVEL,
+you must delete the line 12 of
+
+	$(CORE_PATH)/progs/mesh/arrangements-gui/mk-def.h
+
+or write it as
+	
+	#ifndef CORE_LEVEL
+	#   define CORE_LEVEL n    //(1,2,3,4)  
+	#endif
+
+Otherwise, it could only be compiled successfully under CORE_LEVEL 4, because CORE_LEVEL=4 was defined in mk-def.h
+--------------------------------------------------------------
+
+
+
+
+
+
+
+--------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			Using method
+			Using method
+			Using method
+			Using method
+			Using method
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*Step 1.
+  First, locating path of your terminal at
+
+	$(CORE_PATH)/progs/subdivision_method/
+
+*Step 2.
+  and do
+
+	%make main              ---Build up the program
+
+*Step 3.
+  then do
+
+	%make test              ---compute result
+
+
+  Basically, you could follow the INPUT Form(next chapter) typing in 
+the bipoly system and box region. (Its all right following instruction on screen)
+
+  Our goal is to not only isolate real root box of bipoly system and do further refinement,
+ but also compute and compare efficiency of different algorithms of different 
+input. So I set an output of "time consuming" of algorithms. 
+
+  In case of designment of more efficient algorithms, you could add new methods in
+"src.h" and add execution in "main.h" correspondingly.
+--------------------------------------------------------------
+P.S. "Procedure.pdf" provide an overview of operating steps
+P.S. "Procedure.pdf" provide an overview of operating steps
+P.S. "Procedure.pdf" provide an overview of operating steps
+P.S. "Procedure.pdf" provide an overview of operating steps
+P.S. "Procedure.pdf" provide an overview of operating steps
+
+
+
+--------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			INPUT Form
+			INPUT Form
+			INPUT Form
+			INPUT Form
+			INPUT Form
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//The string representation of bipoly is extremely flexible.
+//	E.g., "x^3 y^4 + x -32.1 y^2 + 3"
+//
+// 	You are allowed to have one equality symbol:
+// 		e.g., "x^2 = 3xy + 1"
+// 	yields the same polynomial as "x^2 - 3xy - 1".
+//
+// 	You can have arbitrarily nesting of parenthesis:
+// 		e.g. "((x-1)^2 + (y-7)^3 = 3^2) ( 2x-3y+1)"
+//	
+//The BNF syntax is the following:-
+//
+//    [bipoly] -> [term]| [term] +/- [bipoly] | [bipoly] = [bipoly]
+//
+//
+//    [term] -> [basic term]|[basic term] [term]|[basic term]*[term]
+//    [basic term] -> [number]|'x'|'y'|[basic term]'^'[number]
+//                    | '(' [bipoly]')'|'-'
+//Unary minus is treated as a basic term
+
+
+
+If you want to compute the isolated root box of a bivariate polynomial
+system in region B
+e.g:        x^2+y^2-1=0       x in [-1,1]
+            x+y=0             y in [0,2]
+
+you need to type in system and region in this order( or following instruction 
+at interactive interface)
+
+	bivariate polynomial 1 [Enter]
+	bivariate polynomial 2 [Enter]
+	x's lower bound[Enter]
+	x's upper bound[Enter]
+	y's lower bound[Enter]
+	y's upper bound[Enter]
+
+e.g:            
+
+x^2+y^2-1 [Enter]
+x+y [Enter]
+-1 [Enter]
+1[Enter]
+0[Enter]
+2[Enter]
+--------------------------------------------------------------
+
+
+
+							--Zhaoji 
+
+						     2018.2.8

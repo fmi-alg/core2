@@ -1,0 +1,46 @@
+============================================================
+README file for $(corelib)/progs/robotics
+
+Core Library (since version 2.1, March 2012)
+============================================================
+
+Description:
+	This directory has various subdirectoris containing algorithms
+	for robotics, especially motion planning.
+
+	(1) Subdirectory 2d-disc:
+	This implements the SSS algorithm for moving a disc amidst polygonal
+	obstacles, using the soft-predicated described in the
+	paper "Numerical Subdivision Methods in Motion Planning" by
+	Y.-J.Chiang and C.Yap (2011).
+
+Authors:
+	J-M. Lien, C.Yap, V.Sharma (2012)
+	Huck Bennett, C.Yap (2015-6)
+
+$Id: README $
+============================================================
+Files:
+	README		-- this file
+	Makefile	-- Type "make" to compile programs in the
+				subdirectories 
+
+Directories:
+	data		-- This directory has various data files
+	
+	vor2d		-- a numerical subdivision-based algorithm for the Voronoi complex
+			   of a polygonal set
+	
+	vor3d		-- a numerical subdivision-based algorithm for the Voronoi complex
+			   of a polyhedral set
+	
+	vor2d-weighted	-- Implementation of anisotropic Vor diagram of polygonal set
+	vor2d-weighted-new
+			-- The version given the "Reproducibility Stamp" at
+				SGP 2016 in Berlin, based on our paper
+			
+				"Planar Minimization Diagrams via Subdivision
+				 with Applications to Anisotropic Vor diagrams"
+
+============================================================
+============================================================

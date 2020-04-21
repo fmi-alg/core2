@@ -1,0 +1,126 @@
+============================================================
+README file for mesh/cxy
+Since Core Library Version 2.0.
+	$Id: README,v 1.12 2010/06/27 06:52:14 exact Exp $
+============================================================
+Files in this directory:
+	README		-- this file
+	Makefile	-- Type "make LEV=n" to compile programs in different
+				levels, or "make eg1" to run examples.
+	cxy.cpp		-- main program
+	cxy-defs.h
+	box.cpp		-- box functions
+	box.h		-- 
+	interval-inl.h	-- simple interval class 
+	points-inl.h	-- simple point class
+	predicates-inl.h -- predicates for evaluation
+	display-list-inl.h	-- Takes the constructed curve, and builds a display list
+                           of line segments for OpenGL to display.
+        multilist-inl.h -- The priority queue datastructure used in the balance
+                           and the Construct+ phases.
+	display.cpp	-- OpenGL routines
+	display.h	--
+
+Directories:
+	original	-- the original implementation from Long and Shuxing
+============================================================
+
+OVERVIEW:
+
+This version of the CXY code by Narayan is derived from the original
+one by Long and Shuxing.  The code is reorganized into
+various smaller modules such as boxes, display, interval arithmetic,
+etc.  Also, the code is extensively commented, to allow further development.
+
+(1) The OPENGL display is improved to allow zooming and panning.
+The output boxes is color coded: In-boxes are green, Out-boxes are
+red and unresolved-boxes are blue (i.e., it reached min_size).
+
+(2) Efficiency was a major issue.  The original code could only
+run in Level 3!  Even running in Level 2 was not
+optimized as there are many unnecessary operations that Level 1
+suffices.  In fact, for most of our examples,
+Level 1 accuracy suffices, but to run this code at Level 1 requires
+changes to Core Library.  That is achieved by introducing
+thin wrappers in Level 1 for the machine types.
+Using profilers, Narayan observed that 80 percent of CXY computation
+was used to manipulate the data structures.
+This idea was in the original design of Core but never fully
+implemented before.  
+
+(3) The Makefile was completely redesigned to allow easy compilation in all
+three levels.  We have a battery of examples, (eg1, eg2, etc) which
+gives automatic timing.  Using our Makefile, we run example 1 in each level:
+
+	> make all		-- compiles into cxy_1, cxy_2, cxy_3
+	> make LEV=1 eg1 	-- runs cxy_1 on example 1 (7 ms)
+	> make LEV=2 eg1	-- runs cxy_2 on example 1 (65 ms)
+	> make LEV=3 eg1	-- runs cxy_3 on example 1 (768 ms)
+
+Thus, we see that Level 1 is one order of magnitude faster than Level 2,
+which in turn is one order of magnitude faster than Level 3.
+Timing is on MacBook Air,
+Intel Core 2 Duo, 2.13 GHz, 6 MB of L2 Cache, 2 GB Memory.
+
+(4) In factoring out the interval arithmetic (into interval-inh.h),
+we might ask why don't we use the BigFloat2 of Core for 
+interval arithmetic?  The reason is that BigFloat2 is optimized for
+its use in Expressions and has many methods that does not make sense
+in an ordinary interval package.  Implementing wrappers for Level
+1 types that includes all the methods of BigFloat2 does not make sense.  
+
+(5) I am unhappy with the data structure.  I believe that the best
+data structure is a "box complex" data structure where boxes are
+2-cells, and its boundary is divided into segments (1-cells) and
+corners (0-cells).  For now,
+Narayan's implementation kept the data structure from Lin and Shuxing.  
+Currently, a corner is duplicated in each of the four incident boxes.
+In a box complex, this duplication is removed, and we can
+check for identity of a point by its address (this is useful in
+navigating around the boundary to return to the starting point).
+Likewise, segments shared by boxes makes it easy to detect inserted
+vertices (representing curves crossing the segments).  It is mathematically
+elegant and has O(1) complexity for most operations.
+	
+(6) Some timings: The refactored cxy (cxy-refactored) is compared to
+a new version of cxy (called cxy-new) here (on the usual MacOS platform):
+			cxy-refactored	cxy-new	speedup
+			==============	=======	=======
+	eg1		8 ms		6 ms	1.3x
+	eg4		202 ms		70 ms	2.9x
+	eg12		775 ms		224 ms	3.5x
+	eg31		13,723 ms 	805 ms 	17.0x 
+	eg33		179,472 ms	6183 ms	29.0x
+			==============	=======	=======
+Clearly, the improvement is nonlinear.
+
+--Chee (Oxford, May 2010)
+
+============================================================
+
+Some points of difference between the new implementation
+and the old.
+
+(i) Usage of unsigned integer arithmetic for all box size
+related comparisons.
+(ii) An efficient Priority queue implementation, insert( )
+and erase( ) operations are now constant time, they were
+earlier O(n)
+(iii) Balances are more efficient, because now they balance
+only in-boxes. It appears earlier that even out boxes would
+be balanced (I am not sure, but i think they were)
+
+(iv) A more efficient balancing algorithm that propagates
+from the minimum sized boxes outwards. It ensure that
+minimum possible number of boxes are compared , and split. 
+Earlier it was just a linear scan based balance, trying to
+balance around *every* box in the list.
+
+(v) Support for balancing around a particular node. Earlier
+if we split a box, we'd try to balance the whole list of boxes.
+
+--Narayan (Oxford, Jun 2010)
+
+(vi) The algorithm now follows the paper exactly. The earlier code differed slightly (I'm not
+sure why).
+

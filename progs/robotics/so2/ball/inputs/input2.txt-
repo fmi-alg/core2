@@ -1,0 +1,30 @@
+# file: input2.txt
+# This tetrahedra has two tetrahedra 
+
+# four points
+8
+100 40 60
+300 40 60
+200 40 400
+200 500 230
+#
+300 40 60
+500 40 60 
+400 40 400
+400 500 230
+
+# Polytope 1
+4
+1 2 3
+2 4 3
+1 4 2
+3 4 1
+
+# Polytope 2
+4
+5 6 7 
+6 8 7 
+5 8 6 
+7 8 5 
+
+0

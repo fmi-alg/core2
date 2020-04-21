@@ -1,0 +1,9 @@
+#  Triangle Demos for SoCG 2016 in Boston:
+#  	demo1	= bug2:
+#  			Fastest is Dist+Size (930 ms)
+#  			Next is Boundary Tracker (6680 ms)
+#  			Last is Greedy (26900 ms)
+#  	demo2 	= 100 triangles,
+#  			Fastest is Greedy (250 ms)
+#  			Next is Boundary Tracker (780 ms)
+#  			Last is Dist+Size (3840 ms)

@@ -1,0 +1,11 @@
+Projects
+
+Feb 2017: Chee's work with Sam Phelan
+	(1) Implement the lower bounds splits of
+		our paper (this is nice validation of our paper)
+	(2) Introduce a non-smooth version
+	(3) Implement the Omega(log n) bound for non-smooth splits
+		(But this requires implementing the non-smooth version first)
+	(4) Implement our robotics motion planning code using smooth splits
+		(general SSS framework)
+	(5) Show experimentally the cost of smoothness/non-smoothness

@@ -1,0 +1,23 @@
+# README file for progs/complex
+#
+# (template Makefile for simple targets)
+#
+# Core Library, $Id: Makefile,v 1.1 2010/06/22 16:25:15 exact Exp $
+
+	A complex number package developed primarily for use
+	in the CEVAL algorithm (progs/mesh/ceval) . It contains
+	(reasonably) complete implementations of polar and
+	cartesian complex number classes. All basic arithmetic
+	operations on complex numbers are defined, as well as
+	conversions between the two types.
+
+--Narayan (June 2010)
+
+NOTES:
+Dec 2016: Modified Makefile so that we use the Debug-version of
+	Corelib in order to turn assertions on!
+	Will adapt homotopy path code with Burr/Xu to work with Core.
+	--Chee
+
+
+

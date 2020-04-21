@@ -1,0 +1,45 @@
+README File
+
+Examples of the anary operators "summation" and "product"
+and the speedup's they afford.  The programs are called tSum.cpp
+and tProd.cpp.  
+
+You can compile them to either use
+	(1) the obvious sum/prod of expressions, or
+	(2) the built-in anary operator called summation/product.
+The Makefile will compile both versions of these programs,
+	(tSum1 vs. tSum2 and tProd1 vs. tProd2).
+
+The program tProdConverge.cpp is used to verify that our
+arbitrary product is converging to pi/2.
+
+Timings (May 11, 2010)
+	on MacBookAir PLATFORM:
+	   MacOS X (10.5.8)
+	   Processor: 2.13 GHz Intel Core 2 Duo
+	   Memory: 2 GB 1067 MHz DDR3, L2 Cache: 6 MB
+
+	Sum vs. Summation
+	===========     ===================     ======================     
+	n		Time w/ sum (msec)	Time w/ summation (msec)    
+			tSum1			tSum2
+	===========     ===================     ====================== 
+	4000		17 			12
+	10000		31			30
+	100000		segment fault		291
+	200000		segment fault		582
+	==============================================================
+
+	Prod vs. Product
+	===========     ===================     ======================     
+	n		Time w/ sum (ms)	Time w/ summation (ms)    
+			tProd1			tProd2
+	===========     ===================     ====================== 
+	400		4 			3
+	1000		122			6
+	10000		1513 			57
+	20000		8211 			112
+	==============================================================
+
+Since Core 2.0
+--Chee (May 2010)

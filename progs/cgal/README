@@ -1,0 +1,5 @@
+This directory contains example programs of how to use CORE with CGAL.
+
+You need to have CGAL installed, and to have the environment variable
+CGAL_MAKEFILE set appropriately.  Then just type "make".
+

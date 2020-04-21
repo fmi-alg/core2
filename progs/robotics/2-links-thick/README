@@ -1,0 +1,45 @@
+README 
+#	2-Link Robot Planner.
+#
+#	Author:  Zhongdi Luo
+#	Date: May 2013
+#
+#	Since Corelib 2.1 (May 2013)
+#    	$Id:$
+# ################################################################################
+
+# ################################################################################
+#	Please read the Makefile for various pre-arranged demos.
+# ################################################################################
+
+	Comments about the code:
+
+	(1) To implement the Voronoi heuristic, we need to maintain the clearance
+		of the center of each translational box.
+		Clearance is called:
+				Box->cl_m
+		This is computed in the file Box.h.
+		To compute clearance, we need to maintain a different feature set.
+		This is found in
+				Box->vorWalls,
+				Box->vorCorners.
+		This feature set needs to be filtered by zone information
+		to correctly implement the Voronoi heuristic.
+		It is not currently done correctly.
+
+# ################################################################################
+#	TODO:
+# ################################################################################
+	(0) Convert to use Core Library to verify the correctness of
+		the IEEE arithmetic in Level 1.
+	(1) Improve method to find the actual path (e.g., Dijkstra)
+	(2) Implement a thread to simultaneously check for no path
+		-- this should speed up no-path examples, but what is
+		its impact on yes-path examples?
+	(3) Hybrid search strategies
+	(4) Implement Astar
+	(5) Compare to PRM
+
+# ################################################################################
+# ################################################################################
+

@@ -1,0 +1,14 @@
+#Polynomials with degree greater than 100
+#Fast
+chebyshev160.pol
+easy100.pol
+hermite160.pol
+laguerre160.pol
+mand127.pol
+mig1_100_1.pol
+mig1_200_1.pol
+nroots100.pol
+nroots200.pol
+sparse100.pol
+sparse200.pol
+wilk160.pol

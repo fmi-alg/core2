@@ -1,0 +1,58 @@
+# file input3a.txt
+# more complex version of input3.txt, with new barrier.
+
+# points
+27
+
+# top left hand square:
+10 502
+110 502
+110 402
+10 402
+# pentagon
+200 312
+250 332
+300 292
+210 162
+220 202
+# triangle
+50 112
+100 162
+150 92
+# boundary:
+1 1
+1 510
+510 510
+510 1
+# wall1
+350 1
+400 1
+400 300
+350 300
+# wall 2
+350 510
+350 350
+400 350
+400 510
+# barrier
+80 300 
+200 350
+195 355
+
+# polygons
+7
+# square
+1 4 3 2 1
+# pentagon
+5 9 8 7 6 5
+# triangle
+10 12 11 10
+13 14 15 16
+# wall 1
+17 18 19 20 17
+# wall 2
+21 22 23 24 21
+# barrier
+25 26 27 25
+# END
+# ################

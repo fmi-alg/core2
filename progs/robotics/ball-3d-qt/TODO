@@ -1,0 +1,11 @@
+Extract logic for ball and rob robots to the robot subdirectory
+Modularize modules
+
+Ziyao, please factorize the code following the outline in README.
+
+	To help this process, I have already created these
+	subdirectories.
+
+Enums for sides - x+, x-, y+, y-, z+, z-
+Animation speed
+Half edge list

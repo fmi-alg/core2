@@ -1,0 +1,15 @@
+README file for core2paper
+
+The various experiments reported in our paper:
+
+"The Design of Core 2: A Library fro Exact Numeric Computation
+	in Geometry and Algebra"
+
+by
+	Jihun Yu, Chee Yap, Zilin Du, Sylvain Pion, Herve Bronnimann
+
+are kept in this directory.
+Note that there might be some duplication with other directories
+as some of these tests are modified from there.
+
+--Chee and Jihun (May 2010)

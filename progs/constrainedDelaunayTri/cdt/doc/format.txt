@@ -1,0 +1,82 @@
+# File: format.txt
+#	This file describes the input and output file formats
+#	for our Constrained Delaunay Triangulation program.
+#
+# Author: Zhihua Wang (zhihua@cs.nyu.edu) and Chee Yap
+# Date: Dec 2002
+#
+#	  Core Library Project (exact@cs.nyu.edu)
+#	  http://cs.nyu.edu/exact/
+############################################################
+############################################################
+
+Input File Format:
+
+      We support a subset of the .noff file format.
+	In particular, we assume 2-dimensional points ('N' equal 2 below)
+
+      The file comment character is "#".
+
+      The file lists a sequence of n vertices and a sequence
+	of m line-segments in the plane.  For example:
+
+         ######################################################
+         # The first line must be the following keyword:
+         NOFF
+         # The next value is the dimension (N)
+         2
+         # The next line are 3 numbers:
+	 #	vertex_count, face_count, edge_count 
+	 # Note that we don't really use face information, but
+	 #	this face_count is needed for us to omit the
+	 #	input lines containing face information:
+         10 3 7
+
+         ######################################################
+         # Now comes the sequence of vertices, given by their x,y values,
+	 #	with the x and y values separated by blank(s) or tab(s).
+         # Point 1
+         1.2   23.3
+         # Point 2
+         3.4      0.4
+
+         ....
+
+         # Point 10
+         3.4        4
+
+         ######################################################
+         # Now comes the face information which we do not use.
+         # 	Each face information has the format
+	 #		k, vertex_1, vertex_2, ..., vertex_k
+         # 	assuming the face has k vertices.  Also vertices
+	 #	are just indices into the point list above.
+	 #
+         # Face 1
+         3 1 0 3
+         # Face 2
+         3 7 1 2
+         # Face 3
+         3 4 2 3
+
+         ######################################################
+         # Finally comes the (constrained) edges information
+	 #	Each edge is represented by the indices of the
+	 #	two vertices that forms their endpoints:
+         # Edge 1
+         1 2   
+         # Edge 2
+         2 4
+
+         ....
+
+         # Edge 6
+         9 10
+
+         # The rest can be anything (will be ignored)
+         ######################################################
+
+
+Output File Format:
+
+	This is exactly the same as the input file format

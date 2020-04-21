@@ -1,0 +1,10 @@
+! file: rootsOfUnity3.pol
+! This is the linear polynomial p(x)=x^3-1. 
+
+dri
+0
+3
+-1
+0
+0
+1

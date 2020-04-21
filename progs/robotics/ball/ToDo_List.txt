@@ -1,0 +1,16 @@
+List of Things to accomplish:
+
+- Add texture mapping (fbo)
+- Add feature to translate or zoom in/out of scene 
+- Enable use of mouse to rotate viewpoint
+- Change background color
+- Add shading
+- Add feature to turn obstacle wireframe on or off
+
+- Write research report
+- Review literature:
+	- Brooks & Lozano-Perez 
+	- Zhu and Latombe
+	- Zhang, Kim, Manocha
+	- Kavraki PRM paper (1996)
+	- Lazy Toggle PRM (Amato)

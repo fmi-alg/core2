@@ -1,0 +1,53 @@
+README 
+#	Non-Crossing 2-Link Robot Planner.
+#
+#	Author:  Zhongdi Luo and Chee Yap
+#	Date: Jan 2014
+#
+#	Since Corelib 2.1 (May 2013)
+#    	$Id:$
+# ################################################################################
+
+# ################################################################################
+#	Please read the Makefile for various pre-arranged demos.
+# ################################################################################
+
+	This demo introduce an interesting new kind of 2-Link Robot:
+	the "non-crossing" 2-Link Robot.
+	
+	The basic idea is that we do not allow the two links to overlap each other.
+	If the configuration is (x,y,A1,A2) where Ai is the angle of the i-th Link,
+	then we consider the case A1=A2 as forbidden.  
+	Let T denote the set of all pairs of angles (A1,A2).
+	Topologically, T is the torus.  When we disallow A1=A2, we are saying
+	that the rotational configuration space is no longer equal to T but is
+	equal to:
+		T(Delta) = { (A1,A2) \in T : A1 not equal A2}
+
+	We can further generalize this to
+		T(Delta,t) = { (A1,A2) \in T:   d(A1,A2) > t}
+
+	where t\ge 0 is any angle less than Pi/2, and d(A1,A2) is
+	the metric on the space of angles.  Call t the "bandwidth".
+
+	REMARK: We disable the thickness parameter
+		(i.e., the robot links have thickness 0).
+
+	-- Chee Yap (Jan 2014)
+
+# ################################################################################
+#	TODO:
+# ################################################################################
+	(0) Convert to use Core Library to verify the correctness of
+		the IEEE arithmetic in Level 1.
+	(1) Improve method to find the actual path (e.g., Dijkstra)
+	(2) Implement a thread to simultaneously check for no path
+		-- this should speed up no-path examples, but what is
+		its impact on yes-path examples?
+	(3) Hybrid search strategies
+	(4) Implement Astar
+	(5) Compare to PRM
+
+# ################################################################################
+# ################################################################################
+

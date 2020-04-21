@@ -1,0 +1,15 @@
+# file: basic2.txt
+#
+#	
+#	--Chee and Zhongdi  (June 2013)
+#
+# Number of Points:
+8
+# Definition of Points:
+40 200 440 200 440 330 40 330
+40 350 80 350 80 500 40 500
+# NUMBER OF POLYGONS:
+2
+# Definition of Polygons:
+1 2 3 4 1
+5 6 7 8 5

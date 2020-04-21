@@ -1,0 +1,73 @@
+README file for demos 
+Core Library: $Id: README,v 1.5 2010/05/27 15:20:41 exact Exp $
+==================================================================
+
+These are simple programs to demo the basic capabilities
+	of the Core Library.  I use some of these as demos
+	in my talks.  Chee 
+
+==================================================================
+To make and test all the test program, do
+
+	% make test
+	% make moretest
+
+The default CORE_LEVEL is 3. But you can recompile and
+and test the programs at any other Levels:
+
+	% touch $.cpp
+	% make all LEV=1
+
+Or, to compile individual programs at any other Level:
+
+	% touch scheinerman.cpp
+	% make scheinerman LEV=2
+
+Of course, the programs will have errors at Levels 1 or 2.
+
+REMARK: In order to make these programs compile at all three
+	levels, we need to use "thin wrappers" in Level 1.  So in the
+	Makefile, we give the compiler the flag,
+	
+	   ${CXX} ...  -DCORE_LEVEL_1_USE_WRAPPERS ... $< -o $@
+
+	which tells Core2 to view "double" as a "DoubleWrapper" class.
+	In the future, the use of wrappers might be the default behavior.
+
+==================================================================
+PROGRAMS:
+
+1. simple.cpp
+	-- to show CORE comparison of the expressions
+	   sqrt(x)+sqrt(y) : sqrt(x+y + 2*sqrt(xy))
+	   for various values of x and y.
+	-- in Level 3, they are all equal, and in Level 1, they
+	   are mostly unequal.
+
+2. pointOnPlane.cpp
+	-- if you compute the intersection of a line and
+	   a plane, and test if the intersection is
+	   on the plane, what is the probability that
+	   you get the correct response?  -- about 20-70%
+	   depending on the kind of rays you choose.
+
+3. pointOnLine.cpp
+	-- this is the 2-D version of pointOnPlane.cpp.
+	
+4. scheinerman.cpp
+	-- an imaginary conversation between a student and teacher
+	   in which the teacher convinces the student that
+	   you cannot prove algebraic identities by numerical
+	   approximation  (Adapted from a paper by Ed Scheinerman)
+
+5. golden.cpp
+	-- some simple tests with the golden ratio
+
+6. pointOnCircle.cpp
+	-- another version of pointOnLine.cpp
+	   This time, we shoot rays from the origin in every
+	   direction to obtain intersection points with the
+	   unit circle.  Then we check if the intersection points
+	   lie on the unit circle.
+
+==================================================================

@@ -1,0 +1,35 @@
+#Both Sturm and Descartes are very slow on these
+chrmc_d171.pol
+chrma342.pol
+chebyshev320.pol
+chrma_d340.pol
+chrmc343.pol
+chrmc_d683.pol
+hermite320.pol
+laguerre320.pol
+mand1023.pol
+mand255.pol
+mand511.pol
+mig1_500_1.pol
+nroots3200.pol
+nroots400.pol
+nroots6400.pol
+nroots800.pol
+nroots1600.pol
+sparse1600.pol
+sparse3200.pol
+sparse400.pol
+sparse6400.pol
+sparse800.pol
+wilk320.pol
+kats8.pol
+#The following 'easy' ones do not have any real root.
+easy1600.pol
+easy200.pol
+easy3200.pol
+easy400.pol
+easy800.pol
+lsr1.pol
+lsr2.pol
+lsr3.pol
+lsr_200.pol

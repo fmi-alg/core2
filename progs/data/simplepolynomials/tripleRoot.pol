@@ -1,0 +1,9 @@
+! file: tripleRoot.pol
+! This is the polynomial p(x)=(x-1)^3 = x^3 -3x^2 + 3x - 1 
+dri
+0
+3
+-1
+3
+-3
+1

@@ -1,0 +1,35 @@
+Tmake all
+v7
+r0
+t336739198.810995
+cCheck dependencies
+cExternalBuildToolExecution "make all"
+
+N/var/folders/j7/j7lgaDLnFV4aQ0EFBqpQa++++TM/-Tmp-/BA26312714122C56001E05E1
+c000000004E6203FD0000000000000015
+t1315046397
+s21
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies336739197#336739197#0(0"0(0#1#0"8625984448#0"0#
+
+CExternalBuildToolExecution "make all"
+s336739197.616961
+e336739198.810950
+r0
+xExternalBuildToolExecution
+xmake all
+og++ -c -O3 -Wfatal-errors -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dgnu -I. -I../ceval/third_party -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ main.cpp -o main.o
+oIn file included from mk-inl.h:33,
+o                 from algorithm.h:31,
+o                 from main.cpp:14:
+orootbox.h: In member function 'bool RootBoxT<NT>::Refine()':
+orootbox.h:59: warning: no return statement in function returning non-void
+oIn file included from main.cpp:14:
+oalgorithm.h: In function 'void Algorithm::Run(const MKPredicates<T>&, const BoxT<NT>*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*)':
+oalgorithm.h:51: error: 'MultiList' was not declared in this scope
+ocompilation terminated due to -Wfatal-errors.
+omake: *** [main.o] Error 1
+lSLF07#2@23"Run external build tool336739197#336739198#0(889"g++ -c -O3 -Wfatal-errors -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dgnu -I. -I../ceval/third_party -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ main.cpp -o main.oIn file included from mk-inl.h:33,                 from algorithm.h:31,                 from main.cpp:14:rootbox.h: In member function 'bool RootBoxT<NT>::Refine()':rootbox.h:59: warning: no return statement in function returning non-voidIn file included from main.cpp:14:algorithm.h: In function 'void Algorithm::Run(const MKPredicates<T>&, const BoxT<NT>*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*)':algorithm.h:51: error: 'MultiList' was not declared in this scopecompilation terminated due to -Wfatal-errors.make: *** [main.o] Error 111(13@188"g++ -c -O3 -Wfatal-errors -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dgnu -I. -I../ceval/third_party -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ main.cpp -o main.o336739197#0#188#0(1@0"0(13@35"In file included from mk-inl.h:33,336739198#188#35#0(1@0"0(13@38"                 from algorithm.h:31,336739198#223#38#0(1@0"0(13@35"                 from main.cpp:14:336739198#261#35#0(1@0"0(13@61"rootbox.h: In member function 'bool RootBoxT<NT>::Refine()':336739198#296#61#0(1@0"0(22@50"No return statement in function returning non-void336739198#357#74#0(6@9"rootbox.h336739198#59#0#59#0#0"0(13@35"In file included from main.cpp:14:336739198#431#35#0(1@0"0(13@284"algorithm.h: In function 'void Algorithm::Run(const MKPredicates<T>&, const BoxT<NT>*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*, std::vector<const BoxT<NT>*, std::allocator<const BoxT<NT>*> >*)':336739198#466#284#0(1@0"0(4@42"'MultiList' was not declared in this scope336739198#750#66#0(6@11"algorithm.h336739198#51#0#51#0#0"0(13@46"compilation terminated due to -Wfatal-errors.336739198#816#46#0(1@0"0(13@27"make: *** [main.o] Error 1336739198#862#27#0(1@0"0(0#0#0"8625804640#175"    cd /Users/sharma/Research/collab/core2/corelib2/trunk/progs/mesh/miranda    setenv ACTION     /var/folders/j7/j7lgaDLnFV4aQ0EFBqpQa++++TM/-Tmp-/BA26312714122C56001E05E12#
+

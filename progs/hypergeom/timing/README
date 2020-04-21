@@ -1,0 +1,22 @@
+file: README CORE/progs/hyperGeom/timing
+Since Core Library Version 1.4
+
+$Id: README,v 1.1 2006/03/07 04:54:38 exact Exp $
+
+Synopsis:
+	Some timing tests.
+	
+	timehyper -- timing for evaluating elementary functions at 
+			different precision
+	timepi -- timing for computing pi on the fly and reading from file
+	timelog -- timing for computing log using standard and transformed
+			hypergeometric series.
+	
+
+Notes:
+	Certain arguments can make the evaluation very slow:
+		e.g., arccos and arcsin at arguments near to 0.5,
+		e.g., log at values close to 0.
+
+
+

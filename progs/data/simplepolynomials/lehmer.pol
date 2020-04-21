@@ -1,0 +1,21 @@
+! file: lehmer.pol
+! Lehmer's polynomial is
+!  	 p(x) =  1-x+x^3-x^4+x^5-x^6+x^7-x^9+x^(10)
+! The measure of this polynomial is about 1.1762,
+! and conjectured to be the minimum among all non-cyclotomic polynomials
+
+dri
+0
+10
+
+1
+-1
+0
+1
+-1
+1
+-1
+1
+0
+-1
+1

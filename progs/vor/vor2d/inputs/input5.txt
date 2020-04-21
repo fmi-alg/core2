@@ -1,0 +1,29 @@
+# file input5.txt
+# variant of input2.txt, but with bounding box for entire environment.
+
+
+16
+
+10 492
+110 492
+110 402
+10 402
+200 312
+250 332
+300 292
+210 162
+220 202
+50 112
+100 162
+150 92
+# bounding box for entire environment:
+2 2
+2 505
+505 505
+505 2
+
+4
+1 4 3 2 1
+5 9 8 7 6 5
+10 12 11 10
+13 14 15 16

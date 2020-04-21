@@ -1,0 +1,18 @@
+# file: cylinder.txt
+#
+#   Simple example of how to build cylinder
+#
+#   Author: Kai Cao  (July 2012)
+#   Since Core 2.1.
+#   
+##################################################
+
+# initialize object
+  radius = 10
+  height = 40
+  nsegments = 6
+
+  make cylinder $radius $height $nsegments
+
+# This completes our octahedron definition: end.
+  end gwb

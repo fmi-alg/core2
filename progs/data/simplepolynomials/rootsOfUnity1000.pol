@@ -1,0 +1,11 @@
+! file: rootsOfUnity1000.pol
+! This is the linear polynomial p(x)=x^1000-1. 
+
+sri
+0
+1000
+2
+0
+-1
+1000
+1

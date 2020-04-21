@@ -1,0 +1,51 @@
+README for progs/mesh/rootIsol
+
+This is adapted from Miranda, focusing only on root isolation.
+
+To by fixed:
+    -- Display is distorted if the input box is non square
+    -- Need GUI type feedback on the location of roots/ambiguous regions
+    -- Reading of polynomials from files only works if directly in current
+        directory or under ./data.
+
+
+##################################################
+RESULTS:
+##################################################
+Apr 2013:  Some times on MacBook Air
+	  Model Name:	MacBook Air
+	  Processor Name:	Intel Core 2 Duo
+	  Processor Speed:	1.86 GHz
+	  Number of Processors:	1
+	  Total Number of Cores:	2
+	  L2 Cache:	6 MB
+	  Memory:	2 GB
+	  Bus Speed:	1.07 GHz
+
+20th Roots of Unity (rootsOfUnity20.pol)
+	Command: make eg9
+		
+		/mk --poly data/rootsOfUnity20.pol \
+		 	--x_min -1.5 --x_max 1.5 --y_min -1.5 --y_max 1.5 \
+		 	--minsize 0.00001 --maxsize 0.01 --maxgen 15 
+	
+	The total time taken was = 67085284 micro seconds
+		statistic results: 
+		output regions: 20
+		ambiguous regions: 0
+		exclusion regions: 4600
+		maximum subdivision depth: 9
+	
+	EFFECTS OF changing minsize:
+		minsize		time (ms)	no.roots found
+		===========	===========	==============
+		0.00001		67,085,284 	20
+		0.001		60,814,838 	20
+		0.01		53,063,900 	20
+		0.015		50,947,553	16
+		0.05		10,887,242	0
+		0.1		2,909,281	0
+
+
+
+

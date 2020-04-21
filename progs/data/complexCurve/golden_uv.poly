@@ -1,0 +1,2 @@
+# output uv-polynomial from convertPoly for output/golden
+y^3(-2x + 1) + (2x^3 - 3x^2 - x + 1)y

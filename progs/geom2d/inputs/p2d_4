@@ -1,0 +1,23 @@
+# file: p2d_4
+#	This input file has 4 points
+# 	It can be read (as istream) using
+#
+#		readPoints(istream iS, Point2d * pA, int MaxN, int N=0)
+#
+# 	to illustrate the variants we allow for specifying points:
+#	The NORMAL format for a sequence of points is
+#		( x1 , y1 ) ( x2 , y2 ) ... ( xN, yN)
+#	The important thing to note is that you must not have commas
+#	between successive points.  But omitting "(" or "," or ")" turns
+#	out to be acceptable!  This is illustrated here.
+
+4		# This says there are 4 points following.
+		# If there are more than 4 points, the rest is ignored.
+		# This value can be omitted if N is given directly
+		# as the 4th argument to readPoints.
+1 1		# point 1
+   -1    +2	# point 2 
+1.0 -3		# point 3 
+ -0.0 4.0	# point 4 
+9.2 -5.0	# point 5 -- will be ignored
+

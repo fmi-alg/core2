@@ -1,0 +1,194 @@
+File: FriscoFormat:
+
+The following describes the file format for polynomials
+in the FRISCO Test Suite.  This is edited from Bini and Fiorentino:
+
+A. FILE FORMAT
+	Each file is an ASCII text file and contains one polynomial.
+	Each line in the file is interpreted in this order:
+
+  A.0. Comment lines:
+	These are lines that begin with "!".  We do not count them
+	in the description that follows.
+	E.g.,
+	  ! This is the Wilkinson polynomial of degree n
+	  ! defined by p(x)=(x-1)(x-2)...(x-n)
+	
+	CHECK: Comment lines can be interspersed throughout the file.
+
+  A.1. The first line contains 3 characters "abc".  It 
+	determine the basic nature of the polynomial:
+
+	"a" can take one of the values:
+	      + d  for dense polynomial
+	      + s  for sparse polynomial
+	      + u  for user polynomial
+	"b" can take the values:
+	      + r  for real coefficient.  
+	      + c  for complex coefficients
+	"c" can take the values
+	      + i  for integer coefficient.  
+	      + q  for rational coefficients
+	      + f for float coefficients
+
+	E.g., "abc" = "dri"
+		stands for a dense real polynomial with integer coefficients.
+
+  A.2.  The second line gives the precision of the coefficients in
+	decimal digits, where 0 denotes the infinite precision
+	typical of integer rational coefficients.
+
+  A.3.  The third line gives the degree of the polynomial, as an integer.
+
+  A.4.  Then follows a multi-line description of the coefficients:
+	
+	* For polynomials coded as dense, each coefficient
+	  is in its own line, arranged in increasing degree,
+	* For polynomials coded as sparse, the fourth line gives
+	  the number of nonzero coefficient.  Then follows a list
+	  of alternating degree-coefficient pairs of lines.
+
+B. EXAMPLES
+
+	The polynomial x^4 + 2 x + 5 can be coded as follows
+	(extra spaces or tabs are ignored) in two forms:
+	
+	! p(x)=x^4+2x+5 in sparse form
+	dri
+	0
+	4
+	5
+	2
+	0
+	0
+	1
+	
+	! p(x)=x^4+2x+5 in dense form:
+	sri
+	0
+	4
+	3
+	0
+	5
+	1
+	2
+	4
+	1
+
+	Clearly, polynomials like x^500 + 1 are more easily written
+	in their sparse form as follows:
+
+	! p(x)=x^500+1
+	sri
+	0
+	500
+	2
+	0
+	1
+	500
+	1
+
+C. COEFFICIENT FORMATS
+
+  1. Integer coefficients of any length can be used such as real
+	coefficients in scientific format.
+
+  2. Complex values are coded as the real part followed the imaginary part.
+
+  3. Rational numbers are written as the numerator followed by the denominator.
+
+  4. Complex numbers with rational real and imaginary parts are coded
+	as a quadruples as follows:
+	
+	* numerator of the real part
+	* denominator of the real part
+	* numerator of the imaginary part
+	* denominator of the imaginary part.
+
+D. COEFFICIENT EXAMPLES
+	Below we report some examples of input formats where
+	the coefficients are:
+
+   D.1 complex integer (Gaussian) numbers,
+
+	! Example 1, complex/integer
+	! p(x)=x^200+(1+3i)x^70 +1
+	sci
+	0
+	200
+	3
+
+	0
+	1
+	0
+	70
+	1
+	3
+	200
+	1
+	0
+
+   D.2 real rational numbers,
+
+	! Example 2, real/rational
+	! p(x)=(3/4)x^200 + (1/3)x^70 + 1
+	srq
+	0
+	200
+	3
+
+	0
+	1
+	1
+	70
+	1
+	3
+	200
+	3
+	4
+
+   D.3 complex rational numbers (extra blank lines  are skipped),
+
+	! Example 3, complex/rational
+	! p(x)=x^2 + (3/2+i*5/7)x + 2
+	dcq
+	0
+	2
+
+	2
+	1
+	0
+	1
+
+	3
+	2
+	5
+	7
+
+	1
+	1
+	0
+	1
+
+   D.4 real floating point numbers
+
+	! Example 4, real/float
+	! p(x)=1.234e200 x^3 + 1.5e-200 x^2 + 1.3e-200
+	! the precision of the coefficients is 15 digits
+	drf
+	15
+	3
+
+	1.3e-200
+	0.0e0
+	1.5e-200
+	1.234e200
+
+   Any other mix is allowed and the input form follows
+	the above lines.  Many coding examples can be found among
+	the test suite.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+END
+++++++++++++++++++++++++++++++++++++++++++++++++++
+

@@ -1,0 +1,33 @@
+# file input2.txt
+# this is a sample file format for input
+#     rest-of-line comment character is '#'
+      	# initial space and tabs ignored
+
+
+# Points:
+12
+
+# square at upper left corner
+20 1004
+220 1004
+220 804
+20 804
+# non-convex pentagon in middle
+400 624
+500 664
+600 584
+420 324
+440 404
+# triangle at bottom left
+100 224
+200 324
+300 184
+
+# Polygons:
+3
+w 1
+0 3 2 1
+w 1
+4 8 7 6 5
+w 0.5
+9 11 10

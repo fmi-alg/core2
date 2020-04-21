@@ -1,0 +1,27 @@
+README file for core2/progs/testsuite
+
+Since Core Library 2.0
+$Id: README,v 1.2 2010/07/09 08:58:10 exact Exp $
+=================================
+
+These programs exercise the basic constructors
+and operations of Core2 number types.
+
+Programs:
+	t_bigfloat.cpp
+	t_bigint.cpp
+	t_bigrat.cpp
+	t_expr.cpp
+	t_poly.cpp
+	kahan.cpp
+
+More tests are found under the subdirectories:
+	misc
+	mpfr
+
+NOTES:
+These tests are done in CORE_LEVEL 4,
+as otherwise the typedef
+ 	typedef unsigned long ulong;
+would not work.  You could use "size_t" instead of "unsigned long".
+

@@ -1,0 +1,62 @@
+# 3-legged robot
+#
+#  This file describe a robot.	
+#	 The file formats like following:
+#	 N, number of vertices, followed by N lines of coordinates.
+#  M, number of triangles, followed by M lines of triangles,
+#	defined by indices for its vertices
+#  Currently, the triangles must be NICE, and the vertices must ordered CCW.
+#
+#     (0,2a+2b)	------------------------- (3a, 2a+2b)
+#		|			|
+#		|			|
+#     (0,a+2b)	-----------------	|
+#		      (2a,a+2b)	|	|
+#				|	|
+#       (0,a+b)	-----------------	----------------- (5a, a+b)
+#		|	(2a,a+b)	(3a,a+b)	|
+#		|					|
+#		|	--------X----------------	|
+#		|	|(a,b)	(2a,b)	  (4a,b)|	|
+#		|	|			|	|
+#		|	|			|	|
+#		|	|			|	|
+#		---------			---------
+#	   (0,0)	 (a,0)		  (4a,0)	(5a,0)
+
+
+# parameter
+a = 2
+b = 3
+
+# CENTER of the robot is (2a,b), not (0,0)
+
+
+# N=number of vertices:
+14
+
+# list of N vertices
+0 0
+a 0
+a b
+4a b
+4a 0
+5a 0
+5a a+b
+3a a+b
+3a 2a+2b
+0  2a+2b
+0  a+2b
+2a a+2b
+2a a+b
+0  a+b
+
+# NOT DONE YET:
+# M=number of triangles:
+4
+
+# list of M triangles
+0 1 2
+0 2 3
+0 3 4
+0 4 5

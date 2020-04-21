@@ -1,0 +1,19 @@
+#This file contains a list of special polynomials for testing
+
+# polynomials with very large rational coefficients
+sebastien8: drq
+
+# polynomials with multiple roots
+
+# degenerate polynomials
+# -zero polynomial
+# -constant polynomial
+# -linear polynomial
+# -binomial
+# -trinomial
+
+# polynomial with small separation
+# - mignotte polynomials
+
+# polynomials with no real roots
+# -

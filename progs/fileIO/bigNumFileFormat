@@ -1,0 +1,292 @@
+Proposal for A BigNumber File Format
+====================================
+-- Chee Yap (yap@cs.nyu.edu)
+   (Aug 1, 2001)
+
+Motivation
+==========
+We need the ability to store bignumbers in files,
+and functions to read such files.  The format should
+support various bases (decimal, binary and hex).
+This capability is vital for fast elementary
+function computations that often need special
+constants to very high precision.  We want
+to store these in precomputed form in files.  Examples
+of constants we will need:
+	e, Pi, sqrt(Pi), 1/sqrt(Pi), sqrt(2), etc.,
+We want this in hex since this avoids the 
+\Omega(n\log^2 n) time to convert
+between binary and decimal representations. 
+
+The following design aims at human readability -- hence
+we only define a text-based (ascii) version.  The speed advantage
+of a byte-based (binary) version is not in our intended applications.
+If file size is an issue, it is usually sufficient to
+run our text file through a standard compression program such as gzip. 
+A text-based version allows a human (using any text editor) to
+create sample files, or to verify and modify output files produced by 
+a program.  Also important is the ability for self-documentation,
+through the comments and white-space management. 
+
+
+BigNum File Format Version 1.0
+======+++++++=================
+
+(0) A data file in this format will have the
+	file extension ".big".
+
+(1) The file is a line-based ascii file
+	In the present version, we assume that each file contains
+	a sequence of big numbers. 
+
+(2) An input file is regarded as a sequence of "physical lines"
+	which are terminated by <CR> (or <LF><CR>).
+
+(3) The comment character is '#'.  
+	The rest of a physical line is ignored after '#'
+
+(4) One or more physical lines are merged into "logical lines"
+	If the last character before the <CR> or <LF> is
+	'\' (continuation character), then 
+	the next physical line is considered a continuation
+	of the current "logical line".  The continuation character
+	is discarded.
+
+(5) White space characters are <space> or <tab> characters.
+	Note that <CR> and <LF> are not white space characters.
+	There are two distinct ways to treat white spaces in a logical line:
+
+	(i) Space-reduced line: Replace consecutive white space characters
+	by a single <space> character.
+
+	(ii) Non-white line: Ignore (i.e., delete) all white spaces.
+
+    N.B. Based on (4) and (5), we can provide three useful file reading
+    functions: read_logical_line(),  read_reduced_line(), read_nonwhite_line().
+
+(6) The following bases are supported:
+	(i) Base 10 (digits are 0-9)
+	(ii) Base 16 (digits are 0-9, A-F (or a-f))
+	(iii) Base 2 (digits are 0,1)
+
+(7) The concept of a "base number" is basically an 
+	unsigned natural number, to any of the supported bases.  
+	Examples of Base number:
+
+		(1a) 123456789
+		(1b) 1234 5678
+		(2a) 0x1234ABCD
+		(2b) 0X 1234 ABCD
+		(3a) 0b 1111 0000
+		(3b) 0b 11 110 000
+		(4a) 01234 5670
+		(4b) 0 12345670
+
+	More precisely:
+
+	<base_number> = [<base_symbol>]<sequence_of_digits>
+
+	where
+		[...] indicates an optional element 
+			(this convention is used throughout this document)
+		<base_symbol> is
+			'0b' or '0B' (for base 2),
+			'0' (for base 8), and
+			'0x' or '0X' (for base 16).
+			When the <base_symbol> is omitted, the base is 10.
+		<sequence_of_digits> is a sequence of at least one
+			digit to the appropriate base, interspersed
+			with white spaces (which are ignored).
+
+	We define the <length> of the <base_number>
+	to be the number of digits in <sequence_of_digits>
+	(thus, <base_symbol> is not counted).
+
+	N.B.  As will be seen below, a <base_number> is typically
+	represented by a single nonwhite line in the input file.  
+	Thus, we use white spaces to help visualization and debugging
+	in <base_number> that is large.  
+
+(8) We define the following number formats:
+
+	Integer, Float, NFloat, Rational
+	
+	These formats represent the corresponding types of mathematical
+	real numbers (called its "value").
+
+(9) An integer is represented by two space-reduced lines as follows:
+
+	Integer [<length>] 
+	[<sign>]<number>
+
+	where 
+		<length> and <number> are both base numbers
+		"Integer" is a key word,
+		<sign> is an optional sign ('+' or '-').  
+			If omitted, assume '+' sign.
+		the second space-reduced line is treated as a nonwhite line
+
+	NOTE: <length> is optional because it is defaulted to the
+	actual number of digits in <number>.  It could be less than
+	the number of digits in <number>, in which case no reader will
+	read the extra digits.  But if it is more, it is automatically
+	set to the actual number of digits.  Thus <length> is a helpful
+	hint to readers that may need to preallocate space for reading
+	in the integer.
+
+	E.g.
+	Integer
+	12345 67890 12345   # space in the second logical line is ignored
+
+	Integer 6	    # space before the length of 6 is required
+	-0X 369 BDF 
+
+	Integer 12
+	+0b 1010 1010\
+	1010 1111 0011
+
+(10) A float is represented by three space-reduced lines as follows
+
+	Float (<base>) [<length>]
+	[<sign_1>]<exponent>
+	[<sign_2>]<mantissa>
+
+	where
+		<base>, <length>, <exponent> and <mantissa> are all base numbers
+
+		<base> is the base B of the floating point representation,
+		<length> is the optional length of <mantissa>, again
+			represented in decimal notation.
+		line 2 is a nonwhite line and represents the exponent E
+		line 3 is a nonwhite line and represents the mantissa M
+		
+		So the value of the Float is (M * B**E).
+	
+	NOTES:  The value <length> is again optional, but the
+	parenthesis '(', ')' in the first logical line is required.
+	Note that, as a base number, M has a base that is equal to 2, 16 or 10.
+	For efficiency, we recommend that B be a power of this base.
+	E.g., if M is in Hex, it is best to have B to be a power of 16.  
+	If this is not possible (as in Core Library numbers),
+	then B should be a power of 2. 
+
+	E.g.
+
+	Float(2) 6
+	- 0x A		# exponent
+	+0x 369 BDF	# mantissa
+	
+	E.g.
+
+	# Value of this float is -10**(-5) * 123 = 0.00123.
+	Float(10)
+	-0101
+	123
+
+	E.g.
+
+	Float(0b 10000 00000 0000)	# base is 2**(14) 
+	-2
+	0b 1111				# value is 15*2**(-14*2 - 3) = 15*2**(-31)
+
+(11) We also have the "Normalized Float" variation which uses the key word
+	"Normalized Float" (or "NFloat") instead of "Float".  
+	This format is useful for well-known mathematical constants
+	and or physical constants because the exponent of such a constant
+	tells us its magnitude, independent of the choice of mantissa.
+
+	The format is exactly as for Floats, except that the value of 
+	a normalized float is defined differently.
+	For mantissa M, exponent E, and base B, is equal to
+		<<M>> * B**E,
+	where <<M>> is the normalized value of an integer M.  In the positional
+	representation, <<M>> just amounts to placing the radical point between
+	the first and second digits of M.  E.g., if M = 1234, then <<M>> = 1.234.
+	If M = 0xABC123, then <<M>> = 0x A.BC123.  Alternatively,
+		<<M>> = M * B**(- len(M) + 1)
+	where len(M) is the number of digits of M in its base representation.  
+	Thus, len(M) = 1 + floor(log_b(M)) where b is tbe base of M.
+
+	E.g.
+
+	# Value of Pi
+	Normalized Float(10)
+	0			# exponent
+	314159  		# mantissa
+
+(12) A rational is represented by 3 space-reduced lines as follows:
+
+	Rational [<num_len> [<den_len>]]
+	[<sign>]<numerator>
+	<denominator>
+
+	where	"Rational" is a key word,
+		<num_len>, <den_len>, <numerator> and <denominator> are base numbers.
+
+	The value of this rational number is 
+	[<sign>] <numerator>/<denominator>.
+
+	The base of <numerator> and <denominator> are strongly recommended
+	to be identical.  This facilitates our goal (below) of only reading
+	in initial parts of a number.
+
+	The optional <num_len> and <den_len> are lengths of the 
+	numerator and denominator.  We strongly recommend providing these 
+	lengths when the numbers involved are very big.  
+	This allows our functions to compute high order digits
+	of the rational number without having to read the entire file.
+
+	E.g.
+
+	Rational 3 5
+	-X123
+	X12345
+
+(13) Input from files.  We want to read any of the
+	above numbers into our Real numbers:
+	-- Natural and Integer becomes our BigInt
+	-- Float becomes our BigFloat
+	-- Rational becomes our BigFloat
+
+(14) It is important to be able to read ONLY the initial segment of the
+	input digits.  So, this means for any of our big number
+	formats, we can ask to read to at most "precision" <p> where
+	<p> is a natural number.
+
+	-- For Natural and Integers, this means we read
+		min(<p>,<length>) digits of the <base_number>,
+		where <length> is the length of the base number.
+
+	-- For Floats, this means we only read the first
+		min(<p>,<length>) digits of the mantissa
+		where <length> is the length of the mantissa.
+
+	-- For Rational, this is trickier.  Assume (as recommended)
+		that the base of the numerator and denominator are the same,
+		and equal to b.  Suppose we want the relative precision to be
+		O(b^{-<p>}).  Let the number of digits in N and D be ln and ld,
+		respectively.  Let N' and D' be the integer obtained from the
+		first <p> digits of N and D, respectively.  Then we compute
+		the value N'/D' * b^{ln - ld}.
+
+REMARKS:
+
+(1) Zilin has recently implemented the integer part of the above proposal.
+This has been incorporated into the Core Library Version 1.4.
+
+(2) Most systems seem to implement a quadratic time conversion.
+Recently, with Valentina Marotta, we designed and
+implemented an O(n\log^2 n) time decimal to binary conversion
+routine.  That should be incorporated into Core Library soon.
+
+(3) Float Format implementation:
+we currently only implement the case where <base> = 2^{14}, and
+the <exponent> is restricted to a machine Long.
+Both restrictions are motivated by our Core Library BigFloat
+number class, where the base is 2^{14} and exponent must be machine Long.
+
+(4) We should probably overload "<<" (by setting
+some stream manipulation parameters) to achieve the above
+file I/O functionality.
+
+======================= END ============================================

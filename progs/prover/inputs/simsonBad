@@ -1,0 +1,70 @@
+# file: simsonBad
+#
+# This is a Deliberately Wrong version of Simson's Theorem
+# We just change one of the mononials below.
+#
+#	Simson's Theorem:
+# 
+#         Let D be a point on the circumscribed circle
+#         (0) of triangle ABC.  From D three perpendiculars
+#         are drawn to the three sides BC, CA and AB.
+#         Let E, F and G be the three feet, respectively.
+#         Show that E, F and G are collinear.
+# 
+#         Setup:  A(0,0), B(u_1,0), C(u_2, u_3), O(x_2, x_1),
+#         D(x_3, u_4), E(x_5, x_4), F(x_7, x_6), G(x_3, 0)
+#         Therefore the hypothesis equations are:
+# 
+#       h_1 = 2 u_2 x_2 + 2 u_3 x_1 - u_3^2 - u_2^2 = 0
+# 	h_2 = 2 u_1 x_2 - u_1^2 = 0
+# 	h_3 = -x_3^2 + 2 x_2 x_3 + 2 u_4 x_1 - u_4^2 = 0
+# 	h_4 = u_3 x_5 - u_2 x_4 + u_1 x_4 - u_1 u_3 = 0
+# 	h_5 = u_2 x_5 - u_1 x_5 + u_3 x_4 - u_2 x_3 + u_1 x_3 - u_3 u_4 = 0
+# 	h_6 = u_3 x_7 - u_2 x_6 = 0
+# 	h_7 = u_2 x_7 + u_3 x_6 - u_2 x_3 - u_3 u_4 = 0
+# 
+# 	The conclusion that points E,F and G are collinear 
+# 	is equivalent to:
+# 
+# 	g = x_4 x_7 - x_5 x_6 + x_3 x_6 - x_3 x_4 = 0	
+# 
+# 4 parameters, 7 dependent variables: 
+4 7 
+# polynomial h_1
+0 2 1 1 5 
+0 2 1 4 3	   # Correct version should be (0 2 1 2 4)
+0 -1 2 2 -1
+0 -1 2 1 -1
+# polynomial h_2
+1 2 1 0 5
+1 -1 2 0 -1
+# polynomial h_3
+2 -1 2 6 -1
+2 2 1 5 6 
+2 2 1 3 4
+2 -1 2 3 -1
+# polynomial h_4
+3 1 1 2 8
+3 -1 1 1 7
+3 1 1 0 7
+3 -1 1 0 2
+# polynomial h_5
+4 1 1 1 8
+4 -1 1 0 8
+4 1 1 2 7
+4 -1 1 1 6
+4 1 1 0 6
+4 -1 1 2 3
+# polynomial h_6
+5 1 1 2 10
+5 -1 1 1 9
+# polynomial h_7
+6 1 1 1 10
+6 1 1 2 9
+6 -1 1 1 6
+6 -1 1 2 3
+# polynomial g
+8 1 1 7 10
+8 -1 1 8 9
+8 1 1 6 9
+8 -1 1 6 7

@@ -1,0 +1,8 @@
+! file: doubleRoot.pol
+! This is the polynomial p(x)=(x-1)^2 
+dri
+0
+2
+1
+-2
+1

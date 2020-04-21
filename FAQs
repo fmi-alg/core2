@@ -1,0 +1,255 @@
+======================================================================
+file: FAQs
+	Frequently Asked Questions for Core Library
+
+Last Update: Core Version 1.6, June 2003
+$Id: FAQs,v 1.2 2010/06/30 16:07:25 exact Exp $
+======================================================================
+
+1. What license?
+	A:  Core Library is now under the terms of the Q Public License
+    version 1.0. See the file LICENSE.QPL distributed with CORE.
+
+2. What is the difference between the global variables
+	defInputDigits and defBigFloatInputDigits?
+
+	A: The former can be infinite, but not the latter.
+	The former controls the precision with which the Real
+	constructor converts a string input, e.g.,
+	Real("0.123", 100) means you want "0.123" converted
+	with 100 digits of precision (remember that internally,
+	"0.123" is not exact in BigFloat representation.  
+	If you omit "100", we use defInputDigits digits.  
+	If you call Real("0.123", CORE_INFTY) then this
+	will be converted into the rational number 123/1000
+	which has no error.  The latter (i.e., defBigFloatInputDigits)
+	controls the precision of BigFloat constructor from string inputs:
+
+		BigFloatRep::fromString(string,prec=defBigFloatInputDigits)
+
+	NOTE: the function
+		Expr:: operator >> (istream & is, Expr & e)
+	calls Real(str, prec).
+
+3. What is the speed of CORE programs? 
+	A: You can run and time all the test program by typing
+	"make time" (only in unix-like platforms).  The results will be
+	stored under $(CORE_PATH)/tmp/DIAG_TIMING.  For instance, for
+	Core v.1.4.1, the overall result is:
+		real       38.0
+		user       25.9
+		sys         2.0
+	using a g++ on Solaris 2.8 on SunBlade 1000 (2 x 750 MHz).
+
+	Generally, if you compare individual arithmetic operations,
+	you may expect 200-300 times slower than machine operations.
+	However, in the context of an algorithm, this overhead can
+	be greatly reduced (simply because arithmetic is only one aspect
+	in the operations of an algorithm).  Thus overhead is further reduced
+	by the use of floating point filters.
+
+	There is evidence from the literature that you can reduce the 100-300
+	times slowdown to a factor of 10 at Level II accuracy.  When
+	combined with filters, we may be able to arrive at a slowdown factor
+	of 3 for problems such as 2-D Delaunay Triangulations.  Even
+	slowdown factor of 2 has been reported in the literature.
+	These aspects have not been an emphasis of our current development.
+
+4. How can I compile Core Library and CORE programs under Borland C++?
+	A: Here is a suggestion from Andreas Fabri 
+		<Andreas.Fabri@sophia.inria.fr>
+
+    > The gmp.dll can be used as is.
+    > The gmp.lib must be converted with Coff2omf which comes
+    >    with the free Borland compiler.
+    > ______________________
+    > In file gmp.h, after the following line
+    >
+    >	 	PORTME: What does Borland use? */
+    >
+    > add one more defined statement:
+    >
+    >   #if defined (__GNUC__) || defined (_MSC_VER) || defined(__BORLANDC__)
+    > ______________________
+    > In Filter.h, find an implementation of ilogb.  Change it to:
+    >
+    > 	#define ilogb(x) (int)_logb(x)
+    >
+    > ______________________
+    > In src/Makefile, the following line
+    >
+    >   ar -rcs $(CORE_LIB) $?
+    >
+    > does not work.  Please change it to:
+    > 
+    >   tlib /C /P512 ''$(CORE_LIB) \
+    >     `ls *$.obj | awk '{for (i=1; i<=NF;++i){printf "+";print $$i}}'`
+    >   mv $(CORE_LIB) $(CORE_LIB_PATH)
+    >
+    > The mv is needed, because the slash in a path would be interpreted
+    > as option by tlib.
+    >
+    > Note that Borland object files have extension ".obj", not ".o".
+    > In CGAL, this extension is stored in the variable $OBJ_EXT.
+    >
+    > ______________________
+    
+5. How can we use Core Library with the CGAL library?
+	A: The latest Core Library (version 1.5 onwards) has provided 
+	   an interface (i.e., a header file) which allows you to
+	   seamlessly incorporate Core Level 3 numbers into CGAL programs.
+	   Generally speaking, you should use Core Level 4 accuracy with CGAL.  
+	   Examples can be found under the progs/cgal directory.
+	   Core Library can be downloaded as part of CGAL since 2003.
+
+6. How can I build CORE projects under Visual C++?
+	A: Please see the README file in the Core Distribution.
+
+7. How can I fix Stack Overflow Problems?
+	A: Please see the file "$(CORE_PATH)/doc/stackOverflow.txt" 
+	for details.
+
+8. Which Core Accuracy Levels should I use?
+	A: We recommend Levels 1 and 3 for most users.  In this case,
+	you either get the standard IEEE machine accuracy, or the
+	guaranteed accuracy.  Programs which are just "standard C++"
+	programs will definitely work.  
+
+	Since Core 2.1, we introduced a wrapper class around machine doubles,
+	called DoubleWrapper.   If you choose Level 1,
+	then double becomes DoubleWrapper.  This allows a code written for Level 2 or 3
+	(i.e., using variables of types BigFloat or Expr) to be compilable at Level 1.
+	This can be useful to speed up some applications.
+
+9. How can I use CORE without overloading machine double or machine long?
+	A: There are 3 possible solutions.  
+	One way is to use Core Level 4 accuracy:
+
+	 	#define CORE_LEVEL 4		// Level 4 Accuracy
+		#include "CORE/CORE.h"
+	
+	The second way is to directly include Expr.h:
+
+		#include "CORE/Expr.h"
+
+	The third way is to use the default Level 3 as usual
+
+		#include "CORE/CORE.h"	// Using default Level 3 Accuracy
+
+	but whenever you want a machine double, you declare it as follows:
+
+		machine_double x;
+		machine_long y;
+		x = 1.2;
+		...
+
+10. Where do I look when when have installation problems?
+	A: There are several things to think about (these are based 
+	on actual reports by users).
+
+	-- When you download our distribution .tgz files, some web browsers,
+		e.g. IE, will rename it to .tar file automatically so that some
+		decompress programs, say WinZip, cannot properly handle it. In 
+		this case, just rename it back to .tgz, then install it as we 
+		described in README.		
+
+	-- 64-bit versus 32-bit libraries:
+		Core Library has not been tested under 64-bit libraries.
+		Since gmp-4.0.1, the default gmp installation under Sparc 
+		is to build a 64-bit library.  Core's installation will force
+		gmp to build a 32-bit library.  HERE is some information from
+		the official gmp site, www.swox.com/gmp:
+
+		"On sparc v9 solaris 2.7, GMP uses ABI=64 by default, but this
+		will fail if the kernel is in 32-bit mode. Use ./configure ABI=32
+		instead (in the future GMP will fall back to that automatically).
+		But note that ABI=64 will give better performance, so consider
+		rebooting into 64-bit mode (with ok boot kernel/sparcv9/unix)."
+
+	-- missing functions from standard libraries:
+	   E.g., two functions, ilogb and finite, from Filter.h are sometimes
+		missing from math.h.  E.g., in the sun Platform, these
+		declarations are found in ieeefp.h instead.  
+		(Fixed for Core Version 1.5)
+
+	-- On redhat 9 (gcc 3.2.2), you may need to change the following
+		two lines in filter.h to get it to compile:
+
+			# extern "C" int finite(double);
+			extern "C" int finite(double) throw();
+  			# extern "C" int ilogb(double);
+  			extern "C" int ilogb(double) throw();
+
+		Thanks to Daniel Russell <drussel@graphics.stanford.edu>
+		for this information.
+
+11.  Why are there inconsistent printout of numerical values?  
+	For instance,
+
+      cout << "1.0 prints as " << 1.0 << endl;
+      cout << "Expr(1.0) prints as " << Expr(1.0) <<  endl;
+
+   ///////////////////////////////////////////////////////////////////
+   // Here is the output from this program
+   // 
+   //	Bug Report from Janos Blazi
+   //	100, .1000000e+1   	(bug!)
+   //	1, 1.   		(why not scientific format like above?)
+   //	1, 1.00000   		(why different from previous?)
+   //	+++++++++++++Below are OK+++++++++++++++
+   //	100.01, 10.0005
+   //	99.99, 9.99950
+   //
+   // ANSWERS FROM Zilin:
+   //
+   // 		Expr("1.0") represents the number as a BigRat
+   // 			(and outputs 1.)
+   // 		Expr(1.0) represents the number as a double
+   // 			(and outputs 1.00000)
+   // 		This inconsistency is from Core 1.3
+   // Suggested solution of Chee:  I think that we should print
+   // 	some indicator of "error/no error"
+   // 	(e.g., "1." means exact, while "1.0..." means inexact).
+   //
+
+   FOLLOWUP:
+   	I do not think there is an easy way out of our
+	printing "1." for Expr("1.0"), and "1.0000" for Expr(1.0).
+	This should be posed as an open problem.
+	I think this should be notified in the tutorial.
+
+	PROPOSAL:
+	We refine our current "scientific versus positional"
+	outputs to let user choose the version they like.
+	Ultimately, we would like to be able to tell users
+	whether they are seeing an approximation or not.
+	E.g., 1. or 1.x means that there is no error ("x" means exact)
+	but 1.0... means there is possible error.
+	--Chee
+
+11. Trouble Shooting
+	-- large datasets can be a problem at Level 3 for two reasons:
+		(1) Space Problem: this is because Expr objects can be 
+		arbitrarily larger than its Level 1 counterpart (i.e.,
+		machine doubles).  
+		(2) Speed Problem: Expr evaluation can be arbitrarily
+		slower than Level 1 arithmetic.
+	-- For example, Martin Held's tested Core Library on his
+		``industrial strength'' triangulation program on 2D points.
+		about 32,000 points, the Core Version is feasible.
+
+12. Known Issues
+	-- When compiling Core Library v1.5 under Sun Workshop 6, the 
+           following error occurs:
+
+	     ~/core_v1.5.CC/progs/poly> make tSturm     
+	     CC -c -O2 -I../../inc -I../../gmp/include tSturm.cpp -o tSturm.o
+	     "/opt/SUNWspro/WS6U2/include/CC/Cstd/./algorithm.cc", line 718: 
+               	Error: "," expected instead of "__long_random".
+	     1 Error(s) detected.
+	     make: *** [tSturm.o] Error 1
+
+======================================================================
+END of FAQs
+======================================================================
+

@@ -1,0 +1,146 @@
+Core Library 
+
+README for testFilter
+=====================
+Various sample programs that test the effectiveness
+of the BFS filter we implemented.
+
+We took other test programs in under ${CORE_PATH}/progs
+such as "gaussian" and "chull".
+
+   testFilter.cc	-- testing the correctness of filter
+   timeFilter.cc	-- timing with filter on and off, for matrices
+			   with rational entries.  Based on gaussian.cc.
+   timeFilter1.cc	-- variant of testFilter.cc for matrices
+			   with integer entries.
+   inputs/		-- subdirectory for input matrices
+   createMatrices.cc	-- to create random matrices
+			   (See Makefile for how to run this)
+   results.txt	  	-- some test results and timings
+
+For details about the timing results, see README file
+under the "inputs" subdirectory here.
+
+-- Chee Yap and Zilin Du (Oct, 2001)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+SOME TIMINGS:
+	On the cost of using filters in Core 2.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+The original goal of this testFilter directory is to show
+the efficacy of filters for testing sign of determinants.
+By turning on/off the filter (see testFilter.cpp),
+we can see how filter speeds up the sign computation.
+These results for Core 1.x is shown in the file results.txt. 
+
+The flexibility of Core 2 allows us to easily switch
+these filters.  This leads to a related experiment which
+gives us some idea of the overhead cost in our filter mechanism.
+
+In Core 2.0, the class Expr is equal to
+
+	ExprT<RootBound, Filter, Kernel>
+
+for suitable RootBound, Filter and Kernel classes.
+Let 
+	Expr1 = ExprT< k-ary_BFMSS, BFS_filter, BigFloat2>
+and
+	Expr2 = ExprT< k-ary_BFMSS, Dummy_filter, BigFloat2>.
+
+Thus, in Expr2, we replace the BFS_filter of Expr1 by the Dummy_filter
+that always return false.   The following experiment shows the effects
+of doing this replacement.
+
+Here is the original experiment using Expr1, using our Makefile:
+
+	==================================================
+	> make test
+
+	./createMatrices inputs/200x3x10matrices 200 3 10
+	Generate 200 random matrices...
+	Done.
+	./createMatrices inputs/200x4x20matrices 200 4 20
+	Generate 200 random matrices...
+	Done.
+	./createMatrices inputs/200x5x30matrices 200 5 30
+	Generate 200 random matrices...
+	Done.
+
+	./testFilter inputs/200x3x10matrices
+	CORRECT!
+	T1 = Total USER time spent w/ filter : 0.004392 seconds
+	T2 = Total USER time spent w/o filter : 0.086238 seconds
+	Speedup = 100*(T2-T1)/T1 %: 1863.52%
+	./testFilter inputs/200x4x20matrices
+	CORRECT!
+	T1 = Total USER time spent w/ filter : 0.00771 seconds
+	T2 = Total USER time spent w/o filter : 0.177545 seconds
+	Speedup = 100*(T2-T1)/T1 %: 2202.79%
+	./testFilter inputs/200x5x30matrices 
+	CORRECT!
+	T1 = Total USER time spent w/ filter : 0.017035 seconds
+	T2 = Total USER time spent w/o filter : 0.324514 seconds
+	Speedup = 100*(T2-T1)/T1 %: 1804.98%
+	==================================================
+
+As expected, filters speed up the computation (but compare these
+times to those for Core 1 as seen in results.txt).
+Here we see that filters is about 20 times faster than without
+filters.  Here is the same experiment, repeated using Expr2:
+
+	==================================================
+	> make test
+
+	... omit the matrix generation ...
+
+	./testFilter inputs/200x3x10matrices
+	CORRECT!
+	T1 = Total USER time spent w/ filter : 0.086362 seconds
+	T2 = Total USER time spent w/o filter : 0.031006 seconds
+	Speedup = 100*(T2-T1)/T1 %: -64.0976%
+	./testFilter inputs/200x4x20matrices
+	CORRECT!
+	T1 = Total USER time spent w/ filter : 0.176421 seconds
+	T2 = Total USER time spent w/o filter : 0.076936 seconds
+	Speedup = 100*(T2-T1)/T1 %: -56.3907%
+	./testFilter inputs/200x5x30matrices 
+	CORRECT!
+	T1 = Total USER time spent w/ filter : 0.3275 seconds
+	T2 = Total USER time spent w/o filter : 0.16996 seconds
+	Speedup = 100*(T2-T1)/T1 %: -48.1038%
+	==================================================
+	
+We see that turning on filters actually slows down the computation,
+by a factor of 2 or 3.   Since calling the dummy filter
+is a no-op, this slow down is fully attributed to the filter overhead cost.
+
+Let us also compare the times for Expr1 against that for Expr2:
+
+	============================================================
+		Experiment		Expr1		Expr2
+	============================================================
+	(1-a) T1  (w/ filter) 		0.004392 sec	0.086362 sec
+	(1-b) T2  (w/o filter)		0.086238 sec	0.031006 sec
+
+	(2-a) T1  (w/ filter) 		0.00771 sec	0.176421 sec
+	(2-b) T2  (w/o filter)		0.177545 sec	0.076936 sec
+
+	(3-a) T1  (w/ filter) 		0.017035 sec	0.3275 sec
+	(3-b) T2  (w/o filter)		0.324514 sec	0.16996 sec
+	============================================================
+
+The lines (1-b), (2-b), and (3-b) are most relevant for this comparison.
+We might expect that both Expr1 and Expr2 should yield
+the same times.  But there seems to be a factor of 2 slowdown in Expr1.
+
+These tests were based on the Platform:
+	  MacBook Air, Intel Core 2 Duo 2.13 GHz,
+	  1 Processor, 2 Cores, 6MB of L2 Cache, 2 GB Memory.
+
+--Chee Yap
+  June 2010, Oxford.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+

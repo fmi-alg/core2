@@ -1,0 +1,23 @@
+file: README file for orientation
+Since CORE Library Version 1.7
+August 2004
+$Id: README,v 1.1 2006/03/07 04:51:25 exact Exp $
+=================================
+Synopsis:
+	Testing various pivoting strategies for evaluating 
+	the orientation predicate, including 
+	   -- Fortune's heuristic
+	   -- maximum edge length heuristic
+	   -- maximum angle heuristic
+Files:
+	pivot.h   -- header file
+	pivot.cpp -- Tests various pivoting strategies for
+			performing the orientation test in 2-D.
+	in        -- input directory containing test data files (data*.txt)
+	out       -- output directory 
+	shyun.tar.gz -- original programs of S.H.Yun
+
+TODO LIST:
+	-- get better point data
+	   (should use full double precision!)
+	-- more comprehensive tests

@@ -1,0 +1,24 @@
+============================================================
+README file for bezier directory
+Since Core Library Version 1.7
+
+Description:
+	Simple Bezier Package
+
+	WARNING: THIS IS STILL EVOLVING (Aug 2004)
+
+Author:
+	Chee Yap, August 2004
+$Id: README,v 1.1 2006/03/07 04:51:23 exact Exp $
+============================================================
+
+Files:
+	README		-- this file
+	Makefile	-- Type "make p=xxx" to compile the file xxx.cpp
+	tBezier.cpp	-- Exercises the functions of Bezier Class
+	Bezier.h	-- Bezier Class definitions
+
+Directories:
+	data            -- directory for input and output files
+
+============================================================

@@ -1,0 +1,77 @@
+# file: cube-with-hole.txt
+#
+#   Simple example of how to build a polyhedral solid using GWB.
+#
+#   This is a model of a cube with a hole built using the Euler
+#   operations of GWB.
+#
+#   Author: Kai Cao  (July 2012)
+#   Since Core 2.1.
+#   
+##################################################
+
+#############BUILD A CUBE#########################
+# The Scalar
+      scalar=100
+# initialize object
+      mvfs 1 1 1 0 0 0
+
+# make three horizontal edge-vertices
+      mev 1 1 1 1 1 1 2 3 0 0
+      mev 1 1 1 2 1 1 3 3 3 0
+      mev 1 1 1 3 2 2 4 0 3 0
+
+# make first laminar  (horizontal) face 
+      mef 1 1 4 3 1 2 2
+
+# make four vertical edge-vertices
+  mev 1 2 2 1 4 4 5 0 0 3
+  mev 1 2 2 2 1 1 6 3 0 3
+  mev 1 2 2 3 2 2 7 3 3 3
+  mev 1 2 2 4 3 3 8 0 3 3
+
+# make four edge-faces
+  mef 1 2 6 2 5 1 3
+  mef 1 2 5 1 8 4 4
+  mef 1 2 8 4 7 3 5
+  mef 1 2 7 3 6 5 6
+
+  
+##############NOW WE HAVE A CUBE##################
+##################################################
+
+
+
+##################################################
+##############LET US DIG A HOLE###################
+       
+
+# make four horizontal edge-vertices in a whole 
+  mev 1 1 1 1 2 2 9 1 1 0
+  mev 1 1 1 9 1 1 10 2 1 0
+  mev 1 1 1 10 9 9 11 2 2 0
+  mev 1 1 1 11 10 10 12 1 2 0
+
+# make edge-face
+  mef 1 1 9 10 12 11 7
+
+# kill edge  (1-9) and make 9-10-11-12 a ring in side face 1
+  kemr 1 1 1 9
+
+# make four vertical edge-vertices in a hole
+  mev 1 7 9 13 1 1 3
+  mev 1 7 10 14 2 1 3
+  mev 1 7 11 15 2 2 3
+  mev 1 7 12 16 1 2 3
+
+# make four horizontal edge-faces in a hole
+  mef 1 7 13 9 14 10 8
+  mef 1 7 14 10 15 11 9
+  mef 1 7 15 11 16 12 10
+  mef 1 7 16 12 13 14 11
+
+# kill the last face left  (16-15-14-13) and make it a ring\
+inside the lower face and now we have a hole
+  kfmrh 1 2 7
+
+# This completes our cube with a hole definition: end.

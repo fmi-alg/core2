@@ -1,0 +1,45 @@
+Points
+"a" 0 1 1
+"b" 0 0 1
+"c" 1 0 1
+"d" 1 1 1
+"e" 0 1 0
+"f" 0 0 0
+"g" 1 0 0
+"h" 1 1 0
+
+Poly "cube" + 0 0 0 * 1 1 1
+0 a b c
+0 d a c
+0 d c g
+0 h d g
+0 a d h
+0 e a h
+0 b a f
+0 a e f
+0 c b f
+0 g c f
+0 f e g
+0 e h g
+
+PutPoly cube + 106 452 0 * 20 60 512
+PutPoly cube + 106 0   0 * 20 428 512
+PutPoly cube + 128 0 0  * 20 512 60
+PutPoly cube + 128 0 84 * 20 512 428
+
+PutPoly cube + 206 0 0  * 20 512 60
+PutPoly cube + 206 0 84 * 20 512 428
+PutPoly cube + 228 0   0 * 20 244 512
+PutPoly cube + 228 268 0 * 20 244 512
+
+PutPoly cube + 306 0   0 * 20 244 512
+PutPoly cube + 306 268 0 * 20 244 512
+PutPoly cube + 328 0 452 * 20 512 60
+PutPoly cube + 328 0 0 * 20 512 428
+
+PutPoly cube + 406 0 452 * 20 512 60
+PutPoly cube + 406 0 0 * 20 512 428
+PutPoly cube + 428 452 0 * 20 60 512
+PutPoly cube + 428 0   0 * 20 428 512
+
+End

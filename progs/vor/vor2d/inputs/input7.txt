@@ -1,0 +1,104 @@
+# file: input.txt
+#
+#   Simple example of a planar obstacle set, an triangular annulus:
+#                            /\
+#                           /  \
+#                          / /\ \
+#                         / /  \ \
+#                        / / G  \ \
+#                       / -------- \ 
+#                      --------------    
+#               S
+#
+#   Try putting your robot start configuration to be outside the annulus,
+#   say S(10,10), and the goal configuration to be inside, say G(250, 250).
+#   There is no path, of course, and PRM type methods would not terminate.
+#   But it is no problem for our subdivision method.
+#
+# ###########################################################################
+#
+#  Authors: Chee Yap, Cong Wang, Yi-Jen Chiang
+#
+#  Since CoreLib 2.1 (April 2012)
+#  $Id:$
+# ###########################################################################
+# This is a sample file format for input
+# 	It supports:
+#     	(1) rest-of-line comment character is '#'
+#	(2) initial space, tabs and newlines are ignored.
+#	(3) continuation line character is '\'
+#
+# BASIC FORMAT:
+# 	N
+#
+#	x1 y1 x2 y2 ...    xN yN
+#
+#	M
+#
+#	p11 p12 p13 ...
+#	p21 p22 p23 p24 ...
+#	...
+#	pM1 pM2 ...
+#
+# where
+# 	N = number of points
+#
+# 		The point (xi,yi) is indexed by i (for i=1,2,...,N)
+#		The coordinates xi, yi can be integers or decimal values 
+# 	
+# 	M = number of polygons
+# 		There are M lines following "M", one for each polygon
+# 		Each polygon is given by a sequence of point indices (1 to N)
+# 			E.g., 1 9 12 3 5 1
+#		The polygons are closed, so the last index must the same
+#			as the first index. 
+# 		The interior of polygon is left of the directed edges:
+# 			So the interior is finite iff the indices are listed
+# 			in counter-clockwise order
+#
+# 			E.g. 
+# 				2 3 8 2
+# 			and
+# 				2 8 3 2
+# 			are two triangles but one has finite interior, the
+# 			other has finite exterior.
+#		Degenerate polygons (line segment, or polygonal lines) are OK:
+#			E.g.,
+#				5 2 5
+#				5 2 7 9 11 9 7 2 5
+#
+# 		If your polygon is non-simple, the effects are
+# 		somewhat unpredictable (it is predictable, of course, but
+# 		harder to figure out).
+#
+# ###########################################################################
+#
+#	RESTRICTION: 	For a point (x,y) we require
+#
+#			0 < xi < 512,	0 < yi < 512
+#	
+# ###########################################################################
+	
+16
+100 100 
+100 -1000
+-1000 -1000
+-1000 100
+400 100
+1000 100
+1000 -1000
+400 -1000
+400 400
+1000 400
+1000 1000
+400 1000
+100 400
+-1000 400
+-1000 1000
+100 1000
+
+4
+1 4 3 2 1
+5 8 7 6 5
+9 10 11 12 9
+13 16 15 14 13

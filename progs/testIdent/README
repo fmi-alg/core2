@@ -1,0 +1,21 @@
+File: README for testIdent
+Core Library, $Id: README,v 1.1 2006/03/07 04:51:26 exact Exp $
+=============================================================================
+SYNOPSIS:
+	testIdent.ccp includes a set of identity tests
+		involving various basic arithmetic opertaions. 
+
+	Most of them are adapted from
+		a similar test program in the LiDIA distribution.
+
+	testBound.cpp -- further tests
+
+
+TO DO:
+	Not all CORE functions are exercised here!
+
+	testIdent is basically for Level 3 Accuracy.
+		Ought to extend to all the other levels.
+
+=============================================================================
+

@@ -1,0 +1,31 @@
+File: README for tests
+Core Library, $Id: README,v 1.1 2006/03/07 04:51:26 exact Exp $
+=============================================================================
+SYNOPSIS:
+	Miscellaneous test programs related to Core Library
+
+	floor_ceil.cpp 
+		includes some tests for the functions
+		"BigInt floor(Expr)" and  "BigInt ceil(Expr)".
+	
+	invalid.cpp
+		tests the behavior of CORE on invalid inputs
+
+	bench.cpp
+		print out the root bounds for various expressions:
+			E_1: sqrt(x) + sqrt(y) - sqrt(x+y + 2*sqrt(x*y))
+			E_2: (sqrt(x) - sqrt(y))/(x-y)
+	        bench_1 computes the root bound for E_1.
+	        bench_2 computes the root bound for E_2 - E_2.
+	
+	linn.cpp, jihun.cpp:
+		Comparison of naive floating-point summation with
+		compensated floating-point summation.
+
+	schmidtt.cpp
+		fixing a bug reported by Susanne Schmidtt.
+
+	coreid.cpp
+		Looking at types in Core Library.
+=============================================================================
+

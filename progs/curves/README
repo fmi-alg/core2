@@ -1,0 +1,15 @@
+README for curves
+
+
+July 2012:
+	Implemented the various methods for IntWrapper to
+	allow polynomial coefficients to be NT = Int.
+	
+	BUG:
+	However,  this caused tCurves and tBiPoly to have segment faults.
+	In tCurves.cpp, we see that the construction of the curve
+		caused segment fault.
+	
+	--Chee 
+
+

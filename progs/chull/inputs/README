@@ -1,0 +1,34 @@
+README for CONVEX HULL data files
+=============================================================
+This directory contains sample input files for
+the chull program (and its variant chull4).
+
+   The input files for chull begin with small letters:
+	cube, points1, points2, etc.
+
+   The input files for chull4 begins with capital letters:
+	Cube, Points1, Points2, etc.
+
+=============================================================
+DIFFERENCE between chull and chull4 is
+just in the format of the input files.
+
+(1) chull input file:
+	this is just a sequence of numbers
+
+	   x1 x2 x3 x4 x5 ...
+
+	So the first point is (x1, x2, x3),
+	and the next point is (x4, x5, x6), etc.
+
+(2) chull4 input file :
+	this is a sequence of quadruples of the form
+
+        	(x1, y1, z1, w1)
+        	(x2, y2, z2, w2)
+        	(x3, y3, z3, w3)
+		...
+
+	where the fourth coordinate (w's) is
+	the homogenizing coordinate (usually set to 1).
+

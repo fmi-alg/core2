@@ -1,0 +1,62 @@
+
+
+              Geometry Library Development Report
+                       Shubin Zhao
+                       Summer,2001
+Description
+ This Geometry Library is an extension of the CORE library. The library includes 
+2-D and 3-D parts. The library provides basic geometry operations. It also provides
+ good 2-d and 3-d intersection functions which can deal with any degeneracy cases.
+ These two parts are independent that means the 3-D part is not based on 2-D. All 
+the computations are done in 3-D. No projection is used. The 2-D library includes 
+Point, Line, Segment and Circle classes. The 3-D library includes Point, Line, Seg
+ment, Plane, Polygon and Triangle classes. An important part of the 3-D library is
+ the triangle-triangle intersection functions. We also include test programs for t
+he library. All the 2-D and 3-D classes have a base class named GeomObj.
+
+Some Design Issue
+
+ Both the 2-d and 3-d library use some common linear algebra classes which are basically 
+definations of Vector and Matrix. These two classes can be of any dimension. So both 
+2-d and 3-d library can use them. In either library, the point class is a basic class 
+that used by other classes, like line or segment. It also includes some predicates 
+like points orientation etc. Each class has a dim() function which return the dimension 
+of the object. Note that this is not the dimension of the coordinates. The dimension 
+of an object is defined like this: A point is of dimension 0; A line, segment or cirle 
+is of dimension 1; A plane is of dimension 2; A polygon or triangle is of dimension 2. 
+The dim() function is a virtual function so that it can be used to test the type of
+ an object. You may notice this may not be enough to distinct line or segment. But 
+as an intersection object, line or segment can not happen both. For triangle or polygon 
+cases, a triangle can be viewed as polygon. So it doesn't matter.
+
+ Each class that is implemented intersection operation has two functions, one is 
+intersect predicate, which return the dimension of the intersection. If no intersection, 
+it return -1. It returns 0 if the intersection is a point and etc. The intersection
+ function returns a reference of the intersection object of two objects. It returns
+ NULL if no intersection indeed. As we mentioned above, you can use dim() function 
+to check what real object the intersection is.
+
+ For the intersection functions, it should be good to implement them as commutative. 
+But since there is a circular include problem, we didn't implement them that way. T
+his can be implemented as friend functions, by which we can easily make them 
+commutative.
+
+Test Programs
+
+ The test programs are implemented for the 3-d library. There are two test programs. 
+One is the pentagon test, which compute the inner and outer pentagon for repeatedly. 
+If the computing is exact, the resulting pentagon should be exactly the same as the 
+orginal one. Another program is to test all the functions that has been implemented. 
+We design the test program that tends to test all the functions and different cases 
+in the library. The three tests are designed for segment, plane and triangle classes. 
+Since most of segment function implementation is based on line functions, so line 
+class should be covered if the segment test is okay.
+
+Further Works
+(1) Add check to make sure an object is proper before computing intersection or other
+    computation. An improper object may cause problems in computation.
+(2) Implement intersection functions to be communitative. A suggestion is to use 
+    friend functions. 
+(3) Use different functions for coplanar intersection and non-coplanar intersection. 
+    Otherwise the coplanarity test has to be done repeatedly.
+

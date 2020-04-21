@@ -1,0 +1,16 @@
+# test a single box for mindset > rB/2 (bug)
+
+4
+
+# P1: square (1,2,3,4,1):
+10 502
+110 502
+110 402
+10 402
+
+# 1 POLYGONS:
+1
+1 4 3 2 1
+
+# END
+

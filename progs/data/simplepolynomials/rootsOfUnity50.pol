@@ -1,0 +1,11 @@
+! file: rootsOfUnity50.pol
+! This is the linear polynomial p(x)=x^50-1. 
+
+sri
+0
+50
+2
+0
+-1
+50
+1

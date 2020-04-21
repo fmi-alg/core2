@@ -1,0 +1,110 @@
+README for Drawpoly Program:
+
+1.  FILES:
+	Makefile
+	drawpoly.cpp	-- original polygon display program
+	drawCurve.cpp	-- curve display program
+	input*		-- sample input files
+	data/		-- directory for other input files
+
+2.  USAGE:
+	--This is a simple openGL program (using GLUT librarry) to draw curves.
+
+	--To compile the main program (drawcurve.cpp),
+		you should be able to simply type "make".  
+		This creates the executable for draw.curve.
+		(NOTE: "make drawCurve1" seems to work better on Cygwin)
+		
+		The PLATFORM variable for your Core Library programs
+		should be defined in the file "Make.config" file in $(COREPATH).
+		The typical values for PLATFORM are gnu, cyg, or sun.
+		If necessary, first use an editor to modify Make.config.
+		You may also to set other options in this file. 
+	
+	--To run the program for a simple example, type "make test".
+
+	--For more details on the input file format, see the source files 
+	(drawcurve.cpp).
+
+3. File Format:
+	The DrawCurve program accepts a text (ASCII) file that
+	describes a list of 2D polygons or polylines.
+	In $(COREPATH)/progs/curves, the program "plotCurves" produces
+	output files in this format.
+
+ 	The max and min values of polygons points are automatically determined
+	by DrawCurve, and the view window is scaled to fit the entire set of polygons
+
+ 	Each polygon has its own color, given in R-G-B values, with this format:
+
+	     	p <number_of_vertices>
+	     	<r_value> <g_value> <b_value>
+	     	<x_coord> <y_coord>
+	     	<x_coord> <y_coord>
+	     	...
+	     	<x_coord> <y_coord>
+
+	 The initial letter `p' indicates a `polygon', which is by definition a closed
+	 	polygonal curve (the first point is implicitly repeated as the last point).
+	 Instead of a polygon, you could specify an open polyline,
+	 	simply by replacing the character 'p' by `o'.
+
+	 E.g. 
+	     	p   4                    # This specifies a quadrilateral
+	     	0.183     0.273   0.281  # The RGB color of the triangle
+	     	0           2            # First point
+	     	-0.26       2            # Second point
+	     	1.5         2.07         # Third point
+	     	.123e2      .123e-2      # Fourth point (scientific notation!)
+	
+		o  3			# This specifies an open polyline with 3 vertices
+		1.0	0	0	# The color is red
+		0	0		# First point at origin
+		1	0		# Second point on x-axis
+		0	1		# Third point on y-axis
+
+	 --- The separate elements are separated by whitespaces
+	     	(i.e., space, tabs or newlines).
+	 --- The comment character is `#'.  All data in the current
+	 	line, starting from the first occurrence of `#', will be ignored.
+	 --- Note that scientific notation is allowed for specifying numbers
+ 
+4. EXTENSIONS/TODO:
+	--Allow the display of individual points (with point shape and labels)
+	--Allow the specification of thickness of the line or point
+	--Allow the specification of dotted/dashed lines
+	--Allow display of optional labels on Polygon vertices
+	--Allow polygons to have fill color (and transparency)
+	--It may be best to write a script (e.g., perl) to process an
+	    input file, and then call a plain drawpoly to display the result...
+	--We should be able to choose or rescale the x- or y-coordinates
+	    into something that is reasonable
+
+4. OPENGL/GLUT INSTALLATION NOTES:
+	-- For you may need to set the correct LD_LIBRARY_PATH to get OpenGL.
+		E.g., on the NYU Computer Science machines, get the
+		free version of openGL called Mesa as follows:
+
+    	% setenv LD_LIBRARY_PATH \
+          ${LD_LIBRARY_PATH}:/usr/unsupported/packages/opengl/OpenGL-Mesa2.4/lib
+
+	-- On Cygwin platform: be sure to download the OpenGL and Glut libraries
+		and try one of the following:
+
+	   LIBS= -L\bin -lglut32 -LC:\WINNT\system32 -lopengl32 -lglu32
+	   LIBS= -lm -lglut32 -lglu32 -lopengl32 
+
+	and set the compiler flags to be
+	
+	   COMPILERFLAGS = -Wall -mno-cygwin -DCYGWIN
+
+5. HISTORY:
+	The original drawpoly.cc program was originally written by
+	Chen Li (1999) to help us debug the "convert program".  
+	The convert program, given any raster image I, computes 
+	a new image J where J is a translated, rotated and scaled
+	version of I, but broken up different tiles of some fixed
+	size.  The file input0 is an example of a construction from
+	the convert program.  This was extended by Chee and Tingjen
+	to allow more flexible input formats as well as colors.
+		

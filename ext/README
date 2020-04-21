@@ -1,0 +1,21 @@
+README File for CORE EXTENSIONS
+
+CURRENT EXTENSION PACKAGES
+
+(1) Linear Algebra:
+	implements Vectors and Matrices,
+	implements determinant
+(2) Geometry:
+	divided into geom2d and geom3d (together: "geom*d")
+	implements
+		Point*d, Line*d, Segment*d
+		Circle2d, 
+		Plane3d, Triangle3d, Polygon3d
+
+	Note that geom3d is independent of geom2d.  In particular,
+		we test if a point is in a triangle in space
+		by direct primitives in 3-d, and not by projection
+		to the planar case.
+
+(3) Graphics:
+	elementary display methods based on openGL

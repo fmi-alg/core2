@@ -1,0 +1,19 @@
+# file: trefoil.txt
+#
+#   Simple example of how to build trefoil
+#
+#   Author: Kai Cao  (July 2012)
+#   Since Core 2.1.
+#   
+##################################################
+
+# initialize object
+  thickness = 10
+  diameter = 40
+  nsegments = 6
+  nsections = 30
+
+  make trefoil $thickness $diameter $nsegments $nsections
+
+# This completes our octahedron definition: end.
+  end gwb

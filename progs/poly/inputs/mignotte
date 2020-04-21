@@ -1,0 +1,40 @@
+# Mignotte described the the family of polynomials
+#
+#	M_n(X)  =  X^n - 2(a*X -1)^2
+#	        =  X^n - 2a^2.X^2 + 4a.X - 2.
+#
+# for integers n >= 3, and a >= 3.
+#
+# These polynomials are irreducible and has two real roots close to 1/a.
+# Their separation are at most 
+#
+#		2.a^{-(n+2)/2}
+#
+# E.g., when a=2, separation is at most 2^{-n/2}, and M_n(X) = X^n - 8X^2 + 8X -2.
+#
+# When n=3, a=3,
+#		M_3(X) = X^3 - 18.X^2 + 12.X - 2.
+# and separation is at most 2^{-5}.
+#	
+Poly(3)
+1
+-18
+12
+-2
+#
+# When a=2, n=10
+#		M_n(X) = X^20 - 8.X^2 + 8.X - 2.
+# and separation is at most 2^{-5}.
+Poly(10)
+1
+0
+0
+0
+0
+0
+0
+0
+-8
+8
+-2
+

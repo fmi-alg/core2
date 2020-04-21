@@ -1,0 +1,7 @@
+# 	This input set of 4 points will cause
+#	graham.cpp to fail in Level 1.
+# 	--Chee Yap (9/29/03)
+0.0	0.0
+1.0	1.0
+1.0	1.0000000000000001
+2.0	2.0000000000000001

@@ -1,0 +1,37 @@
+# Even Polynomial of degree 16
+#
+# This polynomial has no odd degree terms:
+#
+#     -113 + (224)*x^2 + (200)*x^4 + (-184)*x^6 + (-98)*x^8
+#     + (64)*x^10 + (8)*x^12 + (-8)*x^14 + (1)*x^16
+Poly(16)
+  -113
+  0
+  224
+  0
+  200
+  0
+  -184
+  0
+  -98
+  0
+  64
+  0
+  8
+  0
+  -8
+  0
+  1
+#
+# It's Cauchy separation bound is  0.10540225151e-49
+#
+# It has 6 real roots, as isolated using Sturm:
+#
+#  Root in [-.35156250000e+1 ; -.17578125000e+1]
+#  Root in [-.17578125000e+1 ; -.87890625000]
+#  Root in [-.87890625000 ; 0]
+#  Root in [0 ; .87890625000]
+#  Root in [.87890625000 ; .17578125000e+1]
+#  Root in [.17578125000e+1 ; .35156250000e+1]
+# 
+

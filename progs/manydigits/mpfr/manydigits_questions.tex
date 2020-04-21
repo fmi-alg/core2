@@ -1,0 +1,129 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{a4wide}
+\usepackage{amssymb}
+\usepackage{xspace}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% NEW COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\arctanh}{\mathop{\rm arctanh}\nolimits}
+\newcommand{\arcsinh}{\mathop{\rm arcsinh}\nolimits}
+\newcommand{\fib}{\ensuremath{\textsf{fib}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Problems for ``Many Digits'' Friendly
+  Competition
+  \thanks{The event will be held on October 3--4, 2005. The detailed
+    format of the competition as well as an online version of this
+    list of problems are available at the website of the competition
+    \texttt{http://www.cs.ru.nl/\textasciitilde
+      milad/manydigits}\xspace. }}
+
+\author{Milad Niqui\\
+  \emph{Institute for Computing and Information Sciences}\\
+  \emph{Radboud University Nijmegen}\\
+  \emph{The Netherlands}\\
+  \url{http://www.cs.ru.nl/~milad/manydigits/}\\
+  \texttt{milad\;\!@\;\!cs.ru.nl}}
+
+\date{\today\thanks{There is one change from the original version that
+    was announced on September 30, 2005. Namely, the value of $a_2$ in
+    \textbf{C14} was printed wrong in that version. The correct value is
+    $a_2={184}/{35}$ (\emph{see}~\textbf{C14}). The value was expressed
+    correctly in the HTML version.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% BODY %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document} 
+
+\maketitle
+
+\section{Basic Set of Problems}
+
+The required output in Problems \textbf{C01}--\textbf{C12} is the
+string containing the first $10^N$ decimal digits after the decimal
+point of the constant in question.  The initial value for parameter
+$N$ is given between the square brackets.
+
+\begin{description}
+\item[Problem C01.] [$N=4$]~~$\sin (\tan (\cos (1))$
+\item[Problem C02.] [$N=5$]~~$\sqrt{\frac{e}{\pi}}$
+\item[Problem C03.] [$N=4$]~~$\sin\big{(}(e+1)^3\big{)}$
+\item[Problem C04.] [$N=4$]~~$e^{\ensuremath{\pi}\sqrt{2011}}$
+\item[Problem C05.] [$N=4$]~~$e^{e^{\sqrt{e}}}$
+\item[Problem C06.] [$N=4$]~~$\arctanh\Big{(}1-\arctanh\big{(}1-\arctanh(1-\arctanh(\frac{1}{\pi}))\big{)}\Big{)}$
+\item[Problem C07.] [$N=4$]~~$\pi^{1000}$
+\item[Problem C08.] [$N=4$]~~$\sin(6^{6^6})$
+\item[Problem C09.] [$N=4$]~~$\sin\Big(10\times\arctan\big(\tanh(\frac{\pi\sqrt{2011}}{3})\big)\Big)$
+\item[Problem C10.] [$N=4$]~~$\sqrt[3]{7+\sqrt[5]{2}-5\sqrt[5]{8}} + \sqrt[5]{4} - \sqrt[5]{2}$
+\item[Problem C11.] [$N=4$]~~$\tan(\sqrt{2})+\arctanh(\sin(1))$
+\item[Problem C12.] [$N=4$]~~$\arcsin(\frac{1}{e^2}) + \arcsinh(e^2)$
+\end{description}
+
+
+\section{Intermediate Set of  Problems}
+The initial value for parameter $N$ is given between the square
+brackets. Note that the required output in Problems~\textbf{C16},
+\textbf{C20}, \textbf{C23} and \textbf{C24} is different from the
+other problems.
+
+
+\begin{description}
+\item[Problem C13.] [$N=4$]~~The logistic map: $x_0=0.5,\enspace x_{n+1}=3.999\times x_{n} (1-x_{n})\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits after the decimal point of  $x_{\ensuremath{10^N}}\enspace$.
+
+\item[Problem C14.] [$N=2$]~~$a_{0}=\frac{14}{3},\enspace a_{1}=5,\enspace a_{2}=\frac{184}{35},\enspace
+            a_{n+2}=114-\frac{1463-\frac{6390-\frac{9000}{a_{n-1}}}{a_n}}{a_{n+1}}\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits after the decimal point of  $a_{10^{N+2}}\enspace$.
+
+\item[Problem C15.] [$N=4$]~~$h(n)=\sum\limits_{k=n}^{n^2}\frac{1}{k}\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits after the decimal point of  $h(10^{N+1})\enspace$.
+
+\item[Problem C16.] [$N=4$]~~$f(i)=\frac{\pi^2}{6}-\Big{(}\frac{13}{8}+\frac{1}{8{\times}27}\times\big{(}\frac{34}{8}
+                +\frac{8}{8{\times}125}
+              \times(\dots(\frac{21i-8}{8}+\frac{i^3}{8(2i+1)^3}))\big{)}\Big{)}\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits starting from the first nonzero digit after the decimal point of  $f(\ensuremath{10^N})\enspace$.
+
+\item[Problem C17.] [$N=4$]~~(Riemann's $\zeta$) $S= -4\zeta(2) - 2\zeta(3) + 4\zeta(2)\zeta(3) + 2\zeta(5)\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} decimal digits after the decimal point of $S\enspace$.
+
+\item[Problem C18.] [$N=4$]~~(Catalan's G) $G = \sum\limits_{i=0}^{\infty}\frac{(-1)^i}{(2i+1)^2}\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} decimal digits after the decimal point of $G\enspace$.
+
+\item[Problem C19.] [$N=4$]~~$a_{n}=n^3+1,\enspace L= \sum\limits_{n=1}^{\infty} (\frac{1}{7})^{a_{n}}\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits after the decimal point of $L\enspace$.
+
+\item[Problem C20.] [$N=4$]~~$X = \sin(\frac{2\ensuremath{\pi}}{17})\enspace.$
+\item[~~~~~~~~Output:]The \ensuremath{10^N}th partial quotient of the regular continued fraction of $X\enspace$.
+
+\item[Problem C21.] [$N=4$]~~Equation $e^{\cos(x)} = x\enspace.$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits after the decimal point of $x\enspace$.
+
+\item[Problem C22.] [$N=3$]~~$J=\int_{0}^{1}\sin(\sin(\sin(x)))dx$
+\item[~~~~~~~~Output:]The first \ensuremath{10^N} digits after the decimal point of $J\enspace$.
+
+\item[Problem C23.] [$N=2$]~~$M_1$=Inverse of the
+  $\ensuremath{10^N}\times\ensuremath{10^N}$ Hankel matrix $X$\\
+  where
+  $X_{ij}=\frac{1}{\fib(i+j-1)}\qquad(i,j>0)\enspace,\quad$
+  $\fib(k)=\frac{(1+\sqrt{5})^k-(1-\sqrt{5})^k}{2^k\sqrt{5}}\enspace.$
+\item[~~~~~~~~Output:]The first 10 decimal digits of the element $(10^{N}{-}1,10^{N}{-}3)$ of $M_1\enspace$.
+
+
+\item[Problem C24.] [$N=2$]~~$M_2$=Inverse of
+  $I_{\ensuremath{10^N}}+X$ (sum of the identity and the
+  $\ensuremath{10^N}\times\ensuremath{10^N}$ Hankel matrix $X$)
+  where $X$ is defined as in C23.
+
+\item[~~~~~~~~Output:]The first 10 decimal digits of the element $(10^{N}{-}1,\ensuremath{10^N})$ of $M_2\enspace$.
+
+
+\end{description}
+
+
+\end{document}

@@ -1,0 +1,35 @@
+OMPL for non-crossing 2-link robot
+
+I refer to 3 main programs.
+   SE2RigidBodyPlanning
+   http://ompl.kavrakilab.org/demos_2SE2RigidBodyPlanning_2SE2RigidBodyPlanning_8cpp_source.html
+   HybridSystemPlanning (car example with velocity and gear control)
+   http://ompl.kavrakilab.org/HybridSystemPlanning_8cpp_source.html
+   KinematicChainBenchmark (robot arm example)
+   http://ompl.kavrakilab.org/KinematicChainBenchmark_8cpp_source.html
+
+Design steps:
+
+1. Declare state space. R^2 x S x S
+   Make sure to bound R^2.
+
+2. Check state's validity. Define our own checker.
+   http://ompl.kavrakilab.org/stateValidation.html
+   For exmaple, we can re-write the checker in the example, KinematicChainBenchmark.
+
+3. For the continus motion, we need to define our own checker. 
+   "virtual bool ompl::base::MotionValidator::checkMotion(const State* s1, const State* s2)	const{}"
+
+
+
+Problems:
+
+1. There is no problem to create such state space.
+
+2. I have re-written the distance function for our space. But, the problem is the "void registerProjections()".
+   Not sure why it will crash...
+
+3. Need to figure out how to solve problem 2 and we can keep going. They are pretty much the same. 
+   In some examples, they just do the interpolation of two states and do single state check.
+   One thing needs to be considered is how do we rotate the link.
+   

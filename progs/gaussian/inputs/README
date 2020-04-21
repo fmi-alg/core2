@@ -1,0 +1,26 @@
+README
+
+1.  The matrices gregA and gregE are from
+	Gregory and Krishnamurthy's book (p.2-3),
+	the following matrix has determinant 1:
+
+	-73	78	24
+
+  A =	92	66	25
+
+	-80	37	10
+
+But if we add
+
+	0	0	0
+
+  E =	0	0	0
+
+	0	0	1/100
+
+then det(A+E) = -118.94
+
+2.   The matrix pivot4 is just a permutation matrix.
+	So gaussian.cpp will fail on this input.
+	The pivoting version will not fail.
+

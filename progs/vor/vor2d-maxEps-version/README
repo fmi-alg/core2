@@ -1,0 +1,138 @@
+===========================================================
+README file for $(CORELIB)/progs/vor/vor2d
+Since Core Library Version 2.2.
+	$Id: README 1149 2012-06-25 06:13:37Z jmlien $
+============================================================
+Files in this directory:
+	README			-- this file
+	Makefile		-- Type "make LEV=n" to compile programs in different
+					levels, or "make eg1" to run examples.
+	vor2d.cpp		-- main program
+	Box.{h,cpp}		-- box functions
+	QuadTree.{h,cpp}	-- quad tree data structure
+	Corner.{h,cpp}		-- corner features
+	Wall.{h,cpp}		-- wall features
+	PriorityQueue.h		-- priority queue for search strategy
+	Graph.h			-- graph searching based on Dijkstra and Astar 
+	fileProcessor.cpp	-- for parsing input files
+	Timer.{h,cpp}		-- for timing
+	Feature.h		-- 
+
+	envGenerator.py		-- Python script to generate large environments
+Directories:
+	inputs			-- various sample input environment
+============================================================
+
+OVERVIEW:
+
+	This is an implementation of a subdivision algorithm for
+	the Voronoi complex of a polygonal set Omega.  
+	The boundary of Omega is assumed to be decomposed into a set Phi(Omega)
+	of "features", either corners (points) or edges (open line segments).
+
+	This software accompanied our paper
+		"Towards Exact Numerical Voronoi Diagrams"
+	(the main plenary talk at the 9th Voronoi Diagram Symposium,
+	ISVD 2012, Rutgers, NJ, June 27-29, 2012).
+
+WHAT IS NEW?
+	(1) This is the first complete algorithm for the Voronoi complex,
+	based on "purely numerical primitives". 
+	All previous methods ultimately rely on some exact predicates
+	(which gives rise to implementation issues unless they are implemented
+	using some EGC style libraries like LEDA, CGAL or CORE).
+
+	(2) Our purely numerical soft predicates are ultimately reduced
+	to distance computation between pairs of features or points.
+	These are implemented in the file Feature.h.
+	The idea of using distance computations is widely used in the
+	numerical computing literature, and in practical algorithms.
+
+SOFTWARE:
+	Details for using the software can be found in the Makefile
+		(with lots of prepared examples).
+		The input files are found in the subdirectory "inputs".
+	The code can be run in interactive or non-interactive mode.
+		You can dump the subdivision image into a postscript file
+		"vor2d_screen_dump.ps" by pressing button "save image"
+		in the control panel.
+
+	EXPLORATION in the interactive mode:
+
+	(1) Point your mouse at any box in the display window, and press Control-Click.  
+	This box will be high-lighted (in red), and all the features
+	belonging to this box will also be high-lighted (in blue).
+	Note that the Disk of Influence of the box (clearance + 2*radius of box)
+	will also be drawn!
+	
+	(2) Next, if you press Control-uparrow or Control-downarrow,
+	you can move to the parent or child box in the subdivision tree.
+	
+	(3) To compile to different levels, change Feature.h
+
+CORE LEVELS OF ACCURACY:
+	This software is written to compile in all 3 CORE LEVELS.
+		For most purposes, LEVEL 1 (default) should be fine.  But numerical
+		errors can lead to wrong results.
+	Be warned that LEVELS 2 and 3 may be slow for large examples.
+	We plan to improve the LEVEL 2 performance in future research. 
+	
+	To make LEVELS 2 and 3 compatible with graphical applications (which
+	are inherently LEVEL 1), we have to ensure machine doubles when
+	calling OpenGL functions.   Thus, in vor2d.cpp, you find definitions 
+	such as:
+
+		void glVertex2f_core(double x, double y){
+			glVertex2f(CORE::Todouble(x),CORE::Todouble(y));
+		}
+	
+	which must be used instead of the standard "glVertex2f(double x, double y)".
+
+	COMPILING IN CORE LEVELS 1,2,3:
+	(1) The CORE LEVEL is controlled by the code in the file Feature.h.
+		So a simple way is to change the CORE_LEVEL in Feature.h.
+	(2) Better still, call our Makefile with the command line definition
+
+		> make LEV=2 ...the normal arguments...
+		> make LEV=3 ...the normal arguments...
+
+THEORY:
+	The "Voronoi complex" of Omega is a 1-dimensional complex
+			Vor(Omega) 
+	is a set comprising Voronoi vertices and curves connecting
+	Voronoi vertices (or going to infinity) such that the support
+	of this complex is the geometric Voronoi diagram.
+	Elements of Vor(Omega) are called Voronoi features.
+
+	An epsilon-approximation of Vor(Omega) is a
+	a PSLG (planar straightline graph)
+			G=(N,A)
+	where N is the set of nodes and A the set of arcs.
+	Nodes of degree 2 are called via points.
+	A node of degree 3 represents a Voronoi vertex in Vor(Omega).
+	A maximal path along via points and arcs represents a Voronoi curve in Vor(Omega).
+	Thus, G=(N,A) is an exact representation of Vor(Omega).
+	
+	Moreover, if v' is a node representing a
+	Voronoi vertex v, then d(v,v')< epsilon, and if e' is a maximum polygonal
+	curve representing a Voronoi curve, then the Hausdorff distance d(e,e')<epsilon.
+	For each node v', we determine the set of features that
+	are closest to v, and for each edge
+
+	Termination of our algorithm depends on NON-DEGENERACY of the Voronoi
+	diagram (i.e., every Voronoi vertex is closest to exact 3 features).
+	In implementation, we can circumvent this possible non-termination
+	by using an arbitrary epsilon cut-off.
+
+	ALGORITHMIC FRAMEWORK:
+	The framework we are developing is based on the Subdivision Method
+	-- starting from an initial box, we keep subdividing any leaf B that does
+	not satisfy a predicate C(B).   Upon termination, we balance
+	the subdivision, and then process each box in turn to construct
+	our Voronoi complex.  
+	
+============================================================
+--Jyh-Ming Lien, Chee Yap, Vikram Sharma
+  May 20, 2012.
+============================================================
+

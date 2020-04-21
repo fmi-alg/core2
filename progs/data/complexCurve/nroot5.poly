@@ -1,0 +1,8 @@
+# original polynomial from convertPoly for data/nroot5
+z^5 - 1
+
+#  
+# u(x,y) = y^4(5x) + (-10x^3)y^2 + (x^5 - 1)
+#
+# v(x,y) = y^5 + (-10x^2)y^3 + (5x^4)y
+#

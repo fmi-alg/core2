@@ -1,0 +1,47 @@
+README for chullGraham data files
+=============================================================
+This directory contains sample input files for
+the graham convex hull program (and its variant graham4).
+
+   The input files for the graham program ends in a number
+   (the number of points):
+
+	i4, i10, i19, square1000, etc
+
+   The input files for the graham4 program ends in a number 
+   and the "w" suffix, indicating the xyzw-format:
+
+	i4w, i10w, i19w, square1000w, square2000w, etc
+
+=============================================================
+DIFFERENCE between graham and graham4 is
+just in the format of the input files.
+
+(1) graham input file:
+	this is just a sequence of numbers
+
+	   x1 x2 x3 x4 x5 ...
+
+	So the first point is (x1, x2),
+	and the next point is (x3, x4), etc.
+
+(2) graham4 input file :
+	this is a sequence of quadruples of the form
+
+        	(x1, y1, z1, w1)
+        	(x2, y2, z2, w2)
+        	(x3, y3, z3, w3)
+		...
+
+	where the z-coordinates are 0,
+	      the w-coordinates are the homogenizing
+	      coordinate (usually set to 1).
+	Each quadruple must be in its own line.
+=============================================================
+COMMENTS ON THE INPUT FILES:
+
+i4:	This input file (with 4 points)
+	will cause an error in Level 1 of graham.cpp
+
+=============================================================
+

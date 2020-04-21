@@ -1,0 +1,86 @@
+============================================================
+README file for $(CORELIB)/progs/robotics/disc
+Since Core Library Version 2.2.
+	$Id: $
+============================================================
+Files in this directory:
+	README			  -- this file
+	Makefile		  -- used by Qt Creator for building
+	disc.cpp		  -- main program
+	Box.{h,cpp}		  -- box functions
+	QuadTree.{h,cpp}	  -- quad tree data structure
+	Corner.{h,cpp}		  -- corner features
+	Wall.{h,cpp}		  -- wall features
+	PriorityQueue.h		  -- priority queue for search strategy
+	UnionFind.h		  -- UnionFind for quick detection of path
+	Graph.h			  -- graph searching based on Dijkstra and A-star
+	ControlWindow.{h, cpp}    -- GUI window
+	Display.{h, cpp}	  -- OpenGL widget: renders scene
+	shader.{h, cpp}		  -- construct OpenGL shader program
+	ShaderException.{h, cpp}  -- exception class for shader class
+	
+	simple.vert		  -- source code for OpenGL vertex shader
+	simple.frag		  -- source code for OpenGL fragment shader
+	envGenerator.py		  -- Python script to generate large environments
+
+    Qt Creator Files
+	disc.pro		  -- disc program, specifies info about program
+	ControlWindow.ui	  -- specifies widgets on GUI window	
+Directories:
+	inputs			  -- various sample input environment
+============================================================
+
+OVERVIEW:
+
+	This is the simplest example of our technique of using soft predicates
+	for resolution-exact algorithms for motion planning.
+
+	The framework is called "SSS" (for Soft Subdivision Search).
+	It is a very flexible robust framework for motion planning,
+	analogous to the PRM framework.
+
+	Implementation is also very easy to do "exactly".   
+	Currently, we do not find the need to use arbitrary precision
+	computation, but this is easy to do in Core Library.
+
+	The idea of Soft Predicate is that we classify boxes
+	in configuration space as
+
+		FREE, STUCK or MIXED.
+
+	The predicate is "conservative" in the sense FREE or STUCK classifications
+	are correct (i.e., really free and really stuck).
+	In the limit, as boxes converges to a free or stuck point, this 
+	classification will converge to the correct value.
+
+	We guarantee: there is a constant K>1 such that
+		(1) if there is a path with clearance at least K*Epsilon,
+			then we will find a path of clearance at least Epsilon/K
+		(2) if there is no path with clearance Epsilon/K, 
+			then we will return "No Path".
+	The constant K is sqrt(2) here.
+
+	There are many possible strategies for expansion.  Here we implement:
+
+		(1) Breadth First Search
+		(2) Random
+		(3) Dijkstra and A-Star
+		(4) Greedy Best First
+		(5) Hybrids (any combination of the above)
+		(6) (NOT DONE YET) Voronoi diagram based searches
+	
+	Comparison with PRM methods are planned.
+
+	--Chee Yap, Cong Wang, Yi-Jen Chiang
+	April 2012.
+
+UPDATES:
+============================================================
+July 17-20, 2013: our paper describing this work appeared at the
+	ACM Symposium on Computational Geometry in Rio de Janeiro, Brazil.
+	Appeared in Special Issue of CGTA journal.
+July 27, 2013: the paper describing SSS in a general setting won the
+	Best Paper Award at "Robotics Challenge and Vision Workshop" at
+	the Robotics Science and Systems Conference in Berlin, Germany.
+	This award is sponsored by  Computing Community Consortium (CCC).
+============================================================

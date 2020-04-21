@@ -1,0 +1,31 @@
+# file: vorBoxWith2colorsX.poly
+#
+# This polygonal set comprises three triangles A, B, C:
+#
+#             /\        /\        /\
+#            /  \      /  \      /  \
+#           /____\    /____\    /____\     ---------- (H)
+#              A         B         C
+#
+# The bases of these triangles almost lie on a horizontal line H.
+# In fact, the bases of A and C lie on H,
+# but the base of C is only slightly below H (say epsilon below).
+#
+# The apices of these triangles define a Voronoi vertex (V)
+# whose distance above H is inversely proportional to epsilon.
+#
+# CONSIDER the subdivision box B that contains V:
+# The connection rules 
+
+# 9 Points
+9
+	 3750 -300 3450 -750 4050 -750 
+	 1800 -300 1500 -750 2100 -750
+	 2782 -349 2482 -799 3082 -799
+
+# 3 Triangles
+3
+1 2 3 1
+4 5 6 4
+7 8 9 7
+

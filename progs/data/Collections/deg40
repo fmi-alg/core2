@@ -1,0 +1,14 @@
+#Polynomials with degree less than 40 greater than 20
+chebyshev40.pol
+chrma22.pol
+#The following is not square-free
+#chrmc23.pol
+geom3_40.pol
+geom4_40.pol
+hermite40.pol
+kir1_40.pol
+kir1_40_mod.pol
+laguerre40.pol
+lsr_24.pol
+mand31.pol
+wilk40.pol

@@ -1,0 +1,9 @@
+TODO:
+
+(1) Jan 28, 2014,
+	Funny Bug: Why is the start config of eg4 "stuck"????
+
+(2) The "smarter strategy" is not properly implemented.
+	I want the case |Phi(B)|=2 to have the highest priority!
+
+

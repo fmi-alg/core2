@@ -1,0 +1,23 @@
+README for mesh/ceval
+
+TODO:
+    -- convertPoly.cpp needs to handle float coefficients for frisco format
+
+    	This is located in the switch statement of GetPoly (...)
+
+    -- compilation to level 2 needs to be done
+
+          > make all_lev
+
+	 currently works for level 1 only.
+
+    -- modify predicates.cpp so that whenever the polynomials get read in,
+         it will call the appropriate version of GetPoly (from above)
+
+    -- In predicates:
+    	the repeated switching to RoundUp and RoundDown is expensive.
+
+    	Should do the trick to only RoundUp:
+	Then lower bound should be computed as the RoundUp of the negation.
+
+	DO SOME TESTS.

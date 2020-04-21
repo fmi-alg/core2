@@ -1,0 +1,2 @@
+input{base.sk}
+put { scale([Norm]) then view((eye), (look_at))  } {{cube}}

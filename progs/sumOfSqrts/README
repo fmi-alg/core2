@@ -1,0 +1,19 @@
+file: README file for sumOfSqrts
+Since CORE Library Version 1.2, August 1999
+
+This directory contains
+
+1) graham.cpp
+	This compares two sums of 10 square roots each,
+	from Ron Graham.  The sums are equal up to 36 digits.
+
+2) orourke.cpp
+	This compares small sums of square roots, taken
+	from O'Rourke.  The original test was to compare the
+	performance with the "incrementalEvalFlag" set to true or false.
+	This affects only the squareroot evaluation algorithm, but it
+	is no longer supported in Core2.
+
+3) smallsum.cpp
+	This is a technique for generating very small
+	sum of square roots which we discovered.

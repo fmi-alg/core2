@@ -1,0 +1,377 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+0	Makefile	/^interactive = 0		# 0=interactive, >0 is non-interactive$/;"	m
+AlmostEqual	Box.h	/^	inline bool AlmostEqual(const double a[2], const double b[2])$/;"	f	class:Box
+Area	Box.h	/^	inline double Area(const double a[2], const double b[2], const double c[2])$/;"	f	class:Box
+AreaSign	Box.h	/^	inline int AreaSign(const double a[2], const double b[2], const double c[2])$/;"	f	class:Box
+BUFFERSIZE	fileProcessor.cpp	/^unsigned int BUFFERSIZE = 102400;$/;"	v
+Between	Box.h	/^	inline bool Between(const double a[2], const double b[2], const double c[2])$/;"	f	class:Box
+Box	Box.h	/^	Box(double xx, double yy, double w, double h):$/;"	f	class:Box
+Box	Box.h	/^class Box$/;"	c
+BoxIter	Box.cpp	/^BoxIter::BoxIter(const Box* bb, int direc):b(bb), direction(direc), neighbor(0)$/;"	f	class:BoxIter
+BoxIter	Box.h	/^class BoxIter$/;"	c
+BoxNode	Box.h	/^    BoxNode(){ x=y=clearance=0; nearest_feature=NULL; }$/;"	f	class:BoxNode
+BoxNode	Box.h	/^class BoxNode$/;"	c
+BoxQueue	PriorityQueue.h	/^	BoxQueue(void)$/;"	f	class:BoxQueue
+BoxQueue	PriorityQueue.h	/^class BoxQueue$/;"	c
+CCW	envGeneratory.py	/^def CCW(A, B, C):$/;"	f
+CORE_PATH	Makefile	/^CORE_PATH=..\/..\/..$/;"	m
+Collinear	Box.h	/^	inline int Collinear(const double a[2], const double b[2], const double c[2])$/;"	f	class:Box
+Corner	Corner.h	/^	Corner(double xx, double yy):x(xx), y(yy)$/;"	f	class:Corner
+Corner	Corner.h	/^class Corner : public Feature$/;"	c
+EXEPROGS	Makefile	/^EXEPROGS=$(TARGETS:=$(EXETYPE))$/;"	m
+End	Box.cpp	/^Box* BoxIter::End()$/;"	f	class:BoxIter
+FALSE	gliDump.h	21;"	d
+Feature	Feature.h	/^class Feature$/;"	c
+Find	UnionFind.h	/^	Feature* Find(Feature* b)$/;"	f	class:UnionFind
+First	Box.cpp	/^Box* BoxIter::First()$/;"	f	class:BoxIter
+IN	Box.h	/^	enum Status { IN, OUT, ON, UNKNOWN };$/;"	e	enum:Box::Status
+Image	gliDump.h	/^} Image;$/;"	t
+Keyboard	tmp/vor2d.cpp	/^void Keyboard( unsigned char key, int x, int y )$/;"	f
+Keyboard	vor2d.cpp	/^void Keyboard( unsigned char key, int x, int y )$/;"	f
+L	PriorityQueue.h	/^	list<Box*> L;$/;"	m	class:randQueue
+Mouse	tmp/vor2d.cpp	/^void Mouse(int button, int state, int x, int y)$/;"	f
+Mouse	vor2d.cpp	/^void Mouse(int button, int state, int x, int y)$/;"	f
+Next	Box.cpp	/^Box* BoxIter::Next()$/;"	f	class:BoxIter
+OBJS	Makefile	/^OBJS=${SRCS:.cpp=.o}$/;"	m
+OBJ_FILES	Makefile	/^OBJ_FILES = $(OBJS)$/;"	m
+ON	Box.h	/^	enum Status { IN, OUT, ON, UNKNOWN };$/;"	e	enum:Box::Status
+OUT	Box.h	/^	enum Status { IN, OUT, ON, UNKNOWN };$/;"	e	enum:Box::Status
+PQ	PriorityQueue.h	/^	priority_queue<Box*, vector<Box*>, PQCmp> PQ;$/;"	m	class:seqQueue
+PQ	QuadTree.h	/^	BoxQueue* PQ;$/;"	m	class:QuadTree
+PQCmp	PriorityQueue.h	/^class PQCmp$/;"	c
+ParallelInt	Box.h	/^	inline char ParallelInt$/;"	f	class:Box
+Parameters	Makefile	/^	@echo "================ Parameters =================="$/;"	m
+QType	tmp/vor2d.cpp	/^	int QType = 0;				\/\/ The Priority Queue can be$/;"	v
+Qseed	PriorityQueue.h	/^	int Qseed;$/;"	m	class:randQueue
+QuadTree	QuadTree.h	/^	QuadTree(Box* root, double e):$/;"	f	class:QuadTree
+QuadTree	QuadTree.h	/^class QuadTree$/;"	c
+SMALLNUMBER	Box.h	26;"	d
+SRCS	Makefile	/^SRCS=$(wildcard $(addsuffix \/*.cpp,$(SUBDIRS)))$/;"	m
+SUBDIRS	Makefile	/^SUBDIRS = . $/;"	m
+SegSegInt	Box.h	/^	inline char SegSegInt( const double a[2], const double b[2], const double c[2], const double d[2], double p[2] )$/;"	f	class:Box
+Set	UnionFind.h	/^	Set(Feature* b): pFeature(b), rank(1)$/;"	f	class:Set
+Set	UnionFind.h	/^class Set$/;"	c
+SpecialKey	tmp/vor2d.cpp	/^void SpecialKey(int key, int x, int y)$/;"	f
+SpecialKey	vor2d.cpp	/^void SpecialKey(int key, int x, int y)$/;"	f
+Status	Box.h	/^	enum Status { IN, OUT, ON, UNKNOWN };$/;"	g	class:Box
+TARGETS	Makefile	/^TARGETS = vor2d$/;"	m
+TIMER_H_DEF	Timer.h	16;"	d
+TRUE	gliDump.h	20;"	d
+Timer	Timer.cpp	/^Timer::Timer()$/;"	f	class:Timer
+Timer	Timer.h	/^class Timer$/;"	c
+UNKNOWN	Box.h	/^	enum Status { IN, OUT, ON, UNKNOWN };$/;"	e	enum:Box::Status
+Union	UnionFind.h	/^	void Union(Feature*a, Feature* b)$/;"	f	class:UnionFind
+UnionFind	UnionFind.h	/^class UnionFind$/;"	c
+VAR	Makefile	/^VAR=Debug$/;"	m
+VAR	Makefile	/^VAR=Opt$/;"	m
+VorSegment	Box.h	/^class VorSegment$/;"	c
+Wall	Wall.cpp	/^Wall::Wall(Corner* s, Corner* d):src(s), dst(d)$/;"	f	class:Wall
+Wall	Wall.h	/^class Wall : public Feature$/;"	c
+addCorner	Box.h	/^	void addCorner(Corner* c)$/;"	f	class:Box
+addWall	Box.h	/^	void addWall(Wall* w)$/;"	f	class:Box
+alse	Makefile	/^interior = 1		# boolean: 1 or false => do not show interior Vor objects$/;"	m
+alse	Makefile	/^pseudo = 1		# boolean: 1 or false => do not show pseudo Vor objects$/;"	m
+b	Box.h	/^	const Box* b;$/;"	m	class:BoxIter
+balancePhase	QuadTree.h	/^	void balancePhase()$/;"	f	class:QuadTree
+boxHeight	tmp/vor2d.cpp	/^	double boxHeight = 512;			\/\/ Initial box height$/;"	v
+boxHeight	vor2d.cpp	/^	double boxHeight = 512;			\/\/ Initial box height$/;"	v
+boxHt	Makefile	/^	@echo "    boxHt = " ${boxHt}$/;"	m
+boxHt	Makefile	/^boxHt = 512$/;"	m
+boxWidth	Makefile	/^	@echo "    boxWidth = " ${boxWidth}$/;"	m
+boxWidth	Makefile	/^boxWidth = 512		# initial configuration box size$/;"	m
+boxWidth	tmp/vor2d.cpp	/^	double boxWidth = 512;			\/\/ Initial box width$/;"	v
+boxWidth	vor2d.cpp	/^	double boxWidth = 512;			\/\/ Initial box width$/;"	v
+buildVor	Box.h	/^	void buildVor()$/;"	f	class:Box
+c1	Makefile	/^c1  = 0			# if 0 (false) then do not use c1 filter$/;"	m
+c1	tmp/vor2d.cpp	/^	bool c1=false; \/\/c1 predicate (true is new version, false is old version)$/;"	v
+c1	vor2d.cpp	/^	bool c1=false; \/\/c1 predicate (true is new version, false is old version)$/;"	v
+c2	Makefile	/^c2  = 0			# if 0 (false) then do not use c2 filter$/;"	m
+c2	tmp/vor2d.cpp	/^	bool c2=false; \/\/c2 predicate$/;"	v
+c2	vor2d.cpp	/^	bool c2=false; \/\/c2 predicate$/;"	v
+channel	gliDump.h	/^    float       *channel[4];$/;"	m
+check	fileProcessor.cpp	/^void check(){$/;"	f
+cl_m	Box.h	/^	double cl_m; \/\/clearance of the mid point of the box$/;"	m	class:Box
+clearance	Box.h	/^    double clearance;$/;"	m	class:BoxNode
+closePoly	Makefile	/^	@echo "    closePoly = " ${closePoly}$/;"	m
+closePoly	Makefile	/^closePoly  = 1  # if true (non zero) then do not attempt to close input polygons.$/;"	m
+closing_poly	tmp/vor2d.cpp	/^	bool closing_poly=true;$/;"	v
+closing_poly	vor2d.cpp	/^	bool closing_poly=true;$/;"	v
+comc	gliDump.h	/^    int     comc;$/;"	m
+comv	gliDump.h	/^    char        **comv; $/;"	m
+constructPhase	QuadTree.h	/^	void constructPhase()$/;"	f	class:QuadTree
+corners	Box.h	/^	list<Corner*> corners;$/;"	m	class:Box
+counter	Box.cpp	/^int Box::counter = 0;$/;"	m	class:Box	file:
+counter	Box.h	/^	static int counter;	\/\/ time of expansion (used in BFS strategy)$/;"	m	class:Box
+counter	fileProcessor.cpp	/^int counter=0;	\/\/ for debugging$/;"	v
+cross	Box.h	/^	int cross;$/;"	m	class:BoxIter
+cutoff	vor2d.cpp	/^	double cutoff = 10;			\/\/ cutoff value (or "delta") for expansion$/;"	v
+delta	tmp/vor2d.cpp	/^	double delta = 10;			\/\/ cutoff value for expansion$/;"	v
+deltaX	tmp/vor2d.cpp	/^	double deltaX=0;			\/\/ Translate input file in x-direction$/;"	v
+deltaX	vor2d.cpp	/^	double deltaX=0;			\/\/ Translate input file in x-direction$/;"	v
+deltaY	tmp/vor2d.cpp	/^	double deltaY=0;			\/\/ Translate input file in y-direction$/;"	v
+deltaY	vor2d.cpp	/^	double deltaY=0;			\/\/ Translate input file in y-direction$/;"	v
+depth	Box.h	/^	int depth;$/;"	m	class:Box
+determine_clearance	Box.h	/^	void determine_clearance(BoxNode& node)$/;"	f	class:Box
+direction	Box.h	/^	int direction;$/;"	m	class:BoxIter
+dist2Source	Box.h	/^	double dist2Source;$/;"	m	class:Box
+distance	Corner.h	/^	double distance(double x2, double y2)$/;"	f	class:Corner
+distance	Wall.cpp	/^double Wall::distance(double x, double y)$/;"	f	class:Wall
+distance_sign	Wall.cpp	/^short Wall::distance_sign(double x, double y)$/;"	f	class:Wall
+distance_star	Wall.cpp	/^double Wall::distance_star(double x, double y)$/;"	f	class:Wall
+distribute_features2box	Box.h	/^	void distribute_features2box(Box * child)$/;"	f	class:Box
+drawCircle	tmp/vor2d.cpp	/^void drawCircle( float Radius, int numPoints, double x, double y, double r, double g, double b)$/;"	f
+drawCircle	vor2d.cpp	/^void drawCircle( float Radius, int numPoints, double x, double y, double r, double g, double b)$/;"	f
+drawQuad	tmp/vor2d.cpp	/^void drawQuad(Box* b)$/;"	f
+drawQuad	vor2d.cpp	/^void drawQuad(Box* b)$/;"	f
+drawQuad_selected	tmp/vor2d.cpp	/^void drawQuad_selected(list<Box*> boxes)$/;"	f
+drawQuad_selected	vor2d.cpp	/^void drawQuad_selected(list<Box*> boxes)$/;"	f
+drawWalls	tmp/vor2d.cpp	/^void drawWalls(Box* b)$/;"	f
+drawWalls	vor2d.cpp	/^void drawWalls(Box* b)$/;"	f
+dst	Wall.h	/^	Corner* dst;$/;"	m	class:Wall
+dummy	Feature.h	/^    virtual void dummy(){}$/;"	f	class:Feature
+dump	gliDump.cpp	/^bool dump(const char * filename, int w, int h)$/;"	f
+editAlphaX	tmp/vor2d.cpp	/^	GLUI_EditText* editAlphaX;$/;"	v
+editAlphaX	vor2d.cpp	/^	GLUI_EditText* editAlphaX;$/;"	v
+editAlphaY	tmp/vor2d.cpp	/^	GLUI_EditText* editAlphaY;$/;"	v
+editAlphaY	vor2d.cpp	/^	GLUI_EditText* editAlphaY;$/;"	v
+editBetaX	tmp/vor2d.cpp	/^	GLUI_EditText* editBetaX;$/;"	v
+editBetaX	vor2d.cpp	/^	GLUI_EditText* editBetaX;$/;"	v
+editBetaY	tmp/vor2d.cpp	/^	GLUI_EditText* editBetaY;$/;"	v
+editBetaY	vor2d.cpp	/^	GLUI_EditText* editBetaY;$/;"	v
+editDir	tmp/vor2d.cpp	/^	GLUI_EditText* editDir;$/;"	v
+editDir	vor2d.cpp	/^	GLUI_EditText* editDir;$/;"	v
+editEpsilon	tmp/vor2d.cpp	/^	GLUI_EditText* editEpsilon;$/;"	v
+editEpsilon	vor2d.cpp	/^	GLUI_EditText* editEpsilon;$/;"	v
+editInput	tmp/vor2d.cpp	/^	GLUI_EditText* editInput;$/;"	v
+editInput	vor2d.cpp	/^	GLUI_EditText* editInput;$/;"	v
+editRadius	tmp/vor2d.cpp	/^	GLUI_EditText* editRadius;$/;"	v
+editRadius	vor2d.cpp	/^	GLUI_EditText* editRadius;$/;"	v
+editSeed	tmp/vor2d.cpp	/^	GLUI_EditText* editSeed;$/;"	v
+editSeed	vor2d.cpp	/^	GLUI_EditText* editSeed;$/;"	v
+empty	PriorityQueue.h	/^	bool empty()$/;"	f	class:randQueue
+empty	PriorityQueue.h	/^	bool empty()$/;"	f	class:seqQueue
+endCount	Timer.h	/^    LARGE_INTEGER endCount;                     \/\/$/;"	m	class:Timer
+endCount	Timer.h	/^    timeval endCount;                           \/\/$/;"	m	class:Timer
+endTimeInMicroSec	Timer.h	/^    double endTimeInMicroSec;                   \/\/ ending time in micro-second$/;"	m	class:Timer
+epsilon	Makefile	/^	@echo "    epsilon = " ${epsilon}$/;"	m
+epsilon	Makefile	/^epsilon = 10		# resolution parameter$/;"	m
+epsilon	Makefile	/^epsilon = 2		# resolution parameter$/;"	m
+epsilon	QuadTree.h	/^	double epsilon;$/;"	m	class:QuadTree
+epsilon	tmp/vor2d.cpp	/^	double epsilon = 10;			\/\/ resolution parameter$/;"	v
+epsilon	vor2d.cpp	/^	double epsilon = 10;			\/\/ resolution parameter$/;"	v
+expand	QuadTree.h	/^	bool expand ()$/;"	f	class:QuadTree
+expand	QuadTree.h	/^	bool expand (Box* b)$/;"	f	class:QuadTree
+extract	PriorityQueue.h	/^	Box* extract()$/;"	f	class:randQueue
+extract	PriorityQueue.h	/^	Box* extract()$/;"	f	class:seqQueue
+fileName	Makefile	/^	@echo "    fileName = " ${fileName}$/;"	m
+fileName	Makefile	/^fileName = bugtrap.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input0.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input100.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input150.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input2.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input200.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input2d.txt	# input environment file$/;"	m
+fileName	Makefile	/^fileName = input300.txt	# input environment file$/;"	m
+fileProcessor	fileProcessor.cpp	/^int fileProcessor(string infileName){$/;"	f
+filename	gliDump.h	/^    char        filename[256];$/;"	m
+filledCircle	tmp/vor2d.cpp	/^void filledCircle( double radius, double x, double y, double r, double g, double b) $/;"	f
+filledCircle	vor2d.cpp	/^void filledCircle( double radius, double x, double y, double r, double g, double b) $/;"	f
+find	Box.h	/^	Box * find(double qx, double qy)$/;"	f	class:Box
+freeCount	tmp/vor2d.cpp	/^	int freeCount = 0;$/;"	v
+freeCount	vor2d.cpp	/^	int freeCount = 0;$/;"	v
+frequency	Timer.h	/^    LARGE_INTEGER frequency;                    \/\/ ticks per second$/;"	m	class:Timer
+g_selected_PM	tmp/vor2d.cpp	/^	list<Box*> g_selected_PM;$/;"	v
+g_selected_PM	vor2d.cpp	/^	list<Box*> g_selected_PM;$/;"	v
+genEmptyTree	tmp/vor2d.cpp	/^void genEmptyTree()$/;"	f
+genEmptyTree	vor2d.cpp	/^void genEmptyTree()$/;"	f
+getBox	QuadTree.h	/^	Box* getBox(Box* root, double x, double y)$/;"	f	class:QuadTree
+getBox	QuadTree.h	/^	Box* getBox(double x, double y)$/;"	f	class:QuadTree
+getElapsedTime	Timer.cpp	/^double Timer::getElapsedTime()$/;"	f	class:Timer
+getElapsedTimeInMicroSec	Timer.cpp	/^double Timer::getElapsedTimeInMicroSec()$/;"	f	class:Timer
+getElapsedTimeInMilliSec	Timer.cpp	/^double Timer::getElapsedTimeInMilliSec()$/;"	f	class:Timer
+getElapsedTimeInSec	Timer.cpp	/^double Timer::getElapsedTimeInSec()$/;"	f	class:Timer
+getInseparableFeatures	Box.h	/^	void getInseparableFeatures(list<Wall*>& walls, list<Corner*>& corners, list<Feature*>& insep)$/;"	f	class:Box
+getLeaves	Box.h	/^	void getLeaves(list<Box*>& leaves)$/;"	f	class:Box
+getLineBuffer	fileProcessor.cpp	/^int getLineBuffer(){$/;"	f
+getStatus	Box.h	/^	Status getStatus()$/;"	f	class:Box
+heapId	Box.h	/^	int heapId;$/;"	m	class:Box
+height	Box.h	/^	double width, height;$/;"	m	class:Box
+height	gliDump.h	/^    uint        width,height;$/;"	m
+hideBoxBoundary	tmp/vor2d.cpp	/^	bool hideBoxBoundary = false;  \/\/don't draw box boundary$/;"	v
+hideBoxBoundary	vor2d.cpp	/^	bool hideBoxBoundary = false;  \/\/don't draw box boundary$/;"	v
+ifile	fileProcessor.cpp	/^ifstream ifile;$/;"	v
+imagemake	gliDump.cpp	/^bool imagemake(int width, int height, Image *image)$/;"	f
+imageread	gliDump.cpp	/^bool imageread(const char *filename, Image *image)$/;"	f
+imagesetpixel	gliDump.cpp	/^void imagesetpixel(uint color, int x, int y, Image *image)$/;"	f
+imagewrite	gliDump.cpp	/^bool imagewrite(const char *filename, Image image)$/;"	f
+in	Box.h	/^	bool in(double qx, double qy)$/;"	f	class:Box
+inZone	Corner.cpp	/^bool Corner::inZone(Box * box)$/;"	f	class:Corner
+inZone	Wall.cpp	/^bool Wall::inZone(Box * b)$/;"	f	class:Wall
+inZone_star	Corner.cpp	/^bool Corner::inZone_star(Box * box)$/;"	f	class:Corner
+inZone_star	Wall.cpp	/^bool Wall::inZone_star(Box * b)$/;"	f	class:Wall
+inputDir	Makefile	/^	@echo "    inputDir = " ${inputDir}$/;"	m
+inputDir	Makefile	/^inputDir = inputs	# where to find input files$/;"	m
+insertNode	QuadTree.h	/^	void insertNode(Box* b)$/;"	f	class:QuadTree
+interactive	Makefile	/^	@echo "    interactive = " ${interactive}$/;"	m
+interactive	Makefile	/^interactive = 0		# 0=interactive, >0 is non-interactive$/;"	m
+interactive	tmp/vor2d.cpp	/^	int interactive = 0;			\/\/ Run interactively?$/;"	v
+interactive	vor2d.cpp	/^	int interactive = 0;			\/\/ Run interactively?$/;"	v
+interior	Makefile	/^	@echo "    interior = " ${interior}$/;"	m
+interior	Makefile	/^interior = 0		# boolean: 0 or true => show interior Vor objects$/;"	m
+interior	Makefile	/^interior = 1		# boolean: 1 or false => do not show interior Vor objects$/;"	m
+interior	tmp/vor2d.cpp	/^	bool interior = false; \/\/ show Voronoi interior to the polygons$/;"	v
+interior	vor2d.cpp	/^	bool interior = false; \/\/ show Voronoi interior to the polygons$/;"	v
+intersection	Box.h	/^	BoxNode intersection(Feature * f1, Feature * f2, const BoxNode& n1, const BoxNode& n2)$/;"	f	class:Box
+isComment	fileProcessor.cpp	/^int isComment(char *tok){$/;"	f
+isContinue	fileProcessor.cpp	/^int isContinue(char *tok){$/;"	f
+isConvex	Corner.cpp	/^bool Corner::isConvex()$/;"	f	class:Corner
+isDangling	Corner.h	/^	bool isDangling(){ return preWall==NULL || nextWall==NULL; }$/;"	f	class:Corner
+isIsolated	Corner.h	/^	bool isIsolated(){ return preWall==NULL && nextWall==NULL; }$/;"	f	class:Corner
+isLeaf	Box.h	/^	bool isLeaf;$/;"	m	class:Box
+isOverLimit	Box.h	/^	static bool isOverLimit(const Box* base, const Box* nextBox)$/;"	f	class:Box
+isRight	Wall.cpp	/^bool Wall::isRight(double x, double y)$/;"	f	class:Wall
+lineBuffer	fileProcessor.cpp	/^char * lineBuffer = new char[BUFFERSIZE];	$/;"	v
+main	tmp/vor2d.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	vor2d.cpp	/^int main(int argc, char* argv[])$/;"	f
+mixCount	tmp/vor2d.cpp	/^	int mixCount = 0;$/;"	v
+mixCount	vor2d.cpp	/^	int mixCount = 0;$/;"	v
+mixSmallCount	tmp/vor2d.cpp	/^	int mixSmallCount = 0;$/;"	v
+mixSmallCount	vor2d.cpp	/^	int mixSmallCount = 0;$/;"	v
+nearest_feature	Box.h	/^    Feature* nearest_feature;$/;"	m	class:BoxNode
+neighbor	Box.h	/^	Box* neighbor;$/;"	m	class:BoxIter
+next	Box.h	/^	int next;$/;"	m	class:BoxIter
+nextWall	Corner.h	/^	Wall* nextWall;$/;"	m	class:Corner
+nteractive	Makefile	/^	make eg0 interactive=1$/;"	m
+nteractive	Makefile	/^	make eg1 interactive=1$/;"	m
+operator ()	PriorityQueue.h	/^	bool operator() (const Box* a, const Box* b)$/;"	f	class:PQCmp
+p	Box.h	/^    double p[2], q[2];$/;"	m	class:VorSegment
+pChildren	Box.h	/^	Box* pChildren[4]; $/;"	m	class:Box
+pFeature	UnionFind.h	/^	Feature* pFeature;$/;"	m	class:Set
+pParent	Box.h	/^	Box* pParent; \/\/parent in quadtree$/;"	m	class:Box
+pParent	UnionFind.h	/^	Set* pParent; \/\/parent in union find$/;"	m	class:Set
+pRoot	QuadTree.h	/^	Box* pRoot;$/;"	m	class:QuadTree
+pSet	Feature.h	/^	Set* pSet;   \/\/?$/;"	m	class:Feature
+packcolors	gliDump.cpp	/^uint packcolors(uchar r, uchar g, uchar b)$/;"	f
+parseConfigFile	tmp/vor2d.cpp	/^void parseConfigFile(Box* b)$/;"	f
+parseConfigFile	vor2d.cpp	/^void parseConfigFile(Box* b)$/;"	f
+pathCompress	UnionFind.h	/^	Set* pathCompress(Set* set) \/\/find root$/;"	f	class:UnionFind
+pixels	gliDump.h	/^    uint        *pixels;$/;"	m
+preWall	Corner.h	/^	Wall* preWall;$/;"	m	class:Corner
+prev	Box.h	/^	Box* prev;$/;"	m	class:Box
+prev	Box.h	/^	int prev;$/;"	m	class:BoxIter
+priority	Box.h	/^	int priority;$/;"	m	class:Box
+pseudo	Makefile	/^	@echo "    pseudo = " ${pseudo}$/;"	m
+pseudo	Makefile	/^pseudo = 0		# boolean: 0 or true => show pseudo Vor objects$/;"	m
+pseudo	Makefile	/^pseudo = 1		# boolean: 1 or false => do not show pseudo Vor objects$/;"	m
+pseudo	tmp/vor2d.cpp	/^	bool pseudo = false;   \/\/ show pseudo Voronoi vertices\/curves$/;"	v
+pseudo	vor2d.cpp	/^	bool pseudo = false;   \/\/ show pseudo Voronoi vertices\/curves$/;"	v
+push	PriorityQueue.h	/^	void push(Box* b)$/;"	f	class:randQueue
+push	PriorityQueue.h	/^	void push(Box* b)$/;"	f	class:seqQueue
+q	Box.h	/^    double p[2], q[2];$/;"	m	class:VorSegment
+r0	Box.cpp	/^double Box::r0 = 0;$/;"	m	class:Box	file:
+r0	Box.h	/^	static double r0; \/\/radius of robot$/;"	m	class:Box
+rB	Box.h	/^	double rB; \/\/radius of box$/;"	m	class:Box
+radioDrawOption	tmp/vor2d.cpp	/^	GLUI_RadioGroup* radioDrawOption;$/;"	v
+radioDrawOption	vor2d.cpp	/^	GLUI_RadioGroup* radioDrawOption;$/;"	v
+radioQType	tmp/vor2d.cpp	/^	GLUI_RadioGroup* radioQType;$/;"	v
+radioQType	vor2d.cpp	/^	GLUI_RadioGroup* radioQType;$/;"	v
+randPoint2D	envGeneratory.py	/^def randPoint2D(center):$/;"	f
+randQueue	PriorityQueue.h	/^	randQueue(int s): Qseed(s) {$/;"	f	class:randQueue
+randQueue	PriorityQueue.h	/^class randQueue : public BoxQueue$/;"	c
+rank	UnionFind.h	/^	int rank;$/;"	m	class:Set
+renderScene	tmp/vor2d.cpp	/^void renderScene(void) $/;"	f
+renderScene	vor2d.cpp	/^void renderScene(void) $/;"	f
+rgb	gliDump.h	/^    uint        rgb;$/;"	m
+rue	Makefile	/^interior = 0		# boolean: 0 or true => show interior Vor objects$/;"	m
+rue	Makefile	/^pseudo = 0		# boolean: 0 or true => show pseudo Vor objects$/;"	m
+run	tmp/vor2d.cpp	/^void run()$/;"	f
+run	vor2d.cpp	/^void run()$/;"	f
+samplesperprimary	gliDump.h	/^    uint        samplesperprimary;$/;"	m
+saveImage	tmp/vor2d.cpp	/^	bool saveImage=false;$/;"	v
+saveImage	vor2d.cpp	/^	bool saveImage=false;$/;"	v
+scale	Makefile	/^	@echo "    scale = " ${scale}$/;"	m
+scale	Makefile	/^scale  = 1		# scaling of input data $/;"	m
+seed	Makefile	/^	@echo "    seed = " ${seed}$/;"	m
+seed	Makefile	/^seed = 11		# seed for random$/;"	m
+seed	tmp/vor2d.cpp	/^	int seed = 111;				\/\/ seed for random number generator$/;"	v
+seed	vor2d.cpp	/^	int seed = 111;				\/\/ seed for random number generator$/;"	v
+selectedBoxInfo	tmp/vor2d.cpp	/^	GLUI_StaticText * selectedBoxInfo; \/\/information about selected box$/;"	v
+selectedBoxInfo	vor2d.cpp	/^	GLUI_StaticText * selectedBoxInfo; \/\/information about selected box$/;"	v
+separable_features_count	Box.h	/^	int separable_features_count(list<Wall*>& walls, list<Corner*>& corners)$/;"	f	class:Box
+separable_features_count	Box.h	/^    int separable_features_count()$/;"	f	class:Box
+seqQueue	PriorityQueue.h	/^class seqQueue : public BoxQueue$/;"	c
+size	PriorityQueue.h	/^	int size()$/;"	f	class:randQueue
+size	PriorityQueue.h	/^	int size()$/;"	f	class:seqQueue
+skip_backslash_new_line	tmp/vor2d.cpp	/^int skip_backslash_new_line (std::istream & in) {$/;"	f
+skip_backslash_new_line	vor2d.cpp	/^int skip_backslash_new_line (std::istream & in) {$/;"	f
+skip_comment_line	tmp/vor2d.cpp	/^int skip_comment_line (std::ifstream & in) {$/;"	f
+skip_comment_line	vor2d.cpp	/^int skip_comment_line (std::ifstream & in) {$/;"	f
+split	Box.h	/^	bool split(double epsilon)$/;"	f	class:Box
+src	Wall.h	/^	Corner* src;$/;"	m	class:Wall
+start	Timer.cpp	/^void Timer::start()$/;"	f	class:Timer
+startCount	Timer.h	/^    LARGE_INTEGER startCount;                   \/\/$/;"	m	class:Timer
+startCount	Timer.h	/^    timeval startCount;                         \/\/$/;"	m	class:Timer
+startTimeInMicroSec	Timer.h	/^    double startTimeInMicroSec;                 \/\/ starting time in micro-second$/;"	m	class:Timer
+status	Box.h	/^	Status status;$/;"	m	class:Box
+step	Makefile	/^	@echo "    step = " ${step}$/;"	m
+step	Makefile	/^step = 0		# number of steps to run$/;"	m
+stop	Timer.cpp	/^void Timer::stop()$/;"	f	class:Timer
+stopped	Timer.h	/^    int    stopped;                             \/\/ stop flag $/;"	m	class:Timer
+stuckCount	tmp/vor2d.cpp	/^	int stuckCount = 0;$/;"	v
+stuckCount	vor2d.cpp	/^	int stuckCount = 0;$/;"	v
+subdividePhase	QuadTree.h	/^	void subdividePhase()$/;"	f	class:QuadTree
+timeused	tmp/vor2d.cpp	/^	double timeused=0;$/;"	v
+timeused	vor2d.cpp	/^	double timeused=0;$/;"	v
+title	tmp/vor2d.cpp	/^	string title="Subdivision Voronoi 2D";	\/\/ display title$/;"	v
+title	vor2d.cpp	/^	string title="Subdivision Voronoi 2D";	\/\/ display title$/;"	v
+treeTraverse	tmp/vor2d.cpp	/^void treeTraverse(Box* b)$/;"	f
+treeTraverse	vor2d.cpp	/^void treeTraverse(Box* b)$/;"	f
+trickyCount	tmp/vor2d.cpp	/^	int trickyCount = 0;$/;"	v
+uchar	gliDump.h	/^typedef unsigned char uchar;$/;"	t
+uint	gliDump.h	/^typedef unsigned int  uint;$/;"	t
+unpack_blue	gliDump.cpp	/^uchar unpack_blue(uint rgb)$/;"	f
+unpack_green	gliDump.cpp	/^uchar unpack_green(uint rgb)$/;"	f
+unpack_red	gliDump.cpp	/^uchar unpack_red(uint rgb)$/;"	f
+updateSelectedBoxInfo	tmp/vor2d.cpp	/^void updateSelectedBoxInfo()$/;"	f
+updateSelectedBoxInfo	vor2d.cpp	/^void updateSelectedBoxInfo()$/;"	f
+updateStatus	Box.h	/^	void updateStatus()$/;"	f	class:Box
+updateVARinfo	tmp/vor2d.cpp	/^void updateVARinfo()$/;"	f
+updateVARinfo	vor2d.cpp	/^void updateVARinfo()$/;"	f
+uscale	tmp/vor2d.cpp	/^	double uscale=1;			\/\/ Scale the input file $/;"	v
+uscale	vor2d.cpp	/^	double uscale=1;			\/\/ Scale the input file $/;"	v
+visited	Box.h	/^	bool visited;$/;"	m	class:Box
+vorInfo	tmp/vor2d.cpp	/^	GLUI_StaticText * vorInfo;$/;"	v
+vorInfo	vor2d.cpp	/^	GLUI_StaticText * vorInfo;$/;"	v
+vor_segments	Box.h	/^	list<VorSegment> vor_segments;$/;"	m	class:Box
+walls	Box.h	/^	list<Wall*> walls;$/;"	m	class:Box
+width	Box.h	/^	double width, height;$/;"	m	class:Box
+width	gliDump.h	/^    uint        width,height;$/;"	m
+windowPosX	Makefile	/^	@echo "    windowPosX = " ${windowPosX}$/;"	m
+windowPosX	Makefile	/^windowPosX = 200	# initial Window position$/;"	m
+windowPosX	Makefile	/^windowPosX = 450	# initial Window position$/;"	m
+windowPosX	tmp/vor2d.cpp	/^	int windowPosX = 400;			\/\/ X Position of Window$/;"	v
+windowPosX	vor2d.cpp	/^	int windowPosX = 400;			\/\/ X Position of Window$/;"	v
+windowPosY	Makefile	/^	@echo "    windowPosY = " ${windowPosY}$/;"	m
+windowPosY	Makefile	/^windowPosY = 20	$/;"	m
+windowPosY	Makefile	/^windowPosY = 200	$/;"	m
+windowPosY	tmp/vor2d.cpp	/^	int windowPosY = 200;			\/\/ Y Position of Window$/;"	v
+windowPosY	vor2d.cpp	/^	int windowPosY = 200;			\/\/ Y Position of Window$/;"	v
+x	Box.h	/^	double x, y;$/;"	m	class:Box
+x	Box.h	/^    double x, y;$/;"	m	class:BoxNode
+x	Corner.h	/^	double x, y;$/;"	m	class:Corner
+xtrans	Makefile	/^	@echo "    xtrans = " ${xtrans}$/;"	m
+xtrans	Makefile	/^xtrans = 5		# x-translation of the input data $/;"	m
+y	Box.h	/^	double x, y;$/;"	m	class:Box
+y	Box.h	/^    double x, y;$/;"	m	class:BoxNode
+y	Corner.h	/^	double x, y;$/;"	m	class:Corner
+ytrans	Makefile	/^	@echo "    ytrans = " ${ytrans}$/;"	m
+ytrans	Makefile	/^ytrans = 5		# y-translation of the input data$/;"	m
+~BoxQueue	PriorityQueue.h	/^	~BoxQueue(void)$/;"	f	class:BoxQueue
+~QuadTree	QuadTree.h	/^	~QuadTree(void)$/;"	f	class:QuadTree
+~Timer	Timer.cpp	/^Timer::~Timer()$/;"	f	class:Timer

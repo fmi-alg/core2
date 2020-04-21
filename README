@@ -1,0 +1,912 @@
+************************************************************
+*                        Core Library
+*
+*            A C/C++ Library for Robust Computation
+*
+*                Department of Computer Science
+*          Courant Institute of Mathematical Sciences
+*                     New York University
+*                      251 Mercer Street
+*                      New York, NY 10012
+*                            USA
+*
+*                    http://cs.nyu.edu/exact/
+*        
+*  Copyright (c) 1998-2016 by Exact Computation Project, NYU
+*
+*  $Id: README,v 1.12 2010/07/12 13:48:47 exact Exp $
+*************************************************************
+
+README FILE: TABLE OF CONTENTS
+
+    1) ORIENTATION
+    2) DIRECTORIES AND FILES
+    3) DOWNLOAD AND INSTALLATION
+    4) NEWS, PLANS AND BUGS
+    5) ACKNOWLEDGMENT AND HISTORY
+    6) LICENSE INFORMATION
+
+*************************************************************
+1) ORIENTATION
+
+   This is Core Library Version 2.1, released on July 1, 2010.
+
+   The Core Library is a collection of C/C++ classes for exact
+   computation with real algebraic numbers.
+   It embodies our precision-driven approach and is 
+   useful for robust numerical (especially geometric) algorithms.
+   The library supports the Exact Geometric Computation (EGC) philosophy
+   through its novel and easy-to-use notion of accuracy levels.
+   We define four "Core Accuracy Levels":
+
+     Level I:  Machine Accuracy
+                    This is the IEEE 754 Standard.
+     Level II: Arbitrary Accuracy
+                    If a user specify "1000 bits" of accuracy,
+                    this means no overflow/underflow occurs as long
+                    as long as number sizes do not exceed 1000 bits. 
+     Level III: Guaranteed Accuracy
+                    The user can specify "10 bits" (relative or
+                    absolute) and any computed number will have
+                    at least 10 bits of accuracy.
+     Level IV: Mixed Accuracy
+                    The above three levels are intermixed.
+
+   Level III is the most interesting level. It is the default level,
+   Ideally, a single C++ program can be compiled to run at any chosen
+   level.  Level IV is not fully defined at the present time.
+   The current library focuses on Level III.  Most programs should
+   be able to run both Levels I and III.   Such multi-level capability
+   in a single program is useful for debugging and program development.
+
+   A key design goal is to allow any standard C/C++ program to access
+   critical CORE facilities with minimal changes to the program.  Most
+   basic standalone C++ programs can be ``CORE-ized'' with little fuss.
+   In the ideal case, one only has to insert the following statement
+
+                #include "CORE/CORE.h"
+
+   following all other standard include statements.  The default accuracy
+   is Level III.  At this level, a variable with the machine type
+   "double" or "long" is redefined as an instance of the class "Expr"
+   (a C++ class).  All comparisons involving Expr are error-free,
+   provided your expressions involve only the four arithmetic operations
+   and square-roots.  Example:
+
+                double x, y, a, b;
+                x = 2; y = 3;
+                a = sqrt(x) + sqrt(y);
+                b = sqrt(x + y + 2*sqrt(x)*sqrt(y));
+                if (a == b)  cout << "Equal   (CORRECT!)\n";
+                    else     cout << "Not Equal (ERROR!)\n";
+
+   When run in Level III, the expressions for a and b are always equal
+   regardless of the values (x=2 and y=3) assigned to x and y.
+   
+   In the framework of EGC, error-free comparisons amount to
+   computing the ''exact geometry'' in your programs.  Nonrobustness
+   issues arising from round-off errors are thereby abolished.
+
+   A tutorial in this "doc" subdirectory, plus the many
+   sample programs in the "progs" subdirectory, should allow you
+   to start writing CORE programs rather quickly.   In particular,
+   you may use the examples in progs/generic as template
+   to develop your own CORE programs.  For extra functionality, 
+   we define domain specific "CORE eXtensions" (COREX for short). 
+   These include a linear algebra COREX and a geometry
+   COREX.  They are still rudimentary.
+   
+   The Core Library is relatively small.  For convenience, we offer
+   three distributions: "base distribution" has the basics, including
+   source code and examples.  The "full distribution" is the 
+   base distribution, plus documentation, gmp and mpfr.
+   The library has been tested on MacOS, linux, cygwin and Windows. 
+   It is also fully compatible with CGAL, and distributed with CGAL.
+
+   NOTE ON NAMES.
+   "Core" is not an abbreviation; we chose this name to suggest its
+   role as the "numerical core" for robust geometric computations.
+   It is also to remind ourselves (the designers) that "cores" are
+   usually small.  However, we use the capitalized sequence "CORE"
+   as a shorthand for "Core Library" (e.g., a CORE program).
+
+*************************************************************
+2) DIRECTORIES AND FILES
+
+   The Core Directory is denoted ${CORE_PATH} in these notes.
+   The base distribution has the following files and subdirectories
+   under ${CORE_PATH}:
+
+       README        This file
+       ANNOUNCEMENT  Release announcement
+       AUTHORS       Authors of Core Library
+       Makefile      Makefile for the whole library
+       Make.config   Compiler flags (other Makefiles include this)
+       FAQs          Frequently asked questions
+       LICENSE.QPL   The Q Public License 
+
+       ext/          CORE eXtensions (linear algebra, geometry, etc)
+       inc/          The header files.
+       lib/          The compiled library is found here.
+       progs/        Sample programs that use Core Library.
+       src/          Source code for the Core Library.
+       tmp/          Temporary files (e.g., installation diagnostics)
+
+       python/       Python interface to Core Library.
+       win32/        Windows related files (can be deleted for unix-base)
+       bin/          executable programs (mostly for development currently)
+       cmake/        directory for CMake builds and modules
+       builds/       directory for building gmp and mpfr (it is OK to
+                         delete this directory if you don't need it later)
+       gmp/          gmp installation directory (may be a link).  This
+                         directory may be missing if you have your own gmp.
+                         From the SVN repository, you can link to ../gmp.
+       mpfr/         mpfr installation directory (may be a link).  Omit
+                         this directory if you have your own mpfr.
+                         From the SVN repository, you can link to ../gmp.
+
+   The full distribution has these additional files and directories:
+
+       doc/            Core Library Documentation  
+       builds/gmp-xxx.tar.gz  GNU's gmp distribution (version xxx)
+       builds/gmp-xxx/        GNU's gmp directory to unpack & compile
+                       (can be deleted after installing gmp)
+       builds/mpfr-xxx.tar.gz  mpfr distribution (version xxx)
+       builds/mpfr-xxx/        mpfr directory for unpacking and compiling
+
+*************************************************************
+3) DOWNLOAD AND INSTALLATION
+
+   3.1) PREREQUISITE
+        You must have "make" (GNU's gmake is recommended), and "svn"
+        to download Core Library.  You will need the "g++" compiler
+        and gmp/mpfr libraries to compile Core Library.
+
+        For Windows: you could replace g++ with Visual C++.
+        Here, we highly recommend the free "Cygwin".  This is a free
+        and easy-to-install Unix-OS that sits on top of all 
+        versions of Windows.   All the needed tools (g++, make, svn,
+        etc) are available to download (you must choose them).
+        Advantages of Cygwin:
+        (I) There is no need for dual booting;
+        (II) There is no need to partition your disc;
+        (III) You can share files between Windows and Cygwin; 
+        (IV) There is a convenient setup.exe utility that allows you to
+                install / update / re-install / uninstall 
+        any component in a large suite of Unix tools & utilities, directly 
+        from the web.  You can download Cygwin at
+
+                http://www.cygwin.com.  
+
+   3.2) DOWNLOAD 
+        Please follow the download instructions in
+
+              https://cs.nyu.edu/exact/core_pages/downloads.html 
+
+        Let the variable "CORE_PATH" refer to the folder where you
+        downloaded the Core Library.  Go to this folder:
+
+            > cd $(CORE_PATH)
+        
+        (">" denotes the command window prompt)
+        There is a README file (in fact, you are currently
+        reading this file:) with instructions for installing Core Library.
+
+            =========================================================
+            | Before 2014, we distributed Core Library in           |
+            | tar-gzipped files. These files may be downloaded at   |
+            |    https://cs.nyu.edu/exact/core_pages/downloads.html |
+            | The pre-2014 versions may still be useful.            |
+            | For example, Core1 implemented a variety of root      |
+            | bounds but Core2 only implemented one such bound.     |
+            | There are situations where the other bounds may speed |
+            | up difficult zero computation.                        |
+            | NOTE:   Core1 was last tested using                   |
+            |      gcc 5.4.0,    gmp-4.2.4,     mpfr-3.1.5.         |
+            =========================================================
+
+   3.3) There are four stages of installation:
+                STAGE 1 -- gmp installation
+                STAGE 2 -- mpfr installation
+                STAGE 3 -- create the core library, extensions, samples
+                STAGE 4 -- run tests and timings
+        The screen output from the individual steps in these stages are
+        stored in the files ${CORE_PATH}/tmp/DIAG_* for your diagnostics.
+
+        But before any of these steps, you MUST choose your PLATFORM.
+        PLATFORM is a combination of OS plus compiler.
+        This variable is set in the Make.config file:
+
+            > cd $(CORE_PATH)
+            > vi Make.config -- use "vi" or your favorite editor to edit
+                                the file ``Make.config''.   
+                             -- Follow the instructions in the file.
+                             -- For most users, you only need to set one
+                                variable, the PLATFORM variable.
+  
+        To see what your current (default) options are, do:
+            > make options   --this will show the various global settings
+                             --e.g. PLATFORM=gnu, LINKAGE=static, VAR=,etc.
+
+   3.4) STAGE 1: INSTALLING GMP 
+        a) PRELIMINARY STEP:   For Unix-like OS (e.g., Solaris, Linux),
+        gmp will automatically build BOTH a static and a dynamic library.  
+        In this case, most compilers will link to the dynamic gmp library.
+        Therefore, you need to add the path of your dynamic gmp library to
+        the environmental variable LD_LIBRARY_PATH.
+        
+        E.g., in csh/tcsh,
+        
+         > setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${your_gmp_dir}/lib
+               
+        E.g., in bash,
+        
+         > export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${your_gmp_dir}/lib
+
+        For instance, ${your_gmp_dir} might be /usr/local.
+        If you are installing gmp using option d) below, we suggest
+        letting ${your_gmp_dir}=${CORE_PATH}/gmp.
+
+        NOW we are ready to proceed with installing gmp.
+        Choose one of the following three situations that apply to you:
+
+        b) YOU HAVE AN INSTALLED GMP ALL READY TO GO:
+        You already have GMP header files and library files on 
+        your system directory, AND they can be found by your
+        C++ compiler.  In this case, there is nothing to do.
+
+        In any case, if you want to quickly check if you are in this
+        best case situation, do the following:
+
+                > cd ${CORE_PATH} 
+                > make testgmp
+
+        This test simply computes 12345 * 67890 = 838102050,
+        and 111111111 * 111111111 = 12,345,678,987,654,321.
+
+        If you pass the test, skip this stage and go to STAGE 2.
+
+        c) YOU HAVE AN INSTALLED GMP BUT CORE COULD NOT FIND IT:
+        Assuming you have a properly installed GMP in some directory, say
+                ${your_gmp_dir}
+        which was not found by the above "testgmp".  
+        For instance, for the MacOS, you might have your gmp (and mpfr)
+        under /opt/local/lib/libgmp*  and /opt/local/include/gmp*.
+        In that case, your_gmp_dir=/opt/local.
+
+        Typically, you will find under ${your_gmp_dir} several
+        subdirectories, including the following:
+                lib    include     share
+        Then you can make a symbolic link from ${CORE_PATH}/gmp
+        using the following command:
+
+            > cd ${CORE_PATH}
+            > ln -s ${your_gmp_dir} gmp
+            > make testgmp
+
+        If you pass this test, you can go to STAGE 2.
+
+        E.g., The default gmp installation will install the
+        header file and library files in /usr/local/include
+        and /usr/local/lib (respectively).  Hence, in this case,
+        ${your_gmp_dir}=/usr/local.
+
+        E.g., You had successfully installed an older version of Corelib
+        in ${OLD_CORE_PATH}.  Say gmp and mpfr are in these
+        directories.  Then you can simply link from ${CORE_PATH} to
+        both these directories as above.
+
+        d) YOU NEED TO INSTALL GMP:
+        If you did not download the full distribution of CORE, see 3.10).
+        Here we assume you have downloaded our full distribution,
+        which comes with gmp:
+
+            > cd ${CORE_PATH}
+            > make first     -- this is equivalent to "make config-gmp"
+                             -- it uses the configuration program in gmp
+                             -- it searches for system information
+                                (compiler, CPU, files, etc).
+                             -- screen output from this process is placed 
+                                in the file ${CORE_PATH}/tmp/DIAG_CONFIG_GMP.
+                                (E.g., if you do not have m4, the error will
+                                be detected here.)
+            > make second    -- this is equivalent to "make build-gmp"
+                             -- this compiles gmp (takes a while!)
+                             -- screen output from this process is placed
+                                in the file ${CORE_PATH}/tmp/DIAG_BUILD_GMP
+            > make third     -- installs gmp (same as "make install-gmp")
+                             -- screen output from this process is placed
+                                in the file ${CORE_PATH}/tmp/DIAG_INSTALL_GMP
+                                (at this point, you can go to the gmp directory
+                                and do a "make check" for extra assurance)
+            > make testgmp   -- you must pass this test to continue.
+                                output in file ${CORE_PATH}/tmp/DIAG_TEST_GMP
+
+        IMPORTANT: Our top level make file is written for GNU's gmake.
+        The remaining make files in subdirectories should work with other
+        make programs.  The first three steps takes 15-25 minutes.
+
+   3.5) STAGE 2: INSTALLING MPFR
+        Stage 2 is very similar to Stage 1.
+        As for Stage 1, we have three possible scenarios:
+
+        a) If you have already installed MPFR, you can verify this by
+
+                > cd ${CORE_PATH} 
+                > make testmpfr
+
+        If your screen shows the answer 8.3810205000e8 and 3.1415929208,
+        you have passed the test -- then skip this stage and go to STAGE 3.
+
+        b) You have installed MPFR, but it could not be found 
+        by the compiler in a).  Suppose your MPFR is installed in
+        the directory called ${your_mpfr_dir}.  
+        This might be the same directory as ${your_gmp_dir}.
+        For instance, you expect to find the file mpfr.h in 
+        ${your_mpfr_dir}/include.  In this case, we could make a 
+        symbolic link from ${CORE_PATH}/mpfr using the following command:
+
+            > cd ${CORE_PATH}
+            > ln -s ${your_mpfr_dir} mpfr
+            > make testmpfr
+
+        If you pass this test, you can go to STAGE 3.
+
+        c) If you do not have MPFR, we will install MPFR as follows:
+
+            > make fourth    -- configures mpfr (or "make config-mpfr")
+                             -- screen output is placed in the file
+                                ${CORE_PATH}/tmp/DIAG_CONFIG_MPFR
+            > make fifth     -- builds mpfr library (or "make build-mpfr")
+                             -- screen output is placed in the
+                                file ${CORE_PATH}/tmp/DIAG_BUILD_MPFR
+            > make sixth     -- installs mpfr (same as "make install-mpfr")
+                             -- screen output is placed in the
+                                file ${CORE_PATH}/tmp/DIAG_INSTALL_MPFR
+            > make testmpfr  -- you must pass this test to continue.
+                                Output in ${CORE_PATH}/tmp/DIAG_TEST_MPFR
+
+   3.6) STAGE 3: BUILD CORE LIBRARY.
+        Now that gmp and mpfr are properly installed, you are ready to 
+        install CORE.  IMPORTANT: the compilation settings for STAGE 3 
+        are found in ${CORE_PATH}/Make.config.  They are described 
+        in Step 3.3) above, and also Step 3.10) below.  Do the following:
+
+            > cd ${CORE_PATH}
+            > make seventh    -- this is equivalent to a plain "make", or
+                                "make core", or "make corelib; make corex; 
+                                make demo".
+                             -- screen output is placed in the files
+                                ${CORE_PATH}/tmp/DIAG_X where X = CORELIB,
+                                COREX or BUILD_DEMO.
+
+        This creates the library files "libcore++.a", "libcorex++_level1.a"
+        and "libcorex++_level3.a", and store them under ${CORE_PATH}/lib.
+
+        The source files for the Core Library are found in
+        ${CORE_PATH}/src.  If you only want to make "libcore++.a", type
+        "make" while in ${CORE_PATH}/src.
+
+   3.7) STAGE 4: TESTING AND TIMING.
+        If you had chosen LINKAGE to be "shared" above, then make sure
+        that your LD_LIBRARY_PATH contains the directory ${CORE_PATH}/lib
+        (see 3.10(4) below).
+
+            > cd ${CORE_PATH}
+            > make eighth     -- or, "make test".  Screen output is
+                                 placed in the file 
+                                    ${CORE_PATH}/tmp/DIAG_TEST_DEMO
+
+        This tests all the previously compiled programs 
+        in ${CORE_PATH}/progs.  Many of the programs are self-validating:
+        if an unexpected value is computed, it will output "ERROR!"
+        instead of "CORRECT!".  But an "INCORRECT!" output
+        is not considered an error (e.g., with Level I accuracy, this
+        is expected).  You can browse the output in the DIAG_TEST_DEMO file
+        (search for the word "ERROR" to catch obvious errors).
+        You can also time it:
+
+            > make ninth       -- or "make time"; it uses the "time"
+                                  utility to measure the time "make test" 
+                               -- screen output is placed in 
+                                  the file ${CORE_PATH}/tmp/DIAG_TIME
+
+   3.8) USING CORE LIBRARY.
+        Assume that you have a stand alone C++ program "foo.cpp".
+        In the ideal case, you only have to insert the preamble:
+
+             #ifndef CORE_LEVEL
+             #   define CORE_LEVEL N   // N=1,2,3.  Default is N=3 
+             #endif
+             #include "CORE/CORE.h"  
+
+        This should be placed after your standard include
+        files (e.g., <iostream.h>).  You can now compile it as usual:
+
+             g++   -I${CORE_PATH}/inc -I${CORE_PATH}/gmp/include \ 
+                   foo.cpp -o foo \                       
+                   -L${CORE_PATH}/lib -L${CORE_PATH}/gmp/lib \
+                   -lcore${VAR} -lgmp -lm                      
+
+        For more information, please go to ${CORE_PATH}/progs/generic for
+        samples, and also read the tutorial in ${CORE_PATH}/doc.
+
+   3.9) PLATFORMS.
+        Version 2.1 has been tested on
+
+        sun solaris 5.8         --  g++-2.95.3, g++-3.2, g++-3.3, g++-3.4
+                                --  (gmp 4.1.3, gmp 4.1.4)
+                                --  Sun's WorkShop 6 (C++ 5.3)
+        Debian Linux 2.4.9      --  gcc version 2.95
+        cygwin                  --  g++-3.2, g++-3.3, g++-3.4
+        mingw                   --  g++-3.2, g++-3.3, g++-3.4
+        Windows                 --  Visual C++, version 6.0, 7.0, 7.1 
+        MacOS                   --  g++-4.0.1 (Apple build 5493)
+
+        NOTE : for users who prefer a unix/linux type environment that is
+        embedded within the Windows' world, we highly recommend the Cygwin
+        platform as an easy-to-use environment.  Cygwin and Windows
+        can freely access each other's files (a big bonus).
+
+   3.10) VARIANT INSTALLATIONS
+        (0) INSTALLING GMP AND/OR MPFR:
+        Perhaps you only downloaded the base or standard version of CORE,
+        but the above steps for installing GMP and/or MPFR did not work.
+        The easiest is to go to our website and download GMP and MPFR
+        separately (our site has the latest versions of GMP and MPFR that
+        has been tested with CORE).  Suppose the downloaded GMP tar file is
+        "gmp-4.2.4.tar.gz".  Put this into $(CORE_PATH) and do:
+
+                > gzip -cd gmp-4.2.4.tar.gz | tar -xvf -
+                > ln -s gmp-4.2.4 gmp
+                > make gmp
+
+        That is it!  The screen output at the end will include a test of
+        gmp, showing some correctly computed digits.
+        Do the same for your MPFR downloaded file:
+
+                > gzip -cd mpfr-2.4.0.tar.gz | tar -xvf -
+                > ln -s gmp-2.4.0 mpfr
+                > make mpfr
+
+        Again, the screen output at the end include a test of mpfr.
+
+        (1) INSTALLING BASE DISTRIBUTION:
+        This assumes you already have an installed gmp and mpfr.
+
+          -- Download the file core-X.Y.Z.tgz (for version X.Y.Z) from our
+             website, http://cs.nyu.edu/exact/core.   This version has no
+             gmp, mpfr and no documentation.
+          -- Do the UNPACK STEP (Step 3.2) above.  This creates the files
+             under ${CORE_PATH} as described above.
+
+        At this point there are two possibilities.
+        You may not have to do anything.  To test this, try the following:
+
+                > cd ${CORE_PATH}
+                > make testgmp
+                > make testmpfr
+
+        If these tests print encouraging messages,
+        you may continue from STAGE 3 (Step 3.6) above.  
+        Otherwise you need to do STAGES 1 and 2 first.
+
+        (2) INSTALLATION FOR WINDOWS PLATFORM
+        If you use cygwin on your windows platform, then the installation
+        is same as on Unix platform as described above. 
+        But if you use Visual C++ instead, then follow these steps.
+
+          -- Download file core-X.Y.Z_full.tgz (for version X.Y.Z) from our
+             website. (We recommend the Full Distribution since it contains
+             gmp already and you cannot easily link to pre-installed gmp)
+          -- Unpack it into some directory ${CORE_PATH}. 
+          -- Unpack ${CORE_PATH}\gmp-xxx.tar.gz into ${CORE_PATH}\win32 to
+             create a subdirectory ${CORE_PATH}\win32\gmp-xxx. Rename this
+             to plain ${CORE_PATH}\win32\gmp.
+          -- Install gmp patches
+                
+                c:\>cd ${CORE_PATH}\win32\patches
+                c:\>patch xxx      // where "xxx" is the gmp version;
+                                   // (xxx = "3.1.1", "4.0.1","4.1-static",
+                                   //  and  "4.1-dynamic" available)
+                                   // for GMP 4.1.2, you still can choose
+                                   // "4.1-static" or "4.1-dynamic".
+
+          -- Open a "Command Prompt" window and run "vcvars32.bat" to setup
+             Visual C++ command line environment. File vcvars32.bat is
+             automatically created by your Visual C++.  E.g., it may be
+             found in C:\"Microsoft Visual Studio"\vc98\Bin.
+
+          -- Compile gmp and the Core Library: 
+                
+                c:\>cd ${CORE_PATH}\win32
+                c:\>nmake
+          
+             This nmake also creates the Core Extension libraries and 
+             and all the demo programs.
+
+          -- Optional: Testing (for the demo programs)
+
+                c:\>cd ${CORE_PATH}\win32
+                c:\>set PATH=%PATH%;${CORE_PATH}\win32\lib
+                c:\>nmake test
+      
+          -- Alternatively, use Visual Studio IDE to compile Core Library
+             and Core Extensions.  E.g., to compile Core Library, open the 
+             project file "core.dsw" under ${CORE_PATH}\win32\corelib, and 
+             compile.  To compile Core Extensions, open the project file "
+             corex.dsw" under ${CORE_PATH}\win32\ext, and compile.
+
+        (3) CORE USAGE FOR WINDOWS PLATFORM
+        If you want to create your own Visual C++ project file, do the
+        following steps:
+ 
+          --add "${CORE_PATH}\inc", "${CORE_PATH}\win32\gmp" to IncludePath
+          --add "${CORE_PATH}\win32\lib" in "Lib Path".
+          --Enable "Run-Time Type Information" in your project settings. 
+
+        (4) SHARED OR STATIC LIBRARY LINKAGE:
+        In Make.config, you can set the LINKAGE variable to "shared" or
+        "static".  The default is "static" for simplicity; but the
+        executables will be fairly large (over 1MB each).
+        To run programs using the static library there is nothing
+        special to do;  to run the dynamic version of the Core Library,
+        you could move your compiled CORE, gmp, etc, libraries 
+        into the standard library paths (e.g., /lib or /usr/lib).
+        Alternatively, you can set the environment
+        variable LD_LIBRARY_PATH as follows:
+
+        for "csh/tcsh",  
+            > setenv LD_LIBRARY_PATH \
+                ${CORE_PATH}/lib:${CORE_PATH}/gmp/lib:${LD_LIBRARY_PATH}.
+        
+        for "bash",
+            $ export LD_LIBRARY_PATH= \
+                ${CORE_PATH}/lib:${CORE_PATH}/gmp/lib:${LD_LIBRARY_PATH}.
+
+        If gmp is not installed in ${CORE_PATH}, adjust accordingly.
+
+        (5) RECOMPILATION OF THE CORE LIBRARY:
+        Sometimes you may want to recompile the Core Library (perhaps after
+        changing a file in ${CORE_PATH}/src or $(CORE_PATH)/inc).  
+        The simplest is to go into ${CORE_PATH}/src and type
+        "make clean; make".  This will automatically update
+        the files libcore++.a and/or libcore++.so in ${CORE_PATH}/lib. 
+        But for experimental purposes, we may want to keep two or more
+        versions of libcore++.a around.  In this case, we suggest using the
+        VAR variable described next.
+
+        (6) DEBUGGING AND OTHER VERSIONS OF CORE LIBRARY: 
+        It may be useful to have different compiled versions of the Core 
+        Library around.  For this, edit file ${CORE_PATH}/Make.config.
+        This file defines the compilation flags, depending on the platform.
+        There are two main variables to set: VAR and PLATFORM.
+
+        VAR indicates the "variant" of the library you want to compile.
+        The Makefile creates the library file "libcore++$(VAR).a" to be
+        placed in ${CORE_PATH}/lib/.  Since the default value of VAR is
+        the empty string, the default library is the plain "libcore++.a".
+
+        Here are two useful variants, Debug variant and NoOpt variant:
+
+        (a) VAR=Debug: you need this variant to run the GNU debugger, gdb.
+           If you set VAR=Debug in Make.config, and re-do STAGE 3 above
+           (STAGES 1 and 2 are still fine), you will create the debugging
+           variant of the library, namely "libcore++Debug.a".  Other stages
+           will similarly create the Debug variants, e.g., Debug versions
+           Core Extension libraries, sample programs, etc.
+        (b) VAR=NoOpt: this version turns off all compiler optimizations.
+           Try this if you find mysterious bugs, and to rule out possible
+           errors caused by aggressive compiler optimizations.
+
+        PLATFORM is used to define various variables that are platform-
+        and compiler-specific.  It defaults to "gnu".  
+        Other possible values are "sun", "cyg", "mingw", "sgi", "mac".
+        The "sgi" option has not been tested in the latest library.
+
+  3.11) CORE EXTENSIONS.
+        Under ${CORE_PATH}/ext, you will find extensions of Core Library
+        to encode knowledge of algebraic and geometric domains.  These
+        "CORE Extensions" (COREX) are quite rudimentary at present, but 
+        feel free to contribute.   
+
+        For instance, there is a geometry2d and geometry3d.  We compile a
+        Level 1 and Level 3 versions of these libraries, so that you can
+        compile your application in either of these two accuracy levels.
+
+  3.12) HOUSEKEEPING AND UNINSTALL
+        To uninstall the library, simple delete all the files under
+        ${CORE_PATH} (i.e., we do not put files anywhere).  If gmp and
+        mpfr are installed under ${CORE_PATH} you may remove them first.
+        
+        In every directory, we have a Makefile with two targets called
+        "clean" and "veryclean".  If you want to save space, you can type
+        "make clean" in any directory to remove temporary files.
+        E.g., *.o files.  If you type "make veryclean", this will
+        remove more files (in particular, all executable files).
+        NOTE: both targets are recursively propagated into subdirectories.
+
+*************************************************************
+4) NEWS, PLANS AND BUGS
+   NEW in Version 2.1 (July 2010)
+   -- introduction of anary nodes (operators with no fixed arity,
+      such as sum and product)
+   -- introduced a DoubleWrapper as a thinwrapper over
+      machine double in Level 1: now Level 2 and Level 3 programs
+      can also compile at Level 1.
+   -- templated linearAlgebra extension
+   -- templated interval class 
+   -- templated complex number class 
+   -- much improved curve subdivision algorithm (Cxy), and related
+      subdivision code for complex root isolation and interval Newton.
+   -- various bug fixes, including root bound overflow bug and
+      printout of garbage digits but.
+   -- Willi Mann provided a patch to allow the default constructor for
+      Expr to use a static object.  If you have functions that have local
+      Expr variables, this can greatly improve speed (30% speedup in Mann's
+      application in the FIST software of Martin Held for triangulation.)
+   -- Acknowledgments:  Thanks for feedback and bug reports from
+          Sven Kohler, Michael Haag, Volmar Klatt, Martin Held,
+          Willi Mann, Narayan Kamath.   Nararan contributed the interval
+		  class, complex number class, and improvements in subdivision
+		  algorithms.
+
+   NEW in Version 2.0:
+   -- Complete redesign of Core Library, based on Zilin's PhD thesis.
+      However, the original simple interfaces are retained.
+   -- Expr class is now templated to receive three parameter classes:
+      Filter Class, RootBound Class and BigFloat Class.  
+   -- Complete redesign of BigFloat (a new class called BigFloat2, for
+      interval arithmetic, is split off the original BigFloat).
+      The new BigFloat classes are based on MPFR, which in turn is
+      based on GMP.
+   -- Complete redesign of the basic Expr evaluation algorithms to improve
+      efficiency, avoiding redundant computations.
+   -- Introduction of transcendental functions into Expr.
+      All the elementary functions are available in Expr,
+      with EscapeBound used in lieu of root bounds.  CutOffBounds are also
+      introduce to limit approximation near zero.
+   -- Redesigned hypergeometric function classes.
+   -- New facilities for user-defined nodes in Expr.
+   -- Use of Descartes method for real root isolation,
+      in place of Sturm.  This gives general speedup improvements.
+   -- Improved InCore, the interactive python version of CORE.
+   -- Bug Fixes
+          * Newton iteration fixed to really have quadratic convergence
+            (previous implementation only has linear convergence)
+          * Bug fix in Sturm root counting functions (off by one)
+   -- Miscellaneous:
+          * Versioning of Core Library is now Core-X.Y.Z (starting with
+            X.Y.Z = 2.0.0).  Previously it was "Core_v1.7.0").
+          * Upgraded Core Library to be compatible with latest gmp 4.1.4.
+   -- Acknowledgments:  Thanks for feedback and bug reports from
+            Daniel Russell, Ron Wein, Andreas Fabri, Sylvain Pion.
+            
+=============================
+   NEW in Version 1.7:
+   -- Introduction of plane algebraic curves and bi-variate polynomials 
+         The main capability is to plot curves and do basic
+         intersection tests.  See CORE_PATH/progs/curves/.
+   -- Introduced "InCore", an interactive version of Core Library 
+         based on Python (this has to be downloaded separately)
+   -- Enhancement of the univariate polynomial and real algebraic
+        number facilities. New methods such as
+        polynomial GCD, resultant, square free part, primitive part, etc.
+        * Polynomial<NT> can now work with all choices of NT
+                NT = BigInt, int, BigRat, Expr, BigFloat
+          But not all functionality are fully available for
+          NT=BigFloat and NT=Expr (e.g., rootbounds).
+        * Sturm<NT> can now work with NT=BigFloat
+        * To support the above, various new methods are added to the
+          BigInt, BigRat, BigFloat, Real classes (isDivisible, gcd, etc).
+        * Polynomials now accept string inputs. 
+            E.g., Polynomial<BigInt> p = "x^3 - 2x^2 + 17x - 4";
+   -- Compatibility with gmp 4.1, and gcc 3.3
+   -- Introduced a common Reference Counting facility for all
+         Core number types, encoded in the two templated classes:
+                RCRepImpl<class N>
+      to create Reps of the class N.  The basic functions provided by
+      this class is reference counting, and gives us the "Reps" of
+      each number type (e.g., BigIntRep is derived from RCRepImpl).  
+      The other class is
+                RCImpl<class T>
+      which is the actual number type (e.g., BigInt is derived
+      from RCImpl<BigIntRep>).  As a result former Rep Files
+      such as RealRep.h can be removed, and the code size is reduced.
+      Also, BigInt and BigRat now have reference counting in
+      their Rep classes (none before).
+   -- Speedup from reorganization of Core Library number classes.
+      We wrote wrappers around gmp's C function library.
+      We also tested the possibility of using gmp's C++ classes (since
+      gmp 4.1) which are template based.  CORE's interface are not fully
+      compatible with gmp since we have exact algebraic representation
+      and precision bounds.
+      We compared three versions of Core Library:
+           (A) -- old code: version 1.6
+           (B) -- new code: some optimization
+           (C) -- new code: optimization + using gmp C++ class
+      Here are the running times on two machines:
+   
+      Test              Pentium III (1G Memory)        Jinai (Solaris)
+      =======================================================
+      > A               64.12s                         1m:07s
+      > B               56.52s                         52.6s
+      > C               50.71s                         50.4s
+      > Speedup         20%                            25%
+    
+      Although the use of gmp C++ classes (which use expression template
+      to eliminate temporary variables) is faster, it is
+      incompatible with visual C++ (not sure about Sun CC).
+      So we added as an option for compiling the Core Library:
+      to turn on gmp C++ classes, un-comment macro CORE_USE_GMPXX
+      in CoreImpl.h and recompile Core Library; there is no need to compile
+      GMP C++ library since all necessary code are in Core Library already.
+   -- Updated Core Library Tutorial
+   -- Simple openGL display for curves: see CORE_PATH/ext/graphics/
+   -- Bug fixes
+          * rootOf(P,i) now works properly when P have multiple roots
+            (reason: we assumed the endpoints of isolating intervals
+            have distinct signs)
+          * Fixed bugs in Newton and Sturm methods
+          * Expr::doubleValue() is now correctly implemented.
+            E.g., suppose you compute
+                double s = sqrt(n);
+                double ss = sqrt(Expr(n)).doubleValue();
+            Then we guarantee that |s-ss| has relative error at
+            most 4*CORE_EPS = 4.44089e-16 (CORE_EPS is machine epsilon). 
+            This factor of 4 is essentially the best possible (see
+            CORE_PATH/progs/testIO/testSqrt.cpp).
+          * fixed Expr::degreeBound().  Previously it always returned 1 at
+            leaves.  With algebraic numbers, it must return d_e()).  This
+            has dramatic improvement in speed. Ron Wein's program for
+            intersecting two ellipses used to take overnight, but now take
+            0.4 sec.
+          * Fixed an output bug that has been around since Core 1.4.
+            BigFloat can print an output whose exponent is off by 1.
+                E.g., sqrt(100) = 9.999e0 but BigFloatRep::round(...),
+                an internal function, returns the string "1.0000e0"
+                instead of "1.0000e1".  Thanks to Blazi for noticing this.
+   -- Miscellaneous:
+          * Previously, the library version numbers have two numbers
+            (e.g., "1" and "6" in Version 1.6).  Between official releases,
+            we call it Version 1.6x.  Thus "Version 1.6x" refers to any
+            number of unofficial releases between 1.6 and 1.7.
+            We now have a third number.  E.g., this official release
+            is Version 1.7.0.
+          * CORE::core_error() is enhanced to write its results
+            into a file "Core_Diagnostics" but also writes errors to
+            std::cerr (as before).  
+          * We introduce new versions of the BigFloat::makeExact(), namely,
+            makeCeilExact() and makeFloorExact().
+          * Upgraded Core Library to be compatible with the latest gmp
+            4.1.3 (released 4/28/2004).
+          * Use the program "astyle" to beautify all our code, so the
+            files are more consistent and readable.  Tab are converted
+            to spaces, use k&r style, etc):
+                       ./astyle --style=kr -s2 filename
+          * More use of BigFloats to replace Expr, when possible.  E.g.
+            CauchyLowerBound() and CauchyUpperBound() rewritten using
+            BigFloat instead of Expr (30% improvement here).
+          * In CORE_PATH, you can type "make options" 
+            to see all your currently selected CORE ENVIRONMENT VARIABLES.
+            If you type "make alloptions", this will also show
+            all possible alternatives that you could have chosen.
+          * Simple timing facility (see src/Timer.h)
+   -- Acknowledgments:  Thanks for feedback and bug reports from
+            Janos Blazi, Arno Eigenwillig, Ovidiu Daescu,
+            Andreas Fabri, Michael Hemmer, Athanasios Kakargias,
+            Daniel Russell, Ron Wein.
+
+   PLANS:
+       -- improved precision-sensitive algorithm
+       -- improved bounds (measure of Sekigawa, etc)
+       -- better floating point filters
+       -- optimized determinant primitive and filters
+       -- compilation and optimization of expressions
+       -- Expressions should have the ability to output exact values
+                in case of integers or rational numbers.  Currently,
+                only bigFloat values are output.
+       -- complex numbers
+       -- better implementation of relative precision bounds
+       -- Newton-based algorithms for elementary functions
+       -- development of Core Extensions (geometry, algebra, meshes, etc)
+       -- graphical support and interface
+       -- File I/O of Core Objects (e.g., expressions)
+       -- CORE versions of "printf" and "scanf" (this reduces the fuss to
+                CORE-ize a standard C program).
+       -- the exponent of a bigFloat number is represented by 
+             a machine long.  This should not be a problem in practice.  An
+             improvement is to use machine double for the exponent,
+             yielding 53 bits of precision.
+   
+   BUGS:
+       -- To report a bug, please send email to exact@cs.nyu.edu, with as
+             much details as possible (including your platform/compiler).
+       -- Let r = 54.  Suppose you convert a rational p/q to a BigFloat bf 
+			 using r bits of relative precision.  Next convert bf to a
+			 machine double md,
+                       double md = (double)bf;
+			 This md should be equal to rounding "p/q" to the nearest
+			 machine double.  Turns out (Core 1.4) this may not be true!  
+			 But if r=59, our tests indicated that md does equal the
+			 machine rounding of p/q.  This bug is not too serious since,
+             for any particular inputs, it can be removed by increasing r.
+             Tests suggest that r=59 is sufficient for
+             all p/q.  See ${CORE_PATH}/src/test/ for details.
+       -- we should allow defOutputDigits to be CORE_INFTY, and when
+             a rational number is printed in this case, we ought to print
+             it with no errors.  Currently, we let defBigFloatOutputDigits
+             control this output; since this value is never infinite,
+             the printed value may have error.
+       -- level II is not fully supported
+       -- level IV is not fully defined 
+
+*************************************************************
+5) ACKNOWLEDGMENT and BRIEF HISTORY
+
+   This work has been supported by a National Science Foundation
+        Grant \#CCR 9402464 and \#CCR 0082056 (an ITR grant).
+   The Real/Expr Package (1994-96) was developed by
+        Chee Yap and Tom Dube.  
+   Koji Ouchi and Chee Yap further improved the Real/Expr Package with
+        its concept of composite precision bounds.
+        The new algorithms for BigFloat with automatic error bounds
+        is documented in Koji's masters thesis.
+   A Numerical Accuracy API (the 4 levels of accuracy) was 
+        proposed by Chee Yap in Oct 1998.
+   Core Library Version 1.1 (Jan 1999) was adapted from Real/Expr by
+        Chee Yap, Vijay Karamcheti, Igor Pechtchanski and Chen Li to
+        implement the Numerical Accuracy API.
+        Compiler-based optimizations techniques were investigated.
+   Version 1.2 (Sep 1999) is a debugged and improved version.
+        The BFMS root bound was incorporated. 
+   Version 1.3 (Sep 2000) is significantly
+        faster than its predecessor because of new improved root 
+        bounds and adoption of LiDIA/CLN's bignumber as default kernel.
+   Version 1.4 (Aug 2001) moved from LiDIA/CLN to gmp as the main kernel.
+		Incremental square roots, improved precision-sensitivity
+		algorithms, simple floating point filters, hypergeometry package.  
+   Version 1.5 (Aug 2002) improvements in speed and root bounds (k-ary
+		bounds), CGAL compatibility changes, file I/O for large
+		mathematical constants (BigInt, BigFloat, BigRat),
+		improved hypergeometric package,
+   Version 1.6 (June 2003) introduced arbitrary
+        real algebraic numbers in Expr's, incorporated Polynomial and Sturm
+        classes into Core Library.  CORE is now distributed with CGAL,
+        and issued under the QPL agreement.
+   Version 1.7 (Nov 2004) introduced algebraic curves and bivariate 
+       polynomials.  An interactive version of Core Library called "InCore"
+       is available.  Beginning graphic capability for display of curves.
+   Version 2.0 (Jun 2006) complete redesign of Core Library (templated
+        Expr class taking parameters for Filter class, Rootbound class
+        and BigFloat class), incorporation of transcendental functions into
+		Expr, Redesigned BigFloat (split off another class called
+		BigFloat2), general speed improvement 2-10 times.
+   Version 2.1 (Jul 2010) 
+        -- introduce anary nodes for sum and product
+        -- DoubleWrapper for machine double in Level 1
+                so that Levels 2 and 3 programs can compile in Level 1.
+        -- templated classes for linearAlgebra, intervals, complex numbers
+
+*************************************************************
+6)  LICENSE INFORMATION
+
+   Core Library is now under the terms of the Q Public License
+   version 1.0. See the file LICENSE.QPL distributed with CORE.
+*************************************************************
+
+*************************************************************
+*  CONTACT AND FURTHER INFORMATION:
+*       For comments and bug report, send email to:
+*               exact@cs.nyu.edu.
+*       Core Library Homepage:
+*               http://cs.nyu.edu/exact/
+*       CGAL Homepage:
+*               http://www.cgal.org/
+*       GEOMETRY FACTORY Homepage:
+*               http://www.geometryfactory.com/
+*       GNU/gmp Homepage:
+*               http://www.gnu.org/software/gmp/gmp.html
+*               http://www.gnu.org/home.html
+*************************************************************
+

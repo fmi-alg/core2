@@ -1,0 +1,12 @@
+README for progs/bareiss
+
+Implementation of the Bareiss algorithm for computing determinants
+of matrices. This version performs pivoting
+(compare Gaussian.cc in ${CORE}/progs/gaussian). 
+
+For the theory behind this code, read Chapter 10 of
+Chee's book "Fundamental Problems of Algorithmic Algebra"
+(Oxford Press 2000).  Available from http://cs.nyu.edu/yap/book/).
+
+The input matrices are hard-coded.
+

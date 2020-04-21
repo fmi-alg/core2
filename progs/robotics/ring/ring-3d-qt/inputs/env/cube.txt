@@ -1,0 +1,25 @@
+Points
+"a" 0 1 1
+"b" 0 0 1
+"c" 1 0 1
+"d" 1 1 1
+"e" 0 1 0
+"f" 0 0 0
+"g" 1 0 0
+"h" 1 1 0
+
+Poly "cube" + 64 64 64 * 448 448 448
+0 a c b
+0 d c a
+0 d g c
+0 h g d
+0 a h d
+0 e h a
+0 b f a
+0 a f e
+0 c f b
+0 g f c
+0 f g e
+0 e g h
+
+End

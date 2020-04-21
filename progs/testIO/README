@@ -1,0 +1,68 @@
+File: README for testIO Directory
+Core Library
+
+$Id: README,v 1.4 2010/05/10 21:44:01 exact Exp $
+=============================================================================
+SYNOPSIS:
+	This program tests the output routines in Core Library.
+	These test are very important for our library, in view 
+	of our emphasis on significance arithmetic in our Core Accuracy model.
+	We cannot afford to have unpredictable numerical I/O properties!
+
+	There are four programs:
+
+	(1) testIO.ccp: illustrates basic I/O features 
+	
+		-- significance arithmetic (internally) 
+		   as well as "significance output"
+		   (no printed digit is wrong except the last
+		   digit can be off by 1).  For this purpose, it must
+		   be remembered that 1.999 is an acceptable output
+		   for any number in the range [1.998,2.000].
+
+  		-- how to set default precision 
+			e.g., setDefaultPrecision(52, CORE_INFTY)
+				gives you 52 relative bits of precision
+			e.g., setDefaultPrecision(CORE_INFTY, 1000)
+				gives you 1000 absolute bits of precision
+			e.g., setDefaultPrecision(52, 1000)
+				gives you "mixed" (52,1000) bits of precision
+  		-- how to set output (or print) precision 
+  			e.g., setDefaultPrintDigits(6)
+		-- how default precision and output precision interact
+			in outputs
+		-- the 2 modes for output:
+			scientific vs. positional notation
+
+	(2) testSqrt.cpp:
+		-- illustrates the behavior of Expr::doubleValue()
+		-- the method Expr::doubleValue() converts
+		   an Expr to the reasonably machine double value.
+		   When the output precision of cout is set to 14,
+		   you will not see any difference between our
+		   computed value and the IEEE value.
+
+	(3) testMpfr.cpp:
+		-- since Core2, we rely on MPFR package for
+		   underlying big float routines.  Here, we develop
+		   a battery of self-validated tests of our
+		   interface to MPFR's output.  In particular, we
+		   test the elementary functions, the constants Pi and e.
+
+	(4) testCompatible.cpp, testCompatibleNew.cpp:
+		-- self-validating tests for the Core2 function
+		   isCompatible(s1,s2).   This function returns TRUE
+		   iff the two strings s1, s2 are compatible
+		   (i.e., their "implicit intervals" overlap).
+		   E.g., the "implicit interval" for 1.234 is [1.233,1.235].
+		-- The new version generalizes the function
+		   "isCompatible(s1,s2)" to a new function
+		   "compatible(s1,s2)" that returns the first position
+                   where the two strings becomes incompatible.   Then
+                   the original "isCompatible(s1,s2)" is equivalent to
+	           "compatible(s1,s2) = min(length(s1),length(s2))".
+
+Chee and Jihun, May 2010
+Since Core 2.0.
+
+=============================================================================

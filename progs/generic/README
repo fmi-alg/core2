@@ -1,0 +1,22 @@
+# File: README for GENERIC
+#
+# CORE Library, $Id: README,v 1.1 2006/03/07 04:51:24 exact Exp $
+
+Synopsis:
+	This directory contains generic instructions for compiling and
+	building user's own CORE programs.  The most important file here
+	is the Makefile program.  It assumes that your program is found in
+	some directory under $(CORE_PATH)/progs/.
+
+The sample program (sample.cpp) is intended to be run at any CORE
+	Accuracy level (1, 2, 3, 4). Try it and see!
+	Only at CORE_LEVEL 3 should the program work with the right
+	accuracy.
+
+NOTE: Sometimes, you want to create a testing environment
+	where your programs at several Accuracy Levels.
+	Please see, e.g., $(CORE_PATH)/progs/geom2d/ 
+	or $(CORE_PATH)/progs/gaussian/ for examples
+	of such Makefiles.
+
+

@@ -1,0 +1,52 @@
+# file: hsu-latombe-kurniawati.txt
+#
+# This is an example from the paper of
+# 	Hsu, Latombe, Kurniawati (fig.3) 2006
+#
+# Note that the input is slightly modified from the original xfig
+# version so that the 3 polygons are disjoint.   See
+# the file hsu-latombe-kurniawati2.txt where the original xfig version
+# is used.  It caused our soft predicate to be confused...
+#
+#  -- Chee (July 19, 2012)
+#
+#
+# xfig source:	 hsu-latombe-kurniawati (fig.3) 2006
+#
+#	#FIG 3.2
+#	Landscape
+#	Center
+#	Inches
+#	Letter  
+#	100.00
+#	Single
+#	-2
+#	1200 2
+#	2 2 0 1 0 7 50 -1 -1 0.000 0 0 -1 0 0 5
+#		 1200 1200 8400 1200 8400 8400 1200 8400 1200 1200
+#	2 3 0 1 0 7 50 -1 -1 0.000 0 0 -1 0 0 9
+#		 3825 8400 3825 4950 4425 4950 4425 4575 4650 4575 4650 4950
+#		 5250 4950 5250 8400 3825 8400
+#	2 3 0 1 0 7 60 -1 -1 0.000 0 0 -1 0 0 9
+#		 3825 1200 3825 4725 4200 4725 4200 4350 4875 4350 4875 4725
+#		 5250 4725 5250 1200 3825 1200
+
+# Number of Points: 4 + 8 + 8
+20
+# 2 2 0 1 0 7 50 -1 -1 0.000 0 0 -1 0 0 5
+	 1200 1200 8400 1200 8400 8400 1200 8400 
+# 2 3 0 1 0 7 50 -1 -1 0.000 0 0 -1 0 0 9
+	 3825 8300 3825 4950 4425 4950 4425 4575 4650 4575 4650 4950
+	 5250 4950 5250 8300 
+# 2 3 0 1 0 7 60 -1 -1 0.000 0 0 -1 0 0 9
+	 3825 1300 3825 4725 4200 4725 4200 4350 4875 4350 4875 4725
+	 5250 4725 5250 1300
+	
+# Number of Polygons:
+3
+#
+4 3 2 1 4
+5 6 7 8      9 10 11 12 5
+20 19 18 17 16 15 14 13 20
+
+

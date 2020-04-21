@@ -1,0 +1,72 @@
+#file: pappusBad
+#      
+#  WE DELIBERATELY MAKE A WRONG VERSION OF PAPPUS' THEOREM:
+#
+#	Pappus's Theorem:
+# 
+# 	Let ABC and EFG be two lines and P be the intersection
+# 	of AF and EB, Q the intersection of AG and EC and S the
+# 	intersectin of BG and FC. Then P, Q and S are collnear.
+# 
+# 	Let A(0,0), B(u1,0), C(u_2,0), E(u_2,u_3), F(u_4,u_5),
+# 	G(x_1,u_7), P(x_3,x_2), Q(x_5,x_4), S(x_7,x_6).
+# 
+# 	Therefore the hypothesis equations are: 
+# 
+# 	h_1 = u_5 x_1 - u_3 x_1 - u_2 u_5 - u_4 u_7 + 
+# 	      u_3 u_4 + u_2 u_7 = 0
+# 	h_2 = u_4 x_2 - u_5 x_3 = 0
+# 	h_3 = u_2 x_2 - u_1 x_2 - u_3 x_3 + u_3 u_1 = 0
+# 	h_4 = x_1 x_4 - u_7 x_5 = 0
+# 	h_5 = u_2 x_4 - u_6 x_4 - u_3 x_5 + u_3 u_6 = 0
+# 	h_6 = u_5 x_6 - u_6 x_6 - u_5 x_7 + u_5 u_6 = 0
+# 	h_7 = x_1 x_6 - u_1 x_6 - u_7 x_7 + u_1 u_7 = 0
+# 
+# 	The conclusion is:
+# 
+# 	g = x_7 x_4 - x_2 x_7 - x_3 x_4 - x_5 x_6 +
+# 	    x_3 x_6 + x_2 x_5 - x_2 x_5 = 0
+#
+# number of parameters = 7
+# number of dependent variables = 7
+7 7  
+# defining h_1 ...
+0 1 1 4 7   # u_5 x_1
+0 1 1 2 7   # -u_3 x_1	(BAD COEFFICIENT: this is 1 instead of -1)
+0 -1 1 1 4  # -u_2 u_5
+0 -1 1 3 6  # -u_4 u_7
+0 1 1 2 3   # u_3 u_4
+0 1 1 1 6   # u_2 u_7
+# defining h_2
+1 1 1 3 8   # u_4 x_2
+1 -1 1 4 9  # -u_5 x_3
+# defining h_3
+2 1 1 1 8   # u_2 x_2 
+2 -1 1 0 8  # -u_1 x_2
+2 -1 1 2 9  # -u_3 x_3
+2 1 1 2 0   # u_3 u_1
+# defining h_4
+3 1 1 7 10  # x_1 x_4
+3 -1 1 6 11 # -u_7 x_5
+# defining h_5
+4 1 1 1 10  # u_2 x_4
+4 -1 1 5 10 # u_6 x_4
+4 -1 1 2 11 # u_3 x_5
+4 1 1 2 5   # u_3 u_6
+# defining h_6
+5 1 1 3 12  # u_4 x_6
+5 -1 1 5 12 # -u_6 x_6
+5 -1 1 4 13 # -u_5 x_7
+5 1 1 4 5   # u_5 u_6
+# defining h_7
+6 1 1 7 12  # x_1 x_6
+6 -1 1 0 12 # -u_1 x_6
+6 -1 1 6 13 # -u_7 x_7
+6 1 1 0 6   # u_1 u_7
+# defining g
+7 1 1 10 13 # x_4 x_7
+7 -1 1 8 13 # -x_2 x_7
+7 -1 1 9 10 # -x_3 x_4
+7 -1 1 11 12 # -x_5 x_6
+7 1 1 9 12  # x_3 x_6
+7 1 1 8 11  # x_2 x_5

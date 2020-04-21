@@ -1,0 +1,11 @@
+1. Setup
+ a. Parser
+ b. Initialize data structures
+ c. Graphics
+2. Logic
+ a. Subdivision
+ b. Construction
+3. Features
+ a. Representation
+ b. Metric definition
+ c. Metric computation

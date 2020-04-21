@@ -1,0 +1,54 @@
+%basic definitions
+def O (0,0,0)
+def rotN 4
+def eye (10,4,10)
+def look_at (0,0,-5)
+def axes {
+    def sz 3
+    line [arrows=<->] (sz,0,0)(O)(0,sz,0)
+    line [arrows=->]  (O)(0,0,sz)
+    line [linewidth=.2pt,linecolor=blue,linestyle=dashed] (O)(0,0,-10)
+    special |\uput[r]#1{$x$}\uput[u]#2{$y$}\uput[l]#3{$z$}|
+      (sz,0,0)(0,sz,0)(0,0,sz)
+  }
+  
+def cube {sweep[cull=false,opacity=0.7]{rotN<>,rotate(360/rotN,[0,1,0])}{line(1,1,1)(1,-1,1)}
+def solidcube {sweep[cull=false,opacity=1]{rotN<>,rotate(360/rotN,[0,1,0])}{line(1,1,1)(1,-1,1)}
+}
+%--------------Triangle----------------
+def triangle polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0.3)(1,0,1)(-0.7,1,1)
+def equitriangle polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(1,0,1)(0,1,1)
+
+
+%--------------Trapezoidal----------------
+def trape polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(0,1,1)(-0.5,-1,1)(1,-1,-0.5)
+%--------------Parallelogram----------------
+def parallel polygon[cull=false,fillcolor=red!100,opacity=0.3](0.5,-1,-1)(0,1,-1)(-0.5,1,1)(0,-1,1)
+%--------------Rectangle----------------
+def rectangle polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(0,1,1)(0,-1,1)(1,-1,0)
+%--------------Square----------------
+def square polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(1,-1,0)(-1,-1,1)(-1,1,0)
+
+%--------------Pentagon-----------------
+def pentagon polygon[cull=false,fillcolor=red!100,opacity=0.3](0.5,-1,1)(-0.5,1,1)(0.5,1,-1)(1,0,-1)(1,-1,0)
+
+
+%--------------Hexagon-----------------
+def hexagon polygon[cull=false,fillcolor=red!100,opacity=0.3](1,-1,0)(1,0,-1)(0,1,-1)(-1,1,0)(-1,0,1)(0,-1,1)
+%-------------1st level subdivision----
+%-------------x=0 cut------------------
+def x1cut polygon[cull=false,fillcolor=red!100,opacity=1](0,1,1)(0,1,-1)(0,-1,-1)(0,-1,1)
+%-------------y=0 cut------------------
+def y1cut polygon[cull=false,fillcolor=red!100,opacity=1](1,0,1)(1,0,-1)(-1,0,-1)(-1,0,1)
+%-------------z=0 cut------------------
+def z1cut polygon[cull=false,fillcolor=red!100,opacity=1](1,1,0)(1,-1,0)(-1,-1,0)(-1,1,0)
+def first{{x1cut}{y1cut}{z1cut}}
+
+%-------------2nd level subdivision----
+%-------------x=0.5 cut----------------
+def x2cut polygon[cull=false,fillcolor=red!100,opacity=1](0.5,1,1)(0.5,1,0)(0.5,0,0)(0.5,0,1)
+%-------------y=0.5 cut----------------
+def y2cut polygon[cull=false,fillcolor=red!100,opacity=1](1,0.5,1)(1,0.5,0)(0,0.5,0)(0,0.5,1)
+%-------------z=0.5 cut------------------
+def z2cut polygon[cull=false,fillcolor=red!100,opacity=1](1,1,0.5)(1,0,0.5)(0,0,0.5)(0,1,0.5)
+def second{{x2cut}{y2cut}{z2cut}}

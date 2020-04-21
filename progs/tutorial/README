@@ -1,0 +1,23 @@
+File: README for tutorial
+Since Core Library v1.5
+$Id: README,v 1.1 2006/03/07 04:51:26 exact Exp $
+=============================================================================
+SYNOPSIS:
+
+        This directory is a repository for the examples
+	used in the Core Library Tutorial document.
+
+Files:
+	README	 	-- this file
+	Makefile	-- do "make test" to compile and run all programs 
+	simple.cpp	-- first program
+	prog*.cpp	-- miscellaneous programs in tutorial
+	io.cpp		-- Basic Numerical I/O 
+	BF_output.cpp	-- Basic Properties of BigFloat I/O
+				(including exactness, and other useful
+				methods)
+	delaunay.cpp	-- Naive Delaunay Triangulation Program
+	
+To Do:
+	We ought to make ALL these programs self-validating.
+

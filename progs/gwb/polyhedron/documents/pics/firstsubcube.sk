@@ -1,0 +1,3 @@
+input{solidcube.sk}
+put { scale([Norm]) then view((eye), (look_at)) } {{solidcube}{first}}
+%repeat{10, rotate(45,[1,1,1]) then translate([2,0,0])}{cube}

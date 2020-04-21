@@ -1,0 +1,32 @@
+README for harmonic_sum
+=======================
+NOTE: THIS HAS BEEN REPLACED BY sumProd directory.
+
+
+TODO: compare the accuracy of ln(n) to the
+	summation S(n)=\sum_{i=1}^n (1/i).
+
+Experiments for the "summation operation" test,
+as described in Core2 paper (Jan 2010).
+Test is taken from /progs/benchmark/sum, part of Zilin's thesis.
+
+We test two versions of summation:
+	tSum1 -- is the original Expr which builds a deep
+		unbalanced DAG tree.
+	tSum2 -- uses inbuilt summation operator to prevent building
+		a deep unbalanced DAG tree.
+
+Timing (in microseconds):
+===============================================
+n	Timing w/o sum	Timing w/ sum	Speedup
+=====	==============	=============	=======
+10^3	9		5		1.8
+10^4	235		59		4.0
+10^5	(seg fault)	1389		N/A
+10^6	(seg fault)	105970		N/A
+===============================================
+Platform is MacBook Air
+     (MacOS X 10.5.8; Core 2 Duo, 2.13 GHz, 1 Processor, 2 Cores,
+      6MB of L2 Cache, 2 GB of Memory, 1.07 GHz Bus Speed)
+
+--Jihun and Chee (Mar 2010)

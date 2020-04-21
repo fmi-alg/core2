@@ -1,0 +1,74 @@
+README
+	for progs/core2papers/many_digits
+$Id: README,v 1.6 2010/06/25 10:15:49 exact Exp $
+============================================================
+
+Jan 2010:
+	The following are CORE 2 library's performance on
+	some problems from the "Many Digits" friendly competition (2005).
+
+	Our results are for Problems C01-C010 competition.
+		The original competition asks for 10^n (n=2,3,4,...) digits
+		of output depending on the problem.   
+	Below, we show our results to 100 digits only.
+		We check our results with the output from Maple 11.
+		In most cases, we agree with Maple 11 up to the last digit
+		(this ought to be the case).  But in Problem C04, we differ
+		in the last 3 digits.  So one of us must be wrong...
+	SUMMARY:
+	  Since Core is leveraged on MPFR for most of these problems, our performance
+		cannot beat MPFR.  However, the MPFR team uses hand-coded precision,
+		Core has automated all these computations.
+	  Core cannot do C08 because of memory overflow.
+	  Core cannot do C06 and C09 because we have not
+		yet implemented inverse elementary functions,
+		and elementary hyperbolic functions. 
+
+============================================================
+Problem C01 : compute sin(tan(cos(1))) to 100 digits.
+
+CORE 2 = 0.5645109298619598058276864064502964857764866158258856955552147245934844803576138875921296745208522198
+MAPLE =  0.5645109298619598058276864064502964857764866158258856955552147245934844803576138875921296745208522198
+it took 0 mseconds.
+============================================================
+Problem C02 : compute sqrt(e()/pi()) to 100 digits.
+
+CORE 2 = 0.9301913671026328586681246236333315560297109207042887264450006489855422345460234483872155723942699766
+MAPLE =  0.9301913671026328586681246236333315560297109207042887264450006489855422345460234483872155723942699765
+it took 0 mseconds.
+============================================================
+Problem C03 : compute sin((e+1)^3) to 100 digits.
+
+CORE 2 = 0.9094952410572662471855472194521742688939652422138080108799599078079083693175099387713504636663839043
+MAPLE =  0.9094952410572662471855472194521742688939652422138080108799599078079083693175099387713504636663838965
+it took 0 mseconds.
+============================================================
+Problem C04 : compute exp(pi*sqrt(2011)) to 100 digits.
+
+CORE 2 = 15287325030838530726060718956632626460288135250495712354991535.08911292681099318912549002226654964403
+MAPLE =  15287325030838530726060718956632626460288135250495712354991535.08911292681099318912549002226654964319 
+it took 0 mseconds.
+============================================================
+Problem C05 : compute exp(exp(exp(1/2))) to 100 digits.
+
+CORE 2 = 181.3313036085456935150575745126539838088636924785147592794392700131812592190818654155341658216570329
+MAPLE =  181.3313036085456935150575745126539838088636924785147592794392700131812592190818654155341658216570329
+it took 1 mseconds.
+============================================================
+Problem C06 : compute atanh(1 - atanh(1 - atanh(1 - atanh(1/Pi)))) to 100 digits.
+
+CORE 2 = "atanh" not implemented yet
+
+MAPLE = 
+============================================================
+Problem C07 : compute pi^1000 to 100 digits.
+
+CORE 2 = 1.412123544515764812310439732881587635475963461582062574048346324112952884474452775306450654297508705e+497
+MAPLE  = 1.412123544515764812310439732881587635475963461582062574048346324112952884474452775306450654297508713e+497
+it took 1 mseconds.
+============================================================
+Problem C08 : compute sin(6^(6^6)) to 100 digits.
+
+CORE 2 = out of memory
+MAPLE =  −.9243782759082769071599129104213945374204053566344957618861208133051072506448921516566917643513054166
+============================================================

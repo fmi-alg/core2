@@ -1,0 +1,50 @@
+OMPL Installation Instruction
+http://ompl.kavrakilab.org/installation.html
+http://ompl.kavrakilab.org/download.html
+
+
+OS X
+----------
+Please use MacPorts. (OMPL from Homebrew is an old version.)
+
+1. Enter "sudo port sync \; install ompl +app".
+
+2. Go to "/opt/local/bin" and run "ompl_app". "ompl_app" is used for visualization check.
+   Demo video: https://www.youtube.com/watch?v=zG8LS6s0EdM
+
+3. If you can not run the app successfully, it might be an error with python.
+   ----------
+   File "/opt/local/bin/ompl_app", line 48, in <module>
+    from ompl.util import OutputHandler, useOutputHandler, LogLevel, OMPL_DEBUG, OMPL_INFORM, OMPL_WARN, OMPL_ERROR
+   File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/ompl/util/__init__.py", line 4, in <module>
+    from ompl.util._util import *
+   ImportError: No module named _util 
+   ----------
+   I solved it by removing ompl and python on my laptop.
+   And then install python 3.5.
+   https://bitbucket.org/ompl/ompl/src/tip/doc/markdown/installPyPlusPlus.md
+   If you encounter other problems, please see the README.md in the source folder(omplapp-1.2.0-Source or omplapp-1.2.1-Source). 
+
+4. Below is the demo examples page. I pick "SE2RigidBodyPlanning.cpp" as an example.
+   http://ompl.kavrakilab.org/group__demos.html
+   http://ompl.kavrakilab.org/demos_2SE2RigidBodyPlanning_2SE2RigidBodyPlanning_8cpp_source.html
+
+5. Please use the command to run the source on the terminal.
+   "clang++ -std=c++11 -L/opt/local/lib/ -I/opt/local/include/ -o SE2RigidBodyPlanning /opt/local/share/ompl/demos/SE2RigidBodyPlanning.cpp -lompl -lompl_app_base"
+
+6. On our SVN server, robotics/ompl/SE2RigidBody-ompl, I link those libraries properly in the .pro file. So, you can just run the program.
+
+
+Ubuntu
+----------
+
+1. Download the OMPL installation script fro Ubuntu.
+   http://ompl.kavrakilab.org/install-ompl-ubuntu.sh
+
+2. Enter "chmod u+x install-ompl-ubuntu.sh".
+
+3. Run "./install-ompl-ubuntu.sh --python --app". Must use python binding.
+
+4. If there is a problem in python binding, please update your python.
+   https://bitbucket.org/ompl/ompl/src/tip/doc/markdown/installPyPlusPlus.md
+

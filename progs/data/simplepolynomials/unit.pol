@@ -1,0 +1,8 @@
+! file: unit.pol
+! This is the unit polynomial p(x)=1.  
+! It is the same as one.pol, but NOT the same as identity.pol
+
+dri
+0
+0
+1

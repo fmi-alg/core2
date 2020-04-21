@@ -1,0 +1,49 @@
+# tunnelx.poly
+#
+#  Variant of the tunnel.poly 
+# 	
+# Since Core Library 2.1 (May 2012)
+#
+###################################################
+
+# 36 POINTS:
+36
+	# first long horizontal barrier
+	 1200 1200 7200 1200 7200 1350 1200 1350 
+	# second long horizontal barrier
+	 1200 2400 7200 2400 7200 2550 1200 2550
+	# 2 triangles
+	 3600 1500 3750 1500 3600 1650 
+	 3975 2250 3825 2250 3975 2100 
+	# 2 triangles
+	 4800 1500 4950 1500 4800 1650
+	 5175 2250 5025 2250 5175 2100
+	# 2 triangles
+	 6000 1500 6150 1500 6000 1650
+	 6375 2250 6225 2250 6375 2100
+	# 2 triangles
+	 2400 1500 2550 1500 2400 1650
+	 2775 2250 2625 2250 2775 2100
+	# extra confining box... 
+	 300 1125 7875 1125 7875 2700 300 2700
+	
+# 11 POLYGONS
+11
+	# 2 long horizontal barriers
+	1 2 3 4 1
+	5 6 7 8 5
+	# 2 triangles
+	9 10 11 9
+	12 13 14 12
+	# 2 triangles
+	15 16 17 15
+	18 19 20 18
+	# 2 triangles
+	21 22 23 21
+	24 25 26 24
+	# 2 triangles
+	27 28 29 27
+	30 31 32 30
+	# extra confining box... 
+	33 34 35 36 33
+

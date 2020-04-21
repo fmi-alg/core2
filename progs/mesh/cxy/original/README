@@ -1,0 +1,24 @@
+============================================================
+README file for CXY
+Core Library (since version 2.0)
+-- Jan 2009
+============================================================
+
+In Makefile:
+	There are many examples in here.
+	For example, try
+
+		> make eg1
+		> make eg2
+		> ...
+	
+	The equations for examples 1 and 2 are
+		Taylor expansions of some sine-like functions.
+		So the coefficients are divided by factorials:
+			3!=6, 4!=24, 5!=120
+	Actually, our parser do not accept rational coefficients!
+	So the plotted curves are not what is intended.
+	This is remedied as examples 1a and 2a.
+
+============================================================
+============================================================

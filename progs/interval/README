@@ -1,0 +1,20 @@
+README file for progs/interval
+
+	Interval arithmetic was factored out from the mesh/cxy code, and
+	re-designed for general use in Core2 by Narayan Kamath.
+	Although BigFloat2 is a form of interval arithmetic
+	in Core2, its general use as number type is somewhat problematic 
+	because it is specialized to be the numerical engine
+	for the Expr class.   So it makes sense to write a general
+	interval arithmetic package.
+
+	Extended Interval Arithmetic (which allows division by
+	zero, resulting in two intervals) has to be tested here as well.
+
+	A future goal of Core2 is to admit Expr with intervals
+	at leaves.  This has many implications and applications!!
+
+--Chee (June 2010)
+
+ Since Core Library  Version 2.0
+ $Id: README,v 1.2 2010/06/22 07:58:56 exact Exp $

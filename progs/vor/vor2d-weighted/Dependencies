@@ -1,0 +1,209 @@
+vor2d.o: vor2d.cpp Timer.h QuadTree.h Box.h Wall.h Feature.h \
+ ../../../inc/CORE.h ../../../inc/CORE/Config.h \
+ ../../../inc/CORE/CoreDefs.h ../../../inc/CORE/Wrappers.h \
+ ../../../inc/CORE/Mpfr.h ../../../inc/CORE/RefCounting.h \
+ ../../../inc/CORE/BigInt.h ../../../inc/CORE/Gmpz.h \
+ ../../../inc/CORE/BigRat.h ../../../inc/CORE/Gmpq.h \
+ ../../../inc/CORE/BigFloat.h ../../../inc/CORE/CoreIO.h \
+ ../../../inc/CORE/CoreAux.h ../../../inc/CORE/BigFloat.inl \
+ ../../../inc/CORE/BFInterval.h ../../../inc/CORE/BigFloat2.h \
+ ../../../inc/CORE/Policies.h ../../../inc/CORE/BigFloat2.inl \
+ ../../../inc/CORE/Expr.h ../../../inc/CORE/ExprRep.h \
+ ../../../inc/CORE/poly/Sturm.h ../../../inc/CORE/poly/Poly.h \
+ ../../../inc/CORE/poly/PolyBase.h ../../../inc/CORE/IntervalT.h \
+ ../../../inc/CORE/poly/Descartes.h ../../../inc/CORE/RootBounds.h \
+ ../../../inc/CORE/Filters.h ../../../inc/CORE/ExprRep.inl \
+ ../../../inc/CORE/poly/PolyFun.h ../../../inc/CORE/Promote.h \
+ ../../../inc/CORE/Timer.h Vector.h Basic.h Point.h Corner.h UnionFind.h \
+ Intersection.h PriorityQueue.h Graph.h SimplePSinC.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h
+Corner.o: Corner.cpp Corner.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Wall.h Box.h UnionFind.h Intersection.h
+fileProcessor.o: fileProcessor.cpp
+QuadTree.o: QuadTree.cpp QuadTree.h Box.h Wall.h Feature.h \
+ ../../../inc/CORE.h ../../../inc/CORE/Config.h \
+ ../../../inc/CORE/CoreDefs.h ../../../inc/CORE/Wrappers.h \
+ ../../../inc/CORE/Mpfr.h ../../../inc/CORE/RefCounting.h \
+ ../../../inc/CORE/BigInt.h ../../../inc/CORE/Gmpz.h \
+ ../../../inc/CORE/BigRat.h ../../../inc/CORE/Gmpq.h \
+ ../../../inc/CORE/BigFloat.h ../../../inc/CORE/CoreIO.h \
+ ../../../inc/CORE/CoreAux.h ../../../inc/CORE/BigFloat.inl \
+ ../../../inc/CORE/BFInterval.h ../../../inc/CORE/BigFloat2.h \
+ ../../../inc/CORE/Policies.h ../../../inc/CORE/BigFloat2.inl \
+ ../../../inc/CORE/Expr.h ../../../inc/CORE/ExprRep.h \
+ ../../../inc/CORE/poly/Sturm.h ../../../inc/CORE/poly/Poly.h \
+ ../../../inc/CORE/poly/PolyBase.h ../../../inc/CORE/IntervalT.h \
+ ../../../inc/CORE/poly/Descartes.h ../../../inc/CORE/RootBounds.h \
+ ../../../inc/CORE/Filters.h ../../../inc/CORE/ExprRep.inl \
+ ../../../inc/CORE/poly/PolyFun.h ../../../inc/CORE/Promote.h \
+ ../../../inc/CORE/Timer.h Vector.h Basic.h Point.h Corner.h UnionFind.h \
+ Intersection.h PriorityQueue.h Graph.h
+Timer.o: Timer.cpp Timer.h
+Wall.o: Wall.cpp Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h Box.h UnionFind.h Intersection.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h
+vor2d.o: vor2d.cpp Timer.h QuadTree.h Box.h Wall.h Feature.h \
+ ../../../inc/CORE.h ../../../inc/CORE/Config.h \
+ ../../../inc/CORE/CoreDefs.h ../../../inc/CORE/Wrappers.h \
+ ../../../inc/CORE/Mpfr.h ../../../inc/CORE/RefCounting.h \
+ ../../../inc/CORE/BigInt.h ../../../inc/CORE/Gmpz.h \
+ ../../../inc/CORE/BigRat.h ../../../inc/CORE/Gmpq.h \
+ ../../../inc/CORE/BigFloat.h ../../../inc/CORE/CoreIO.h \
+ ../../../inc/CORE/CoreAux.h ../../../inc/CORE/BigFloat.inl \
+ ../../../inc/CORE/BFInterval.h ../../../inc/CORE/BigFloat2.h \
+ ../../../inc/CORE/Policies.h ../../../inc/CORE/BigFloat2.inl \
+ ../../../inc/CORE/Expr.h ../../../inc/CORE/ExprRep.h \
+ ../../../inc/CORE/poly/Sturm.h ../../../inc/CORE/poly/Poly.h \
+ ../../../inc/CORE/poly/PolyBase.h ../../../inc/CORE/IntervalT.h \
+ ../../../inc/CORE/poly/Descartes.h ../../../inc/CORE/RootBounds.h \
+ ../../../inc/CORE/Filters.h ../../../inc/CORE/ExprRep.inl \
+ ../../../inc/CORE/poly/PolyFun.h ../../../inc/CORE/Promote.h \
+ ../../../inc/CORE/Timer.h Vector.h Basic.h Point.h Corner.h UnionFind.h \
+ Intersection.h PriorityQueue.h Graph.h SimplePSinC.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h
+Box.o: Box.cpp Box.h Wall.h Feature.h ../../../inc/CORE.h \
+ ../../../inc/CORE/Config.h ../../../inc/CORE/CoreDefs.h \
+ ../../../inc/CORE/Wrappers.h ../../../inc/CORE/Mpfr.h \
+ ../../../inc/CORE/RefCounting.h ../../../inc/CORE/BigInt.h \
+ ../../../inc/CORE/Gmpz.h ../../../inc/CORE/BigRat.h \
+ ../../../inc/CORE/Gmpq.h ../../../inc/CORE/BigFloat.h \
+ ../../../inc/CORE/CoreIO.h ../../../inc/CORE/CoreAux.h \
+ ../../../inc/CORE/BigFloat.inl ../../../inc/CORE/BFInterval.h \
+ ../../../inc/CORE/BigFloat2.h ../../../inc/CORE/Policies.h \
+ ../../../inc/CORE/BigFloat2.inl ../../../inc/CORE/Expr.h \
+ ../../../inc/CORE/ExprRep.h ../../../inc/CORE/poly/Sturm.h \
+ ../../../inc/CORE/poly/Poly.h ../../../inc/CORE/poly/PolyBase.h \
+ ../../../inc/CORE/IntervalT.h ../../../inc/CORE/poly/Descartes.h \
+ ../../../inc/CORE/RootBounds.h ../../../inc/CORE/Filters.h \
+ ../../../inc/CORE/ExprRep.inl ../../../inc/CORE/poly/PolyFun.h \
+ ../../../inc/CORE/Promote.h ../../../inc/CORE/Timer.h Vector.h Basic.h \
+ Point.h Corner.h UnionFind.h Intersection.h

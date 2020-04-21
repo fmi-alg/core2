@@ -1,0 +1,59 @@
+README FILE
+===========
+Since Core Library Version 1.6
+
+We do simple tests to check IEEE number formats, and to catch exceptions.
+Some of these tests are not specific to Core Library, but
+developers may find this information useful.
+
+Programs:
+=========
+	ieeeFormat.cpp		-- gives various information about
+					the IEEE Format (endian, sizes, etc)
+	tDoubleValue.cpp	-- verifies that our Expr::doubleValue()
+					gives the correct double value
+	next.cpp		-- gives the next double value.
+	bigRand.cpp		-- creates 53-bit random integers
+					which fit into machine doubles
+	fpOverflow.cpp		-- uses the <fenv> library routines to
+					detect overflow/underflow exceptions
+
+CORE Information Related to Machine Arithmetic
+==============================================
+	CORE_EPS 		-- predefined constant equal to 2^{-52}.
+	Expr::doubleValue()	-- convertes an Expression to closest
+					machine double value
+	Expr::doubleInterval(lb,ub) -- returns two double values lb, ub
+					that are upper and lower bounds
+					on the exact value.
+	Let d be a double, e an int:
+
+	frexp(d, &e) 		-- sets e to the exponent part of d.
+	ldexp(d, e)  		-- returns the value d * 2^e.
+                                   (thus, we do a left-shift by y)
+
+================
+ADDITIONAL NOTES:
+================
+    IEEE double
+    ===========
+   	bit 63 -- sign (1 bit)
+   	bits 62-52 -- exponent (11 bits)
+   	bits 51-0 -- mantissa (52 bits)
+
+   	Negative Infinity Double: 0x fff0 0000 0000 0000
+   	Positve Infinity Double: 0x 7ff0 0000 0000 0000
+
+    IEEE float
+    ==========
+   	bit 31 -- sign (1 bit)
+   	bits 30-23 -- exponent (8 bits)
+   	bits 22-0 -- mantissa (23 bits)
+
+   	Negative Infinity Float: 0x ff80 0000
+   	Positve Infinity Float: 0x 7f80 0000
+================
+================
+
+
+

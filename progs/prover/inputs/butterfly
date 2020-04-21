@@ -1,0 +1,76 @@
+# file: butterfly
+#
+#	Butterfly Theorem:
+# 
+# 	Let A, B, C, D be four points on a circle (O).
+# 	E is the intersection of AC and BD. Through E 
+# 	draw a line perpendicular to OE, meeting AD at 
+# 	F and BC at G. Show that FE=GE.
+# 
+# 	Let E(0,0), O(u_1,0), A(u_2,u_3), B(x_1,u_4),
+# 	C(x_3,x_2), D(x_5,x_4), F(0,x_6) and G(0,x_7).
+# 
+# 	Therefore the hypothesis equations are:
+# 
+#	AO = BO:
+# 	  h_0 = x_1^2 - 2 u_1 x_1 + u_4^2 - u_3^2 - u_2^2 + 2u_1 u_2 = 0 
+#	AO = CO:
+# 	  h_1 = x_3^2 - 2u_1 x_3 + x_2^2 - u_3^2 - u_2^2 + 2u_1 u_2 = 0 
+#	Collinear(A, E, C):
+# 	  h_2 = -u_3 x_3 + u_2 x_2 = 0
+#	AO = DO:
+# 	  h_3 = x_5^2 - 2u_1 x_5 + x_4^2 - u_3^2 - u_2^2 + 2u_1 u_2 = 0 
+#	Collinear(B, E, D): 
+# 	  h_4 = -u_4 x_5 + x_1 x_4 = 0
+#	Collinear(A, F, D): 
+# 	  h_5 = -x_5 x_6 + u_2 x_6 + u_3 x_5 - u_2 x_4 = 0 
+#	Collinear(B, G, C): 
+# 	  h_6 = -x_3 x_7 + x_1 x_7 + u_4 x_3 - x_1 x_2 = 0
+# 
+# 	The conclusion is:
+# 
+# 	g = x_7 + x_6 = 0
+# 
+# 4 parameter, 7 dependent variables:  
+4 7 
+#
+# polynomial h_0
+0 1 2 4 -1
+0 -2 1 0 4
+0 1 2 3 -1
+0 -1 2 2 -1
+0 -1 2 1 -1
+0 2 1 0 1
+# polynomial h_1
+1 1 2 6 -1
+1 -2 1 0 6
+1 1 2 5 -1
+1 -1 2 2 -1
+1 -1 2 1 -1
+1 2 1 0 1
+# polynomial h_2
+2 -1 1 2 6 
+2 1 1 1 5
+# polynomial h_3
+3 1 2 8 -1
+3 -2 1 0 8
+3 1 2 7 -1
+3 -1 2 2 -1
+3 -1 2 1 -1
+3 2 1 0 1
+# polynomial h_4
+4 -1 1 3 8
+4 1 1 4 7
+# polynomial h_5
+5 -1 1 8 9
+5 1 1 1 9
+5 1 1 2 8
+5 -1 1 1 7
+# polynomial h_6
+6 -1 1 6 10
+6 1 1 4 10
+6 1 1 3 6 
+6 -1 1 4 5
+# polynomial g (hypothesis)
+8 1 1 10 -1
+8 1 1 9 -1

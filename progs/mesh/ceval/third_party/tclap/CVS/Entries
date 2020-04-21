@@ -1,0 +1,27 @@
+/AUTHORS/1.1/Tue Nov 23 23:42:05 2010//
+/Arg.h/1.1/Tue Nov 23 23:42:05 2010//
+/ArgException.h/1.1/Tue Nov 23 23:42:05 2010//
+/ArgTraits.h/1.1/Tue Nov 23 23:42:05 2010//
+/COPYING/1.1/Tue Nov 23 23:42:05 2010//
+/CmdLine.h/1.1/Tue Nov 23 23:42:05 2010//
+/CmdLineInterface.h/1.1/Tue Nov 23 23:42:05 2010//
+/CmdLineOutput.h/1.1/Tue Nov 23 23:42:05 2010//
+/Constraint.h/1.1/Tue Nov 23 23:42:05 2010//
+/DocBookOutput.h/1.1/Tue Nov 23 23:42:05 2010//
+/HelpVisitor.h/1.1/Tue Nov 23 23:42:05 2010//
+/IgnoreRestVisitor.h/1.1/Tue Nov 23 23:42:05 2010//
+/MultiArg.h/1.1/Tue Nov 23 23:42:05 2010//
+/MultiSwitchArg.h/1.1/Tue Nov 23 23:42:05 2010//
+/OptionalUnlabeledTracker.h/1.1/Tue Nov 23 23:42:05 2010//
+/StandardTraits.h/1.1/Tue Nov 23 23:42:05 2010//
+/StdOutput.h/1.1/Tue Nov 23 23:42:05 2010//
+/SwitchArg.h/1.1/Tue Nov 23 23:42:05 2010//
+/UnlabeledMultiArg.h/1.1/Tue Nov 23 23:42:05 2010//
+/UnlabeledValueArg.h/1.1/Tue Nov 23 23:42:05 2010//
+/ValueArg.h/1.1/Tue Nov 23 23:42:05 2010//
+/ValuesConstraint.h/1.1/Tue Nov 23 23:42:05 2010//
+/VersionVisitor.h/1.1/Tue Nov 23 23:42:05 2010//
+/Visitor.h/1.1/Tue Nov 23 23:42:05 2010//
+/XorHandler.h/1.1/Tue Nov 23 23:42:05 2010//
+/ZshCompletionOutput.h/1.1/Tue Nov 23 23:42:05 2010//
+D

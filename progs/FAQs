@@ -1,0 +1,443 @@
+FAQs for Programming in Core Library
+--------------------------------------
+TABLE OF CONTENTS:
+=================
+	--0: Overview
+	--1: How to check the default core options?
+	--2: What controls precision in CORE?
+	--3: What is Garbage Digits?
+	--11: What is the cut-off bound and how can I use it?
+	--12: What is the escape bound and how can I use it?
+	--13: What is the difference between the escape bound and cut-off bound?
+	--14: How do I insert my error message into core_error()?
+	--15: Some examples of timing of Core Library?
+	--16: Different Ways to Automatically Compile into different CORE LEVELS
+	--17: Examples of compiling with different number kernels?
+	--18: How to do variant compilations of Core library?
+	--19: How to do compilations of user programs on different platforms?
+	--20: How do I replace the RootBound/Filter/Kernel modules of Expr?
+	--21: How do I use Eclipse with Core?
+	--22: How to use debuggers with Core?
+	--23: Unit tests with different number types in Core?
+	--24: Mysterious errors with loads (ld)?
+	--31: What are the static objects in Core?
+	--41: How to check out additional files under progs
+	--51: Editors
+	--999: END
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--0: Overview
+	We test our CORE programs under the $(CORE)/progs directory
+	of core library.  This file is in this directory, for instance.
+	These FAQs will help you work in this environment.
+	For orientation, you should read the README file that is
+	distributed with Core Library.  If you installed Core Library,
+	you probably did this already.
+
+	Our main development tool is the "Makefile"
+	and you will see that every subdirectory will have one. 
+	To do your project, you can begin by creating a new directory, say
+	"myproj" under $(CORE)/progs.  You can copy one of the Makefiles from
+	the other directories into $(CORE)/progs/myproj.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--1: How to check the default CORE options?
+	A:
+	The behavior of Core Library are controlled by values of
+	environmental variables, called CORE options.  To find your
+	current values, go to the root of CORE, and type "make options"
+	(also, "make alloptions").  Here is a sample output:
+	==============================================================
+	   YOUR CURRENT CORE ENVIRONMENT VARIABLES ARE: 
+	     PLATFORM:	 mac
+	     LINKAGE:	 static
+	     VAR(iant):	
+	     GMP_PREFIX:	 /Users/cheeyap/core/core2/gmp
+	     PACKAGE:	 core
+	     VERSION:	 2.0.0
+	     CORE_PATH:	 /Users/cheeyap/core/core2
+	     AR(chiver):	 ar rcs
+	     CC(compiler):	 cc
+	     CXX(compiler):  g++
+	     CXXFLAGS:	 -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dmac
+	     CORE_CXXFLAGS	 -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dmac
+	     LDFLAGS:	
+	     CORE_LDFLAGS:	
+	     EXETYPE:	
+	     OS:		 Darwin
+	==============================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--2: What controls precision in CORE?
+	A: There are several parameters that do this, and you can look them
+	up in the file CoreDefs.h.  It is important
+	to understand four groups of related concepts:
+
+	a) Error versus precision
+	b) Relative, absolute, and composite precision.
+	c) Bits versus digits
+	d) Input, output, and computational precision
+
+	a) "Error is the difference between the exact value (as given by
+	the expression) and the approximated value.  But "Precision" are
+	user-specified values to control the error.
+	
+	b) We assume you know the concepts of absolute and
+	relative precision.  "Composite precision" is given by a
+	pair (A,R) of integers.  This says that
+	the error must either have absolute precision of A or relative
+	precision of R.  Thus, if A=CORE_INFTY, it forces you to have
+	relative precision of R.
+
+	The main global parameter is the default absolute and relative
+	precision, "defAbsPrec" and "defRelPrec".  Typically,
+	one of them is set to CORE_INFTY (infinity),
+	and the other one becomes operative.   E.g.,
+
+		setDefaultRelPrecision(1000);
+
+	Will set defAbsPrec=CORE_INFTY, and defRelPrec=1000.
+	This tells CORE to evaluate all expressions to 1000 bits
+	of relative precision.  Note that relative precision implies
+	knowing the sign of the expression.  
+	
+	c) Precision and error parameters are logarithms.  If you take log
+	base 2, you are measuring in "bits" and if you take log base 10, you
+	are measuring in "digits".   Thus, "defAbsPrec=1000" means that
+	the absolute error is at most 2^{-1000} (1000 bits).
+	Typically, internal computation uses
+	bits measure ("defAbsPrec" and "defRelPrec" are in bits).  But precision
+	for input and output are in digits (humans understand this
+	measure better, because what we read or type are usually in digits). 
+
+	d) Both "defAbsPrec" and "defRelPrec" control the computation.
+	For BigFloats, you need other parameters like "defBFdivRelPrec" which
+	controls how precise to do a BigFloat division (since the result
+	of division must usually be approximated).
+	But there are other parameters controlling input and output precision.
+	Just because you compute to 1000 bits of accuracy does not
+	mean that you have to print all the 1000 bits.  That is controlled
+	by the output precision parameter "defOutputDigits".   
+
+	Input precision is needed because
+	you may input an exact value like "1/3" and assign it to
+	a BigFloat, which must know how precision to approximate "1/3".
+	E.g. "defInputDigits" is set to 15, then we will approximate "1/3"
+	to 15 digits before assigning it to the BigFloat.  Output precision
+	controls how many digits you will see when you print a value.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--3: What is Garbage Digits?
+	A: When a value is approximate, we expect the
+	last digit to be off by +/- 1.   For instance, 12.34
+	we expect the actual value to be between 12.33 and 13.35.
+	Any output with more than 4 digits, even if it lies in the
+	correct range of [12.33, 12.35], is considered have garbage
+	digits.  E.g., the output 12.34567 is considered to have 3
+	garbage digits.   This phenomena arises even if the internal
+	approximation is behaving correctly because the internal
+	representation is in binary and output is in decimal.
+	CORE LIBRARY WILL NEVER PRINT GARBAGE DIGITS.
+	For illustration of this, see progs/testIO/noGarbageDigits.cpp.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--11: What is the cut-off bound and how can I use it?
+	A:  The cut-off bound says that no expression is approximated to
+	    more than many bits of ABSOLUTE precision.
+
+	    It is a useful tool for speeding up computation, and for debugging.
+	    When an exact comparison cannot be performed because of cut-off
+	    bound, you will get a message in the Core_Diagnostic file in
+	    the current directory.
+
+	    For examples of its use, see bounds/tCutOffBound.cpp.   
+	    The following two functions can be used:
+
+		get_cut_off_bound(), set_cut_off_bound()
+	
+	    The default cut-off bound is CORE_INFTY.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--12: What is the escape bound and how can I use it?
+	A:  The escape bound serves as the substitute root bound for
+	    transcendental expression, and is the number of absolute bits
+	    of precision to which we will refine such expressions.
+
+	    When an exact comparison cannot be performed because of the escape
+	    bound, you will get a message in the Core_Diagnostic file in
+	    the current directory.
+
+	    For examples of its use, see bounds/tEscapeBound.cpp.   
+	    The following two functions can be used:
+
+		get_escape_bound(), set_escape_bound()
+
+	    The default escape bound is currently 10000.
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--13: What is the difference between the escape bound and cut-off bound?
+	A: "Escape" is the euphemism for transcendence, and is used
+	   in place of a true zero bound.   So, escape bound is part
+	   of the root bound mechanism. On the other hand, the cut-off
+	   bound is outside the root bound mechanism, but is part of
+	   the sign evaluation mechanism.  It simply prevents evaluation of
+	   an expression above this bound while trying to determine sign.
+	   Thus, it over-rides an root bound.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--14: How do I insert my error message into core_error()?
+	A: core_error() is called when CORE encounters a problem
+	   such as divide by zero or hitting an escape or cut-off-bound.
+	   If you want your own message to be printed when this happens,
+	   you can use the function
+		set_error_message("...my message...")
+	   near the place where you expect this error to occur.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--15: Some examples of timing of Core Library?
+	A:
+	Look at examples in prog/testFilter.cpp.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--16: Different Ways to Automatically Compile into different CORE LEVELS
+	A:
+	Suppose you have a program you want to be compiled into different
+	CORE LEVELS (1, 2 and 3).  Of course you can do this by hand, but it
+	would be nice to automate this in the Makefile.   This exploits
+	CORE's philosophy of "write once, compile to desired accuracy".
+
+	Note that if your program calls the Core Extension Library
+	(corex), you need to make sure that you link to the extension
+	library that has the correct level.
+
+	There are several different ways to accomplish this, and examples
+	of each of these ways are found in various folders under $(CORE)/progs.
+
+	METHOD 1: Automatically compile at 3 LEVELs
+	   See the Makefile under progs/gaussian where the
+		program "gaussian" is compiled into 
+	  	three versions, "gaussian_1", "gaussian_2", "gaussian_3".
+	   To accomplish this, provide suitable rules for each
+		level in the Makefile.
+		
+	METHOD 2: Choose LEVEL at command line when calling the Make program.
+	   Under progs/demos, you can invoke make with desired LEVEL:
+
+		> make LEV=n " (where n=1,2,3)
+
+	METHOD 3: Another variant of METHOD 1
+	   Under progs/mesh/cxy, we wrote the Makefile so that you can
+		type "make all" or "make testall"
+		to compile and test different versions of the
+		meshing program "cxy.cpp".
+	
+	METHOD 4: This method does not use Makefiles but writing templated
+		methods.   E.g., write a templated method "RUN<NT>" that is compiled
+		at LEVEL 4, then call RUN<NT> with different number types for NT.
+
+	   Look under progs/bareiss for this approach.  In the program
+		inverse.cpp, we wrote a templated function called
+		run<NT>() which performs the desired tests
+		using different number types (NT). Now we can call this function:
+
+		  run<Expr>(); run<BigFloat>(); run<machine_double>; etc.
+		
+	METHOD 5: Compiling library files in different CORE LEVELS.
+		Look under $(CORELIB)/ext/Makefile.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--17: Examples of compiling with different number kernels?
+	A:
+	Since our classes are templated, it is often possible
+	to plug in different number types (or kernels).   For
+	example, the coefficients of the polynomial class is
+	a template class NT, and NT can be
+	int, long, double, BigFloat, BigInt, BigRat, Expr.
+	
+	See examples for doing this under (try "make moretest")
+	   CORE/progs/radicals
+	   CORE/progs/curves
+	   CORE/progs/poly
+	The above were from Core1.  The following are based on
+	Narayan's contribution to make a common CORE interface for all three
+	levels:
+	   CORE/progs/mesh/{ceval,benchmark}
+	   CORE/progs/vor/vor2d
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--18: How to do variant compilations of core library?
+	A:
+	It may be useful to have simultaneous different versions of the
+	CoreLibrary around (e.g., one with debugging info, one that
+	is optimized, etc).   This is done by setting the variable VAR
+	in CORE/Make.config.  E.g. VAR=, VAR=opt, VAR=debug.
+	Also, we need Core Library compiled at various
+	levels of accuracy (CORE_LEVEL 1,2,3 or  4).
+	You will see various examples of this in our prgrams.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--19: How to do compilations of user programs on different platforms?
+	A:
+	Suppose you work on both mac and cygwin platforms
+	and you want your Makefile to work on both platforms.
+	The variable PLATFORM defined in CORE/Make.config can be used
+	to modify the behavior of your Makefile using the construct:
+		ifeq ($(PLATFORM), mac)
+		  ...
+		else
+		  ...
+		endif
+	See an example in CORE/progs/bounds/Makefile.
+		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--20: How do I replace the RootBound/Filter/Kernel modules of Expr?
+	A:
+	In the re-design of Core Library under Core2, the class
+	Expr is a typedef.  Here is the current default typedef in Core2:
+	
+	    typedef ExprT<BfmsskRootBd_double<BigFloat2>, 
+		BfsFilter<BigFloat2>, 	BigFloat2> Expr;
+
+	This can be found around line 550 in the file inc/CORE/Expr.h.
+	In general, the class ExprT is templated with three classes:
+
+		ExprT< RootBound,  Filter,  Kernel>
+
+	You can replace any one of them with your own implementation,
+	or with some alternatives we have implemented.   Go to the
+	file Expr.h, and un-comment one of our pre-canned alternatives
+	if you want to do some experimentation.
+
+	To see this in action, please look at our experiments described
+	in testFilter/README.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--21: Can I use Eclipse with Core?
+	A: Yes.  Eclipse (like any IDE) is a powerful programmers tool.
+	For researchers who occasionally programs, it will pay off even if
+	even if you only use its basic capabilities, to browse and explore
+	CORE.  Look under $(CORE)/doc/ for a CORE-specific eclipse
+	information file (or go to the CORE download site).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--22: How to use debuggers with Core?
+	A:
+	The easiest is to set the variable VAR in $(CORE)/Make.config
+	to VAR=Debug.  If this version of the library had never been
+	created before, then compile the debugging version as follows:
+	   > cd $(CORE)
+	   > make veryclean
+	   > make
+	Now you will see the debugging version of the library called
+	libcore++Debug.a, and libcorex++Debug_level*.a  under
+	$(CORE)/lib.  Previous versions would still be around.
+
+	We usually use the gnu debugger "gdb".  To debug the program
+	called test.cpp, first compile it with the above library
+	and then invoke "gdb":
+	   > gdb ./test
+
+	This will open the gdb prompt. Then you can type "run" to run
+	the program , and it will halt when it encounters an error. 
+
+	   > quit :	get out of gdb
+	   > print <variable_name> : to inspect a variable
+	   > bt :   for a full stack trace 
+	   > help :  list of "classes" of commands
+	   > help <class> :	list of commands in <class>
+	   > help stack : commands in class "stack" (e.g., up, down, etc).
+	
+	Other useful commands are up/down to move up/down the stack frames
+	and step/next to step into or step over lines of code.
+	You can find a useful list of commands here :
+	   http://users.ece.utexas.edu/~adnan/gdb-refcard.pdf
+
+	N.B.  Thanks to Narayan for providing this outline.
+	You can also use the debugger in eclipse (which calls
+	gdb), but it is a bit harder to setup.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--23: Unit tests with different number types in Core?
+	A:
+	One way is to set CORE_LEVEL to 4,
+	and plug in various number types to a templated test:
+
+	    template <typename NT> void Test();
+ 
+	You then plug in different number types for NT.
+	Look under progs/interval for an example to exercise the
+	interval class, where NT was chosen to be:
+	   Expr, BigFloat, machine_double, DoubleWrapper.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--24: Mysterious errors with loads (ld)?
+	A:
+	If you see errors from the loader complaining of "duplicate symbol",
+	it is probably because some templated function was defined more than once.
+	The solution is to "inline" the duplicated function.  This problem sometimes
+	is masked by compilers that automatically do "inlining" of some functions,
+	but shows up in compilers that do not do "inlining".  Since "inlining" is only
+	a "request", it is conceivable the attempted "inline" solution fail.
+	So far, we have not seen this error.
+
+	Here is an example of a compiler complain of this sort:
+
+	##################################################
+	... "make test" in progs/mesh/cxy ...
+	...
+	> g++-4.2  cxy_1.o box_1.o display_1.o \
+	    -L../../../lib -L../../../mpfr/lib -L../../../gmp/lib \	                             -lcore++ -lmpfr -lgmp  -lglut -lglu -lGL -lcorex++Debug_level1 -o cxy_1
+
+	ld: duplicate symbol CORE::showIntervals(char*,
+	     std::vector<std::pair<CORE::BigFloat, CORE::BigFloat>,
+	     std::allocator<std::pair<CORE::BigFloat, CORE::BigFloat> > >&)
+		in display_1.o and box_1.o
+	collect2: ld returned 1 exit status
+	make[1]: *** [cxy_1] Error 1
+
+##################################################
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--31: What are the static objects in Core?
+	A: We currently have two such objects: ZeroConst and OneConst,
+	whose values are simply 0 and 1. ZeroConst is useful because
+	our expressions are initialized to zero by default.  Using
+	this static object avoids unnecessary allocation and deallocation
+	of memory.   Likewise, One Const is useful for initializing
+	the anary operator Product.  Both constants are defined in
+	inc/CORE/Expr.h.  These objects are constructed in the source file
+	src/CoreExpr.cpp.  But there is a problem: if two compilation units
+	creates static objects, the C++ standard says that we
+	cannot rely on any dependencies among them (either one may be
+	created first).  Unfortunately, ext/LinearAlgebra.cpp also has
+	static vectors of zeros, and these depend on ZeroConst.  This
+	can sometimes cause bus errors (it happens on MacOS, but
+	not on Cygwin).  We have go give up this dependency in
+	general.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--41: How to check out additional files under progs folder?
+	A: If you checked out from our SVN repository (since 2014),
+	we have arranged to download only some basic programs of
+	Core Library.  But some subfolders in progs are work in progress
+	and/or our experimental platform. Some (especially those on robot
+	motion planning) are very large.  But suppose you want to download
+	some of our robotics files:
+		> cd ${myCORE}
+		> cd progs
+		> svn up --set-depth immediates robotics
+	This will download many top level folders and files under
+	progs/robotics.  Next, if you decide to download the disc subfolder,
+	you can do this:
+		> cd robotics
+		> svn up --set-depth infinity disc
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--51: Editors
+	Our text files (README, FAQs, etc) uses tabs to indent paragraphs
+	indent, and are optimized for browsing by editors such as gvim
+	which can do automatic folding/unfolding of text files based on such
+	indents.  This FAQs file is an example.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+--999: END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,66 @@
+============================================================
+README file for mesh
+Core Library (since version 2.0)
+-- Jan 2010
+============================================================
+Author:
+	Long Lin (2008), Shuxing Lu (2009), Narayan Kamath (2010)
+	Shang Wang (2011).
+
+Files:
+	README		-- this file
+	Makefile	-- Type "make" to compile programs in the
+				subdirectories 
+Directories:
+	data		-- This directory has various test curves and output
+	cxy		-- This is the "balanced" Cxy algorithm
+	PV		-- Our implemenation of Plantinga-Vegter's algorithm
+	Snyder		-- Our implemenation of Snyder's algorithm
+	krawczyk	-- Implementation of Krawczyk interval operator for
+			   solving bivariate systems
+	ceval		-- Implementation of CEVAL complex root algorithm of
+			   Sagraloff-Yap 
+	benchmark	-- Benchmarks for ceval, krawczyk, etc
+			   You can get visualization for ceval here.
+	miranda		-- Implementation of the modified Miranda test.
+
+Description:
+	This directory has various subdirectoris containing mesh-related code:
+
+(1) Subdirectories cxy and PV:
+	They implement the Cxy and Rect Algorithms
+	for Approximating Algebraic Curves, based on the paper
+	   "Adaptive Isotopci Approximation of NonSingular Curves:
+		the Parametrizability and Nonlocal Isotopy Approach"
+	by Long Lin and Chee Yap (Proceedings of SoCG 2009).
+	
+	The algorithms of Plantinga-Vegter (PV) and Snyder for
+	curve approximations are also implemented, for comparison.
+	
+	All these algorithms are based on the "subdivision method"
+	which begins with a rectangular region and repeatedly
+	subdivides them.  The 3-D version of such methods usually
+	produces a "mesh" (we plan to go to the 3-D version eventually).
+	
+	The original implementation was by Long Lin, in Java.
+	This is ported to Core Library by Shuxing Lu.
+	Narayan further improved the code, and factored out various modules.
+
+(2) Subdirectories krawczyk, ceval and benchmark:
+	These are from Narayan's thesis at Oxford (2010).  They implement
+	the various Newton methods for root isolation for a pair of polynomials,
+	and also the CEVAL algorithm.   In Benchmark, these algorithms
+	are compared.
+	The results in ceval/krawczyk/benchmark applications form the
+	Masters Thesis of Narayan Kamath from Oxford University Computing
+	Laboratory (Sep 2010), supervised by Irina Voilescu and Chee Yap.
+
+(3) Subdirectory miranda:
+	This is the summer project of Shang Wang (2011)
+	implementing the modified Miranda test, which led to an
+	implementation of the new curve arrangement algorithm of Sharma and Yap.
+			
+
+============================================================
+$Id: README,v 1.7 2010/07/14 16:09:03 exact Exp $
+============================================================

@@ -1,0 +1,2 @@
+# output v-polynomial from convertPoly for data/nroot5
+y^5 + (-10x^2)y^3 + (5x^4)y

@@ -1,0 +1,10 @@
+#Polynomials with degree less than 20 greater than 10
+chebyshev20.pol
+chrma_d20.pol
+geom3_20.pol
+chrmc_d11.pol
+geom4_20.pol
+hermite20.pol
+kir1_20.pol
+kir1_20_mod.pol
+laguerre20.pol

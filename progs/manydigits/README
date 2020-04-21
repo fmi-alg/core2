@@ -1,0 +1,49 @@
+README FILE for manydigits
+==========================
+	Problems from "Many Digits" Friendly Competition held
+	at Radboud University, Nijmegen, The Netherlands, Oct 3-4, 2005
+	http://www.cs.ru.nl/~milad/manydigits/
+
+REMARK:
+This is somewhat obsolete for Core2.
+Look under progs/core2paper/many_digits for update.
+--Chee (2010)
+
+============================================================
+		PRACTICE PROBLEMS:
+============================================================
+Compute each of the following expressions to 10^4 digits:
+
+############################################################
+P01:	sin(sin(sin(1)))
+
+	To Do:
+	Change hypergeom package so that
+	(1) it returns a BigFloat with err, not an Expr
+	(2) it takes a BigFloat input, not an Expr
+	Also need the ability to store partial
+	computations which can be re-started, in case the
+	original precision is insufficient!
+
+	TIME:
+		Sep 6, 2005: this time is for the Expression version
+		It takes 58 sec. on jinai, without the output.
+		It also takes 58 sec. on jinai, with the output.
+
+		To speedup, we avoid doing argument reduction (which
+		reads from File).  This saves 1 second.
+
+############################################################
+
+############################################################
+P02:	sqrt(Pi)
+############################################################
+
+############################################################
+P03:	sin(e)
+############################################################
+
+############################################################
+P04:	e^{Pi * sqrt(163)}
+############################################################
+

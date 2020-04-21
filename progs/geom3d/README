@@ -1,0 +1,60 @@
+README file
+
+========================================================================
+DEMO of Nonrobust Geometric Operations
+========================================================================
+
+We perform some very basic geometric operations:
+	 intersect two lines (in 2D)
+	 a line and a plane (in 3D)
+Then we check if the intersection point P (assuming it exists)
+lies on one of the original line L.  
+If there were no errors, then of course, P must lie on L.
+
+These tests are carried out in two programs 
+	line3d.ccp and line2d.cpp.
+When these programs are run in Level 3, there will be no
+errors.  In Levels 1 and 3, there is a high probability of error.
+To run these programs at Levels 1, 2 and 3, type
+
+	> make testall
+
+--Chee Yap
+
+========================================================================
+Description of the programs:
+========================================================================
+
+1) line3d.cc
+
+   This determines the relative disposition of the following two lines:
+
+          L1 : (0, 0, 0) --- (sqrt(i), sqrt(j), 1) and
+          L2 : (1, 1, 0) --- (sqrt(i)+1, sqrt(j)+1, 1)
+
+   where i, j are in the range [0, 10).  These two lines must satisfy
+   exactly one of the following predicates:
+
+   	"isSkew", "isParallel" and "intersect".
+
+   The correct answer should be "isSkew" in all cases.  
+   But 10 of the answers are wrong at level 1.
+
+2) line2d.cc
+
+   This computes the intersection point of the plane 
+
+ 		P: sqrt(2)*x + y + z - 1 = 0
+
+   with the line:
+
+               L[i,j] : (0, 0, 0) --- (sqrt(i), j*sqrt(j), 3)
+
+   where i, j are in the range [0, 10).  Let P[i,j] be the intersection
+   point.  We then evaluates the predicate
+
+		"is P[i,j] on the plane P?"
+
+   The correct answer should be "yes" in every case.
+   But 27 of the answers are wrong at level 1.
+

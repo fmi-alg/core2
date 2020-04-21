@@ -1,0 +1,37 @@
+# file: p2d_10
+#	This input file has 10 points
+# 	It can be read by
+#
+#		readPoints(istream iS, Point2d * pA, int MaxN, int N=0)
+#
+# 	to illustrate the variants we allow for specifying points:
+#	The NORMAL format for a sequence of points is
+#		( x1 , y1 ) ( x2 , y2 ) ... ( xN, yN)
+#	The important thing to note is that you must not have commas
+#	between successive points.  But omitting "(" or "," or ")" turns
+#	out to be acceptable!
+
+10		# This says there are 10 points following.
+		# If there are more than 10 points, the rest is ignored.
+		# If less, it is also ok.
+		# This value can be omitted if N is given directly
+		# as the 4th argument to readPoints().
+(1, 1)		# point 1 -- this is the "normal" format.
+		#		When you deviate from this, the
+		#		result may be somewhat unpredictable
+(-1 +2)		# point 2 -- note that "," is omitted here but it is OK
+(1.0, -3	# point 3 -- note that the ")" is omitted (but it is still OK)
+ 1.0, 4.0)	# point 4 -- note that "(" is omitted (but OK)
+9.2 -5.0	# point 5 -- just two plain numbers are given (also OK)
+  8.1     6.0	# point 6 -- just like point 5
+7.0, 7.0	# point 7 -- just the comma separating the numbers (also OK)
+(.0, 8),	# point 8 -- normal, but an extra "," after ")" is bad!!!!
+		#		This causes unpredictable errors down stream
+(1.0  9)	# point 9 -- this is normal, but it is messed up by the
+		#		the previous extra comma
+(1  -10)	# point 10 -- this is normal, it is still messed up by the 
+		#		the last extra comma
+(1 11)		# point 11 -- this point will be ignored
+(1 12)		# point 12 -- this point will be ignored
+
+

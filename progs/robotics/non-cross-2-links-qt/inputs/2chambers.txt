@@ -1,0 +1,82 @@
+# file: 2chambers.txt
+#
+# 	This produces an interesting environment for a 2-link robot.
+#	It consists of two connected annulus corridors:
+#
+#	    ------------
+#	    |  ______  |
+#	    |  |    |  |
+#	    |  |    |  |_________
+#	    |  ------  _______  |
+#	    |________  |     |  |
+#	            |  |     |  |
+#	            |  |_____|  |
+#	            |___________|
+#
+# 	-- Chee Yap, July 22, 2013.
+#
+# 	Notes:
+#	I have not yet checked that the orientations
+#	of the polygons are correct.
+#
+##################################################
+# Here is the xfig figure
+#	(with suggested start/goal configurations for 2-link robot)
+#
+# #FIG 3.2  Produced by xfig version 3.2.5b
+# Landscape
+# Center
+# Inches
+# Letter  
+# 100.00
+# Single
+# -2
+# 1200 2
+# 2 3 0 1 0 2 250 -1 32 0.000 0 0 -1 0 0 9
+# 	 4800 1200 4800 4200 7200 4200 7200 6600 10200 6600 10200 3600
+# 	 7800 3600 7800 1200 4800 1200
+# 2 2 0 1 0 7 150 -1 20 0.000 0 0 -1 0 0 5
+# 	 7800 4200 9600 4200 9600 6000 7800 6000 7800 4200
+# 2 1 0 3 0 7 50 -1 -1 0.000 0 0 -1 1 0 3
+# 	0 0 3.00 90.00 165.00
+# 	 5175 2400 5175 1500 6720 1500
+# 2 1 0 3 0 7 50 -1 -1 0.000 0 0 -1 1 0 3
+# 	0 0 3.00 90.00 165.00
+# 	 8400 6300 7500 6300 7500 4755
+# 2 2 0 1 0 7 50 -1 20 0.000 0 0 -1 0 0 5
+# 	 5400 1800 7200 1800 7200 3600 5400 3600 5400 1800
+# 
+##################################################
+# Here is the conversion into our file format:
+#
+# Number of Points:
+16
+# Definition of Points:
+
+# (1) 8 points for the outer polygon:
+
+4800 1200 4800 4200 7200 4200 7200 6600
+10200 6600 10200 3600 7800 3600 7800 1200
+
+# (2) 4 points for one inner polygon:
+
+7800 4200 9600 4200 9600 6000 7800 6000
+
+# (3) 4 points for another inner polygon:
+
+5400 1800 7200 1800 7200 3600 5400 3600 
+
+# NUMBER OF POLYGONS:
+3
+
+# First Polygon:
+1 2 3 4 5 6 7 8 1
+
+# Second Polygon:
+9 10 11 12 9
+
+# Third Polygon:
+13 14 15 16 13
+#13 16 15 14 13
+
+##################################################

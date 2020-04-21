@@ -1,0 +1,119 @@
+README File for "rod" demo
+
+This project is an extension of the "ball" robot project
+(completed September 2013)
+was originally undertaken by Surin Ahn for
+the 2013 Siemens Math, Science, Technology Competition.
+Surin Ahn was a Regional Finalist (one out of 100 students nationwide),
+from Mamoroneck Union Free School District, New York.
+
+With Ziyao, we first improved the graphical interface for visualizing 3D,
+and also extended the robot to a 5DOF robot, namely a rod robot.
+We also began to factor the code into the general framework
+of Soft-Subdivision Search (SSS) so that we can reuse the components
+in our related applications.
+
+--Chee Yap, Ziyao Wei (Apr 2014)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Refactoring of Code:
+	We begin the process of modularizing program into the
+	general SSS framework.
+
+	Modules
+
+	1. main.cpp
+		The main entry into our program.
+		GUI interfaces are here
+
+	2. robot/
+		ball.h
+		rod.h
+		pyramid.h
+
+ 	3. sss/
+		SoftSubdivisionSearch.cpp
+		SoftSubdivisionSearch.h
+ 		UnionFind.h
+ 		Graph.h
+
+	4. predicate/
+ 		ConfBox3dPredicate.cpp
+ 		ConfBox3dPredicate.h
+
+	5. subdivision/
+ 		ConfBox3d.cpp
+ 		ConfBox3d.h
+ 		Box3d.h
+ 		Rot3dSide.h
+ 		Status.h
+
+	6. geometry/
+ 		Obstacle.h
+ 		Corner.h
+ 		Wall.h
+ 		Edge.h
+ 		Vector.h
+
+	7. strategy/
+ 		PriorityQueue.h
+
+	8. path/
+		bfs.h
+
+	9. utility/
+ 		Parser.h
+ 		Timer.h
+ 		RenderUtils.h
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TODO:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+(1) Some motion is too fast.  Users should be able to adjust the animation speed.
+(2) We want the ball to move more smoothly.
+	Suppose you first compute a number (F) of frames (using the user
+	choice for speeding up the demo).  Faster speed corresponds to smaller F.
+	Sum up the length of all the line segments in a path.
+	Call this total length L.  Intuitively, you would like
+	to show a frame for every L/F distance.
+	If a segment has length s, then you display  1+ floor(sF/L) frames
+	for that segment.
+(3) Default viewpoint of the demo.
+	For each demo, we want be specify (using the Makefile)
+	the most useful initial viewing point.
+	In the GLU library, there is a function called
+		gluLookAt(eyeX, eyeY, eyeZ, atX, atY, atZ, upX, upY, upZ)
+	specify the "eye" position, "look-at" position, and a direction for "UP".
+	So we want to add to the following last line to your call:
+
+	./ball $(interactive) \
+	        $(startX) $(startY) $(startZ)  $(goalX) $(goalY) $(goalZ) \
+		$(epsilon) $(radius) $(fileName) \
+		$(boxWidth) $(windowPosX) $(windowPosY) \
+		$(Qtype) $(seed)  $(inputDir) \
+		$(xtrans) $(ytrans) $(ztrans) $(scale) \
+		$(eyeX) $(eyeY) $(eyeZ) $(atX) $(atY) $(atZ) $(upX) $(upY) $(upZ) \
+		&
+(4) Features:
+	Reset: We should be able to reset the viewing position to the original,
+		See the latest 2-links example for many of such features.
+	Axes: the origin and the x/y/z axes should be drawn
+		(helps us understand construction of obstacles)
+	Constrained Rotation: it is unlikely we need to see the motion from
+		below the obstacles.  Restrict the ability to completely
+		rotate the viewpoint (make it roughly 2.5 degrees of freedom)
+(5) Input format:
+	Rectangles or parallellograms are very useful for constructing environments:
+		we should allow the input of 3 points to
+		generate the fourth point when desired.
+(6) Generate more complex scenes:
+	need some tools for this
+(7) Transparencies:
+	the obstacles should allow some transparency so we can see obscured ball motion.
+(8) Multiple views:  should be able to set up two simultaneous views
+	(e.g., top view and side view)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

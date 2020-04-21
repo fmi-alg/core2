@@ -1,0 +1,33 @@
+============================================================
+README file for radical
+
+Description:
+	Demonstrate the usage of radical leaf node
+
+	Basic usage:
+
+		Expr e = radical(n, m);
+
+	where n is any of the following types:
+		BigInt, Expr, BigRat, BigFloat, int.
+	It will create a node whose value is the m-th root of n.
+	
+	This is not defined if n is negative.
+
+Author:
+	Chee Yap, Zilin Du, Vikram Sharma, June 2003
+
+$Id: README,v 1.2 2010/05/28 16:17:09 exact Exp $
+============================================================
+
+Files:
+	README		-- this file
+	Makefile	-- Type "make p=xxx" to compile the file xxx.cpp
+	tRadical.cpp	-- test radical(NT, m)
+	tUC.cpp		-- test "small" expression from Uniformity
+		           Conjecture of Richardson.  The examples come
+		           from Simon Langley.
+
+--Zilin,Chee
+June 18, 2003
+

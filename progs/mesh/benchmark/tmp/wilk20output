@@ -1,0 +1,21 @@
+wilk20.pol
+['./main_ceval', '--poly ../../data/frisco/wilk20.pol', '--use_root_bounds', '--min_box_size 0.01']
+['BOX STATISTICS: \n   iters', '40557']
+['   includes', '40']
+['   splits', '10139']
+['\n   ambiguous', '0']
+['   exc_c0', '30282']
+['   exc_c1', '0']
+['time', '155937']
+['output', '12\n']
+wilk20.pol
+['./main_ceval', '--poly ../../data/frisco/wilk20.pol', '--use_root_bounds', '--min_box_size 0.01', '--no_use_inclusion']
+['BOX STATISTICS: \n   iters', '40781']
+['   includes', '0']
+['   splits', '10195']
+['\n   ambiguous', '232']
+['   exc_c0', '30354']
+['   exc_c1', '0']
+['time', '161866']
+['output', '7\n']
+wilk20 & (time)[ceval]155937 & [ceval_ni]161866 & \\

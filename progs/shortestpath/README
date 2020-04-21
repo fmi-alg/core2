@@ -1,0 +1,11 @@
+README for shortestpath
+
+Among elementary geometric problems, computing shortest paths
+is one of the hardest problems from an algebraic view point
+because its algebraic degree is unbounded.
+The simplest form of such problems is a ``pseudo-geometric'' problem
+where we are given
+an undirected graph G(V,E) where vertices in V are points in Euclidean space
+and edge weights are Euclidean distances between vertices.
+
+

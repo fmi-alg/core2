@@ -1,0 +1,15 @@
+README for fortune directory
+
+There are 2 subdirectories
+	vor  -- this is the CORE version of Fortune's implementation of
+		his Voronoi diagram algorithm for a 2-D point set
+	pred -- this contains timing tests for some predicates
+		(and generalizations) used in Fortune's algorithm.
+		These tests were described in the paper
+		"A New Constructive Root Bound for Algebraic Expression" 
+		(SODA 2001).
+
+--Chen Li & Chee Yap
+  July 2000.
+
+	

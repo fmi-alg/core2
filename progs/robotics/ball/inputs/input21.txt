@@ -1,0 +1,50 @@
+# input21.txt
+# This is input uses our exhanced syntax:
+#
+# FACE WITH A HOLE:
+#	Outer face is a, b, c, d.
+#	Inner face is aa, bb, cc, dd.
+#	We model this with two polygons:
+#		(b,c,cc,bb,aa,a)
+#	and
+#		(d,c,cc,dd,aa,a)
+#
+#		d---------------c
+#		|	      /	|
+#		|    dd----cc	|
+#		|    |      |	|
+#		|    |      |	|
+#		|    aa----bb	|
+#		|  /		|
+#		a---------------b
+Points
+"a" 10 0 10
+"b" 100 0 10
+"c" 100 0 100
+"d" 10 0 100
+"aa"  20 0 20
+"bb"  80 0 20
+"cc"  80 0 80
+"dd"  20 0 80
+"X'" 0 0 0
+"Y'" 128 0 0
+"Z'" 0 0 128
+"P" 30 30 30
+"PP" P + 30 50 30
+"PPP" P + 40 60 40
+
+Poly "Hole"
+6 b c cc bb aa a + 0 30 0
+6 d c cc dd aa a + 0 30 0
+
+Wall "floor_and_ceiling"
+5 X' Y' Z' + 0 0 0
+# 5 X' Y' Z' + 0 128 0
+
+PutPoly Hole + 0 40 0
+
+Poly "Point"
+7 P 10
+7 PP 10
+7 PPP 10
+End

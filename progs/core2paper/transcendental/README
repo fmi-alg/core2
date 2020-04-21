@@ -1,0 +1,9 @@
+README for core2paper/transcendental.
+
+Note that some compilers claim that
+the constants pi() and e(),
+both friend functions of Expr, 
+are not declared.  
+We do not have a solution yet.
+
+--Chee/Jihun (May 2010)

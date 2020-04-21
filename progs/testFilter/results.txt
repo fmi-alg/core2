@@ -1,0 +1,75 @@
+file: results.txt
+=================
+Since Core Library Version 1.4
+========================
+
+This file contains some experimental results on
+our BFS filter implementation.  The tests are on
+Solaris 2.8, CPU 440 MHz, 512M Memory.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TEST 1:  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	We first create 1000 random 3x3 matrices with 10-bit entries.
+	Then we compute the determines of these matrices, with and
+	without the filter.  We check that the filtered results
+	are the same as the unfiltered results.  The speeds of
+	the two methods are also compared:
+
+	>  ./createMatrices inputs/1000x3x10matrices 1000 3 10
+	    Generate 1000 random matrices...
+	    Done.
+
+	>  ./testFilter inputs/1000x3x10matrices
+	    CORRECT!
+	    Total USER time spent w/ filter : 0.54 seconds
+	    Total USER time spent w/o filter : 1.8 seconds
+	    Speedup: 70%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TEST 2:  This is equivalent to "make test"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	===========================================================
+	MATRIX		w/filter	w/o filter	% speedup
+	========	========	==========	=========
+	200x3x10	0.15 seconds	0.3 seconds	50%
+	200x4x20	0.23		1.14		79%
+	200x5x30	0.4		2.95		86%
+	===========================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TEST 3:  This is equivalent to "make moretest"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	===========================================================
+	MATRIX		w/filter	w/o filter	% speedup
+	========	========	==========	=========
+	1000x2x10	0.23 seconds	0.54 seconds	57%
+	1000x3x10	0.57 		1.81 		68%
+	1000x4x10	1.06		5.61		81%
+	500x5x10	1.19		6.62		82%
+	500x6x10	9.05		14.17		36%
+	500x7x10	25.49		28.32		9%
+	500x8x10	38.79		42.19		8%
+	===========================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TEST 4:  Using more bits 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	===========================================================
+	MATRIX		w/filter	w/o filter	% speedup
+	========	========	==========	=========
+	200x10x100	40.49 seconds	40.75 seconds	0%
+	200x20x100	558.76		565.84		1%
+	===========================================================
+
+Note: this result is expected -- filters are only effective when
+the determinant has few bits that can be decided at machine precision.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+

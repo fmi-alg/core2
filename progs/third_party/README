@@ -1,0 +1,27 @@
+************************************************************
+file: README for  $(CORE_PATH)/third_party
+	$Id: $
+
+CORE LIBRARY
+	Since Version 2.1.
+
+************************************************************
+Third Party software included here:
+
+  tclap/	-- a sophisticated "Command Line Argument Processor" (CLAP)
+			from Michael Smoot.   Read the Overview inside
+			"tclap-example.cpp" about CLAP.   To compile
+			and test this example, you can just type:
+
+			> make tclap
+
+			(See the Makefile for more examples)
+
+Files in this subdirectory, $(CORE_PATH)/third_party:
+  README		-- this file
+  Makefile		-- Various targets. e.g.,  try "make test"
+  Make.Options		-- included by Makefile
+  tclap-exampe.cpp	-- Illustrating use of tclap.
+
+************************************************************
+************************************************************

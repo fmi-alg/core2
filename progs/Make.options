@@ -1,0 +1,30 @@
+# file: Make.options
+#	This file in included by all the makefiles
+#	below this subdirectory
+# $Id: Make.options,v 1.7 2010/07/12 14:02:32 exact Exp $
+
+# This CORE_PATH is to be used by Makefiles in subdirectory of CORE/progs.
+# If you are in a deeper level, define CORE_PATH=../../..
+ifndef CORE_PATH
+	CORE_PATH=../..
+endif
+
+include $(CORE_PATH)/Make.config
+
+CORE_INC=-I. -I$(CORE_PATH)/inc -I$(CORE_PATH)/mpfr/include \
+	 -I$(CORE_PATH)/gmp/include
+CORE_LIB=-L$(CORE_PATH)/lib -L$(CORE_PATH)/mpfr/lib -L$(CORE_PATH)/gmp/lib \
+	 -lcore++$(VAR) -lmpfr -lgmp
+
+COREX_LIB_LEVEL=-lcoreex++$(VAR)_level
+
+COREX_LIB_LEVEL3=-lcorex++$(VAR)_level3
+COREX_LIB_LEVEL2=-lcorex++$(VAR)_level2
+COREX_LIB_LEVEL1=-lcorex++$(VAR)_level1
+
+
+# This works for GCC 3.x, but not for 2.9x, so I removed it
+# The user have to set LD_LIBRARY_PATH environment variable.
+#ifeq (${LINKAGE}, shared)
+#	LDFLAGS+=-R${CORE_PATH}/lib -R${CORE_PATH}/gmp/lib
+#endif

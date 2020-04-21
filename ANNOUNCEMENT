@@ -1,0 +1,99 @@
+===================== SOFTWARE RELEASE ANNOUNCEMENT ==========================
+
+July 1, 2010:
+Core Library Version 2.1 is now available for free download at
+
+                 http://cs.nyu.edu/exact/core/
+
+The Core Library (CORE) is a collection of C/C++ classes to support 
+computation with real numbers with the following set of operations
+	+, -, x, /, radicals, rootOf, elementary functions
+under a variety of precision requirements.  When the real number
+is algebraic, CORE guarantees any desired relative precision
+(this implies error-free comparisons).  For non-algebraic real numbers,
+CORE guarantees any desired absolute precision.  Elementary functions include 
+log (also log2 and log10), exp (also exp2, exp10),
+trigonometric functions (sine, cosine, tangent) and
+their inverses (arcsine, arccos, arctan), as well as constants such as Pi and e.
+
+Numerical nonrobustness is a widely acknowledged problem.  It has proven
+particularly intractable in the context of geometric algorithms where
+numerical data and combinatorial data are intermixed in a strongly constrained
+manner.  Recent research in computational geometry has
+demonstrated a variety of techniques based on the principles of
+Exact Geometric Computation (EGC) that can address such problems.
+A basic goal of our library is to make such techniques easily accessible to 
+the wider community of programmers and researchers.
+
+Basic CORE Features:
+   -- ease of use:
+        Any C/C++ programmer can write numerical or geometric
+        code that are fully robust by calling our Library.
+   -- ease of migration:
+        Many existing C/C++ programs can be converted into robust CORE
+        programs with minimal effort.
+   -- natural and novel numerical accuracy model:
+        Users can choose and get the numerical accuracy that best fit
+        their applications. 
+   -- state of art technology:
+        The precision-driven approach to EGC, best known root bounds,
+        filter technology, etc, are incorporated into the library
+        as the research progresses.  Thus, users' application programs
+        are automatically be upgraded (at the cost of re-compilation).
+   -- modest size system:
+        It can serve as the "robust core" of your own applications.
+   -- tested on Unix, MacOS, Linux, cygwin and Windows platforms.
+   -- interpreted Python-based version called Incore, for rapid
+   	prototyping and experimentation
+
+What is new with CORE 2.1 ?
+
+   Core 2.1 is the latest version of Core2, a completely redesigned
+	Core Library.  From the outside, Core2 looks the same as the
+	original Core Library, which we now call Core1.  But internally,
+	these are new in Core2, as introduced in Core 2.0:
+
+	-- modularized design of Expr class, based on three template
+		classes (Filter class, Root bound class, Kernel class)
+   	-- incorporation of transcendental functions into Expr
+	-- new BigFloat and BigFloat2 engine, based on gmp/mpfr
+	-- facility for users to design new Expr nodes
+	-- improved Precision-Driven evaluation of expressions
+	-- introduction of EscapeBound and CutOffBounds
+
+    What is new in Core 2.1 (over Core 2.0)?
+	-- introduction of anary nodes (operators with no fixed arity,
+	   such as sum and product)
+	-- introduced a DoubleWrapper as a thinwrapper over
+	   machine double in Level 1: now Level 2 and Level 3 programs
+	   can also compile at Level 1.
+	-- templated linearAlgebra extension
+	-- templated interval class
+	-- templated complex number class
+	-- various bug fixes, including root bound overflow bug and
+	   printout of garbage digits but.
+
+We welcome your comments and input.
+
+-- Chee Yap (yap@cs.nyu.edu)
+   Jihun Yu (jihun@cs.nyu.edu)
+   Sylvain Pion (Sylvain.Pion@sophia.inria.fr)
+
+                     |============================================= 
+                     | Exact Computation Project
+                     | Department of Computer Science
+                     | Courant Institute of Mathematical Sciences
+                     | New York University
+                     | 251 Mercer Street
+                     | New York, NY 10012, USA
+                     | 
+                     | For further information:
+                     |    htt/cs.nyu.edu/exact/
+                     |    mailt/exact@cs.nyu.edu.
+                     | 
+                     | Supported by NSF/ITR Grant CCR-0082056 (2000-4) and
+                     | NSF Grants CCF-0430836 (2004-7), CCF-0728977 (2007-10),
+                     | CCF-0917093 (2009-2012).
+                     |============================================= 
+
+===================== SOFTWARE RELEASE ANNOUNCEMENT ==========================

@@ -1,0 +1,319 @@
+# Makefile for progs/robotics/vor/vor2d
+#
+#  HOW TO USE THIS Makefile:
+#
+# (A)	To compile run this demo, you can use this Makefile and just have to type:
+#
+# 	       > make 		-- compiles the main program into "vor2d"
+# 	       > make test	-- compiles and runs "vor2d" non-interactively
+# 	       			   (this is Core Library's automatic self-test)
+#
+# (B)	But you probably want to try the various interactive demos of this program:
+#
+# 	       > make eg	-- compiles and runs "vor2d" interactively
+#
+#	This is equivalent to typing:
+#
+#		> ./vor2d $(interactive) \
+#			$(pseudo) $(interior) $(fileName) \
+#			$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+#			$(inputDir)
+#			$(xtranslate) $(ytranslate)
+#
+#	where the meaning of these arguments are described below when we
+#	define these parameters.
+#
+#	To see what these default parameters are, you can type
+#
+#		> make params
+#
+# (C)	You can override any of these values at the command line.
+#	For instance, to change the input file to "input2.txt", you may type:
+#
+#		> make eg fineName=input2.txt
+#
+# (D)	Instead of the target "eg" you can use any of these targets:
+#
+#		eg, ega, egb,
+#		eg0,
+#		eg1, eg1a, eg1b,
+#		eg2, eg2a, eg2b,
+#		egbug, egbuga,
+#		egbug2, egbug2a,
+#		etc.
+#
+# 	These targets uses different input files, all taken from
+# 	the subdirectory "inputs".   
+#
+#  (E)	Other useful targets:
+#
+#		params:  this shows all the default paramaters
+#
+# May 20, 2012
+# Since Core Library 2.1
+# $Id:$
+################################################################################
+
+VAR=Opt
+VAR=Debug
+CORE_PATH=../../..
+include ../Make.options
+
+#=================================================
+# User variables (you can change them in the command line)
+#=================================================
+interactive = 0		# 0=interactive, >0 is non-interactive
+
+epsilon = 2		# resolution parameter
+epsilon = 10		# resolution parameter
+
+pseudo = 0		# boolean: true => show pseudo Vor objects
+interior = 0	# boolean: true => show interior Vor objects
+
+inputDir = inputs	# where to find input files
+fileName = input2d.txt	# input environment file
+fileName = input2.txt	# input environment file
+fileName = input0.txt	# input environment file
+fileName = input.txt	# input environment file
+fileName = input100.txt	# input environment file
+fileName = input150.txt	# input environment file
+fileName = input200.txt	# input environment file
+fileName = input300.txt	# input environment file
+fileName = bugtrap.txt	# input environment file
+
+boxWidth = 512		# initial configuration box size
+boxHt = 512
+
+windowPosX = 200	# initial Window position
+windowPosY = 200	
+windowPosX = 450	# initial Window position
+windowPosY = 20	
+
+xtranslate = 10		# x-translation of the input data 
+ytranslate = 10		# y-translation of the input data
+
+seed = 11		# seed for random
+step = 0		# number of steps to run
+			#	(step=0 means run to completion)
+		
+#=================================================
+# Define target files (put all your files here)
+#=================================================
+TARGETS = vor2d
+SUBDIRS = . 
+SRCS=$(wildcard $(addsuffix /*.cpp,$(SUBDIRS)))
+OBJS=${SRCS:.cpp=.o}
+OBJ_FILES = $(OBJS)
+CXXFLAGS += -MMD
+
+all: $(TARGETS)
+
+# note: this target is the standard target that Core Library uses
+#       to test its subdirectories.   So the program must run in a
+#       non-interactive mode (i.e., the first argument to "vor2d" is "1").
+#
+test: $(TARGETS)
+	./vor2d 1 \
+		$(startX) $(startY)  $(goalX) $(goalY) \
+		$(epsilon)  $(radius)  input.txt  $(boxWidth) $(boxHt) \
+       		$(windowPosX) $(windowPosY) $(Qtype) $(seed) $(inputDir)
+
+testall: $(TARGETS)
+	make ega interactive=1
+	make egb interactive=1
+
+testa: $(TARGETS)
+	./vor2d 1
+
+testb: $(TARGETS)
+	./vor2d 1 \
+		$(startX) $(startY)  $(goalX) $(goalY) \
+		$(epsilon)  $(radius)  input2.txt  $(boxWidth) $(boxHt) \
+       		$(windowPosX) $(windowPosY) $(Qtype) $(seed) $(inputDir)
+
+#=================================================
+# Examples of running vor2d program
+#=================================================
+#
+# this is default, but every option may be changed at command line:
+#
+eg:	vor2d
+	@echo "Target 'eg':  runs vor2d with the default options of Makefile"
+	./vor2d $(interactive) \
+		1 $(pseudo) $(interior) $(fileName) \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+
+# Simple NO PATH example:
+nopath eg0:	vor2d
+	./vor2d $(interactive) \
+		1 $(pseudo) $(interior) input0.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+# run with default Makefile options:
+#
+eg1:	vor2d
+	./vor2d $(interactive) \
+		1 $(pseudo) $(interior) input.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+star:	vor2d
+	@echo "Target 'eg':  runs vor2d with the default options of Makefile"
+	@echo "--  You can all of them in you 'make' command line, e.g.,"
+	@echo "--      > make eg radius=60 goalX=111 goalY=450 startY=200 startX=20"
+	./vor2d $(interactive) 1 $(pseudo) $(interior) star.poly \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+
+eg2 dog:	vor2d
+	@echo "Target 'eg2' or 'dog': "
+	./vor2d $(interactive) \
+		0.1 $(pseudo) $(interior) dog.poly \
+		1000 1000 $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+eg3 line:	vor2d
+	@echo "Target 'eg3' or 'line': "
+	./vor2d $(interactive) \
+		0.5 $(pseudo) $(interior) line.txt \
+		512 512 $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+eg4: vor2d
+	./vor2d $(interactive)\
+		1 $(pseudo) $(interior) input2.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+	
+eg5: vor2d
+	./vor2d $(interactive)\
+		1 $(pseudo) $(interior) boxes.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+eg6: vor2d
+	./vor2d $(interactive)\
+		1 $(pseudo) $(interior) input6.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+
+eg7: vor2d
+	./vor2d $(interactive)\
+		1 $(pseudo) $(interior) input5.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+
+eg10: vor2d
+	./vor2d $(interactive) \
+		1 $(pseudo) $(interior) input10.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+eg150: vor2d
+	./vor2d $(interactive) \
+		4 $(pseudo) $(interior) input150.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+eg200: vor2d
+	./vor2d $(interactive) \
+		4 $(pseudo) $(interior) input200.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir) \
+		$(xtranslate) $(ytranslate)
+		
+# BUG TRAP:
+###################################################
+# Bugtrap example -- Non-existence of path, but barely!
+egbug bug: vor2d
+	./vor2d $(interactive) \
+		1 $(pseudo) $(interior) bugtrap.txt \
+		$(boxWidth) $(boxHt) $(windowPosX) $(windowPosY) \
+		$(inputDir)
+
+moretest: $(TARGETS)
+# nothing to do
+
+$(TARGETS): $(OBJ_FILES)
+
+#=================================================
+# Temp
+#=================================================
+m:
+	gvim Makefile
+vi:
+	gvim vor2d.cpp
+
+#=================================================
+# Rules
+#=================================================
+
+.SUFFIXES: .cpp
+
+%: %.o
+	${CXX} $(OBJ_FILES) $(LDFLAGS) $(CORE_LIB) -o $@
+
+.cpp.o:
+	${CXX} $(CXXFLAGS) $(CORE_INC) -c $< -o $@
+	cat $*.d >> Dependencies
+	rm -f $*.d 
+
+Dependencies:
+	touch Dependencies
+
+include Dependencies
+
+#=================================================
+# Misc
+#=================================================
+
+params:
+	@echo "================ Parameters =================="
+	@echo "    interactive = " ${interactive}
+	@echo "    epsilon = " ${epsilon}
+	@echo "    pseudo = " ${pseudo}
+	@echo "    interior = " ${interior}
+	@echo "    inputDir = " ${inputDir}
+	@echo "    fileName = " ${fileName}
+	@echo "    boxWidth = " ${boxWidth}
+	@echo "    boxHt = " ${boxHt}
+	@echo "    windowPosX = " ${windowPosX}
+	@echo "    windowPosY = " ${windowPosY}
+	@echo "    seed = " {seed}
+	@echo "    step = " {step}
+	@echo "    xtranslate = " {xtranslate}
+	@echo "    ytranslate = " {ytranslate}
+	@echo "=============================================="
+
+#=================================================
+# Clean object files
+#=================================================
+clean:
+	-@test -z "*.o" || rm -f *.o Dependencies
+
+#=================================================
+# Remove executable files
+#=================================================
+EXEPROGS=$(TARGETS:=$(EXETYPE))
+
+vclean veryclean: clean
+	-@test -z "$(EXEPROGS)" || rm -f $(EXEPROGS) Dependencies
+
+#=================================================
+# END Makefile 
+#=================================================
+

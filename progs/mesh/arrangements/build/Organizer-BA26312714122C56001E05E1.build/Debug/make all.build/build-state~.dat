@@ -1,0 +1,31 @@
+Tmake all
+v7
+r0
+t336735319.458790
+cCheck dependencies
+cExternalBuildToolExecution "make all"
+
+N/var/folders/j7/j7lgaDLnFV4aQ0EFBqpQa++++TM/-Tmp-/BA26312714122C56001E05E1
+c000000004E61F4D60000000000000015
+t1315042518
+s21
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies336735318#336735318#0(0"0(0#1#0"3544385916120543744#0"0#
+
+CExternalBuildToolExecution "make all"
+s336735318.340106
+e336735319.458750
+r0
+xExternalBuildToolExecution
+xmake all
+og++ -c -O3 -Wfatal-errors -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dgnu -I. -I../ceval/third_party -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ main.cpp -o main.o
+oIn file included from mk-inl.h:33,
+o                 from algorithm.h:31,
+o                 from main.cpp:14:
+orootbox.h:47: error: expected `)' before '<' token
+ocompilation terminated due to -Wfatal-errors.
+omake: *** [main.o] Error 1
+lSLF07#2@23"Run external build tool336735318#336735319#0(420"g++ -c -O3 -Wfatal-errors -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dgnu -I. -I../ceval/third_party -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ main.cpp -o main.oIn file included from mk-inl.h:33,                 from algorithm.h:31,                 from main.cpp:14:rootbox.h:47: error: expected `)' before '<' tokencompilation terminated due to -Wfatal-errors.make: *** [main.o] Error 17(13@188"g++ -c -O3 -Wfatal-errors -O2 -Wall -DNDEBUG -DCORE_DEBUG -Dgnu -I. -I../ceval/third_party -I../../../inc -I../../../mpfr/include -I../../../gmp/include -I/usr/include/ main.cpp -o main.o336735318#0#188#0(1@0"0(13@35"In file included from mk-inl.h:33,336735319#188#35#0(1@0"0(13@38"                 from algorithm.h:31,336735319#223#38#0(1@0"0(13@35"                 from main.cpp:14:336735319#261#35#0(1@0"0(4@29"Expected `)' before '<' token336735319#296#51#0(6@9"rootbox.h336735319#47#0#47#0#0"0(13@46"compilation terminated due to -Wfatal-errors.336735319#347#46#0(1@0"0(13@27"make: *** [main.o] Error 1336735319#393#27#0(1@0"0(0#0#0"32370056120565808#175"    cd /Users/sharma/Research/collab/core2/corelib2/trunk/progs/mesh/miranda    setenv ACTION     /var/folders/j7/j7lgaDLnFV4aQ0EFBqpQa++++TM/-Tmp-/BA26312714122C56001E05E12#
+

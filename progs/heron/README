@@ -1,0 +1,207 @@
+File: README for heron
+Core Library, $Id: README,v 1.1 2006/03/07 04:51:24 exact Exp $
+=============================================================================
+SYNOPSIS:
+	Implements heron's formula for area of a triangle
+	and tests CORE library's values against some data from Kahan.  
+
+Author: Chee Yap (April, 2000)
+
+Files:
+	Makefile
+	README		This file
+	heron.cc: 	CORE program to compute the values to specified
+			precision on Kahan's input instances.  
+	heron.m:	maple implementation 
+	kahan.ps: 	a postscript version of the table below
+	outputs:	output directory.  The file "outXXX-YY"	indicates
+			a guaranteed precision of XXX bits,
+			and with YY print digits.
+=============================================================================
+
+INTRODUCTION:
+
+Heron's formula for the area of a triangle with side lengths of a, b and c
+is the following:
+	A = sqrt( s(s-a)(s-b)(s-c) )
+where
+	s = (a+b+c)/2.
+This formula, when implemented in a straightforward manner in
+machine arithmetic, is inaccurate for ``needle like triangles''.  
+An extensive discussion of this issue is found in Kahan's paper
+	``Miscalculating Area and Angles of a Needle-like Triangle'',
+	July 19, 1999 (work in progress).
+This paper is available from
+	http://www.cs.berkeley.edu/~wkahan/Triangle.pdf).
+
+Kahan gave a clever prescription for computing the area A accurately
+using machine arithmetic.
+The following table is an excerpt from Kahan's paper.
+There are 12 input instances.  The last 2 columns are the corresponding
+areas computed with machine arithmetic using a "Naive" and a "Kahan's"
+implementation, respectively.
+
+======================================================================================
+No  	a 		b		c 		Naive 		Kahan's	
+======================================================================================
+1 	10  		10  		10 		43.30127019 	43.30127020 
+--------------------------------------------------------------------------------------
+2 	-3		5  		2  		2.905		Error 
+--------------------------------------------------------------------------------------
+3	100000		99999.99979 	0.00029 	17.6		9.999999990
+--------------------------------------------------------------------------------------
+4	100000		100000		1.00005		50010.0		50002.50003 
+--------------------------------------------------------------------------------------
+5	99999.99996	99999.99994	0.00003		Error		1.118033988 
+--------------------------------------------------------------------------------------
+6	99999.99996	0.00003		99999.99994	Error		1.118033988 
+--------------------------------------------------------------------------------------
+7	10000		5000.000001	15000		0		612.3724358 
+--------------------------------------------------------------------------------------
+8	99999.99999	99999.99999	200000		0		Error 
+--------------------------------------------------------------------------------------
+9	5278.64055	94721.35941	99999.99996	Error		0 
+--------------------------------------------------------------------------------------
+10	100002		100002		200004		0		0 
+--------------------------------------------------------------------------------------
+11	31622.77662	0.000023	31622.77661	0.447		0.327490458 
+--------------------------------------------------------------------------------------
+12	31622.77662	0.0155555	31622.77661	246.18		245.9540000 
+--------------------------------------------------------------------------------------
+
+RESULTS FROM CORE:
+==================
+Core's number substantially agrees with Kahan's number,
+except for test4.  Kahan (3/27/2000) has since confirmed the
+result of test4 is in error in the last digit, attributable to the use
+of HP-15C's 10-significant decimal arithmetic.
+Incidentally, the last bit of Kahan's result are off
+by one in case of test1, test3 and test7, but these are known.
+
+------------------- Problem 1 --------------------------
+(a,b,c) = (10, 10, 10)
+   Kahan's Area = 43.30127020
+   Core's Area  = 43.30127019
+------------------- Problem 2 --------------------------
+(a,b,c) = (-3, 5, 2)
+   Kahan's Area = Error
+   Core's Area  = Error
+------------------- Problem 3 --------------------------
+(a,b,c) = (100000, 99999.99979, 0.00029)
+   Kahan's Area = 9.999999990
+   Core's Area  = 9.999999989
+------------------- Problem 4 --------------------------
+(a,b,c) = (100000, 100000, 1.00005)
+   Kahan's Area = 50002.50003
+   Core's Area  = 50002.50000
+------------------- Problem 5 --------------------------
+(a,b,c) = (99999.99996, 99999.99994, 0.00003)
+   Kahan's Area = 1.118033988
+   Core's Area  = 1.118033988
+------------------- Problem 6 --------------------------
+(a,b,c) = (99999.99996, 0.00003, 99999.99994)
+   Kahan's Area = 1.118033988
+   Core's Area  = 1.118033988
+------------------- Problem 7 --------------------------
+(a,b,c) = (10000, 5000.000001, 15000)
+   Kahan's Area = 612.3724358
+   Core's Area  = 612.3724357
+------------------- Problem 8 --------------------------
+(a,b,c) = (99999.99999, 99999.99999, 200000)
+   Kahan's Area = Error
+   Core's Area  = Error
+------------------- Problem 9 --------------------------
+(a,b,c) = (5278.64055, 94721.35941, 99999.99996)
+   Kahan's Area = 0
+   Core's Area  = 0
+------------------- Problem 10 --------------------------
+(a,b,c) = (100002, 100002, 200004)
+   Kahan's Area = 0
+   Core's Area  = 0
+------------------- Problem 11 --------------------------
+(a,b,c) = (31622.77662, 0.000023, 31622.77661)
+   Kahan's Area = 0.327490458
+   Core's Area  = 0.327490458
+------------------- Problem 12 --------------------------
+(a,b,c) = (31622.77662, 0.0155555, 31622.77661)
+   Kahan's Area = 245.9540000
+   Core's Area  = 245.9540000
+---------------------------------------------------------
+
+RESULTS FROM MAPLE:
+===================
+We implemented the naive program in Maple (file heron.m).  
+When Maple precision is set to 13 digits ("Digits := 13;"),
+then Maple agrees with Kahan's numbers except for test4.
+In this case, Maple's answer is
+	50002.499999, not 50002.50003.
+Basically, Core and Maple are in agreement.
+Here are the results from Maple:
+
+---------------------------------------------------------
+maple>testall(13);
+=========== Problem 1 =========
+ (a,b,c) = (10.000000, 10.000000, 10.000000)
+ Kahan's area = 43.301270
+ Maple's area = 43.301270
+=========== Problem 2 =========
+ (a,b,c) = (-3.000000, 5.000000, 2.000000)
+ Kahan's area = ERROR
+ Maple's area = ERROR
+=========== Problem 3 =========
+ (a,b,c) = (100000.000000, 99999.999790, .000290)
+ Kahan's area = 10.000000
+ Maple's area = 10.000000
+=========== Problem 4 =========
+ (a,b,c) = (100000.000000, 100000.000000, 1.000050)
+ Kahan's area = 50002.500030
+ Maple's area = 50002.499999
+=========== Problem 5 =========
+ (a,b,c) = (99999.999960, 99999.999940, .000030)
+ Kahan's area = 1.118034
+ Maple's area = 1.118034
+=========== Problem 6 =========
+ (a,b,c) = (99999.999960, .000030, 99999.999940)
+ Kahan's area = 1.118034
+ Maple's area = 1.118034
+=========== Problem 7 =========
+ (a,b,c) = (10000.000000, 5000.000001, 15000.000000)
+ Kahan's area = 612.372436
+ Maple's area = 612.372436
+=========== Problem 8 =========
+ (a,b,c) = (99999.999990, 99999.999990, 200000.000000)
+ Kahan's area = ERROR
+ Maple's area = ERROR
+=========== Problem 9 =========
+ (a,b,c) = (5278.640550, 94721.359410, 99999.999960)
+ Kahan's area = 0.000000
+ Maple's area = 0.000000
+=========== Problem 10 =========
+ (a,b,c) = (100002.000000, 100002.000000, 200004.000000)
+ Kahan's area = 0.000000
+ Maple's area = 0.000000
+=========== Problem 11 =========
+ (a,b,c) = (31622.776620, .000023, 31622.776610)
+ Kahan's area = .327490
+ Maple's area = .327490
+=========== Problem 12 =========
+ (a,b,c) = (31622.776620, .015556, 31622.776610)
+ Kahan's area = 245.954000
+ Maple's area = 245.954000
+---------------------------------------------------------
+
+Note: Maple rounds the numbers for Kahan's results
+(thus in problem 3, Kahan's 9.999999990 is output as 10.000000).
+
+=========================================================================
+POSTSCRIPT:
+The point of this example is to show that
+with facilities such as Core Library, "clever programming" to extract the
+maximum accuracy possible out of (fixed-precision) machine arithmetic is 
+rendered unnecessary by the speed of today's hardware.
+A straightforward CORE program will usually do the job.  
+This comment applies more generally to efforts at 
+improving the numerical accuracy of algorithms under the restrictions
+of machine arithmetic.  Such restrictions may be real at one time,
+but should now be regarded as artificial in *most* applications.
+

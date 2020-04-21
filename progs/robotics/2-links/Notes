@@ -1,0 +1,177 @@
+NOTES:
+
+(1) WHEN ARE TWO d-dimensional boxes adjacent?   
+
+	Here is the theory:  if B and B' are two d-dimensional boxes
+	and for each i=1,2,..,d, let
+	B[i] be the interval range in the i-th dimension.
+	Note that we have tranlational as well as angular intervals.
+	
+	Then B and B' are adjacent 
+
+		iff
+
+	There exists some i=1,...,d, such that
+		(1)  B[i] and B'[i] are adjacent intervals,
+			i.e., they share an endpoint, but does NOT overlap
+		(2)  For all j not equal to i,
+			B[j] and B'[j] overlap.  
+			(For translational intervals where
+			we do binary splits only, this is equivalent
+			to B[j] contained in B'[j] or vice-versa.)
+
+I am not sure that you are implementing this logic.
+I do not see checks for condition (1).
+
+HERE IS THE LOGIC FOR CHECKING CONDITION (1) for adjacency of intervals:
+	Let B[i]=[a,b], and B'[i] = [a', b'].
+
+	RECALL that there are two kinds of intervals. 
+	But we always have a<b and a'<b', even the case of angular intervals.
+	Initially, the angular interval is [0, 2*Pi].
+	HERE IS THE ALGORITHM:
+	For translational intervals,
+		B[i] and B'[i] are adjacent iff b=a' or a=b'.
+	For angular intervals,
+		B[i] and B'[i] are adjacent iff b=a' or a=b' or (a,b')=(0,2*Pi)
+						or (a',b)=(2*Pi,0)
+
+HERE IS THE LOGIC FOR CHECKING CONDITION (2) for overlap of intervals:
+	For translational intervals,
+		B[i] and B'[i] are overlapping
+			iff	a < a' < b
+				or 
+				a < b' < b
+				or
+				a' < a < b'
+				or
+				a' < b < b'
+				or
+				(a=a' and b=b')
+	
+Current code in Box.cpp:
+
+//
+// Zhongdi: What is the return Code?
+//    -1 = ?
+//    0  = ?
+//    1  = ?
+//    2  = ?
+//    3  = ?
+int Box::isNhbr(Box* b1, Box* b2) {
+	double xmin1 = b1->x - b1->width / 2;
+	double xmax1 = b1->x + b1->width / 2;
+	double ymin1 = b1->y - b1->height / 2;
+	double ymax1 = b1->y + b1->height / 2;
+	double xmin2 = b2->x - b2->width / 2;
+	double xmax2 = b2->x + b2->width / 2;
+	double ymin2 = b2->y - b2->height / 2;
+	double ymax2 = b2->y + b2->height / 2;
+
+	if (!isArcIntsct(b1->xi[0], b1->xi[1], b2->xi[0], b2->xi[1])
+			|| !isArcIntsct(b1->xi[2], b1->xi[3], b2->xi[2], b2->xi[3])) {
+		return -1;
+	}
+	if (isEq(xmin1, xmax2) && isOneContainAnotherY(b1, b2)) {
+		return 2;
+	}
+	if (isEq(xmax1, xmin2) && isOneContainAnotherY(b1, b2)) {
+		return 0;
+	}
+	if (isEq(ymin1, ymax2) && isOneContainAnotherX(b1, b2)) {
+		return 3;
+	}
+	if (isEq(ymax1, ymin2) && isOneContainAnotherX(b1, b2)) {
+		return 1;
+	}
+//	//down
+//	if (isEq(b1->xi[0], b2->xi[1]) && isOneContainAnotherX(b1, b2)
+//			&& isOneContainAnotherY(b1, b2)) {
+//		return 5;
+//	}
+//	//up
+//	if (isEq(b1->xi[1], b2->xi[0]) && isOneContainAnotherX(b1, b2)
+//			&& isOneContainAnotherY(b1, b2)) {
+//		return 4;
+//	}
+
+	return -1;
+}
+
+In Box.h:
+
+// Zhongdi: isn't this the arc logic suppose to under "wrap around"?
+// I.e., 0 and 2* Pi should be the same?   Even if you assume that 0 is never
+// in the interior of an arc, you still need to check if 0 for one arc is
+// equal to 2*Pi in another arc to check adjacency.
+//
+
+	//returns true if any edge of arc2 is within arc1
+	static bool isAnyInArc1(double s1, double e1, double s2, double e2) {
+		if (e1 > s1) {
+			if (e1 > s2 && s2 >= s1) {
+				return true;
+			}
+
+			if (e1 >= e2 && e2 > s1) {
+				return true;
+			}
+		} else {
+			if ((s2 >= s1) || (e2 >= s1) || (s2 < e1) || (e2 < e1)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+////////////////////////
+	//returns true if both edges of arc2 is within arc1
+	static bool isBothInArc1(const Box* b1, const Box* b2) {
+		double s1 = b1->xi[0];
+		double e1 = b1->xi[1];
+		double s2 = b2->xi[0];
+		double e2 = b2->xi[1];
+
+		double s3 = b1->xi[2];
+		double e3 = b1->xi[3];
+		double s4 = b2->xi[2];
+		double e4 = b2->xi[3];
+
+		bool link1In = false;
+		bool link2In = false;
+		if (e1 > s1) {
+			if (e1 >= e2 && s2 >= s1) {
+//				return true;
+				link1In = true;
+			}
+		} else {
+			if ((2 >= e2 && s2 >= s1) || (e1 > e2 && s2 >= 0)) {
+//				return true;
+				link1In = true;
+			}
+		}
+
+		if (e3 > s3) {
+			if (e3 >= e4 && s4 >= s3) {
+//				return true;
+				link2In = true;
+			}
+		} else {
+			if ((2 >= e4 && s4 >= s3) || (e3 > e4 && s4 >= 0)) {
+//				return true;
+				link2In = true;
+			}
+		}
+
+		return link1In && link2In;
+	}
+
+////////////////////////
+	static bool isArcIntsct(double s1, double e1, double s2, double e2) {
+		if (isAnyInArc1(s1, e1, s2, e2) || isAnyInArc1(s2, e2, s1, e1)) {
+			return true;
+		}
+		return false;
+	}
+

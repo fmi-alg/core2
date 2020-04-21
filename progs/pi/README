@@ -1,0 +1,187 @@
+================================================================================
+ File: README for pi
+ Author: Chee and Chen Li (June 2000)
+         Jihun (Apr 2007)
+ Since CORE Library version 1.2
+	$Id: README,v 1.4 2010/06/18 09:54:43 exact Exp $
+================================================================================
+SYNOPSIS:
+	% make		-- makes the executable "newPi"
+	% newPi 6644 2	-- computes Pi to 6644 bits (=2000 digits) of accuracy
+				using Brent's algorithm, implemented using BigFloat
+			   NOTE: 6644 = 2000 * log_2(10).
+	% newPi 6644 1	-- computes Pi to 2000 digits using Machin's formula
+				implemented using BigFloat
+
+        % make more	-- makes the executable "pi" and "brent"
+	% pi 123	-- computes Pi to 123 bits of accuracy
+				and sqrt(Pi) to 121 bits of accuracy
+        % pi 6644 	-- computes Pi to 6644 bits (=2000 digits) of accuracy
+				and sqrt(Pi) to 6642 bits of accuracy
+			   	NOTE: 6644 = 2000 * log_2(10).
+	% pi 6644 0	-- same as above, but do not compute sqrt(Pi)
+			   	Default for second argument is "1")
+	% pi 6644 0 2	-- same as above, except self validation of Pi is
+				to 2000 digits instead of 250 digits.
+				Default for third argument is "1"
+	% brent 6644 1	-- to compute Pi to 2000 digits using Brent's algorithm
+				implemented using Expr (slow version)
+
+Files in this directory:
+	README		-- This file
+	Makefile	-- Assumes the current directory is $(CORE)/progs/pi
+	pi.cpp 		-- Computes Pi using Machin's formula.
+	newPi.cpp 	-- Computes Pi using various algorithms
+				(improved Brent's or improved Machin's)
+	brent.cpp	-- Brent's algorithm for Pi (original Brent implementation)
+	PI2000.html	-- A source for 2000 digits of Pi
+	inputs/{PI2000, PI250, ...}	-- Pi to 2000 digits, etc.
+================================================================================
+
+INTRODUCTION:
+
+We implement Machin's formula for computing
+	Pi = 3.14159265358979323846264338327950288419716939937510582097494459...
+to any desired precision.  It serves to check the correctness of 
+Core library's numerical outputs and its precision mechanism.
+Here is Machin's well-known formula:
+
+    pi/4  = 4 arctan(1/5) - arctan(1/239)
+          = \sum_{k=0} ^\infty  (-1)^k
+                [   4 / ( (2k +1) 5^{2k+1} )
+                  - 1 / ( (2k +1) 239^{2k+1} )  ]
+
+Timing: Using this formula, a Sun Ultra 10 (440 MHz, 256 MB RAM) can 
+compute Pi to 2000 digits (=6644 bits) in about 1.51 seconds (using
+CORE Version 1.2).   You can get duplicate this timing by running 
+the current program with the command arguments
+
+	% pi 6644 0 0
+	% pi 10000 0 0	-- this takes 3.24 seconds to compute 3010 digits
+	
+
+In some formulas (e.g., for erf(x)), there is also a need for high precision
+values of sqrt(Pi).  The program also outputs sqrt(Pi).
+
+NOTE: we include automatic self-verification of the computed values
+of Pi up to 250 digits, and sqrt(Pi) up to 100 digits.
+
+=================================================================
+BUG REPORT: for some reason, pi does not work correctly on
+cygwin platforms for n > 4195 bits.  Actually, this upper bound
+seems to vary depending on machines.
+
+4/4/2002, UPDATE: This is not a bug, but a stack overflow problem.  
+Please read the file "stackOverflow.txt" found under $(CORE_PATH)/doc
+for details on how to fix it.
+=================================================================
+
+July, 2002: On Brent's algorithm for Pi:
+We also implemented Brent's algorithm for Pi.
+Theoretically, this is supposed to be extremely fast (Newton convergence).
+But for some reason, it is much slower than the above Machin's formula.
+For instance, on Solaris SunBlade 1000 (2x Ultrasparc III 750MHz,
+8MB Cache, 2GB Memory), we obtain the following times:
+	time pi 10000 0 0: 0.74 seconds	
+	time brent 10000 0 0: 19.12 seconds	
+
+Sep, 2002: Update on timing Brent's timing
+	New improvements after CORE 1.5 has made Brent's
+	algorithm competitive with Machin's formula.  Still,
+	more improvements should be expected.
+=================================================================
+Oct, 2004: 
+     We can speed this up with one of two approaches:
+	(1) reduce to rational (if using Expr)
+	(2) use BigFloats instead of Expr
+     In newPi.cpp, we implemented (2), and this gives significant speedup
+     (much faster than Maple).  
+     We also reimplemented Machin's formula in newPi.cpp, but now
+     we use binary split to compute arctan(1/x) where x is a bigInt.
+     This greatly speeds up Machin as well.
+     The BigFloat version of Brent is a great improvement over the
+     old Machin's algorithm, but is still inferior to the improved
+     Machin's formula!
+
+     Using the same Solaris SunBlade as above to compute to
+     100,000 bits (30102 digits) (timing does not include printout of digits).
+
+	Test			Time		Comment
+	====			=====		=======
+	newPi 100000 0		3.35 sec	Machin's formula using binary split
+	newPi 100000 1		33.3 sec	Brent's algorithm using bigFloat
+	pi    100000 0 0	segment fault	Original implementation of Machin's.
+
+=================================================================
+Nov, 2005:
+	We now understand why our original Brent's implementation
+	was slower than the theoretical prediction.  See the paper
+	on Robust Approximate Zero by Sharma, Du, Yap.   The reason
+	is that we did not approximate each step to sufficient relative
+	precision -- in this case, it can be shown that we only
+	get linear convergence.
+=================================================================
+Mar, 2007:
+	Brent's algorithm in newPi.cpp and in brent.cpp are no longer correct
+	after we moved from the old BigFloat to the new BigFloat class.
+	Hope to come back to this in the future.
+					-- Jihun & Chee
+=================================================================
+NOTES:
+	Compendium of approximations to Pi (from Wikipedia):
+    * accurate to 4 digits:
+
+        \sqrt{7+\sqrt{6+\sqrt{5}}} = 3.14163^+[19]
+
+    * accurate to 3 digits:
+
+        \sqrt{2} + \sqrt{3} = 3.146^+
+
+    	Karl Popper conjectured that Plato knew this expression.
+
+    * accurate to 4 digits:
+
+        \sqrt[3]{31} = 3.1413^+
+
+    * an approximation by Ramanujan, accurate to 4 places:
+
+        \frac{9}{5}+\sqrt{\frac{9}{5}} = 3.14164^+
+
+    * accurate to 7 digits:
+
+        \frac{355}{113} = 3.14159\ 29^+
+
+    * accurate to 9 digits:
+
+        \frac{63}{25} \times \frac{17 + 15\sqrt{5}}{7 + 15\sqrt{5}}
+		= 3.14159\ 26538^+
+
+    * accurate to 9 places:
+
+        \sqrt[4]{\frac{2143}{22}} = 3.14159\ 26525^+
+
+    This is from Ramanujan, who claimed the goddess Namagiri appeared
+	to him in a dream and told him the true value of π.
+
+    * accurate to 18 digits:
+
+        \frac{80\sqrt{15}(5^4+53\sqrt{89})^\frac{3}{2}}
+		{3308(5^4+53\sqrt{89})-3\sqrt{89}}
+
+    * accurate to 25 digits:
+
+        \frac{5\sqrt{15}(1169+48(8+\sqrt{7})\sqrt{3\sqrt{7}+8}+432\sqrt{7})^\frac{3}{2}}
+	     {64(7308+5(144+191\sqrt{7})\sqrt{3\sqrt{7}+8}+2790\sqrt{7})}
+
+    * accurate to 30 decimal places:
+
+        \frac{\log(640320^3+744)}{\sqrt{163}}
+	   = 3.14159\ 26535\ 89793\ 23846\ 26433\ 83279^+
+
+    This is a consequence of the closeness of the Ramanujan constant to the
+    integer 640320³+744.  Similarly, we get the following
+    formula accurate to 52 decimal places:
+
+        \frac{\log(5280^3(236674+30303\sqrt{61})^3+744)}{\sqrt{427}}
+
+=================================================================

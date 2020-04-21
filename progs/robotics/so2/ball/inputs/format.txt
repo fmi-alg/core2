@@ -1,0 +1,24 @@
+# BASIC FORMAT:
+#     FOR NOW, MAKE SURE THAT ALL OBSTACLES ARE CONVEX 
+#
+#     V            # number of vertices
+#
+#    x1 y1 z1 x2 y2 z2 ...    xN yN zN    # vertices
+#
+#    F1            # number of faces in polyhedron 1  (all faces are triangles)
+#
+#    u11 v11 w11        # first triangle (face)   given by a list of vertices
+#    u12 v12 w12        # second triangle (face)
+#    ...
+#    u1F1 v1F1 w1F1        # last triangle (face)
+#
+#    F2            # number of faces in polyhedron 2 
+#
+#    u21 v21 w21        # first triangle (face)
+#    u22 v22 w22        # second triangle (face)
+#    ...
+#    u2F2 v2F2 w2F2        # last triangle (face)
+#
+#    0            # zero indicates no more polyhedra
+#
+

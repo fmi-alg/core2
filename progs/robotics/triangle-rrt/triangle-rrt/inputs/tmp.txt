@@ -1,0 +1,33 @@
+# file input2.txt
+# this is a sample file format for input
+#     rest-of-line comment character is '#'
+      	# initial space and tabs ignored
+
+
+20
+10 502
+110 502
+110 402
+10 402
+200 312
+250 332
+300 292
+210 162
+220 202
+50 112
+100 162
+150 92
+150 362
+250 362
+250 262
+150 262
+0 262
+0 240
+180 240
+180 262
+5
+1 4 3 2 1
+5 9 8 7 6 5
+10 12 11 10
+13 16 15 14 13
+17 18 19 20 17

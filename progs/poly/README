@@ -1,0 +1,144 @@
+============================================================
+README file for poly
+Core Library 
+
+Description:
+	Simple Polynomial Package
+	with Applications (Newton, Sturm)
+
+Author:
+	Chee Yap, July 2002
+$Id: README,v 1.3 2007/02/06 22:02:11 exact Exp $
+============================================================
+
+Files:
+	README		-- this file
+	Makefile	-- Type "make p=xxx" to compile the file xxx.cpp
+	tPoly.cpp	-- Exercises the functions of Polynomial Class
+	Newton.h	-- template Newton Class, for simple Newton iteration
+	tNewton.cpp	-- Exercises the Newton class
+	tSturm.cpp	-- Exercises the Sturm class
+	tDescartes.cpp	-- identical to tSturm, but for Descartes class 
+	solve.cpp	-- uses Sturm and Newton together to solve for roots
+	timeNewton.cpp	-- time Newton for various accuracy of evaluating iterates
+	wein.cpp	-- test polynomial from Ron Wein.
+
+Directories:
+	inputs		-- files for input data
+	outputs		-- results from tests
+
+============================================================
+NOTE ON RELATIVE ERROR REQUIRED FOR IMPLEMENTING SELF-CORRECTING NEWTON
+
+Consider this experiment using the program "timeNewton.cpp":
+
+To compute the square root of N=12345678 to
+100,000 bits of precision.  Using the standard Newton iteration
+(as implemented in Sturm class), we want to know the effects of
+approximate Newton iteration.  More precisely,  if
+
+		N(x_0) = x_0 - f(x_0)/f'(x_0),
+
+where x_0 is a bigfloat, we want to know to what precision should
+we compute f(x_0)/f'(x_0).  Currently, we compute this to
+relative error defBFdivRelPrec (a global variable used by BigFloat division).
+
+Here are some timings:
+	
+		defBFdivRelPrec 	time (secs)
+		===============		===========
+		4			64.4
+		30			21.4
+		300			3
+		3000			0.75
+		30000			1.0
+		300000			8.5
+
+How to determine the optimal?
+
+-- Chee, Vikram, Zilin
+   Sep 28, 2004
+
+============================================================
+NOTE ON IMPLEMENTING NEWTON ITERATION 
+
+We have kept an older version of Newton.h in the file
+
+	NewtonOrig.h
+
+The main difference from the Newton.h is that the members "val" and "del"
+in the original Newton class are Expr objects, instead of BigFloat Objects.
+
+The relative performance between the 2 implementations is seen in the 
+following experiment: suppose we use Newton iteration to
+compute sqrt(2) to 10,000 bits of precision.  We also write
+this result to a file (in our bigNumber format).
+
+The program based on the current Newton.h needed
+67 iterations, using 0.17 seconds.
+The program based on the current Newton.h terminated in only
+13 iterations but using 0.31 seconds.  
+
+Thus, while Expr is more accurate, it is slower
+than a simple BigFloat iterator.
+
+--Chee
+August 2, 2002
+
+============================================================
+NOTE ON CHANGING THE DEFINITION OF Interval,
+from a pair of Expr's to a pair of BigFloats:
+
+In a test involving tSturm, using the default polynomial
+in tSturm, suppose we refine all the isolated real roots (there are 6)
+to 2000 absolute bits:
+	Using Expr Intervals, the time is 257.56 seconds,
+	Using BigFloat Intervals, the time is 45.34seconds.
+Another timing:
+	Timing for running tSturm, tPoly, tNewton is
+	0.6 sec user time, 0.0 sec system time.
+
+--Chee and Sharma
+March 13, 2003
+
+============================================================
+NOTE ON POLYNOMIALS USING DIFFERENT NUMBER TYPES
+
+You can now use NT=BigInt (default), NT=int, NT=BigRat, NT=Expr
+are polynomials.  We plan to allow NT=BigFloat as well.
+Here are the relative times for running tPoly.cpp (test down
+on a Pentium M, 1.4 GHz, 786 MB RAM) using Core 1.6x):
+	NT=Expr,	0.230s
+	NT=BigRat,	0.193s
+	NT=BigInt,	0.160s
+	NT=int,		0.130s
+Note the extra time for more complex number types are purely
+attributable to overhead for the structures, and not to more
+complex numerical precision.
+
+--Chee
+Mar 26, 2004
+============================================================
+NOTE ON ISOLATING ROOT INTERVAL USING DESCARTES' RULE OF SIGN
+
+We have implemented Descartes's algorithm for getting isolating root interval.
+tDescartes.cpp is created for isolating roots of the test polynomials
+found in tSturm.cpp.
+
+Timings are
+
+NT		tSturm		tDescartes
+======		======		==========
+Expr		9.089		1.245		
+BigRat		1.696		0.924
+BigFloat	1.166		1.136
+BigInt		1.307		0.781
+long		0.798		0.521
+int		0.835		0.499
+
+Thus, we find that Descartes is up to twice as fast
+as Sturm for these polynomials.
+
+--Jihun
+Feb 1, 2007
+============================================================

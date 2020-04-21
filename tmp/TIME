@@ -1,0 +1,29 @@
+TIME
+
+Some typical times
+==================
+
+Platform: Intel Pentium M, 1.60GHz, 504 MB RAM
+	Cygwin g++ on Windows XP
+
+	Core2:
+	make first -- 4 minutes
+	make fourth -- 2 minutes
+	make fifth -- 10 minutes
+
+PLATFORM:
+  	MacBook Air
+  	Model Identifier:	MacBookAir2,1
+  	Processor Name:	Intel Core 2 Duo
+  	Processor Speed:	2.13 GHz
+  	Number Of Processors:	1
+  	Total Number Of Cores:	2
+  	L2 Cache:	6 MB
+  	Memory:	2 GB
+  	Bus Speed:	1.07 GHz
+
+	On this platform "make time" (for Core 2.0) takes:
+
+			real	0m0.804s
+			user	0m0.428s
+			sys	0m0.146s

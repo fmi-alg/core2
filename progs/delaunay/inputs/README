@@ -1,0 +1,8 @@
+Input files:
+
+i10:  10 random 2D points
+i100: 100 random 2D points
+circ12: 12 co-circular points
+circ20: 20 co-circular points
+I10:  10 random points (leda format)
+I100: 100 random points (leda format)

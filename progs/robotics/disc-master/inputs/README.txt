@@ -1,0 +1,94 @@
+# README:
+# ###########################################################################
+#  Since CoreLib 2.1 (April 2012)
+#  Chee Yap
+# ###########################################################################
+#
+# Our basic 2d polygonal format is this:
+# This is a sample file format for input
+# 	It supports:
+#     	(1) rest-of-line comment character is '#'
+#	(2) initial space, tabs and newlines are ignored.
+#	(3) continuation line character is '\'
+#
+# It a sequence of lines with these elements:
+#
+# (1) Number of points:
+# 	N
+#
+# (2) Coordinates of the N points in a single line:
+#
+#	x1 y1 x2 y2 ...    xN yN
+#
+#	The coordinates xi, yi can be integers or decimal values 
+# 	The point (xi,yi) has index i (for i=1,2,...,N)
+#	TODO: should allow optional commas, to help visualize the separate points:
+#		x1 y1, x2 y2, x3 y3, ...
+#
+# (3) Number of polygons:
+#	M
+#
+# (4) Follows M lines, one for each polygon:
+#
+#	p11 p12 p13 ...
+#	p21 p22 p23 p24 ...
+#	...
+#	pM1 pM2 ...
+#
+# where
+# 	each polygon is given by a sequence of point indices (1 to N)
+# 		E.g., 1 9 12 3 5 1
+#	The polygons are closed, so the last index must the same
+#		as the first index. 
+# 	The interior of polygon is left of the directed edges:
+# 		So the interior is finite iff the indices are listed
+# 		in counter-clockwise order
+# 	E.g. 
+# 		2 3 8 2
+# 	and
+# 		2 8 3 2
+# 	are two triangles but one has finite interior, the
+# 	other has finite exterior.
+#	Degenerate polygons (line segment, or polygonal lines) are OK:
+#		E.g.,
+#		5 2 5
+#		5 2 7 9 11 9 7 2 5
+#
+# 	If your polygon is non-simple, the effects are
+# 	somewhat unpredictable (it is predictable, of course, but
+# 	harder to figure out).
+#
+#  EXAMPLE:  Suppose we want to represent an obstacle set whose
+#		complement is a triangular annulus:
+#                            /\
+#                           /  \
+#                          / /\ \
+#                         / /  \ \
+#                        / / A  \B\  C
+#                       / -------- \ 
+#                      --------------    
+#	where A and C are interior to the obstacle set,
+#	but B is exterior to the set. 
+#	Thus the outer triangle must be listed clockwise,
+#	and the inner triangle must be listed counter-clockwise.
+
+6		# 6 points
+100 100 	# first point
+300 100 	# second point
+200 300		# third point
+80 80
+320 80
+200 320		# last point
+
+2		# 2 polygons
+1 3 2 1		# first polygon (the inner triangle, listed counter-clockwise:
+		# 	(100,100), (200,300), (300,100), (100,100)
+4 5 6 4		# second polygon (the outer triangle, listed clockwise)
+
+#
+# ###########################################################################
+#
+#	RESTRICTION: 	For a point (x,y) we require
+#			0 < xi < 512,	0 < yi < 512
+#	
+# ###########################################################################

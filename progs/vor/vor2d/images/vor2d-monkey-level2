@@ -1,0 +1,14 @@
+The image 
+	vor2d-monkey-level2.tiff
+
+    is produced by vor2d program, running at Level 2.
+
+    It takes an appreciable amount of time, and its output out
+    to be compared to the output at Level 1, to see if there is
+    any difference.
+
+    We ought to check this automatically by looking at their
+    corresponding Voronoi graphs.
+   
+   --Chee
+   Jun 19, 2012.

@@ -1,0 +1,68 @@
+\documentclass{article}
+\title{Structure-3D}
+\author{Kai Cao}
+\date{Oct 2012}
+\begin{document}
+
+\maketitle
+\section {3-Level Representation}
+\subsection {CSG objects (We should draw a tree here)}
+Primitives:
+\begin{enumerate}
+      \item Half Spaces
+      \item Spheres
+      \item Cylinders
+      
+\end{enumerate}
+
+\subsection {Subdivision Trees(Double, Quad, Oct, Draw a tree here)}
+\subsubsection {Relations between a box B and a primitive A:}
+      \begin{enumerate}
+            \item Box B belongs to A
+            \item Box B is out of A
+            \item A belongs to  Box B
+            \item Box B intersects A
+      \end{enumerate}
+
+\subsubsection {Features in a Box}
+      \begin{enumerate}
+            \item Half Plane
+            \item Corner
+      \end{enumerate}
+\subsection {Euler Representation(Draw a graph here)}
+We need to include a pointer in every vertex pointing to the box it belongs to because the box contains all information needded.
+
+\section {Relation between these 3 Levels (Draw a picture here)}
+
+\section {Operations:}
+      \begin{enumerate}
+            \item Union
+            \item Intersection
+            \item Difference
+      \end{enumerate}
+
+
+\section {Structure of Boxes:}
+      typedef SplitType bool[3]
+      111=full split
+      011, 101, 110= quad split
+      001, 010 ,100= half split
+
+      item It should be a Template
+      We have to rewrite Point2D, Point3D as templates
+
+
+
+
+\section {Design a generalized number representing machine number and a BigFloat at the same time}
+
+class type{
+bool isMachine;
+double x;
+BigFloat *y;
+}
+
+Information in extlong?
+\end{document}
+
+      

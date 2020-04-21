@@ -1,0 +1,57 @@
+Authors of Core Library
+(in chronological order of initial contribution)
+
+==================================================
+It is sometimes difficult to associate authors with a particular
+source file, because the files evolve and gets split up or merged
+over time.   The year that an author worked on Core Library can
+be roughly correlated with the version of Core Library.
+
+==================================================
+Chee Yap	Designer/Author of Real/Expr (1993), Core Library 1 (1998),
+		Polynomial Package and Sturm (2001),
+		Author of Core Library 2 (2006)
+Thomas Dube	Author/Designer of Real/Expr and BigFloat (1993)
+Koji Ouchi	Reimplementation of Real/Expr and BigFloat (1997)
+Chen Li		Author of Core Library 1 (1999), Root Bounds (2000)
+Vijay Karamcheti Author of Core Library 1 (1999), 
+Igor Pechtchanski Author of Core Library 1 (1999),
+		Linear Algebra Package (2000),
+		Author of Geometry Package (2000)
+Yaping Yuan	Author of 2D Geometry Package (2000)
+Shubin Zhao	Author of 3D Geometry Package (2001)
+Zilin Du	Author of File I/O (2001), Filters (2002),
+		Hypergeometric package (2002), algebraic numbers (2003),
+		Designer/Author of Incore (2004),
+		Designer/Author of Core Library 2 (2006)
+Jose Moreira	Author of Original Hypergeometric Package (2001)
+Maria Eleftheriou Author of Original Hypergeometric Package (2001)
+Sylvain Pion	Author of Filters (2002), CGAL Interface (2002),
+		Root Bounds -- kary bounds (2003),
+		Author of Core Library 2 (2006)
+Vikram Sharma	Author of Newton package (2003), Root Isolation (2003),
+		Curves (2004)
+Herve Bronnimann Author of Core Library 2 (2006)
+Jihun Yu	Author of Core Library 2 (2006-2011)
+		Auther/Designer of BigFloat2 and Policies.h.
+Philip Davidson	Author of algebraicNum class, and contributions
+		to polynomial class (2006)
+Long Lin	Author of Mesh code (Cxy, etc) (2008)
+Shuxing Lu	Author of Mesh code (Cxy) (2009)
+Narayan Kamath	Author of wrappers for Core Level 1 in Core Library 2,
+		IntervalT.h, ComplexT.h, improved Cxy code, Newton-type
+		solver code (2010)
+Shang Wang	Author of miranda code in mesh (Summer 2011)
+		for intersecting 2 plane curves.
+Cong Wang	Main Author of Planner for Disc and Triangle Robot (2013)
+Zhongdi Luo	Main Author of Planner for 2-Link Robot (2014-5)
+Huck Bennett	Author of Box Subdivision Package (2015-17)
+Ching-Hsiang (Tom) Hsu	Main Author of Planner for Rod/Ring Robot (2016-2018)
+Remi Imbach	Author of Root Clustering software (2018)
+Bo Zhou		Author Planner for Complex Planar Robot (2017-18)
+Michael Burr	Author of Univariate Homotopy Path (2017-18)
+Juan Xu		co-Author of Univariate Homotopy Path (2017-18)
+Remi Imbach	Author of Root Clustering software (2018)
+
+==================================================
+

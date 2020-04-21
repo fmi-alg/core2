@@ -1,0 +1,51 @@
+README for kahan
+Core Library, $Id: README,v 1.2 2010/06/11 17:49:29 exact Exp $
+===============================================================
+
+Kahan posed the following challenge for Core Library:
+
+"Let x,y,z be real and define
+
+	F(z) := if (z=0) then 1 else (exp(z) -1)/z;
+	Q(y) := | y- sqrt(y**2 + 1) | - 1/( y + sqrt( y**2 + 1 ) ;
+	G(x) := F( Q(x) ** 2).
+
+Now for n = 15 to 9999 do Print { n, G(n) }.
+
+You may replace exp(z) by the first few terms of its Taylor series.
+
+Assume that all expressions are computed to the same floating-point
+precision rounded in a reasonable way.
+
+Unless your system can deduce algebraically that Q(n) = 0,
+it will almost always compute a nonzero value so small that then
+it will compute G(n) after roundoff, where the correct value of G(n) = 1.
+To get the correct value,  your system would have to perform correct
+analysis with inequalities and symbolic expressions,  no easy matter.
+  
+Inequalities can be very troublesome for automated symbolic analysis.
+Here is another example:
+
+Let  w  be a complex variable,  and let  sqrt(...)  stand for the
+principal square root,  the one whose real part is nonnegative and
+whose imaginary part matches the argument's imaginary part in sign.
+One of the following expressions vanishes everywhere;  where does
+the other  NOT  vanish?
+
+        sqrt( w*w - 1 )  -  sqrt(w - 1)*sqrt(w + 1)
+
+        sqrt( 1 - w*w )  -  sqrt(1 - w)*sqrt(1 + w)
+
+Of course,  this question can be reduced to an equivalent question
+about real variables."  
+
+[Email to Yap, 4/21/2000]
+
+====================================================================
+POSTSCRIPT:
+This program was verified by Kahan to compute as he had specified.
+Kahan remarked that our system had to do "theorem proving" to
+accomplish this feat.  In a sense, this is right!  Our system has
+some inherent ability to prove theorems.  See our ruler-and-compass
+geometric theorem prover under ${CORE}/progs/prover/.
+====================================================================

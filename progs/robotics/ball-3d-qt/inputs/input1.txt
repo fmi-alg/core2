@@ -1,0 +1,19 @@
+# file: input1.txt
+# This is a tetrahedron obstacle
+# 	It is in the "basic format".
+
+# four vertices:
+Points
+100 40 60
+300 40 60
+200 40 400
+200 500 230
+
+# four triangles
+Poly
+0 3 2 1
+0 3 4 2
+0 2 4 1
+0 1 4 3
+
+End

@@ -1,0 +1,31 @@
+# input11.txt
+# This is a duplicate of input10.txt, but using our
+# exhanced syntax:
+#
+# This is a single box obstacle
+#
+#    	Note that in the coordinates (x,y,z), the height is represented by y.
+#
+#    	The Box's dimensions are 20 x 80 x 100
+#
+#	The first four vertices are
+#		A = (10, 40, 60)   	-- the "origin"
+#		B = A + (20, 0, 0)	-- point in the x-axis (20 units thick)
+#		C = A + (0, 80, 0)	-- point on the y-axis (80 units high)
+#		D = A + (0, 0, 100)	-- point on the z-axis (100 units wide)
+#
+#	The remaining four vertices are generated from A,B,C,D:
+#		A' = A + (20, 80, 160)	-- diagonally opposite of A
+#		B' = A' - (20, 0, 0)
+#		C' = A' - (0, 80, 0)
+#		D' = A' - (0, 0, 100)
+#
+
+Points
+"X" 0 0 0
+"Y" 230 0 0
+"Z" 0 0 230
+
+Wall
+5 X Y Z + 0 120 0
+End

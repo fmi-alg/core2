@@ -1,0 +1,48 @@
+%basic definitions
+def O (0,0,0)
+def rotN 4
+def eye (10,4,10)
+def look_at (0,0,-5)
+def axes {
+    def sz 3
+    line [arrows=<->] (sz,0,0)(O)(0,sz,0)
+    line [arrows=->]  (O)(0,0,sz)
+    line [linewidth=.2pt,linecolor=blue,linestyle=dashed] (O)(0,0,-10)
+    special |\uput[r]#1{$x$}\uput[u]#2{$y$}\uput[l]#3{$z$}|
+      (sz,0,0)(0,sz,0)(0,0,sz)
+  }
+  
+def cube {sweep[cull=false,opacity=0.7]{rotN<>,rotate(360/rotN,[0,1,0])}{line(1,1,1)(1,-1,1)}}
+def solidcube {sweep[cull=false,opacity=1]{rotN<>,rotate(360/rotN,[0,1,0])}{line(1,1,1)(1,-1,1)}}
+%--------------Triangle----------------
+def triangle polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0.3)(1,0,1)(-0.7,1,1)
+def equitriangle polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(1,0,1)(0,1,1)
+
+
+%--------------Trapezoidal----------------
+def trape polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(0,1,1)(-0.5,-1,1)(1,-1,-0.5)
+%--------------Parallelogram----------------
+def parallel polygon[cull=false,fillcolor=red!100,opacity=0.3](0.5,-1,-1)(0,1,-1)(-0.5,1,1)(0,-1,1)
+%--------------Rectangle----------------
+def rectangle polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(0,1,1)(0,-1,1)(1,-1,0)
+%--------------Square----------------
+def square polygon[cull=false,fillcolor=red!100,opacity=0.3](1,1,0)(1,-1,0)(-1,-1,1)(-1,1,0)
+
+%--------------Pentagon-----------------
+def pentagon polygon[cull=false,fillcolor=red!100,opacity=0.3](0.5,-1,1)(-0.5,1,1)(0.5,1,-1)(1,0,-1)(1,-1,0)
+
+
+%--------------Hexagon-----------------
+def hexagon polygon[cull=false,fillcolor=red!100,opacity=0.3](1,-1,0)(1,0,-1)(0,1,-1)(-1,1,0)(-1,0,1)(0,-1,1)
+
+%--------------1st level Subdivision-------------
+%--------------x=0 plane cut-----------------------
+def cutx polygon[cull=false,fillcolor=red!100,opacity=0](0,1,1)(0,1,-1)(0,-1,-1)(0,-1,1)
+%--------------y=0 plane cut-----------------------
+def cuty polygon[cull=false,fillcolor=red!100,opacity=0](1,0,1)(1,0,-1)(-1,0,-1)(-1,0,1)
+%--------------z=0 plane cut-----------------------
+def cuty polygon[cull=false,fillcolor=red!100,opacity=0](1,1,0)(1,-1,0)(-1,-1,0)(0,-1,1)
+def first {{cutx}{cuty}{cutz}}
+
+put { view((eye), (look_at)) } {{cube}}
+%repeat{10, rotate(45,[1,1,1]) then translate([2,0,0])}{cube}

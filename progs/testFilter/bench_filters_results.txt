@@ -1,0 +1,88 @@
+Timings for 10^6 calls to : bench_filter(0.123456789, 0.987654321)
+-------------------------
+
+void bench_filter(const NT &x, const NT &y)
+{
+  NT e = (sqrt(x) + sqrt(y)) + sqrt(x + y + NT(2)*sqrt(x*y));
+  assert(e != 0);
+}
+
+
+CORE::Expr :
+./bench 1000000  114.27s user 0.18s system 100% cpu 1:54.44 total
+
+leda_real (4.2) :
+./bench 1000000  3.60s user 0.01s system 100% cpu 3.603 total
+
+
+CGAL::Lazy_exact_nt<CORE::Expr> :
+./bench 1000000  3.22s user 0.02s system 99% cpu 3.241 total
+
+CGAL::Lazy_exact_nt<leda_real> :
+./bench 1000000  3.34s user 0.01s system 99% cpu 3.352 total
+
+double :
+./bench 1000000  0.33s user 0.01s system 100% cpu 0.337 total
+
+==========================================================
+
+Timings for 10^4 calls to : bench_root_bounds(0.123456789, 0.987654321)
+-------------------------
+
+void bench_root_bounds(const NT &x, const NT &y)
+{
+  NT e = (sqrt(x) + sqrt(y)) - sqrt(x + y + NT(2)*sqrt(x*y));
+  assert(e == 0);
+}
+
+CORE::Expr :
+./bench 10000  33.39s user 0.05s system 99% cpu 33.468 total
+
+leda_real (4.2) :
+./bench 10000  54.08s user 0.12s system 99% cpu 54.245 total
+
+CGAL::Lazy_exact_nt<CORE::Expr> :
+./bench 10000  34.82s user 0.07s system 99% cpu 34.895 total
+
+CGAL::Lazy_exact_nt<leda_real> :
+./bench 10000  54.58s user 0.08s system 99% cpu 54.703 total
+
+
+==========================================================
+bench_root_bounds(123456789, 987654321); // 9 digits integers
+
+CORE::Expr :
+./bench 10000  40.85s user 0.03s system 99% cpu 40.885 total
+
+leda_real : 
+./bench 10000  12.37s user 0.02s system 99% cpu 12.411 total
+
+==========================================================
+bench_root_bounds(1234, 9876); // 4 digits integers
+
+CORE::Expr :
+./bench 10000  16.12s user 0.02s system 99% cpu 16.150 total
+
+leda_real : 
+./bench 10000  8.19s user 0.03s system 99% cpu 8.228 total
+
+
+==========================================================
+bench_root_bounds(123456789.0 / (1<<30), 987654321.0 / (1<<30));
+
+CORE::Expr :
+./bench 10000  58.82s user 0.03s system 99% cpu 58.856 total
+
+leda_real : 
+./bench 10000  52.41s user 0.04s system 99% cpu 52.459 total
+
+==========================================================
+    bench_root_bounds((123456789.0 / (1<<30))/ (1<<30), 
+                      (987654321.0 / (1<<30))/ (1<<30)); // integer shifted
+
+CORE::Expr :
+./bench 10000  65.83s user 0.05s system 99% cpu 1:05.90 total
+
+leda_real : 
+./bench 10000  51.68s user 0.06s system 99% cpu 51.742 total
+

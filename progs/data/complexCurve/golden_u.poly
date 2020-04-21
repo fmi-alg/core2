@@ -1,0 +1,2 @@
+# output u-polynomial from convertPoly for output/golden
+-y^2 + (x^2 - x - 1)

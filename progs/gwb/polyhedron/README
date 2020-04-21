@@ -1,0 +1,24 @@
+file: README
+
+(1) This directory implements Mantyla's Geometric Workbench
+      (taken from his Solid Modeling book)
+      
+            The main program in this directory is called "gwb.cpp".
+            It can read a sequence of Euler operators from a *.gwb file
+            to build a geometric model.
+
+(2) Format for *.gwb files:
+    These are line-oriented ASCII files with
+       -- single-line comments indicated by "#" (rest of line is ignored)
+       -- continuation character indicated by "/" (the current line is joined
+            with the next line)
+       -- a sequence of semi-colon terminated GWB Euler operations
+            (mvfs, mev, mef, kev, kef, ... etc)
+       -- the last command is just "end".
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   Kai Cao and Chee Yap
+   July 2012
+   Since Core 2.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

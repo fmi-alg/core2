@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{900910EA-2D00-44C7-B732-F013936089A3}</ProjectGuid>
+    <RootNamespace>rrtd</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>..\..\..\$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>..\..\..\$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..;../utils;../mathtool;../FIST</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../GL;../FIST</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glui32.lib;freeglut.lib;FIST.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..;../utils;../mathtool;../FIST;../graph;../itree</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../GL;../FIST</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glui32.lib;freeglut.lib;FIST64.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..;../utils;../mathtool;../FIST</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../GL;../FIST</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glui32.lib;freeglut.lib;FIST.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..;../utils;../mathtool;../FIST;../graph;../itree</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../GL;../FIST</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glui32.lib;freeglut.lib;FIST64.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\draw.cpp" />
+    <ClCompile Include="..\GL\gl2ps.cpp" />
+    <ClCompile Include="..\GL\gli.cpp" />
+    <ClCompile Include="..\GL\gliDump.cpp" />
+    <ClCompile Include="..\GL\gliFont.cpp" />
+    <ClCompile Include="..\itree\EndPoint.cpp" />
+    <ClCompile Include="..\itree\Interval.cpp" />
+    <ClCompile Include="..\itree\RectKD.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\mathtool\Basic.cpp" />
+    <ClCompile Include="..\mathtool\Gauss.cpp" />
+    <ClCompile Include="..\mathtool\Quaternion.cpp" />
+    <ClCompile Include="..\polygon.cpp" />
+    <ClCompile Include="..\RRT.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\draw.h" />
+    <ClInclude Include="..\FIST\basic.h" />
+    <ClInclude Include="..\FIST\bv_tree.h" />
+    <ClInclude Include="..\FIST\data.h" />
+    <ClInclude Include="..\FIST\defs.h" />
+    <ClInclude Include="..\FIST\ext_appl.h" />
+    <ClInclude Include="..\FIST\graphics.h" />
+    <ClInclude Include="..\FIST\graphics_header.h" />
+    <ClInclude Include="..\FIST\header.h" />
+    <ClInclude Include="..\FIST\ipe_io.h" />
+    <ClInclude Include="..\FIST\local.h" />
+    <ClInclude Include="..\FIST\martin.h" />
+    <ClInclude Include="..\FIST\matrix.h" />
+    <ClInclude Include="..\FIST\numerics.h" />
+    <ClInclude Include="..\FIST\sgo.h" />
+    <ClInclude Include="..\FIST\triangulate.h" />
+    <ClInclude Include="..\FIST\vertex.h" />
+    <ClInclude Include="..\GL\gl2ps.h" />
+    <ClInclude Include="..\GL\gli.h" />
+    <ClInclude Include="..\GL\gliDump.h" />
+    <ClInclude Include="..\GL\gliFont.h" />
+    <ClInclude Include="..\intersection.h" />
+    <ClInclude Include="..\itree\EndPoint.h" />
+    <ClInclude Include="..\itree\Interval.h" />
+    <ClInclude Include="..\itree\MiddleStructure.h" />
+    <ClInclude Include="..\itree\RectangleTree.h" />
+    <ClInclude Include="..\itree\RectKD.h" />
+    <ClInclude Include="..\main.h" />
+    <ClInclude Include="..\mathtool\Basic.h" />
+    <ClInclude Include="..\mathtool\Gauss.h" />
+    <ClInclude Include="..\mathtool\Matrix.h" />
+    <ClInclude Include="..\mathtool\Point.h" />
+    <ClInclude Include="..\mathtool\Quaternion.h" />
+    <ClInclude Include="..\mathtool\Vector.h" />
+    <ClInclude Include="..\polygon.h" />
+    <ClInclude Include="..\RRT.h" />
+    <ClInclude Include="..\segseg.h" />
+    <ClInclude Include="..\utils\Timer.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

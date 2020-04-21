@@ -1,0 +1,16 @@
+README
+
+Homotopy Path is a project to implement
+certified homotopy path finding.
+
+--Michael Burr, Juan Xu and Chee Yap
+  July 2016
+
+
+TODO:
+	-- Define a new Frisco format called "string"
+		that accepts our string representation
+		of polynomials
+	-- Take readpoly.h from ../progs/rootIsol/ and
+		modify it, combined with
+		code from Poly.h, Curve.h and Curve.tcc)

@@ -1,0 +1,7 @@
+! file: identity.pol
+! This is the identity polynomial p(x)=x
+dri
+0
+1
+0
+1

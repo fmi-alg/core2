@@ -1,0 +1,2 @@
+# original polynomial from convertPoly for data/lehmer
+x^10 - x^9 + x^7 - x^6 + x^5 - x^4 + x^3 - x + 1

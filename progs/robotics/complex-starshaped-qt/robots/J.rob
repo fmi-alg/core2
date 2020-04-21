@@ -1,0 +1,26 @@
+#  A complex robot looks like a letter J.
+#  This file describe a robot.	
+#	 The file formats like following:
+#	 N, number of vertices, followed by N lines of coordinates.
+#  M, number of trianlges, followed by M lines of triangles, defiend by indices its vertices
+#  Currently, the triangles must be NICE, and the vertices must ordered CCW.
+#
+
+9 	# N verts
+0 0
+0 10
+-6 10 
+-6 7 
+-3 7 
+-3 3 
+-10 3 
+-10 0  
+-3 10
+
+6	# M triangles
+0 1 8
+4 8 2
+4 2 3
+0 8 5
+0 5 6
+0 6 7

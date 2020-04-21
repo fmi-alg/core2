@@ -1,0 +1,2 @@
+# output uv-polynomial from convertPoly for data/nroot5
+y^9(5x) + (-60x^3)y^7 + (126x^5 - 1)y^5 + (-60x^7 + 10x^2)y^3 + (5x^9 - 5x^4)y

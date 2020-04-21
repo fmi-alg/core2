@@ -1,0 +1,48 @@
+Points
+"a" 0 1 1
+"b" 0 0 1
+"c" 1 0 1
+"d" 1 1 1
+"e" 0 1 0
+"f" 0 0 0
+"g" 1 0 0
+"h" 1 1 0
+
+Poly "halfcube1" + 0 0 254 * 480 480 20
+0 a b c
+0 b a f
+0 a e f
+0 c b f
+0 g c f
+0 f e g
+0 g a c
+0 g e a
+
+Poly "halfcube2" + 34 34 254 * 478 478 20
+0 d a c
+0 d c g
+0 h d g
+0 a d h
+0 e a h
+0 e h g
+0 a e c
+0 e g c
+
+
+
+
+Poly "Bound" + 0 0 0 * 512 512 512
+0 a c b
+0 d c a
+0 d g c
+0 h g d 
+0 a h d
+0 e h a
+0 b f a
+0 a f e
+0 c f b
+0 g f c
+0 f g e
+0 e g h	
+
+End

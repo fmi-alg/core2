@@ -1,0 +1,13 @@
+# file: basic1.txt
+#
+#	
+#	--Chee and Zhongdi  (June 2013)
+#
+# Number of Points:
+4
+# Definition of Points:
+40 200 440 200 440 330 40 330
+# NUMBER OF POLYGONS:
+1
+# Definition of Polygons:
+1 2 3 4 1

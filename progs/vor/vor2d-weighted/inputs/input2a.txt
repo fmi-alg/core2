@@ -1,0 +1,33 @@
+# file: input2a.txt
+# 	Variant of input2.txt, but the vertices of polygons
+# 	are now given in clockwise order!
+
+# Points:
+12
+
+# square at upper left corner
+10 502
+110 502
+110 402
+10 402
+# non-convex pentagon in middle
+200 312
+250 332
+300 292
+210 162
+220 202
+# triangle at bottom left
+50 112
+100 162
+150 92
+
+# Polygons: vertices in Clockwise order
+3
+1 2 3 4 1
+5 6 7 8 9 5
+10 11 12 10
+
+# original order (these are ignored by our file reader)
+1 4 3 2 1
+5 9 8 7 6 5
+10 12 11 10

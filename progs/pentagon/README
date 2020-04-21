@@ -1,0 +1,74 @@
+README file
+
+Pentagon Test
+
+Author: Shubin Zhao, Summer 2001
+	Chee Yap, 2003
+
+Since Core Library Version 1.6
+$Id: README,v 1.1 2006/03/07 04:51:25 exact Exp $
+=======================================================================
+
+Description of Pentagon Test:
+
+In this test, we first construct a planar pentagon P in 3-D.
+In order to guarantee that P is actually planar, we 
+first construct a pentagon Q in the the plane z=0.  
+Then we define an affine transformation T, and set P = T(Q).
+
+We consider two operations
+	In(P),  Out(P)
+which transforms a pentagon P into another pentagon so that
+the following containment (written as inequality) holds:
+	In(P) < P < Out(P)
+The pentagon In(P) is inside P and obtained by constructing
+all the chords of P.  These five chords intersect at 5 points
+that form the vertices of In(P).  We may define Out(P) to
+be the "inverse" of In(P).  Thus,
+	Out(In(P)) = P.
+However, starting from any pentagon P, we can also directly
+try to construct Out(P) as follows: we extend each edge of P
+into an infinite line.  Each of these lines intersect at most two
+other infinite lines at points that are strictly outside P.   
+These gives rise to at most 10 intersection points strictly
+outside P.  If there are exactly 10 intersection points,
+then they form our pentagon Out(P).  Otherwise, Out(P) is not defined.
+
+We can iterate these operations, and mix them in any order.
+In particular, Out^n (In^n(P))= P.
+In the test of this program, we only check the simple identity:
+
+		Out(In(P))=P.
+
+Unfortunately, even this simple test will usually take a 
+VERY long time to complete (in Core Version 1.3).
+Elsewhere, we do a complete analysis of this.
+Therefore, we invoke the "escape precision mechanism" of Core Library.
+This mechanism allows a comparison to return "equal" when
+the difference is no larger than a user specified value.
+
+We compile this program at levels 1 and 3.  But Level 1 cannot
+be run because it will have segment fault (not surprisingly).
+
+--Shubin Zhao and Chee Yap
+  Summer 2001
+
+
+======================================================
+UPDATE: June 2003, Core 1.6
+======================================================
+We can now reduce an expression, if its value is rational,
+to a leaf node with a rational number.
+To do this, we just set a global flag by calling
+
+	bool f = true;
+	bool oldf = setRationalReduceFlag(f);
+
+Here, oldf is the previous value of the global flag.
+Using this trick, we can now easily run the pentagon program
+(without invoking the escape precision mechanism).
+
+--Chee Yap
+  Summer 2003
+
+

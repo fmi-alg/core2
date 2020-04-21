@@ -1,0 +1,35 @@
+# file input2c.txt
+#
+# This is basically input2.txt, but we added a fourth polygon (13 14 13).
+# 	This is a degenerate polygon, essentially a line segment.
+#
+# 	The classification predicate (April 21) seems to get confused.
+#
+# this is a sample file format for input
+#	-- rest-of-line comment character is '#'
+# 	-- initial space and tabs ignored
+#
+# See the file input.txt for a detailed description of format
+#
+
+14
+12.34 510.12
+110 502
+110 402
+10 402
+200 312
+250 332
+300 292
+210 162
+220 202
+50 112
+100 162
+150 92
+401.9 400
+400 100
+
+4
+13 14 13
+1 4 3 2 1
+5 9 8 7 6 5
+10 12 11 10

@@ -1,0 +1,47 @@
+# This is mainly to generate images of a standard parabola.
+#
+# 	But we need screen dump to be able to place additional information
+# 	on the image (line segments, points, labels).   
+#
+# 	The suggested syntax (must discuss this) is given below:
+# 	I am really trying to reproduce figure 2(c) in p.tex
+#
+#	--Chee
+#
+
+4
+0 100		
+512 100
+256 140
+256 141
+
+2
+1 2 	# this is the line y=a
+3 4	# point "p". It is really an isolated point, but cheat by drawing 2 close points
+
+# NOTE THAT CURRENT READER IGNORES whatever follows:
+# Here comes our new section.
+#
+SECTION: DISPLAY 	# additional display object: P=points, S=segments 
+
+P 10 110  "line $y=a$"	R	# label for the line  (R is placement hint)
+P 300 100 "$r$"		R	# point r on the line y=a
+P 300 180 "$q$"		R	# point q on the parabola (I am estimating the position!)
+P 256 140 "$p$"		L	# point p on the parabola (this is the focus
+
+S 256 0	256 510		A	# y-axis
+				# "A" means we want an arrow head at the end of the line
+S 0 256	510 256		A	# x-axis
+				# A means we want an arrow head at the end of the line
+S 300 100 300 180	D	# line from r to q
+				# D means the line is "dashed"
+S 300 100 256 140	D	# line from r to p
+S 300 180 256 140	D	# line from q to p
+
+END				# THIS INDICATES END OF FILE
+# anything else is ignored:
+
+junk here
+
+# end!
+

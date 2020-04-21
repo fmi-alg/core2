@@ -1,0 +1,21 @@
+#  Complex Robot Demo for ESA 2017
+#  			
+#	taken from triangle code.
+
+
+
+# TODO:
+--	run() should set up signals to allow interruption.
+--	SHOULD NOT PASS epsilon around to methods.  
+		Should be global.
+--	geom2d should know how to 
+		construct lines from 2 points
+	
+-- 	WE SHOULD USE CoreLib's geom2d.
+
+		RIGHT NOW, we are just duplicating
+
+--	Do memory leak check (delete/new)
+
+--	In Box.cpp, outerDomain is NOT used (line 730)
+			SHOULD FIX THIS.

@@ -1,0 +1,97 @@
+README FILE: TABLE OF CONTENTS
+
+    1) ORIENTATION
+    2) USAGE
+    3) DIRECTORIES AND FILES
+
+******************************************************************
+Author: Zhihua Wang (zhihua@cs.nyu.edu)
+	Courant Institute, New York University
+
+Date:   December 2002
+
+Acknowledgements:
+	This project is supported by an NSF/ITR grant
+	under Professors Chee Yap and Marsha Berger
+	Exact Computation Project website is:
+		http://cs.nyu.edu/exact/
+
+******************************************************************
+1) ORIENTATION
+
+    This is a C/C++ implementation of a Divide-and-Conquer algorithm
+    for Constrained Delaunay Triangulation (CDT) in plane.
+    Version 0.2, released on Dec. 4 2002. 
+	
+    Constrained Delaunay Triangulation is a generalization of
+    Delaunay Triangulation. Our algorithm runs in O(n*log(n)).
+
+    We also include two related software:
+    	(a) a viewer program written in OpenGL to display points
+		and line segments
+	(b) a program to generate any number of random points
+	
+2) Usage:
+   To run:
+   	% make			-- this makes the cdt program
+
+	% make test		-- this is equivalent to typing
+   					"./cdt input/src1.noff"
+				-- this computes the CDT, stores
+				-- it in the file output/src1.noff,
+				-- and displays the result
+	
+   To just view 'noff' file:
+
+	% make viewer
+   	% ./view input/filename.noff
+
+   To generate sample random points
+
+	% make points
+   	% ./points N outputfilename.noff
+
+3) DIRECTORIES AND FILES
+
+	README.txt	This file
+
+	Makefile	To compile and test programs
+
+	cdt.h		Header file
+	myMacro.h	Some macro definitions
+        geom2d.h	Definitions related to geometry (from Core Library)
+
+	cdt.cpp		Source file 
+			To compile this, you need the above 3 head files
+
+        viewer.cpp      A simple display program to view '*.noff' file.
+			Can be compiled separately.
+
+	points.cpp	A simple program to generate 'random' points in plane.
+			Can be compiled separately.
+
+	doc/		Subdirectory containing related materials
+	doc/format.txt	Format description for input and output files
+	doc/cdt.ps	Paper describing the implemented algorithm
+
+	input/*.noff    Subdirectory containing sample input files
+
+    Full version (if "make tarall") also includes:
+	
+	change.log	File containing all records of debugging and changes.
+
+	paper/		Subdirectory containing paper's source files.
+
+	paper/p.tar	Source file in Latex format.
+
+4) Version:
+
+	0.1 on Aug. 12th 2002
+    	Need to recompile the code if the input size 
+    	exceed the predefined maximum value.
+
+	0.2 on Dec. 04th 2002
+    	Input can be arbitrary size now.
+    	Still does not support input which contains 
+		vertices sharing same X-value.
+

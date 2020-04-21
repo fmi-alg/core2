@@ -1,0 +1,51 @@
+file: README for delaunay examples
+Core Library 
+$Id: README,v 1.1 2006/03/07 04:51:23 exact Exp $
+
+Two examples to demonstrate the ease of
+converting an exising C application to CORE level 3 program.
+
+The original C source code
+(stored here in the sub-directory "orig") is from O'Rourke
+(http://cs.smith.edu/~orourke/books/ftp.html)
+and is based on his book,
+"Computational Geometry in C (Second Edition)".
+
+Programs:
+
+1. dt2.cc
+Implements the Graham algorithm to compute the delaunay triangulation of
+a set of 2D points.  We modified it slightly to utilize Core Library
+and to allow it to process input/output files with the LEDA format.
+ 
+Usage: 
+	dt2 -[ c | d | l | L ] < input_file > output_file
+	Options:
+		-c: check and debug mode;
+		-d: debug mode;
+		-l: produce output in LEDA format;
+		-L: read in input with LEDA format.
+	Input:
+		A few sample inputs file are listed under the
+	sub-directory "inputs". Please take a look of the README
+	file there. Note that to read in LEDA format files, you need
+	to specify the "-L" option.
+
+	Output:
+		Depending on the options specified, it can produce
+	both PostScript file (by default) and LEDA files (-l option).
+
+2: dt4.cc
+A very simple O(n^4) algorithm based on orientation tests.
+
+Usage:
+	dt4 < input_file > output_file
+		
+	Input: as above.
+	Output: print to the standard output
+		the delaunay triangles and the total
+		number of faces found.
+
+		NOTE: if a delaunay k-gon is degenerate (i.e., k > 3),
+		then the program counts (k choose 3) triangles.
+

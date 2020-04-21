@@ -1,0 +1,2 @@
+# output u-polynomial from convertPoly for data/nroot5
+y^4(5x) + (-10x^3)y^2 + (x^5 - 1)

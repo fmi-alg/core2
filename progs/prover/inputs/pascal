@@ -1,0 +1,94 @@
+# file: pascal
+#
+#	Pascal's Theorem:
+# 
+# 	Let A, B, C, D, F and E be six points on a circle 
+# 	(O). Let P intersection of AB and DF, Q intersection 
+# 	of BC and FE and S intersection of CD and EA.
+# 	Show that P, Q and S are collinear.
+# 
+# 	Let A(0,0), O(u_1,0), B(x_1,u_2), C(x_2,u_3), D(x_3,u_4)
+# 	F(x_4,u_5), E(x_5,u_6), P(x_7,x_6), Q(x_9,x_8) and S(x_11,x_10).
+# 	Therefore the hypothesis equations are:
+# 
+# 	h_1 = x_1^2 - 2 u_1 x_1 + u_1^2 = 0 	
+# 	h_2 = x_2^2 - 2 u_1 x_2 + u_3^2 = 0 
+# 	h_3 = x_3^2 - 2 u_1 x_3 + u_4^2 = 0 
+# 	h_4 = x_4^2 - 2 u_1 x_4 + u_5^2 = 0 
+# 	h_5 = x_5^2 - 2 u_1 x_5 + u_6^2 = 0 
+# 	h_6 = u_5 x_7 - u_4 x_7 - x_4 x_6 + x_3 x_6 + u_4 x_4 - u_5 x_3 = 0
+# 	h_7 = u_2 x_7 - x_1 x_6 = 0 
+# 	h_8 = u_6 x_9 - u_5 x_9 - x_5 x_8 + x_4 x_8 + u_5 x_5 - u_6 x_4 = 0
+# 	h_9 = u_3 x_9 - u_2 x_9 - x_2 x_8 + x_1 x_8 + u_2 x_2 - u_3 x_1 = 0
+# 	h_10 = u_6 x_11 - x_5 x_10 = 0 
+# 	h_11 = u_4 x_11 - u_3 x_11 - x_3 x_10 +
+#              x_2 x_10 + u_3 x_3 - u_4 x_2 = 0 
+# 
+# 	The conclusion that P, Q and S are collinear is:
+# 
+#       g = x_8 x_11 - x_6 x_11 - x_9 x_10 +
+#           x_7 x_10 + x_6 x_9 - x_7 x_8 = 0
+# 
+# 6 parameters, 11 independent variables:
+6 11 
+# polynomial h_1
+0 1 2 6 -1
+0 -2 1 0 6
+0 1 2 1 -1
+# polynomial h_2
+1 1 2 7 -1
+1 -2 1 0 7
+1  1 2 2 -1
+# polynomial h_3
+2 1 2 8 -1
+2 -2 1 0 8
+2 1 2 3 -1
+# polynomial h_4
+3 1 2 9 -1
+3 -2 1 0 9
+3 1 2 4 -1
+# polynomial h_5
+4 1 2 10 -1
+4 -2 1 0 10
+4 1 2 5 -1
+# polynomial h_6
+5 1 1 4 12
+5 -1 1 3 12
+5 -1 1 9 11
+5 1 1 8 11
+5 1 1 3 9
+5 -1 1 4 8
+# polynomial h_7
+6 1 1 1 12
+6 -1 1 6 11
+# polynomial h_8
+7 1 1 5 14
+7 -1 1 4 14 
+7 -1 1 10 13
+7 1 1 9 13
+7 1 1 4 10
+7 -1 1 5 9
+# polynomial h_9
+8 1 1 2 14
+8 -1 1 1 14
+8 -1 1 7 13
+8 1 1 6 13
+8 1 1 1 7
+8 -1 1 2 6
+# polynomial h_10
+9 1 1 5 16
+9 -1 1 10 15
+# polynomial h_11
+10 1 1 3 16 
+10 -1 1 2 16
+10 -1 1 8 15
+10 1 1 7 15
+10 1 1 2 8
+10 -1 1 3 7
+# polynomial g
+12 1 1 13 16
+12 -1 1 11 16
+12 -1 1 14 15
+12 1 1 12 15
+12 1 1 11 14
+12 -1 1 12 13

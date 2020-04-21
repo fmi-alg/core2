@@ -1,0 +1,39 @@
+=============================================================================
+File: README for fileIO
+Core Library
+$Id: README,v 1.1 2006/03/07 04:51:24 exact Exp $
+=============================================================================
+SYNOPSIS:
+	The programs here tests the file IO routines in Core Library.
+	We also test analogous string IO routines here.
+
+FILES:
+	README		 -- this file
+	Makefile	 -- compiling and testing
+	bigNumFormat.txt -- specification for a bigNumber file format (moved to doc)
+	fileIO.cpp	 -- testing file I/O facilities for BigInt 
+			 -- the analogous I/O facilities for BigFloat
+			 	can be found in the files log2.cpp and
+				pi.cpp under COREPATH/progs/hypergeom/const.
+	stringIO.cpp	 -- testing string I/O facilities 
+	IOspeed.cpp	 -- shows that storing and reading in hex or binary is 
+			    much faster than in base 10.
+
+The files here only tests BigInt.  We also support file I/O for BigRat
+and BigFloat.  To see examples for BigFloat, please see
+
+	progs/hypergeom/const/{pi,log2}.cpp
+
+Sample Timing on a Sparc 10:
+===========================
+We computed the value of 20000! (factorial),
+and wrote the result to a file and then read it back.
+RESULTS:
+In base 10, then time to write is 550 ms, and time to read is 78 ms.
+In base 16, then time to write is 0 ms, and time to read is 2 ms.
+
+UPDATE: July 2002:
+==================
+Above was for BigInt file formats.  We now also have file I/O for
+BigFloat and Rational numbers.
+=============================================================================

@@ -1,0 +1,21 @@
+ disc-bugtrap-barely-nopath
+
+ 	This is the "bug trap" environment that makes life difficult for
+ 	probabilistic motion planning based on PRM...
+
+	Interesting parameters to try for running this example:
+
+	Example 1:
+		radius = 10,  epsilon = 5,  start = (200,350), goal = (30,30)
+		
+		Our software reports "No Path".
+		But visually, you will see a green path that has to pass
+		between two green boxes through a shared corner, but these two
+		boxes do not share an edge.  In other words, there is NO green channel.
+	
+	Example 2:
+		Same parameters as before, but epsilon = 4.
+		Now, our disc program finds a Path.	
+
+	Chee Yap (April 22, 2012)
+

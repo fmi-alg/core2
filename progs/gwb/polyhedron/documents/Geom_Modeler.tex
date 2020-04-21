@@ -1,0 +1,518 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.0 (25/8/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside]{article}
+
+
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\titleformat{\section}[block]{\large\scshape\centering{\Roman{section}.}}{}{1em}{} % Change the look of the section titles 
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{ $\bullet$ November 2012 $\bullet$ } % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------------------
+%	Kai's 	Macro
+%----------------------------------------------------------------------------------------
+\usepackage{verbatim}
+\usepackage{tikz}
+\usepackage{pstricks}
+%----------------------------------------------------------------------------------------
+%	Zhongdi's 	Macro
+%----------------------------------------------------------------------------------------
+\usepackage{etex}
+\usepackage{amsmath}
+\usepackage{boxedminipage}
+\usepackage{cases}
+\usepackage{array}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{\vspace{-15mm}\fontsize{20pt}{10pt}\selectfont\textbf{3-Level Geometric Modeler: CSG, Subdivision Trees and Boundary Representation}} % Article title
+
+\author{
+\large
+\textsc{Kai Cao, Zhongdi Luo}\iffalse \thanks{Thanks to Chee Yap for his help}\fi \\[2mm] % Your name
+\normalsize New York University \\ % Your institution
+\normalsize \href{mailto:kcao@cs.nyu.edu}{kcao@cs.nyu.edu} % Your email address
+\normalsize \href{mailto:zl562@nyu.edu}{zl562@nyu.edu} % Your email address
+\vspace{-5mm}
+}
+\date{}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Insert title
+
+\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+
+\noindent The problem of computing geometry modeling in $\mathbb{R}^3$ is fundamental to computer graphics, path finding, motion planning and numerous branches of computer science. Given a polyhedron P defined by constructive solid geometry (CSG) model, we raise a new idea to present the boundary features (vertices, edges and faces) of P using subdivision method; it has the following steps: 1) define P in CSG model, 2) subdivide a given box $B_0$ for P and construct the adequate subdivision tree T, 3) represent the boundary features based on the subdivision tree T. We could also compute the boolean operations of 2 subdivision trees. Since the great generality and scalability of subdivision method, this idea can also be expanded to support more complex shape with higher order surfaces in $\mathbb{R}^3$.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % Two-column layout throughout the main article text
+
+\section{Introduction}
+\noindent In this paper, we focus on the geometric modeling of solids (especially polyhedra) in $\mathbb{R}^3$. The traditional definition of a polyhedron in $\mathbb{R}^3$ is the boolean union of half spaces (CSG).  The faces of a polyhedron P are the plains which bounds the half spaces. Meanwhile the edges are the intersection of two unparallel plains and the vertices are the intersection of three. Faces, edges and vertices constitute the features of a polyhedron. By CSG definition, these features are not obvious. To present them more efficiently and make them more operable, we keep subdividing a box $B_0$ containing P until the boundary features are kept in certain subboxes. Then we can compute the features by manipulating the subdivision tree instead. 
+
+\iffalse
+Solid modeling is distinguished from related areas of geometric modeling and computer graphics by its emphasis on physical fidelity. Together, the principles of geometric and solid modeling form the foundation of computer-aided design and in general support the creation, exchange, visualization, animation, interrogation, and annotation of digital models of physical objects.
+
+\\
+\\
+\indent
+We describe a polyhedron as three sets : $(V, E, F)$. $V$ represents the set of vertices of the polyhedron. $E$ represents the set of edges of the polyhedron. $F$ represents the set of faces of the polyhedron.
+\fi
+
+\section{Regularized set}
+
+      A set $S\subset \mathbb{R}^3$ is a \textbf{regularized set} $\textrm{if}$ $S=\overline{int (S)}$. 
+      \\
+      \\
+      \indent
+      A \textbf{solid} is defined as a regularized subset of $\mathbb{R}^3$. Obviously a polyhedron $P$ is a finite solid.
+      \\
+      \\
+      \indent
+ Suppose $A$ and $B$ are regularized sets, we define the boolean operations:
+ \begin{itemize}
+
+  \item $A \cup^* B = \overline{int (A \cup B)}$
+  \item $A \cap^* B = \overline{int (A \cap B)}$
+  \item $A \setminus^* B = \overline{int (A \setminus B)}$
+  \item $A^{c*} B = \overline{int (A^c)}$
+ \end{itemize}
+
+%------------------------------------------------
+
+\section{CSG primitives}
+
+\begin{comment}Just as a polyhedron can be described as the intersection of half spaces, 
+\end{comment}
+
+A \textbf{constructive solid geometry} (CSG) model describes a polyhedron as regularized set operation on primitives which are the simplest solid objects used for the representation.
+      \\
+      \\
+      \indent
+Primitives in CSG models are all semi-algebraic sets as follows:
+\begin{enumerate}
+      \item \textbf{Half Space}: $H=\{(x,y,z)|a*x+b*y+c*z+d\ge0\}$.
+      \item \textbf{Sphere} : $S=\{(x,y,z)|(x-x_0)^2+(y-y_0)^2+(z-z_0)^2-r^2\le0\}$. 
+      \item \textbf{Cylinder} : $C=\{(x,y,z)|A=-x\sin(\theta)+y\cos(\theta)\cos(\phi)+z\cos(\theta)\sin(\phi), \\
+B=-y\sin(\phi)+ z\cos(\phi),A^2+B^2\le R^2\}$.
+      \item \textbf{Torus} : $T=\{(x,y,z)|(R-\sqrt{x^2+y^2})^2+z^2\le r^2\}$. 
+
+      
+\end{enumerate}
+A polyhedron is limited by the intersection of half spaces.
+
+
+%------------------------------------------------
+
+\section {Subdivision tree}
+
+Subdivision tree is an octree which is very efficient to maintain the features of a polyhedron in a hierarchical structure.
+
+\subsection {Box}
+            	$B$ is a \textbf{box} $\mathrm{if}$ $B \subset \mathbb{R}^3$, $B=\{ (x,y,z)|x_1\le x\le x_2, y_1\le y\le y_2, z_1\le z\le z_2\}$, or simplified as $B=([x_1,x_2],[y_1,y_2],[z_1,z_2])$, which is a regularized subset of $\mathbb{R}^3$.
+            	\iffalse
+        \\
+		\\
+		\indent Another representation of $B$ is $B=([x_1,x_2],[y_1,y_2],[z_1,z_2])$.
+		\\
+        \\
+        
+		\indent We name the set containing all boxes as $\mathbb{B}$.
+		\fi
+		
+\subsection {Subdivision on box}
+Suppose $B=([x_1,x_2],[y_1,y_2],[z_1,z_2])$, let $\bar{x} = \frac {x_1+x_2}{2}$, $\bar{y} = \frac {y_1+y_2}{2}$, $\bar{z} = \frac {z_1+z_2}{2}$. The subdivision on $B$ is to subdivide $B$ into eight subboxes by splitting at $x = \bar{x}$, $y = \bar{y}$ and $z = \bar{z}$.
+
+\iffalse
+\begin{itemize}
+	\item $B_0=([x_1,\bar{x}],[y_1,\bar{y}],[z_1,\bar{z}])$
+	\item $B_1=([x_1,\bar{x}],[y_1,\bar{y}],[\bar{z},z_2])$
+	\item $B_2=([x_1,\bar{x}],[\bar{y},y_2],[z_1,\bar{z}])$
+	\item $B_3=([x_1,\bar{x}],[\bar{y},y_2],[\bar{z},z_2])$
+	\item $B_4=([\bar{x},x_2],[y_1,\bar{y}],[z_1,\bar{z}])$
+	\item $B_5=([\bar{x},x_2],[y_1,\bar{y}],[\bar{z},z_2])$
+	\item $B_6=([\bar{x},x_2],[\bar{y},y_2],[z_1,\bar{z}])$
+	\item $B_7=([\bar{x},x_2],[\bar{y},y_2],[\bar{z},z_2])$
+\end{itemize}	
+\fi
+%We name $B_i\ (i=0,1,2,\ldots,7)$ a subbox of $B$.
+	
+\subsection {Features}
+
+For a polyhedron $P \subset \mathbb{R}^3$, we use the sets V, E and F to represent its vertices, edges and faces respectively. Let
+
+\begin{itemize}
+%-------------feature function-----------------------
+	\item $\Phi_0(P):=V$
+	\item $\Phi_1(P):=E$
+	\item $\Phi_2(P):=F$
+	\\
+	\\ and
+	\item $\Phi(P):=\displaystyle\mathop{\cup}_{i=1}^2\Phi_i(P)$
+\end{itemize}
+
+Elements in $\Phi(P)$ are called \textbf{features}. Also let $\Phi_i(P,B)$ denote the set $\{f\in\Phi_i(p): f\cup B\neq \emptyset\ and\ \Phi_i(P,B)=\displaystyle\mathop{\cup}_{i=1}^2\Phi_i(P,B)\}$
+
+
+\subsection{Elementary Box}
+%------------elementary boxes---------------------
+	We call a box $B$ to be \textbf{elementary} for a polyhedron $P$ if one of the following conditions hold: 
+		\begin{enumerate} 
+           		\item $B\cap P=\emptyset$. 
+           		\\
+           		\\
+           		Call $B$ an \textbf{empty box} for $P$.
+           		%\input{cube.tex}
+           		\item $B \subseteq P$. 
+           		\\
+           		\\
+           		Call $B$ a \textbf{full box} for $P$.
+            	\item Exists only one $v$ st. $\Phi_0(B,P)=\{v\}$ and $\forall e \in \Phi_1(B,P)$ $e$ is bounded by $v$ and $\forall f \in \Phi_2(B,P)$ $f$ is bounded by $v$.
+            	\\
+            	\\
+            	Call $B$ a \textbf{vertex box} for $P$.
+            		\iffalse
+           			 a box $B_e$ is a vertex box $\mathrm{iff}$  there exists only one vertex $v \in V \cap B_e$, s.t.\ $\forall e \in E$, if $e \cap B_e \not= \emptyset$, $v$ bounds $e$, and $\forall f \in F$, if $f \cap B_e \not= \emptyset$, $v$ bounds $F$. \\
+			Because $|\Phi_0^*\ (B_e, P)|=1$, we can specify the only one vertex in the set as $v$
+			We name the Edges bounded by $v$ as $(e_1,e_2,...)$. 
+			We define $\bar{e_i}=e_i\cap B_s$.
+			\fi
+            		\item $V \cap B = \emptyset$, exists only one $e$ st. $\Phi_1(B,P)=\{e\}$ and $\forall f \in \Phi_2(B,P)$ $f$ is bounded by $v$.
+            		\\
+            		\\ 
+            		Call $B$ a \textbf{edge box} for $P$. 
+            		\iffalse
+            			a box $B_e$ is an edge box $\mathrm{iff}$ $V \cap B_e = \emptyset$ and there exists only one edge $ e\in E$, $e\cap B_e \not= \emptyset, \forall f \in F$, if $f \cap B_e \not= \emptyset$, e bounds f. 
+            		\fi
+            		\item $V \cap B = \emptyset$, $E \cap B = \emptyset$, exists only one $f$ st. $\Phi_2(B,P)=\{f\}$.
+            		\\
+            		\\
+            		Call $B$ a \textbf{face box} for $P$.
+            		\iffalse
+            			a box $B_e$ is a face box $\mathrm{iff}$ $V \cap B_e = \emptyset$, $E \cap B_e = \emptyset$ and there exists only one face $f \in F$, and $f \cap B_e \not= \emptyset$. 
+            		\fi
+                  \end{enumerate}
+   \indent If none of the above conditions holds, we call the box \textbf{mixed box}.
+\subsection{Adequate subdivision tree}
+
+\begin{enumerate}
+%subdivision tree
+	\item A \textbf{subdivision tree} is a tree where each interior node has degree 8 (octree) and each node $u$ is associated with a box $u.box$ such that if $u_0,\ldots,u_7$ are the children of $u$. Then $\{u.box: i = 0,\ldots,7\}$ is the split of $u.box$.
+	\item An \textbf{adequate} subdivision tree for a box $B_0$ and a polyhedron $P$ is a subdivision tree rooted at $B_0$, in which all leaves are associated with elementary boxes for $P$.\\
+
+\end{enumerate}
+
+%-----------------Boolean Operation on AS-Trees--------------------------------------------------------------      	
+\section{Boolean Operations on subdivision trees}
+Suppose we already have $\Phi(P,B)$ and $\Phi(P^\prime,B)$ for two polyhedra $P$, $P^\prime$. We now address the question of computing $\Phi(Q,B)$ where $Q$ is the union or intersection of $P$ and $P^\prime$.
+
+\subsection {Make two trees compatible}
+\indent
+Give box $B_0$ and polyhedron $P_1$, $P_2$. We have two adequate subdivision trees $T_1$ for $P_1$, $T_2$ for $P_2$. 
+\\
+\\
+\indent
+\iffalse
+Before we do the boolean operation on $T_1$, $T_2$, it's necessary to make them congruent, which means $\forall$ node $n_1$ in $T_1$, $\exists$ $n_2$ in $T_2$ st. $n_1.box = n_2.box$, $\forall$ node $n_2$ in $T_2$, $\exists$ $n_1$ in $T_1$ st. $n_2.box = n_1.box$. We name this process \textbf{even up}.
+\fi
+
+\indent We say $T_1$, $T_2$ are congruent if they are isomorphic. Our approach is to organize $\Phi(B,P)$ using a subdivision tree that is adequate for $B$ and $P$.
+
+
+
+
+The process of \textbf{Make Compatible}($T_1,T_2$) using BFS:
+\\
+\\
+\begin{boxedminipage}{.47\textwidth}
+
+Input: $T_1$, $T_2$ are two adequate subdivision trees for $P_1$, $P_2$ respectively and both rooted at $B_0$.
+\\
+Output: The modified $T_1$ and $T_2$ which are compatible.
+\\
+%\\
+%\indent
+%\ \ \ \ Color all nodes as initially \textbf{unseen}.
+\\ \indent \ \ \ \ 
+$n_1 \leftarrow T_1.root$.
+\\ \indent \ \ \ \ 
+$n_2 \leftarrow T_2.root$.
+\\ \indent \ \ \ \ 
+insert $n_1$ into queue $Q_1$, $n_2$ into queue $Q_2$.
+\\ \indent \ \ \ \ 
+while $Q_1 \neq \emptyset$ and $Q_2 \neq \emptyset$ do:
+\\ \indent \ \ \ \ \ \ \ \ 
+$n_1 \leftarrow Q_1$.dequeue().
+\\ \indent \ \ \ \ \ \ \ \ 
+$n_2 \leftarrow Q_2$.dequeue().
+\\ \indent \ \ \ \ \ \ \ \ 
+if ($n_1$.box is elementary for $T_1$
+\\ \indent \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+and $n_2$.box is elementary for $T_2$)
+\\ \indent \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+then
+\\ \indent \ \ \ \ \ \ \ \ \ \ \ \ 
+continue.
+\\ \indent \ \ \ \ \ \ \ \ 
+if ($n_1$ is a leaf) then
+\\ \indent \ \ \ \ \ \ \ \ \ \ \ \ 
+$T_1$.expand($n_1$).
+\\ \indent \ \ \ \ \ \ \ \ 
+elif ($n_2$ is a leaf) then
+\\ \indent \ \ \ \ \ \ \ \ \ \ \ \ 
+$T_2$.expand($n_1$).
+\\ \indent \ \ \ \ \ \ \ \ 
+$Q_1$.enqueue($n_1$.children).
+\\ \indent \ \ \ \ \ \ \ \ 
+$Q_2$.enqueue($n_2$.children).
+\end{boxedminipage}
+\\
+\\
+\indent
+Note that the termination of this algorithm is obvious.
+\\
+Observe that suppose $B^\prime$ is a subbox of $B$, $P$ is a polyhedron, $\Phi\ (B^\prime, P) \subseteq \Phi\ (B, P)$.
+\newtheorem{lemma}{Lemma}
+\begin{lemma}
+Given a box $B$ and a polyhedron $P$, we get its adequate subdivision tree in limited subdivisions.
+\end{lemma}
+\textit{proof}. We get its adequate subdivision tree, that is to say, we would get a state that all \textbf{leaf} subboxes of $B$ are elementary for $P$.
+\\
+\\
+\indent We define $d(x,y)$ to be Euclidean distance between $x$ and $y$ ($x,y$ can be vertex, edge or face). Given a subbox $B^\prime$.
+\iffalse we discuss the following 6 simplest cases:
+\\
+\\
+$\Phi\ (B^\prime, P)$ has (at least)
+		\begin{itemize}
+			\item two vertices $v_1$ and $v_2$, $v_1 \neq v_2$.\hfill (1)
+			\item two edges $e_1$ and $e_2$, $e_1 \cap e_2 \cap B^\prime = \emptyset$.\hfill (2)
+			\item two faces $f_1$ and $f_2$, $f_1 \cap f_2 \cap B^\prime = \emptyset$.\hfill (3)
+			\item a vertex $v$ and an edge $e$, $v \notin e \cap B^\prime$.\hfill (4)
+			\item a vertex $v$ and a face $f$, $v \notin f \cap B^\prime$.\hfill (5)
+			\item an edge $e$ and a face $f$, $e \cap f \cap B^\prime = \emptyset$.\hfill (6)
+		\end{itemize}
+
+We define $l(B)$ is the side length of $B$. Then the diameter of $B$ equals $\sqrt{3} * l(B)$.
+\\
+\\
+\indent For cases (1), (4) and (5), we simply keep subdividing $B^\prime$. Then we choose the biggest box $B_m^\prime$ of its leaf subboxes. When the following conditions hold, 
+\begin{itemize}
+\item $\sqrt{3} * l(B_m^\prime) < d(v_1,v_2)$ \hfill (1)
+\item $\sqrt{3} * l(B_m^\prime) < d(v,e)$ \hfill (4)
+\item $\sqrt{3} * l(B_m^\prime) < d(v,f)$ \hfill (5)
+\end{itemize}
+\indent We guarantee none of the leaf subboxes contains both features.
+\\
+\\
+\indent For cases (2), (3) and (6), the process is similar except we can't simply use the Euclidean distance between edges and faces since they may intersect outside the box $B^\prime$. First we compute the line segments of edges and polygons of faces cut by $B^\prime$, then similarly when
+ \begin{itemize}
+ \item $\sqrt{3} * l(B_m^\prime) < d(e_1\cap B^\prime,e_2\cap B^\prime)$ \hfill (2)
+ \item $\sqrt{3} * l(B_m^\prime) < d(f_1\cap B^\prime,f_2\cap B^\prime)$ \hfill (3)
+ \item $\sqrt{3} * l(B_m^\prime) < d(e\cap B^\prime,f\cap B^\prime)$ \hfill (6)
+ \end{itemize}
+ 
+\indent We split the features into two different subboxes.
+ \fi
+ \\
+ \\
+\indent Therefore we have proved that during subdivision we would split all the unrelated features into different subboxes. $Lemma$ 2 holds.
+\\
+\\
+\indent Furthermore, we consider using the process above to compute $\Phi\ (B^\prime, P_1) \cup \Phi\ (B^\prime, P_2)$. We would get an adequate subdivision tree $T_3$ for both $P_1$ and $P_2$. When we extend both $T_1$ and $T_2$ to $T_3$, we make them compatible. We proved
+
+\begin{lemma}
+Given a Box $B$, its adequate subdivision tree $T_1$ for polyhedron $P_1$ and adequate subdivision tree $T_2$ for polyhedron $P_2$, we even $T_1$ and $T_2$ up in limited steps.
+\end{lemma}
+\indent Now we have two congruent adequate subdivision trees and then can step forward to the boolean operations.
+\subsection {Boolean operations}
+When we do boolean operations on two trees, we care about the leaves since they show the boundary condition. For simplification, we turn the boolean operations on trees to the same operations on two corresponding nodes (corresponding means two nodes are at the same position of their congruent trees).
+\\
+\\
+\indent
+Suppose $n_1$, $n_2$ are two corresponding elementary leaf nodes of $T_1$, $T_2$ for $P_1$, $P_2$ respectively. Each of them belongs to one of the five types: empty box (EMB), full box (FUB), vertex box (VB), edge box (EDB), face box (FAB). We have the following rules (left operand is of $n_1$, right operand is of $n_2$):
+
+\subsubsection{Empty boxes}
+\begin{itemize}
+\item $EMB \cup B^* = B^*$
+\item $EMB \cap B^* = EMB$
+\item $EMB - B^* = EMB$
+\item $B^* - EMB = B^*$
+\end{itemize}
+
+\subsubsection{Full boxes}
+\begin{itemize}
+\item $FUB \cup B^* = FUB$
+\item $FUB \cap B^* = B^*$
+\item $\left\{
+\begin{array}{l}
+FUB - FUB = EMB\\
+FUB - VB = VB\\
+FUB - EDB = EDB\\
+FUB - FAB = FAB\\
+FUB - EMB = FUB
+\end{array}
+\right.$
+\item $B^* - FUB = EMB$
+\end{itemize}
+
+\subsubsection{Vertex boxes}
+\begin{itemize}
+\item $VB_1 \cup VB_2$
+\\
+If $VB_1$ and $VB_2$ share the same vertex, the result is a vertex box, otherwise the result is a mixed box (MB) which needs further subdivision.
+
+\item $VB \cup EDB$
+\\
+If $VB \cup P_1 \subset EDB \cup P_2$, the result is a edge box, else if $EDB \cup P_2 \subset VB \cup P_1$, the result is a vertex box, else if the vertex of $VB$ bounds the edge of $EDB$, the result is a vertex box, otherwise the result is a mixed box.
+
+\item $VB \cup FAB$
+\\
+If $VB \cup P_1 \subset FAB \cup P_2$, the result is a face box, else if $FAB \cup P_2 \subset VB \cup P_1$, the result is a vertex box, else if the vertex of $VB$ bounds the face of $FAB$, the result is a vertex box, otherwise the result is a mixed box.
+
+\item $VB_1 \cap VB_2$
+\\
+Todo
+
+\item $VB \cap EDB$
+\\
+Todo
+
+\item $VB \cap FAB$
+\\
+Todo
+
+\item $VB_1 - VB_2$
+\\
+Todo
+
+\item $VB - EDB$
+\\
+Todo
+
+\item $VB - FAB$
+\\
+Todo
+
+\item $EDB - VB$
+\\
+Todo
+
+\item $FAB - VB$
+\\
+Todo
+
+\end{itemize}
+
+\subsubsection{Edge boxes}
+\begin{itemize}
+\item $EDB_1 \cup EDB_2$
+\\
+Todo
+
+\item $EDB \cup FAB$
+\\
+Todo
+
+\item $EDB_1 \cap EDB_2$
+\\
+Todo
+
+\item $EDB \cap FAB$
+\\
+Todo
+
+\item $EDB_1 - EDB_2$
+\\
+Todo
+
+\item $EDB - FAB$
+\\
+Todo
+
+\item $FAB - EDB$
+\\
+Todo
+\end{itemize}
+
+\subsubsection{Edge boxes}
+\begin{itemize}
+\item $FAB \cup FAB$
+\\
+Todo
+
+\item $FAB \cap FAB$
+\\
+Todo
+
+\item $FAB - FAB$
+\\
+Todo
+
+\end{itemize}
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+
+\end{document}

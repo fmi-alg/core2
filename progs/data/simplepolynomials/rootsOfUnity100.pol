@@ -1,0 +1,11 @@
+! file: rootsOfUnity100.pol
+! This is the linear polynomial p(x)=x^100-1. 
+
+sri
+0
+100
+2
+0
+-1
+100
+1

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="mathtool">
+      <UniqueIdentifier>{8f16eaee-0e5d-4ac8-b2e0-53d8f93055a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{a322d24c-8c4f-4fb7-a0f6-3194f919f2e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GL">
+      <UniqueIdentifier>{1886f3e7-6ca5-4159-af17-c870d3a11d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FIST">
+      <UniqueIdentifier>{197d4f65-842e-409a-b592-63ce871c98fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="itree">
+      <UniqueIdentifier>{8397a51e-2433-47f5-8e60-0349628f05c4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\polygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\RRT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mathtool\Basic.cpp">
+      <Filter>mathtool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mathtool\Quaternion.cpp">
+      <Filter>mathtool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GL\gl2ps.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GL\gli.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GL\gliDump.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GL\gliFont.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\itree\EndPoint.cpp">
+      <Filter>itree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\itree\Interval.cpp">
+      <Filter>itree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\itree\RectKD.cpp">
+      <Filter>itree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mathtool\Gauss.cpp">
+      <Filter>mathtool</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\mathtool\Basic.h">
+      <Filter>mathtool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mathtool\Matrix.h">
+      <Filter>mathtool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mathtool\Point.h">
+      <Filter>mathtool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mathtool\Quaternion.h">
+      <Filter>mathtool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mathtool\Vector.h">
+      <Filter>mathtool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\Timer.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GL\gl2ps.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GL\gli.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GL\gliDump.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GL\gliFont.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\basic.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\vertex.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\bv_tree.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\data.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\defs.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\ext_appl.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\graphics.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\graphics_header.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\header.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\ipe_io.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\local.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\martin.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\matrix.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\numerics.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\sgo.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FIST\triangulate.h">
+      <Filter>FIST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\intersection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\polygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RRT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\segseg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\itree\EndPoint.h">
+      <Filter>itree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\itree\Interval.h">
+      <Filter>itree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\itree\MiddleStructure.h">
+      <Filter>itree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\itree\RectangleTree.h">
+      <Filter>itree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\itree\RectKD.h">
+      <Filter>itree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\mathtool\Gauss.h">
+      <Filter>mathtool</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
