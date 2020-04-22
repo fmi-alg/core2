@@ -1369,7 +1369,7 @@ public:
   { return mpfr_cbrt(mp(), x.mp(), rnd); }
   /// kth root
   int r_root(const BigFloat& x, unsigned long k, rnd_t rnd = MPFR_RND)
-  { return mpfr_root(mp(), x.mp(), k, rnd); }
+  { return mpfr_rootn_ui(mp(), x.mp(), k, rnd); }
   /// negation
   int r_neg(const BigFloat& x, rnd_t rnd = MPFR_RND)
   { return mpfr_neg(mp(), x.mp(), rnd); }
