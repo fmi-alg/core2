@@ -49,6 +49,12 @@ public:
   /// copy constructor
   Gmpq(const Gmpq& rhs)
   { mpq_init(m_mp); mpq_set(m_mp, rhs.m_mp); }
+  /// constructor for <tt>mpq_srcptr</tt>
+  explicit Gmpq(const mpq_srcptr& v) {
+    mpq_init(m_mp);
+    mpq_set(m_mp, v);
+    mpq_canonicalize(m_mp);
+  }
   /// destructor
   ~Gmpq()
   { mpq_clear(m_mp); }
@@ -117,6 +123,9 @@ public:
   /// constructor for <tt>mpz_srcptr, mpz_srcptr</tt>
   explicit RcGmpq(mpz_srcptr num, mpz_srcptr den) 
     : base_cls(new Gmpq(num, den)) {}
+  /// constructor for <tt>mpq_srcptr</tt>
+  explicit RcGmpq(mpq_srcptr v) 
+    : base_cls(new Gmpq(v)) {}
 
   /// assignment operator for <tt>RcGmpq</tt>
   RcGmpq& operator=(const RcGmpq& rhs) {
