@@ -87,13 +87,13 @@ public:
   }
   // Return true iff. this interval contains a zero.
   // (Chee: it would be clearer to return a _ZERO or _NONZERO sign condition)
-  const bool zero() const {
+  bool zero() const {
     return (left_ <= 0) && (right_ >= 0);
   }
   
   // This definition of SignCondition should be used more widely!
   // Return a sign condition (_ZERO, _POS, _NEG, _UNKNOWN):
-  const SignCondition sign() const {
+  SignCondition sign() const {
     if (left_ <= 0) {
 	  if (right_ >= 0) {
 		return(_ZERO);
@@ -245,7 +245,7 @@ template <typename NT> const NT IntervalT<NT>::I_NEG_INFTY = CORE_negInfty;
 
 
 template <typename NT>
-inline const bool Overlap(const IntervalT<NT> &s, const IntervalT<NT> &t) {
+inline bool Overlap(const IntervalT<NT> &s, const IntervalT<NT> &t) {
   return !(s.getR() < t.getL() || s.getL() > t.getR());
 }
 // Note that this function returns a sensible result only if
@@ -258,7 +258,7 @@ inline IntervalT<NT> Intersect(const IntervalT<NT> &a, const IntervalT<NT> &b) {
 // Note that a consequence of this [-INF, INF ] is contained in
 // [-INF, INF ].
 template <typename NT>
-inline const bool Contains(const IntervalT<NT> &a, const IntervalT<NT> &b) {
+inline bool Contains(const IntervalT<NT> &a, const IntervalT<NT> &b) {
   return (b.getL() >= a.getL()) && (b.getR() <= a.getR());
 }
 

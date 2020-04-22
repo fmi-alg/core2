@@ -625,7 +625,7 @@ protected: // overridable methods
 public: 
   virtual size_t get_children_size() const
   { return 0; }
-  virtual thisClass* get_child(size_t t) const
+  virtual thisClass* get_child(size_t /*t*/) const
   { assert(0); return 0; }
 
 protected: 
@@ -638,7 +638,7 @@ protected:
   };
   typedef std::bitset<numFlags> flag_t;
 
-  const bool kernel_initialized() const {
+  bool kernel_initialized() const {
     return m_nodeinfo != 0;
   }
   
@@ -735,7 +735,7 @@ public: // reference counting
   { ++m_ref_counter; }
   void dec_ref()
   { if (--m_ref_counter == 0) delete this; }
-  const int get_ref() const
+  int get_ref() const
   { return m_ref_counter; }
 private:
   int m_ref_counter;
@@ -743,12 +743,12 @@ private:
 
 /// These 12 functions were introduced to support getZTVal(), getFTVal(), getQTVal()
 ///  which are in turn used in getExactVal(), for use in ReduceToRational.
-inline BigInt getBigIntVal(const BigRat& v) { return 0; }
-inline BigInt getBigIntVal(const BigFloat& v) { return 0; }
+inline BigInt getBigIntVal(const BigRat& /*v*/) { return 0; }
+inline BigInt getBigIntVal(const BigFloat& /*v*/) { return 0; }
 inline BigInt getBigIntVal(const BigInt& v) { return v; }
 inline BigInt getBigIntVal(const long& v) { return (BigInt)v; }
 
-inline BigFloat getBigFloatVal(const BigRat& v) { return 0; }
+inline BigFloat getBigFloatVal(const BigRat& /*v*/) { return 0; }
 inline BigFloat getBigFloatVal(const BigFloat& v) { return v; }
 inline BigFloat getBigFloatVal(const BigInt& v) { return (BigFloat)v; }
 inline BigFloat getBigFloatVal(const long& v) { return (BigFloat)v; }
@@ -1005,7 +1005,7 @@ public:
   { child->dec_ref(); }
   virtual size_t get_children_size() const
   { return 1; }
-  virtual ExprRep* get_child(size_t t) const
+  virtual ExprRep* get_child(size_t /*t*/) const
   { return child; }
 
 protected:

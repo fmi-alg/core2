@@ -74,8 +74,8 @@ BigFloat2 evalApprox(Polynomial <NT> &p, const BigFloat& f,
 
 // This BigInt version of evalApprox should never be called...
 inline 
-BigFloat2 evalApprox( Polynomial<BigInt> &p, const BigFloat& f,
-	const extLong& r, const extLong& a) {// evaluation
+BigFloat2 evalApprox( Polynomial<BigInt> &/*p*/, const BigFloat& /*f*/,
+	const extLong& /*r*/, const extLong& /*a*/) {// evaluation
   assert(0);
   return BigFloat2(0);
 }

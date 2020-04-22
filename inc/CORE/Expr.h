@@ -778,7 +778,7 @@ inline bool isDivisible(const Expr& x, const Expr& y) {
   return ((e - ToBigInt(e, CORE_INFTY, 2)) == 0);
 }
 
-inline Expr gcd(const Expr& x, const Expr& y) {
+inline Expr gcd(const Expr& /*x*/, const Expr& /*y*/) {
   return 1;
 }
 

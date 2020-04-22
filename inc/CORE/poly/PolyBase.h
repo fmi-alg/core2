@@ -82,7 +82,7 @@ public:
     }
   }
   /// constructor with coeff vector
-  PolyBase(int n, const VecNT& coef) : _deg(coef.size()-1), _coeff(0) {
+  PolyBase(int /*n*/, const VecNT& coef) : _deg(coef.size()-1), _coeff(0) {
     if (_deg >= 0) {
       _coeff = new NT[_deg+1];
       for (int i=0; i<=_deg; ++i) _coeff[i] = coef[i];
