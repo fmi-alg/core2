@@ -56,6 +56,8 @@ public:
   //@{
   /// default constructor
   BigInt() {}
+  /// default copy constructor
+  BigInt(BigInt const &) = default;
   /// constructor for <tt>int</tt>
   BigInt(int i) : base_cls(static_cast<long>(i)) {}
   /// constructor for <tt>unsigned int</tt>
