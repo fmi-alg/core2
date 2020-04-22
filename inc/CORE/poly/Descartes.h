@@ -1,9 +1,9 @@
-#ifndef CORE_DESCARTES_H
-#define CORE_DESCARTES_H
+#ifndef CORE_TWO_DESCARTES_H
+#define CORE_TWO_DESCARTES_H
 
-#include <CORE/poly/Poly.h>
+#include <CORE_TWO/poly/Poly.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /***************************************************
  * Descartes Class:
@@ -321,7 +321,7 @@ public:
   //and then doing a contraction by b-a.
   //Again v contains the sorted list of intervals.
   void isolateRoots(const BFInterval &I, BFVecInterval& v)
-  { CORE_NS::isolateRoots(_poly, I, v); }
+  { CORE_TWO_NS::isolateRoots(_poly, I, v); }
 
   void isolateRoots(const BigFloat &x, const BigFloat &y,
                     BFVecInterval &v) {
@@ -333,7 +333,7 @@ public:
   /**   v is a vector of isolated intervals
    */
   void isolateRoots(BFVecInterval& v) {
-    CORE_NS::isolateRoots(_poly, v);
+    CORE_TWO_NS::isolateRoots(_poly, v);
   }
   // isolateRoot(i)
   ///   Isolates the i-th smallest root 
@@ -679,7 +679,7 @@ public:
   //
   BFInterval newtonRefine(BFInterval &J, int aprec) {
 
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
     if (sign(evalExactSign(_poly,J.first)) * sign(evalExactSign(_poly,J.second)) > 0){
       std::cout <<" ERROR! Root is not in the Input Interval " << std::endl;
       std::cout <<" Polynomial is " << _poly << std::endl;
@@ -692,7 +692,7 @@ public:
     }
 #endif
  
-#ifdef CORE_DEBUG_NEWTON
+#ifdef CORE_TWO_DEBUG_NEWTON
     std::cout << "In newtonRefine, input J=[" << J.first
 	<< ", " << J.second << "] precision = " << aprec << std::endl;
 #endif
@@ -871,7 +871,7 @@ public:
       //  
       //  NOTE: We implemented this DEL in newtonIterE.   
 
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
       std::cout << "Inside Newton Refine: Refining Part " << std::endl;
 
       if((J.second - J.first) > yap)
@@ -900,7 +900,7 @@ public:
       }
     }
 
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
     if (sign(evalExactSign(_poly,J.first)) * sign(evalExactSign(_poly,J.second)) > 0){
       std::cout <<" ERROR! Root is not in the Output Interval " << std::endl;
       std::cout <<" Polynomial is " << _poly << std::endl;
@@ -960,6 +960,6 @@ inline int signVar(Polynomial<NT> poly, BFInterval I) {
   );
 }
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
 #endif

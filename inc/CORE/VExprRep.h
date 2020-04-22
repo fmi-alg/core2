@@ -21,16 +21,16 @@
  *
  * $Id: VExprRep.h,v 1.1 2010/01/14 13:53:50 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_EXPRREP_H__
-#define __CORE_EXPRREP_H__
+#ifndef __CORE_TWO_EXPRREP_H__
+#define __CORE_TWO_EXPRREP_H__
 
-#include <CORE/CoreAux.h>
-#include <CORE/poly/Curves.h>
+#include <CORE_TWO/CoreAux.h>
+#include <CORE_TWO/poly/Curves.h>
 #include <bitset>
 #include <iostream>
 #include <sstream>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class ExprRepT
 /// \brief represent an expression node in DAG
@@ -71,6 +71,6 @@ public:
 protected:
 };
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_EXPRREP_H__*/
+#endif /*__CORE_TWO_EXPRREP_H__*/

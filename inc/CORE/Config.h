@@ -21,38 +21,38 @@
  *
  * $Id: Config.h,v 1.3 2006/03/03 17:19:58 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_CONFIG_H__
-#define __CORE_CONFIG_H__
+#ifndef __CORE_TWO_CONFIG_H__
+#define __CORE_TWO_CONFIG_H__
 
 // define version number
-#define CORE_VERSION            2
-#define CORE_VERSION_MINOR      0
-#define CORE_VERSION_PATCHLEVEL 0
+#define CORE_TWO_VERSION            2
+#define CORE_TWO_VERSION_MINOR      0
+#define CORE_TWO_VERSION_PATCHLEVEL 0
 
 // macros for defining namespace
-#define CORE_BEGIN_NAMESPACE    namespace CORE {
-#define CORE_END_NAMESPACE      };
-#define CORE_NS                 CORE
+#define CORE_TWO_BEGIN_NAMESPACE    namespace CORE_TWO {
+#define CORE_TWO_END_NAMESPACE      };
+#define CORE_TWO_NS                 CORE_TWO
 
 // disable old names
-//#define CORE_DISABLE_OLDNAMES
+//#define CORE_TWO_DISABLE_OLDNAMES
 
 // disable reference counting
-//#define CORE_DISABLE_REFCOUNTING
+//#define CORE_TWO_DISABLE_REFCOUNTING
 
 // disable memory pool
-//#define CORE_DISABLE_MEMPOOL
+//#define CORE_TWO_DISABLE_MEMPOOL
 
 // disable debug
-//#define CORE_DISABLE_DEBUG
+//#define CORE_TWO_DISABLE_DEBUG
 
 // debug filter
-//#define CORE_DEBUG_FILTER 1
+//#define CORE_TWO_DEBUG_FILTER 1
 
 // debug root bound
-//#define CORE_DEBUG_ROOTBOUND 1
+//#define CORE_TWO_DEBUG_ROOTBOUND 1
 
 // disable automatic namespace
-//#define CORE_NO_AUTOMATIC_NAMESPACE
+//#define CORE_TWO_NO_AUTOMATIC_NAMESPACE
 
-#endif /*__CORE_CONFIG_H__*/
+#endif /*__CORE_TWO_CONFIG_H__*/

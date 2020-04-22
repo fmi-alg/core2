@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -19,7 +19,7 @@
  *****************************************************************/
 
 
-#include <CORE/geom2d/line2d.h>
+#include <CORE_TWO/geom2d/line2d.h>
 
 Line2d::Line2d(const Point2d &p, const Vector &v) 
                : p0(p), p1(p + v), V(v) { assert(p != p+v); }

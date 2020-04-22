@@ -86,7 +86,7 @@ template <> inline machine_double cosT(const machine_double &in) {
   return ::cos(in);
 }
 
-#if CORE_LEVEL >= 2 && CORE_LEVEL != 3
+#if CORE_TWO_LEVEL >= 2 && CORE_TWO_LEVEL != 3
 template <> inline BigFloat atanT(const BigFloat &in) {
   BigFloat type;
   type.atan(in, DEFAULT_PREC, MPFR_RND);
@@ -105,11 +105,11 @@ template <> inline BigFloat sinT(const BigFloat &in) {
 #endif
 
 
-#if CORE_LEVEL >= 3
+#if CORE_TWO_LEVEL >= 3
 // Define a specialization for Expr.
 template < > inline Expr piT() {
   // This is defined in Expr.h
-  return CORE::pi();
+  return CORE_TWO::pi();
 }
 #endif
 

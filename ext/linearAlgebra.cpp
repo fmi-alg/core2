@@ -4,12 +4,12 @@
 //        -- class Matrix implementation
 //
 //  REMARK: in Core2, we implemented a templated linearAlgebra class
-//      in $(COREPATH)/inc/CORE/linearAlgebraT.h.
+//      in $(CORE_TWOPATH)/inc/CORE_TWO/linearAlgebraT.h.
 //
 //  TODO:
 //  	This should introduce namespace.
 //
-//  Linear Algebra Extension of the CORE library, ver. 1.0
+//  Linear Algebra Extension of the CORE_TWO library, ver. 1.0
 //
 //    Copyright (c) 1998, 1999, 2000 Exact Computation Project
 //    written by Igor Pechtchanski (pechtcha@cs.nyu.edu)
@@ -18,11 +18,11 @@
 //  $Id: linearAlgebra.cpp,v 1.5 2010/06/16 15:27:54 exact Exp $
 //
 
-#ifndef CORE_LEVEL
-#define CORE_LEVEL 3
+#ifndef CORE_TWO_LEVEL
+#define CORE_TWO_LEVEL 3
 #endif
 
-#include <CORE/linearAlgebra.h>
+#include <CORE_TWO/linearAlgebra.h>
 
 // Note: 5/23/2010: Narayan pointed out the ZeroConst in the original
 // Core, being a static, causes runtime bus error, because

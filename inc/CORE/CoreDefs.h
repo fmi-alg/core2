@@ -21,13 +21,13 @@
  *
  * $Id: CoreDefs.h,v 1.29 2010/11/23 17:58:36 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_COREDEFS_H__
-#define __CORE_COREDEFS_H__
+#ifndef __CORE_TWO_CORE_TWODEFS_H__
+#define __CORE_TWO_CORE_TWODEFS_H__
 #include <climits>
 #include <string>
 #include <stack>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 #ifndef sign_t
 typedef int sign_t;
@@ -43,9 +43,9 @@ typedef long msb_t;
 #define LOG2_10 3.3219280948873626 /* upper approximation of log(10)/log(2) */
 #define LOG10_2 0.30102999566398120 /* upper approximation of log(2)/log(10) */
   
-#define CORE_INFTY LONG_MAX
-#define CORE_posInfty LONG_MAX
-#define CORE_negInfty LONG_MIN
+#define CORE_TWO_INFTY LONG_MAX
+#define CORE_TWO_posInfty LONG_MAX
+#define CORE_TWO_negInfty LONG_MIN
 
 extern long defAbsPrec;
 extern long defRelPrec;
@@ -74,22 +74,22 @@ extern bool rationalReduceFlag;  // We bring this back from Core1. We make ratio
 inline unsigned long digits2bits(unsigned long digits)
 {
   // Jan 2010 (Jihun) bug fix: 
-  // Added test for CORE_INFTY because digits = CORE_INFTY is
+  // Added test for CORE_TWO_INFTY because digits = CORE_TWO_INFTY is
   //     interpreted to mean that we want a rational representation!
   //     This digits is also converted to bits (=prec) which is
-  //     also checked for CORE_INFTY when converting from string to 
-  //     expression value (i.e., BigFloat if prec<CORE_INFTY, or BigRat if
-  //     prec=CORE_INFTY).
+  //     also checked for CORE_TWO_INFTY when converting from string to 
+  //     expression value (i.e., BigFloat if prec<CORE_TWO_INFTY, or BigRat if
+  //     prec=CORE_TWO_INFTY).
   //
   // We do the following min(x,y) on a pair of double values,
-  //    so that if if digits=CORE_INFTY, we will return CORE_INFTY
-  if (digits == CORE_INFTY) return CORE_INFTY;
-  return (unsigned long)(std::min)(digits*LOG2_10, (double)CORE_INFTY);
+  //    so that if if digits=CORE_TWO_INFTY, we will return CORE_TWO_INFTY
+  if (digits == CORE_TWO_INFTY) return CORE_TWO_INFTY;
+  return (unsigned long)(std::min)(digits*LOG2_10, (double)CORE_TWO_INFTY);
 }
 
 inline unsigned long bits2digits(unsigned long bits)
 {
-  if(bits == CORE_INFTY) return CORE_INFTY; // added: Jan 2010
+  if(bits == CORE_TWO_INFTY) return CORE_TWO_INFTY; // added: Jan 2010
   return (unsigned long)(bits*LOG10_2);
 }
 
@@ -98,33 +98,33 @@ extern void core_error(std::string msg, std::string file, int lineno, bool err);
 
 /// This sets the global variable defRelPrec and defAbsPrec.
 //  PROBLEM IS this is "composite precision" which we don't really
-//  support in Core2.  So, one of these two must be CORE_INFTY.
+//  support in Core2.  So, one of these two must be CORE_TWO_INFTY.
 //  But in Expr.h, we see that approx() is implemented so that
-//     If defAbsPrec<CORE_INFTY, then we compute to defAbsPrec (absolute prec)
-//     Else defAbsPrec=CORE_INFTY, we compute to defRelPrec (relative prec).
+//     If defAbsPrec<CORE_TWO_INFTY, then we compute to defAbsPrec (absolute prec)
+//     Else defAbsPrec=CORE_TWO_INFTY, we compute to defRelPrec (relative prec).
 inline void setDefaultPrecision(long r, long a)
 { defRelPrec = r; defAbsPrec = a; }
 inline void setDefaultRelPrecision(long r) {
   defRelPrec = r; 
-  defAbsPrec = CORE_INFTY;
-  if (defRelPrec == CORE_INFTY)
-    core_error("Relative Prec and Absolute Prec are both CORE_INFTY", __FILE__, __LINE__, false);
+  defAbsPrec = CORE_TWO_INFTY;
+  if (defRelPrec == CORE_TWO_INFTY)
+    core_error("Relative Prec and Absolute Prec are both CORE_TWO_INFTY", __FILE__, __LINE__, false);
 }
 inline void setDefaultAbsPrecision(long a) {
   defAbsPrec = a; 
-  defRelPrec = CORE_INFTY;
-  if (defAbsPrec == CORE_INFTY)
-    core_error("Relative Prec and Absolute Prec are both CORE_INFTY", __FILE__, __LINE__, false);
+  defRelPrec = CORE_TWO_INFTY;
+  if (defAbsPrec == CORE_TWO_INFTY)
+    core_error("Relative Prec and Absolute Prec are both CORE_TWO_INFTY", __FILE__, __LINE__, false);
 }
 inline void setDefaultComPrecision(long r, long a) {
   defAbsPrec = a;
   defRelPrec = r;
-  if (defAbsPrec == CORE_INFTY && defRelPrec == CORE_INFTY)
-    core_error("Relative Prec and Absolute Prec are both CORE_INFTY", __FILE__, __LINE__, false);
+  if (defAbsPrec == CORE_TWO_INFTY && defRelPrec == CORE_TWO_INFTY)
+    core_error("Relative Prec and Absolute Prec are both CORE_TWO_INFTY", __FILE__, __LINE__, false);
 }
 
 // THIS controls the precision for converting input values into Core internal representation
-//    -- if this value is CORE_INFTY, then we must not have any error in the
+//    -- if this value is CORE_TWO_INFTY, then we must not have any error in the
 //       the internal representation.  This may require a BigRat value
 inline long getDefaultInputDigits()
 { return defInputDigits; }
@@ -134,7 +134,7 @@ inline void setDefaultInputDigits(long digits)
 inline long get_def_input_digits()
 { return defInputDigits; }
 inline bool is_infty(long l)
-{ return l == CORE_INFTY; }
+{ return l == CORE_TWO_INFTY; }
 
 inline long getDefaultBFdivPrec()
 { return defBFdivRelPrec; }
@@ -243,6 +243,6 @@ long restoreEnv();
 
 
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_COREDEFS_H__*/
+#endif /*__CORE_TWO_CORE_TWODEFS_H__*/

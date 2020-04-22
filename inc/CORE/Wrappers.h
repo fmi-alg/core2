@@ -14,15 +14,15 @@
  * Author: Narayan Kamath (Oxford University, 2010)
  * Since Core 2.0
  */
-#ifndef __CORE_WRAPPERS_H__
-#define __CORE_WRAPPERS_H__
+#ifndef __CORE_TWO_WRAPPERS_H__
+#define __CORE_TWO_WRAPPERS_H__
 
-#include <CORE/Mpfr.h>  // for the definition of prec_t
+#include <CORE_TWO/Mpfr.h>  // for the definition of prec_t
 #include <cmath>
 #include <stdlib.h>
 #include <sstream>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /* ***************************************************
  * Wrapper class for machine long type.
@@ -47,7 +47,7 @@ class LongWrapper {
 // type conversions.
 //
 // NOTE (Narayan): If this function was not defined "inline" then many compilers
-// would break. This is because CORE.h will be compiled into every
+// would break. This is because CORE_TWO.h will be compiled into every
 // translation unit (normally a C++ file that gets converted to a .o file)
 // and each of those files will contain a definition of this function,
 // and when multiple such files are linked together, there will be
@@ -175,7 +175,7 @@ inline IntWrapper power(const IntWrapper &i, unsigned long p) {
 }
 
   // Chee (July 2012): != operator,
-  // 		modeled after == operator for IntWrapper (needed by inc/CORE/poly/Poly.h):
+  // 		modeled after == operator for IntWrapper (needed by inc/CORE_TWO/poly/Poly.h):
   //		==================================================
   /// \addtogroup IntWrapperComparisonOperators
   //@{
@@ -970,10 +970,10 @@ inline DoubleWrapper cos(const DoubleWrapper &x)
 //   return ret;
 // }
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
 /* ***************************************************
  * END of DoubleWrapper Definitions
  *************************************************** */
 
-#endif /*__CORE_WRAPPERS_H__*/
+#endif /*__CORE_TWO_WRAPPERS_H__*/

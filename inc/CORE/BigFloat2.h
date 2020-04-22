@@ -21,14 +21,14 @@
  *
  * $Id: BigFloat2.h,v 1.44 2010/11/23 17:58:36 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_BIGFLOAT2_H__
-#define __CORE_BIGFLOAT2_H__
+#ifndef __CORE_TWO_BIGFLOAT2_H__
+#define __CORE_TWO_BIGFLOAT2_H__
 
-#include <CORE/BigFloat.h>
-#include <CORE/Policies.h>
+#include <CORE_TWO/BigFloat.h>
+#include <CORE_TWO/Policies.h>
 #include <sstream>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // BUG:
 // 
@@ -80,7 +80,7 @@ public:
   explicit BigFloat2(const BigInt& v) : m_l(v), m_exact(true) {}
   /// constructor for <tt>BigFloat</tt> 
   explicit BigFloat2(const BigFloat& v) : m_l(v), m_exact(true) {}
-#ifndef CORE_LEVEL_1_NO_WRAPPERS
+#ifndef CORE_TWO_LEVEL_1_NO_WRAPPERS
   /// constructor for <tt>DoulbeWrapper</tt> 
   explicit BigFloat2(const DoubleWrapper& v)
       : m_l(v.doubleValue()), m_exact(true) {}
@@ -997,7 +997,7 @@ public: // C++ style operators
   { BigFloat2 t; t.div(*this, rhs); t.swap(*this); return *this; }
   //@}
 
-#ifdef CORE_OLDNAMES
+#ifdef CORE_TWO_OLDNAMES
   /// \name back-compatiable functions
   //@{
   /// Has Exact Division
@@ -1256,16 +1256,16 @@ inline BigFloat2 root(const BigFloat2& x,
 
 /********************* INLINE FUNCTIONS *********************/
 // include inline functions (private)
-#include <CORE/BigFloat2.inl>
+#include <CORE_TWO/BigFloat2.inl>
 inline int sign(const BigFloat2& x) 
 { return x.sgn(); }
 
-#ifdef CORE_OLDNAMES 
+#ifdef CORE_TWO_OLDNAMES 
 /// \addtogroup BigFloat2BackCompatiableFunctions
 //@{
 //@}
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_BIGFLOAT2_H__*/
+#endif /*__CORE_TWO_BIGFLOAT2_H__*/

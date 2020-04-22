@@ -3,9 +3,9 @@
  * Copyright (c) 1995-2004 Exact Computation Project
  * All rights reserved.
  *
- * This file is part of CORE (http://cs.nyu.edu/exact/core/); you may
+ * This file is part of CORE_TWO (http://cs.nyu.edu/exact/core/); you may
  * redistribute it under the terms of the Q Public License version 1.0.
- * See the file LICENSE.QPL distributed with CORE.
+ * See the file LICENSE.QPL distributed with CORE_TWO.
  *
  * Licensees holding a valid commercial license may use this file in
  * accordance with the commercial license agreement provided with the
@@ -50,17 +50,17 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $Source: /home/exact/cvsroot/exact/corelib2/inc/CORE/poly/Sturm.h,v $
+ * $Source: /home/exact/cvsroot/exact/corelib2/inc/CORE_TWO/poly/Sturm.h,v $
  * $Revision: 1.19 $ $Date: 2010/09/08 00:14:36 $
  ***************************************************************************/
 
 
-#ifndef CORE_STURM_H
-#define CORE_STURM_H
+#ifndef CORE_TWO_STURM_H
+#define CORE_TWO_STURM_H
 
-#include "CORE/poly/Poly.h"
+#include "CORE_TWO/poly/Poly.h"
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // ==================================================
 // Sturm Class
@@ -798,7 +798,7 @@ public:
   bool smaleBoundTest(const BigFloat& z){
     //assert(z.isExact());   // the bound only makes sense for exact z
 
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
     std::cout <<"Computing Smale's bound = " <<  std::endl;
 #endif
 
@@ -880,7 +880,7 @@ public:
   //
   BFInterval newtonRefine(BFInterval &J, int aprec) {
 
-#ifdef CORE_DEBUG_NEWTON
+#ifdef CORE_TWO_DEBUG_NEWTON
     std::cout << "In newtonRefine, input J=" << J.first
 	<< ", " << J.second << " precision = " << aprec << std::endl;
 #endif
@@ -1059,7 +1059,7 @@ public:
       //  
       //  NOTE: We implemented this DEL in newtonIterE.   
 
-#ifdef CORE_DEBUG_NEWTON
+#ifdef CORE_TWO_DEBUG_NEWTON
       std::cout << "Inside Newton Refine: Refining Part " << std::endl;
 
       if((J.second - J.first) > yap)
@@ -1173,6 +1173,6 @@ inline void testNewtonSturm(const Polynomial<NT>&P, int prec, int n = -1) {
   }
 }// testNewtonSturm
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
 #endif

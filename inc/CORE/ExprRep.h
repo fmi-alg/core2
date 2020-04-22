@@ -21,17 +21,17 @@
  *
  * $Id: ExprRep.h,v 1.52 2010/11/23 17:58:37 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_EXPRREP_H__
-#define __CORE_EXPRREP_H__
+#ifndef __CORE_TWO_EXPRREP_H__
+#define __CORE_TWO_EXPRREP_H__
 
-#include <CORE/CoreAux.h>
-#include <CORE/poly/Sturm.h>
-#include <CORE/poly/Descartes.h>
+#include <CORE_TWO/CoreAux.h>
+#include <CORE_TWO/poly/Sturm.h>
+#include <CORE_TWO/poly/Descartes.h>
 #include <bitset>
 #include <iostream>
 #include <sstream>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 enum NODE_NUMTYPE {
   NODE_NT_INTEGER,
@@ -368,18 +368,18 @@ public: // public methods
       return;
     }
     if (level == OPERATOR_ONLY) {
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
       std::cout << op();
 #endif
     } else if (level == VALUE_ONLY) {
       std::cout << appValue();
     } else if (level == OPERATOR_VALUE) {
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
       std::cout << op() << "[val: " << appValue() << "]";
 #endif
     } else if (level == FULL_DUMP) {
       std::cout 
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
       << op()
 #endif
       << "[val: "  << appValue() << "; "
@@ -450,7 +450,7 @@ public: // public methods
   //////////////////////////////////////////////////
 
   void refine() {
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
       std::cerr << std::endl << "In refine," << std::endl;
 #endif
   
@@ -473,14 +473,14 @@ public: // public methods
     }
     // Step 3
     if (bound > get_cut_off_bound()) {
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
       std::cerr << "root bound is bigger than cut off bound." << std::endl;
       std::cerr << "root bound=" << bound << std::endl;
       std::cerr << "cut off bound=" << get_cut_off_bound() << std::endl;
 #endif
       bound = get_cut_off_bound(); bound_type = 0;
     }
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
       std::cerr << "refine bound type=" << bound_type << std::endl;
       std::cerr << "refine bound=" << bound << std::endl;
 #endif
@@ -489,20 +489,20 @@ public: // public methods
     do {
 	  unsigned long realPrec = (std::min)(prec,bound);
 //	  unsigned long realPrec = prec;
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
       std::cerr << "refine prec=" << realPrec << std::endl;
 #endif
       a_approx(realPrec);
       if (appValue().has_sign()) {
         set_flags(appValue().sgn(), appValue().uMSB(), appValue().lMSB());
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
         std::cerr << "found sign =" << appValue().sgn() << std::endl;
 #endif
         return;
       }
       prec <<= 1;
     } while (prec < 2*bound);
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
     std::cerr << "root bound=" << get_constructive_bound() << std::endl;
     std::cerr << "root type=" << bound_type << std::endl;
     rootBd().dump();
@@ -526,25 +526,25 @@ public: // public methods
     prec_t rootbd;
     if(get_rootBd().is_constructive())
       rootbd = get_rootBd().get_bound(get_Deg());
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
     std::cout << "\nrootbd degree upperbound = " << get_Deg() << std::endl;
     std::cout << "rootbd bit = " << rootbd << std::endl;
 #endif
     
     for (prec_t prec=(std::min)(rootbd, DEF_INIT_PREC); prec<2*rootbd; prec<<=1) {
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
       std::cerr << "rootbd prec=" << prec << std::endl;
 #endif
       a_approx(prec);
       if (!appValue().has_zero()) {
         set_flags(appValue().sgn(), appValue().uMSB(), appValue().lMSB());
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
         std::cerr << "found sign =" << appValue().sgn() << std::endl;
 #endif
         return;
       }
     }
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
     std::cerr << "root bound=" << rootBd().get_bound(get_Deg()) << std::endl;
     rootBd().dump();
 #endif
@@ -608,7 +608,7 @@ protected: // overridable methods
   /// compute rootBd
   virtual void compute_rootBd()
   {}
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("undefined"); }
 #endif 
@@ -812,7 +812,7 @@ public:
   BigFloat getFTVal() {return getBigFloatVal(value); }
   BigRat getQTVal() { return getBigRatVal(value); }
 
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Const"); }
 #endif 
@@ -903,7 +903,7 @@ protected:
     else value.set(BigFloat2(I.first, I.second), prec);
     return appValue().set(value);
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("rootOf"); }
 #endif 
@@ -947,7 +947,7 @@ protected:
   { rootBd().set(3.14); }
   virtual bool compute_r_approx(prec_t prec)
   { return appValue().pi(prec);}
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Pi"); }
 #endif  
@@ -1061,7 +1061,7 @@ protected:
   BigInt getZTVal() { return -child->getZTVal(); }
   BigFloat getFTVal() { return -child->getFTVal(); }
   BigRat getQTVal() { return -child->getQTVal(); }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Neg"); }
 #endif 
@@ -1112,7 +1112,7 @@ protected:
     // if child's sign is zero, compute_r_approx is not called	  
     return this->check_exact(appValue().sqrt(child->r_approx(prec*2), prec));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Sqrt"); }
 #endif 
@@ -1159,7 +1159,7 @@ protected:
   virtual bool compute_r_approx(prec_t prec) {
     return this->check_exact(appValue().cbrt(child->r_approx(prec*3), prec));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Cbrt"); }
 #endif 
@@ -1203,7 +1203,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().sin(child->a_approx(prec+1), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Sin"); }
 #endif 
@@ -1246,7 +1246,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().cos(child->a_approx(prec+1), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Cos"); }
 #endif 
@@ -1289,7 +1289,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().tan(child->a_approx(prec+3), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Tan"); }
 #endif 
@@ -1330,7 +1330,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().cot(child->a_approx(prec+2), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Cot"); }
 #endif 
@@ -1371,7 +1371,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().asin(child->a_approx(prec+2), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("ASin"); }
 #endif 
@@ -1412,7 +1412,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().acos(child->a_approx(prec+2), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("ACos"); }
 #endif 
@@ -1453,7 +1453,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().atan(child->a_approx(prec+2), abs2rel(prec+2)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("ATan"); }
 #endif 
@@ -1512,7 +1512,7 @@ protected:
     prec_t L = prec + 2 * (abs(child->appValue().get_max()).get_ui() + 1);
     return this->check_exact(appValue().exp(child->a_approx(L), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Exp"); }
 #endif 
@@ -1571,7 +1571,7 @@ protected:
     prec_t L = prec + 2 * (abs(child->appValue().get_max()).get_ui() + 1);
     return this->check_exact(appValue().exp2(child->a_approx(L), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Exp2"); }
 #endif 
@@ -1630,7 +1630,7 @@ protected:
     prec_t L = prec + 2 * (abs(child->appValue().get_max()).get_ui() + 1);
     return this->check_exact(appValue().exp10(child->a_approx(L), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Exp10"); }
 #endif 
@@ -1682,7 +1682,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().log2(child->a_approx(prec+1-floorlg(child->a_approx(2).get_min())), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("log2"); }
 #endif 
@@ -1735,7 +1735,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().log(child->a_approx(prec+1-floorlg(child->a_approx(2).get_min())), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("log"); }
 #endif 
@@ -1788,7 +1788,7 @@ protected:
   virtual bool compute_a_approx(prec_t prec) {
     return this->check_exact(appValue().log10(child->a_approx(prec+1-floorlg(child->a_approx(2).get_min())), abs2rel(prec+1)));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("log10"); }
 #endif 
@@ -1840,7 +1840,7 @@ protected:
     return this->check_exact(appValue().root(child->r_approx(prec*m_k),
 			    m_k, prec));
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Radical"); }
 #endif 
@@ -2022,7 +2022,7 @@ protected:
   BigInt getZTVal() { return first->getZTVal() + second->getZTVal() * (is_add ? 1 : -1); }
   BigFloat getFTVal() { return first->getFTVal() + second->getFTVal() * (is_add ? 1 : -1); }
   BigRat getQTVal() { return first->getQTVal() + second->getQTVal() * (is_add ? 1 : -1); }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("AddSub"); }
 #endif 
@@ -2078,7 +2078,7 @@ protected:
 	  std::cerr << "second=" << second->getQTVal()
 		  	<< std::endl;
 	  return first->getQTVal() * second->getQTVal(); }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Mul"); }
 #endif 
@@ -2130,7 +2130,7 @@ protected:
   BigInt getZTVal() { return first->getZTVal() / second->getZTVal(); }
   BigFloat getFTVal() { return first->getFTVal() / second->getFTVal(); }
   BigRat getQTVal() { return first->getQTVal() / second->getQTVal(); }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Div"); }
 #endif 
@@ -2247,7 +2247,7 @@ protected:
     }
     return exact;
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Sum"); }
 #endif 
@@ -2343,7 +2343,7 @@ protected:
     }
     return exact;
   }
-#ifdef CORE_DEBUG
+#ifdef CORE_TWO_DEBUG
   virtual std::string op()
   { return std::string("Prod"); }
 #endif 
@@ -2419,6 +2419,6 @@ BEGIN_DEFINE_BINARY_NODE(DivRepT)
 END_DEFINE_UNARY_NODE
 */
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_EXPRREP_H__*/
+#endif /*__CORE_TWO_EXPRREP_H__*/

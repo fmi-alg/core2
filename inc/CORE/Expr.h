@@ -67,12 +67,12 @@
  *       have not been implemented in Core 2.0.
  * **************************************************/
 
-#ifndef __CORE_EXPR_H__
-#define __CORE_EXPR_H__
+#ifndef __CORE_TWO_EXPR_H__
+#define __CORE_TWO_EXPR_H__
 
-#include <CORE/ExprRep.h>
+#include <CORE_TWO/ExprRep.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class ExprT
 /// Kernel -- internal representation 
@@ -526,9 +526,9 @@ public: // public methods
   /// return a BigFloat approximation \f$[r, \infty]\f$ or \f$[\infty, a]\f$
   /// Note: Compare to approx2(..) that returns a BigFloat2
   FT approx(prec_t r_prec = defRelPrec, prec_t a_prec = defAbsPrec) {
-    if (a_prec == CORE_INFTY)
+    if (a_prec == CORE_TWO_INFTY)
       return r_approx(r_prec).get_f();
-    else if (r_prec == CORE_INFTY)
+    else if (r_prec == CORE_TWO_INFTY)
       return a_approx(a_prec).get_f();
     else 
       return a_approx( (std::min)(a_prec, m_rep->rel2abs(r_prec)) ).get_f();
@@ -536,9 +536,9 @@ public: // public methods
   /// return a BigFloat2 approximation \f$[r, \infty]\f$ or \f$[\infty, a]\f$
   /// Note: Compare to approx(..) that returns a BigFloat only
   KT& approx2(prec_t r_prec = defRelPrec, prec_t a_prec = defAbsPrec) {
-    if (a_prec == CORE_INFTY)
+    if (a_prec == CORE_TWO_INFTY)
       return r_approx(r_prec);
-    else if (r_prec == CORE_INFTY)
+    else if (r_prec == CORE_TWO_INFTY)
       return a_approx(a_prec);
     else 
       return a_approx( (std::min)(a_prec, m_rep->rel2abs(r_prec)) );
@@ -631,16 +631,16 @@ private:
   ExprRep* m_rep; ///<- internal representation
 }; // end of ExprT
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
 ///////////////////////////////////////////////////////////////////////////
 // Definition of Expr
 ///////////////////////////////////////////////////////////////////////////
 
-#include <CORE/RootBounds.h>
-#include <CORE/Filters.h>
+#include <CORE_TWO/RootBounds.h>
+#include <CORE_TWO/Filters.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // VERY IMPORTANT: This is where we typedef "Expr" by choosing the
@@ -775,7 +775,7 @@ inline BigRat ToBigRat(const Expr& e, prec_t r = defRelPrec, prec_t a=defAbsPrec
 
 inline bool isDivisible(const Expr& x, const Expr& y) {
   Expr e = x/y;
-  return ((e - ToBigInt(e, CORE_INFTY, 2)) == 0);
+  return ((e - ToBigInt(e, CORE_TWO_INFTY, 2)) == 0);
 }
 
 inline Expr gcd(const Expr& /*x*/, const Expr& /*y*/) {
@@ -783,11 +783,11 @@ inline Expr gcd(const Expr& /*x*/, const Expr& /*y*/) {
 }
 
 inline Expr div_exact(const Expr& x, const Expr& y) {
-  return (x/y).approx(CORE_INFTY, 2);
+  return (x/y).approx(CORE_TWO_INFTY, 2);
 }
 
 inline BigInt floor(const Expr& x) {
-  BigInt r = ToBigInt(x, CORE_INFTY, 2);
+  BigInt r = ToBigInt(x, CORE_TWO_INFTY, 2);
   if (x - r >= 0)
     return r;
   else
@@ -812,5 +812,5 @@ inline long ceilLg(const Expr& x) {
     return ceilLg(ceil(x));
 }
 
-CORE_END_NAMESPACE
-#endif // __CORE_EXPR_H__
+CORE_TWO_END_NAMESPACE
+#endif // __CORE_TWO_EXPR_H__

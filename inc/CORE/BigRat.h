@@ -21,17 +21,17 @@
  *
  * $Id: BigRat.h,v 1.13 2010/11/23 17:58:36 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_BIGRAT_H__
-#define __CORE_BIGRAT_H__
+#ifndef __CORE_TWO_BIGRAT_H__
+#define __CORE_TWO_BIGRAT_H__
 
-#include <CORE/Gmpq.h>
-#include <CORE/BigInt.h>
+#include <CORE_TWO/Gmpq.h>
+#include <CORE_TWO/BigInt.h>
 
 extern std::istream& extract(std::istream &i, mpq_ptr x);
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   typedef RcGmpq BigRatBase;
 #else
   typedef Gmpq BigRatBase;
@@ -339,7 +339,7 @@ public: // C++ operators
   { div_2exp(*this, ul); return *this; }
   //@}
 
-#ifndef CORE_DISABLE_OLDNAMES
+#ifndef CORE_TWO_DISABLE_OLDNAMES
   /// \name back-compatiable functions
   //@{
   /// Has Exact Division
@@ -803,7 +803,7 @@ inline std::ostream& operator<<(std::ostream& os, const BigRat& x)
 { return os << x.get_str(); }
 //@}
 
-#ifndef CORE_DISABLE_OLDNAMES 
+#ifndef CORE_TWO_DISABLE_OLDNAMES 
 /// \addtogroup BigRatBackCompatiableFunctions
 //@{
 /// comparison
@@ -854,6 +854,6 @@ inline long ceillg(const BigRat& a) { return a.uMSB(); }
 //@}
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_BIGRAT_H__*/
+#endif /*__CORE_TWO_BIGRAT_H__*/

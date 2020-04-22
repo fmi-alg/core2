@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -18,7 +18,7 @@
  * $Id: triangle3d.cpp,v 1.2 2010/05/19 04:48:20 exact Exp $
  *****************************************************************/
 
-#include <CORE/geom3d/triangle3d.h>
+#include <CORE_TWO/geom3d/triangle3d.h>
 
 /************************************************************
  *   constructors

@@ -16,10 +16,10 @@
  * $Id: geombase.h,v 1.2 2006/04/04 04:57:48 exact Exp $
  *****************************************************************/
 
-#ifndef CORE_GEOMETRY_H
-#define CORE_GEOMETRY_H
+#ifndef CORE_TWO_GEOMETRY_H
+#define CORE_TWO_GEOMETRY_H
 
-#include <CORE/CORE.h>
+#include <CORE_TWO/CORE_TWO.h>
 
 
 //base class for geom2d and geom3d classes

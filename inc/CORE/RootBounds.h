@@ -21,22 +21,22 @@
  *
  * $Id: RootBounds.h,v 1.18 2010/11/23 17:58:37 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_ROOTBOUNDS_H__
-#define __CORE_ROOTBOUNDS_H__
+#ifndef __CORE_TWO_ROOTBOUNDS_H__
+#define __CORE_TWO_ROOTBOUNDS_H__
 
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <limits>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// Dummy Root Bound (minimal root bound class)
 template <int bound = 1000>
 class DummyRootBd {
   typedef DummyRootBd thisClass;
 public:
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
   void dump() const {}
 #endif
   bool is_constructive() const { return false; }
@@ -862,6 +862,6 @@ public:
   { m_rootBd1.div(f, s), m_rootBd2.div(f, s); }
 };
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_ROOTBOUNDS_H__*/
+#endif /*__CORE_TWO_ROOTBOUNDS_H__*/

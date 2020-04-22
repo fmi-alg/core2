@@ -2,12 +2,12 @@
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
  * All rights reserved.
- * 	$Source: /home/exact/cvsroot/exact/corelib2/inc/CORE/poly/Curves.h,v $
+ * 	$Source: /home/exact/cvsroot/exact/corelib2/inc/CORE_TWO/poly/Curves.h,v $
  * 	$Revision: 1.21 $ $Date: 2010/11/08 14:52:09 $
  *
- * This file is part of CORE (http://cs.nyu.edu/exact/core/); you may
+ * This file is part of CORE_TWO (http://cs.nyu.edu/exact/core/); you may
  * redistribute it under the terms of the Q Public License version 1.0.
- * See the file LICENSE.QPL distributed with CORE.
+ * See the file LICENSE.QPL distributed with CORE_TWO.
  *
  * Licensees holding a valid commercial license may use this file in
  * accordance with the commercial license agreement provided with the
@@ -80,18 +80,18 @@
  ***************************************************************************/
 
 
-#ifndef CORE_CURVES_H
-#define CORE_CURVES_H
+#ifndef CORE_TWO_CURVES_H
+#define CORE_TWO_CURVES_H
 
 #include <fstream>
 #include <string>
 #include <list>
 #include <iostream>
-#include "CORE/poly/Poly.h"
+#include "CORE_TWO/poly/Poly.h"
 
 // NOTE: This IntervalT.h is only used in eval1 and eval2 methods(see below)
 // (Shang Wang, Aug 2011)
-#include "CORE/IntervalT.h"
+#include "CORE_TWO/IntervalT.h"
 // pre-define
 //template <class NT>
 //class IntervalT;
@@ -104,7 +104,7 @@
 
 using namespace std;
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // ==================================================
 // Curve Class
@@ -673,7 +673,7 @@ public:
   //    The display is done in the rectangale 
   //    defined by [(x1, y1), (x2, y2)].
   //    The output is written into a file in the format specified
-  //    by our drawcurve function (see COREPATH/ext/graphics).
+  //    by our drawcurve function (see CORE_TWOPATH/ext/graphics).
   //
   //    Heuristic: the open polygonal lines end when number of roots
   //    changes...
@@ -945,9 +945,9 @@ private:
 // Curves.tcc does not concern itself with the type of root
 // isolation method used any longer. All calls to isolation
 // methods are directed through the class RootIsolator above.
-#include <CORE/poly/Curves.tcc>
+#include <CORE_TWO/poly/Curves.tcc>
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 #endif
 /*************************************************************************** */
 // END

@@ -21,14 +21,14 @@
  *
  * $Id: CoreAux.cpp,v 1.17 2010/05/19 04:48:21 exact Exp $
  ***************************************************************************/
-#include <CORE/Config.h>
-#include <CORE/CoreDefs.h>
-#include <CORE/BigInt.h>
+#include <CORE_TWO/Config.h>
+#include <CORE_TWO/CoreDefs.h>
+#include <CORE_TWO/BigInt.h>
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // Chee: this message is printed by core_error().  User can set this.
 // See progs/bounds for example of usage.
@@ -76,32 +76,32 @@ int gcd(int x, int y)
 { return gcd(BigInt(x), BigInt(y)).get_si(); }
 
 
-/// CORE_DIAGFILE is file name for core_error(..) output.
-const char* CORE_DIAGFILE = "Core_Diagnostics";  // global file name
+/// CORE_TWO_DIAGFILE is file name for core_error(..) output.
+const char* CORE_TWO_DIAGFILE = "Core_Diagnostics";  // global file name
   
 /// core_error is the method to write Core Library warning or error messages
-/**     Both warnings and errors are written to a file called CORE_DIAGFILE.
+/**     Both warnings and errors are written to a file called CORE_TWO_DIAGFILE.
  *      But errors are also written on std:cerr (similar to std::perror()).
  * */
 // Usage: core_error(message, file_with_error, line_number, err_type)
 //   where err_type=false means WARNING, error_type=true means ERROR
 void core_error(std::string msg, std::string file, int lineno, bool err) {
-  std::ofstream outFile(CORE_DIAGFILE, std::ios::app);  // open to append
+  std::ofstream outFile(CORE_TWO_DIAGFILE, std::ios::app);  // open to append
   if (!outFile) {               
-     std::cerr << "CORE ERROR: can't open Core Diagnostics file"<<std::endl;
+     std::cerr << "CORE_TWO ERROR: can't open Core Diagnostics file"<<std::endl;
      exit(1); //Note: do not call abort()
   }
-  outFile << "CORE " << (err? "ERROR" : "WARNING")
+  outFile << "CORE_TWO " << (err? "ERROR" : "WARNING")
      << " (at " << file << ": " << lineno << "): "
      << msg << std::endl; 
   outFile << coreErrorMsg << std::endl;  // Chee: prints a user-settable message as well
   outFile.close();
   if (err) { // ERROR!
 	  coreErrorFlag++; 	// this increments each time we have an error!
-    std::cerr << "CORE ERROR: file " << file << ", line "
+    std::cerr << "CORE_TWO ERROR: file " << file << ", line "
         << lineno << "):" << msg << std::endl;
      exit(1); //Note: do not call abort()
   }
 }
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE

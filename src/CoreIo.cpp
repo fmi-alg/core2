@@ -3,9 +3,9 @@
  * Copyright (c) 1995-2004 Exact Computation Project
  * All rights reserved.
  *
- * This file is part of CORE (http://cs.nyu.edu/exact/core/); you may
+ * This file is part of CORE_TWO (http://cs.nyu.edu/exact/core/); you may
  * redistribute it under the terms of the Q Public License version 1.0.
- * See the file LICENSE.QPL distributed with CORE.
+ * See the file LICENSE.QPL distributed with CORE_TWO.
  *
  * Licensees holding a valid commercial license may use this file in
  * accordance with the commercial license agreement provided with the
@@ -36,9 +36,9 @@
  * $Revision: 1.1 $ $Date: 2006/11/10 21:09:28 $
  ***************************************************************************/
 
-#include <CORE/BigFloat.h>
+#include <CORE_TWO/BigFloat.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 void core_io_error_handler(const char *f, const char *m) {
 	  std::cout << "\n error_handler";
@@ -339,7 +339,7 @@ void readFromFile(BigFloat& bf, std::istream& in, long maxLength) {
 }//readFromFile (BigFloat)
 
 void writeToFile(const BigFloat& bf, std::ostream& out, int base, int charsPerLine) {
-	  BigInt c(CORE::abs(bf.m()));
+	  BigInt c(CORE_TWO::abs(bf.m()));
 	
 	  // get the absoulte value string
 	  char* buffer = new char[mpz_sizeinbase(c.mp(), base) + 2];
@@ -354,7 +354,7 @@ void writeToFile(const BigFloat& bf, std::ostream& out, int base, int charsPerLi
 	  out << bf.exp() << std::endl;
 	
 	  // write mantissa
-	  if ( CORE::sign(bf.m()) < 0 )
+	  if ( CORE_TWO::sign(bf.m()) < 0 )
 	    out << '-';
 	
 	  write_base_number(out, buffer, length, base, charsPerLine);
@@ -439,12 +439,12 @@ void BigFloat::write_to_file2(std::ostream& out, int base, int charsPerLine) {
 	  long tmp_exp = (rep->exp) * CHUNK_BIT;
 	  long q = tmp_exp / new_base;
 	  long r = tmp_exp % new_base;
-	  std::cout << "CORE_DEBUG: q=" << q << ", r=" << r << std::endl;
+	  std::cout << "CORE_TWO_DEBUG: q=" << q << ", r=" << r << std::endl;
 	  if ( r < 0 ) {
 	    r += new_base;
 	    q--;
 	  }
-	  std::cout << "CORE_DEBUG: q=" << q << ", r=" << r << std::endl;
+	  std::cout << "CORE_TWO_DEBUG: q=" << q << ", r=" << r << std::endl;
 	  
 	  BigInt m16 = (rep->m) << r;
 	 
@@ -478,5 +478,5 @@ void BigFloat::write_to_file2(std::ostream& out, int base, int charsPerLine) {
 }//write_to_file2
 ***************************************************/
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 

@@ -6,7 +6,7 @@
  * 		(modified, Chee Yap, 2003)
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -19,8 +19,8 @@
  * $Id: pentagon.cpp,v 1.1 2006/04/03 18:55:31 exact Exp $
  *****************************************************************/
 
-#include "CORE/CORE.h"
-#include "CORE/geometry2d.h"
+#include "CORE_TWO/CORE_TWO.h"
+#include "CORE_TWO/geometry2d.h"
 using namespace std;
 
 void inner( Point2d pentagon[5], Point2d * output) {
@@ -75,7 +75,7 @@ int main( int argc, char* argv[] ) {
   Point2d pentInner[5];
   Point2d pentOuter[5];
 
-  EscapePrec = CORE_INFTY;
+  EscapePrec = CORE_TWO_INFTY;
   int rounds = 2;
 
   if( argc > 1 )

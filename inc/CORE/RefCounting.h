@@ -1,5 +1,5 @@
-#ifndef __CORE_REFCOUNTING_H__
-#define __CORE_REFCOUNTING_H__
+#ifndef __CORE_TWO_REFCOUNTING_H__
+#define __CORE_TWO_REFCOUNTING_H__
 
 /*
  *     1. This file defines two templated classes:
@@ -27,7 +27,7 @@
  *         }
  */
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 template <class T>
 class RcRepImpl {
@@ -55,6 +55,6 @@ protected:
   T* _rep;
 };
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_REFCOUNTING_H__*/
+#endif /*__CORE_TWO_REFCOUNTING_H__*/

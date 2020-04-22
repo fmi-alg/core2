@@ -21,14 +21,14 @@
  *
  * $Id: Mpfr.h,v 1.12 2007/03/07 02:05:11 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_MPFR_H__
-#define __CORE_MPFR_H__
+#ifndef __CORE_TWO_MPFR_H__
+#define __CORE_TWO_MPFR_H__
 
 #include <mpfr.h>
-#include <CORE/Config.h>
+#include <CORE_TWO/Config.h>
 
-#ifndef CORE_DISABLE_REFCOUNTING
-  #include <CORE/RefCounting.h>
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
+  #include <CORE_TWO/RefCounting.h>
 #endif
 
 // default rouning mode
@@ -42,12 +42,12 @@ typedef mp_rnd_t rnd_t;
 typedef mp_exp_t exp_t;
 typedef mp_prec_t prec_t;
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class Mpfr Mpfr.h
 /// \brief Mpfr is a wrapper class of <tt>mpfr</tt> in MPFR
 class Mpfr 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   : public RcRepImpl<Mpfr>
 #endif
 {
@@ -114,7 +114,7 @@ private:
   mpfr_t m_mp;
 };
 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
 /// \class RcMpfr Mpfr.h
 /// \brief RcMpfr is a wrapper class of <tt>Mpfr</tt> with reference counting
 class RcMpfr : public RcImpl<Mpfr> {
@@ -172,6 +172,6 @@ public:
 };
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_MPFR_H__*/
+#endif /*__CORE_TWO_MPFR_H__*/

@@ -17,11 +17,11 @@
  * $Id: linearAlgebraT.h,v 1.7 2010/06/08 19:50:31 exact Exp $
  *****************************************************************/
 
-#ifndef CORE_LINEAR_ALGEBRAT_H
-#define CORE_LINEAR_ALGEBRAT_H
+#ifndef CORE_TWO_LINEAR_ALGEBRAT_H
+#define CORE_TWO_LINEAR_ALGEBRAT_H
 
 #include <cstdarg>
-#include <CORE/CORE.h>
+#include <CORE_TWO/CORE_TWO.h>
 
 template <class T>
 class VectorT;
@@ -615,10 +615,10 @@ template <typename T> bool bareiss(MatrixT<T> *matrix, const unsigned int n_step
   const unsigned int n = matrix->dimension_1();
 
   // Initialize the pivot transformation array.
-  // NOTE : Is there an unwritten rule against using STL in CORE ?
+  // NOTE : Is there an unwritten rule against using STL in CORE_TWO ?
   // the vector< > class is better suited, that way i dont have to remember
   // to delete this array at all exit points. (Variable length arrays are
-  // also liberally used through CORE, but they are not ISO C++) .
+  // also liberally used through CORE_TWO, but they are not ISO C++) .
   unsigned int *p = new unsigned int[n];
   // Initially, p[i] = i.
   for (unsigned int i = 0; i < n; ++i) {

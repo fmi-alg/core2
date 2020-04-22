@@ -5,7 +5,7 @@
  * Author: Chee and Tom Hsu (2016)
  *
  *****************************************************************
- * CORE Library Version 2.1 (Feb 2016)
+ * CORE_TWO Library Version 2.1 (Feb 2016)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Tom Hsu <chhsu@cs.nyu.edu>
  *
@@ -18,8 +18,8 @@
  *****************************************************************/
 
 
-#include <CORE/geom2d/point2d.h>
-#include <CORE/geom2d/segment2d.h>
-#include <CORE/geom2d/circle2d.h>
+#include <CORE_TWO/geom2d/point2d.h>
+#include <CORE_TWO/geom2d/segment2d.h>
+#include <CORE_TWO/geom2d/circle2d.h>
 
 // To be filled!!

@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -22,13 +22,13 @@
 #ifndef _POINT2D_H
 #define _POINT2D_H
 
-#ifndef CORE_LEVEL
-#  define CORE_LEVEL 3
+#ifndef CORE_TWO_LEVEL
+#  define CORE_TWO_LEVEL 3
 #endif
 
-#include <CORE/CORE.h>
-#include <CORE/linearAlgebra.h>
-#include <CORE/geombase.h>
+#include <CORE_TWO/CORE_TWO.h>
+#include <CORE_TWO/linearAlgebra.h>
+#include <CORE_TWO/geombase.h>
 
 class Point2d : public GeomObj {
 

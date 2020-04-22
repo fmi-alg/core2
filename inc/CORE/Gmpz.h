@@ -21,22 +21,22 @@
  *
  * $Id: Gmpz.h,v 1.7 2006/03/03 17:19:58 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_GMPZ_H__
-#define __CORE_GMPZ_H__
+#ifndef __CORE_TWO_GMPZ_H__
+#define __CORE_TWO_GMPZ_H__
 
 #include <gmp.h>
-#include <CORE/Config.h>
+#include <CORE_TWO/Config.h>
 
-#ifndef CORE_DISABLE_REFCOUNTING
-  #include <CORE/RefCounting.h>
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
+  #include <CORE_TWO/RefCounting.h>
 #endif
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class Gmpz Gmpz.h
 /// \brief Gmpz is a wrapper class of <tt>mpz</tt> in GMP
 class Gmpz 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   : public RcRepImpl<Gmpz>
 #endif
 {
@@ -83,7 +83,7 @@ private:
   mpz_t m_mp;
 };
 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
 /// \class RcGmpz Gmpz.h
 /// \brief RcGmpz is a wrapper class of <tt>Gmpz</tt> with reference counting
 class RcGmpz : public RcImpl<Gmpz> {
@@ -122,6 +122,6 @@ public:
 };
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_GMPZ_H__*/
+#endif /*__CORE_TWO_GMPZ_H__*/

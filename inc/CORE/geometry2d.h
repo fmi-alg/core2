@@ -15,33 +15,33 @@
  * $Id: geometry2d.h,v 1.1 2006/04/03 18:55:31 exact Exp $
  *****************************************************************/
 
-#ifndef CORE_GEOMETRY2D_H
-#define CORE_GEOMETRY2D_H
+#ifndef CORE_TWO_GEOMETRY2D_H
+#define CORE_TWO_GEOMETRY2D_H
 
-#ifndef CORE_LEVEL
-#  define CORE_LEVEL 3
+#ifndef CORE_TWO_LEVEL
+#  define CORE_TWO_LEVEL 3
 #endif
 
-#include <CORE/geom2d/point2d.h>
-#include "CORE/geom2d/line2d.h"
-#include "CORE/geom2d/circle2d.h"
-#include "CORE/geom2d/segment2d.h"
+#include <CORE_TWO/geom2d/point2d.h>
+#include "CORE_TWO/geom2d/line2d.h"
+#include "CORE_TWO/geom2d/circle2d.h"
+#include "CORE_TWO/geom2d/segment2d.h"
 
 // automaticall link necessary static library under visual c++
 #ifdef _MSC_VER
-	#if CORE_LEVEL == 1
+	#if CORE_TWO_LEVEL == 1
 		#ifdef _DEBUG
 			#pragma comment(lib, "corexDebug_level1.lib")
 		#else
 			#pragma comment(lib, "corex_level1.lib")
 		#endif
-	#elif CORE_LEVEL == 2
+	#elif CORE_TWO_LEVEL == 2
 		#ifdef _DEBUG
 			#pragma comment(lib, "corexDebug_level2.lib")
 		#else
 			#pragma comment(lib, "corex_level2.lib")
 		#endif
-	#elif CORE_LEVEL == 3
+	#elif CORE_TWO_LEVEL == 3
 		#ifdef _DEBUG
 			#pragma comment(lib, "corexDebug_level3.lib")
 		#else

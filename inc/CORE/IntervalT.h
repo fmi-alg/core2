@@ -27,10 +27,10 @@
  * Email: exact@cs.nyu.edu
  *****************************************************************/
 
-#ifndef CORE_LINEAR_INTERVALT_H
-#define CORE_LINEAR_INTERVALT_H
+#ifndef CORE_TWO_LINEAR_INTERVALT_H
+#define CORE_TWO_LINEAR_INTERVALT_H
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // This inclusion removed:
 // 	Instead, Curves.h should include IntervalT.h
@@ -46,7 +46,7 @@ namespace interval_ext {
 }
 
 // A class that defines an interval. Another option
-// to this class is to use the BigFloat2 class from CORE
+// to this class is to use the BigFloat2 class from CORE_TWO
 // but the issue there is that we are constrained to
 // operating at Level 2 (BigFloat) , this class can be
 // used at machine precision too, or at Level 3 if required.
@@ -231,7 +231,7 @@ public:
 
   // Used for intervals of infinite width. This whole business of
   // representing infinity in this way is rather crude, and might
-  // cause trouble. (CORE_posInfty = std::numeric_limits<unsigned long>::max).
+  // cause trouble. (CORE_TWO_posInfty = std::numeric_limits<unsigned long>::max).
   static const NT I_POS_INFTY;
   static const NT I_NEG_INFTY;
  private:
@@ -240,8 +240,8 @@ public:
   NT right_;
 };
 
-template <typename NT> const NT IntervalT<NT>::I_POS_INFTY = CORE_posInfty;
-template <typename NT> const NT IntervalT<NT>::I_NEG_INFTY = CORE_negInfty;
+template <typename NT> const NT IntervalT<NT>::I_POS_INFTY = CORE_TWO_posInfty;
+template <typename NT> const NT IntervalT<NT>::I_NEG_INFTY = CORE_TWO_negInfty;
 
 
 template <typename NT>
@@ -460,7 +460,7 @@ inline void Divide(const IntervalT<NT> &a,
 }  // end namespace interval_ext
 
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
 #endif
 

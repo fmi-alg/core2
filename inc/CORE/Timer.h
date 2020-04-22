@@ -21,16 +21,16 @@
  *
  * $Id: Timer.h,v 1.7 2010/11/23 17:58:37 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_TIMER_H__
-#define __CORE_TIMER_H__
+#ifndef __CORE_TWO_TIMER_H__
+#define __CORE_TWO_TIMER_H__
 
-#include <CORE/Config.h>
+#include <CORE_TWO/Config.h>
 #include <ctime>
 #ifndef _MSC_VER
 #include <sys/resource.h>
 #endif
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class Timer Timer.h
 /// \brief a timer using clock() function, return in seconds, less precise
@@ -78,6 +78,6 @@ private:
   }
 };
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_TIMER_H__*/
+#endif /*__CORE_TWO_TIMER_H__*/

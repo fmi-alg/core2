@@ -9,7 +9,7 @@
  *    Generation of random and special point sets
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -22,8 +22,8 @@
  * $Id: point2d.cpp,v 1.1 2006/04/03 18:55:31 exact Exp $
  *****************************************************************/
 
-#include "CORE/CORE.h"
-#include "CORE/geom2d/point2d.h"
+#include "CORE_TWO/CORE_TWO.h"
+#include "CORE_TWO/geom2d/point2d.h"
 
 // returns the midpoint between a and b
 Point2d midPoint(const Point2d& a, const Point2d& b)
@@ -147,7 +147,7 @@ std::istream& operator>>(std::istream& in, Point2d& p)
 	// where the white spaces, "(", "," and ")" are all optional.
 	// but no other non-white chars may be used.  
 {
-  double x, y;  // CORE disallow in >> double????
+  double x, y;  // CORE_TWO disallow in >> double????
   char c;
   // char buf[256];
 

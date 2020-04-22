@@ -523,7 +523,7 @@ inline std::istream& operator>>(std::istream& is, BigFloat& x)
   // this is hack.
   // Users should not call this operator with infinity input digits
   // Bigrat number type must be used instead.
-  if(getDefaultInputDigits() == CORE_INFTY) {
+  if(getDefaultInputDigits() == CORE_TWO_INFTY) {
     x.set_prec(52); // default double precision
   } else {
     x.set_prec(digits2bits(getDefaultInputDigits()));
@@ -724,7 +724,7 @@ inline BigFloat log10(const BigFloat& a, prec_t prec, rnd_t rnd = MPFR_RND) {
 
 //@}
 
-#ifndef CORE_DISABLE_OLDNAMES 
+#ifndef CORE_TWO_DISABLE_OLDNAMES 
 /// \addtogroup BigFloatBackCompatiableFunctions
 //@{
 /// comparison

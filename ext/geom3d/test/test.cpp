@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -19,7 +19,7 @@
  *****************************************************************/
 
 
-#include "CORE.h"
+#include "CORE_TWO.h"
 
 #include "geometry3d.h"
 #include <iostream.h>

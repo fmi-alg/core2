@@ -21,14 +21,14 @@
  *
  * $Id: Filters.h,v 1.11 2010/11/23 17:58:37 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_FILTERS_H__
-#define __CORE_FILTERS_H__
+#ifndef __CORE_TWO_FILTERS_H__
+#define __CORE_TWO_FILTERS_H__
 
 #include <iostream>
 
 #include <cmath>
 #include <cfloat>
-#include <CORE/BigFloat2.h>
+#include <CORE_TWO/BigFloat2.h>
 
 #if defined (_MSC_VER) || defined (__MINGW32__) // add support for MinGW
   #define finite(x)	_finite(x)
@@ -39,14 +39,14 @@
   #include <ieeefp.h>
 #endif
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class DummyFilter
 /// \brief a dummy filter, do nothing
 class DummyFilter {
   typedef DummyFilter thisClass;
 public:
-#ifdef CORE_DEBUG_FILTER
+#ifdef CORE_TWO_DEBUG_FILTER
   void dump() const {}
 #endif
   bool is_ok() const { return false; }
@@ -81,7 +81,7 @@ inline bool setFpFilterFlag(bool f) {
 // constants
 const int IEEE_DOUBLE_PREC = 52;
 const double DBL_INFTY = ::ldexp(DBL_MAX, 1);
-const double CORE_EPS = ::ldexp(1.0, -IEEE_DOUBLE_PREC);
+const double CORE_TWO_EPS = ::ldexp(1.0, -IEEE_DOUBLE_PREC);
 
 // k-th root for double (using BigFloat for now)
 inline double root(double x, unsigned long k) 
@@ -113,7 +113,7 @@ class BfsFilter {
   typedef typename Kernel::FT FT;
 private:
   void compute_cache () {
-    double Val = maxAbs*ind*CORE_EPS;
+    double Val = maxAbs*ind*CORE_TWO_EPS;
   //  Sep'14, Chee: finite(fpVal) is deprecated on MacOS! 
   //  	so must use isfinite(fpVal)
   //  Furthermore, there is a error of this nature:
@@ -134,7 +134,7 @@ private:
 public:
   BfsFilter()
   { _isok = false; }
-#ifdef CORE_DEBUG_FILTER
+#ifdef CORE_TWO_DEBUG_FILTER
   void dump() const 
   { std::cerr<<"[fpVal,maxAbs,ind]="<<fpVal<<","<<maxAbs<<","<<ind<<std::endl; }
 #endif
@@ -231,11 +231,11 @@ public:
   // TODO: root() function for double, using newton ??
   void root(const thisClass& child, unsigned long k) {
     if (child.fpVal > 0.0) {
-      fpVal = CORE_NS::root(child.fpVal, k); 
+      fpVal = CORE_TWO_NS::root(child.fpVal, k); 
       maxAbs = child.maxAbs / child.fpVal * fpVal;
     } else {
       fpVal = 0.0; 
-      maxAbs = ::ldexp(CORE_NS::root(child.maxAbs, k), (IEEE_DOUBLE_PREC+k-1)/k);
+      maxAbs = ::ldexp(CORE_TWO_NS::root(child.maxAbs, k), (IEEE_DOUBLE_PREC+k-1)/k);
     }
     ind = 1 + child.ind;
     compute_cache();
@@ -259,7 +259,7 @@ public:
 
   // division
   void div(const thisClass& f, const thisClass& s) {
-    double xxx = ::fabs(s.fpVal) / s.maxAbs - (s.ind+1)*CORE_EPS;
+    double xxx = ::fabs(s.fpVal) / s.maxAbs - (s.ind+1)*CORE_TWO_EPS;
     if (xxx > 0) {
       fpVal = f.fpVal / s.fpVal;
       maxAbs = (::fabs(f.fpVal)/::fabs(s.fpVal)+f.maxAbs/s.maxAbs)/xxx+DBL_MIN;
@@ -273,6 +273,6 @@ public:
   }
 };
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_FILTERS_H__*/
+#endif /*__CORE_TWO_FILTERS_H__*/

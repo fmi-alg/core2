@@ -21,23 +21,23 @@
  *
  * $Id: PolyBase.h,v 1.9 2010/11/23 18:00:52 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_POLYBASE_H__
-#define __CORE_POLYBASE_H__
+#ifndef __CORE_TWO_POLYBASE_H__
+#define __CORE_TWO_POLYBASE_H__
 
-#include <CORE/Config.h>
+#include <CORE_TWO/Config.h>
 #include <vector>
 
-#ifndef CORE_DISABLE_REFCOUNTING
-  #include <CORE/RefCounting.h>
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
+  #include <CORE_TWO/RefCounting.h>
 #endif
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class PolyBase PolyBase.h
 /// \brief PolyBase is the base class of polynomial class
 template <typename NT>
 class PolyBase
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   : public RcRepImpl<PolyBase<NT> >
 #endif
 {
@@ -154,7 +154,7 @@ private:
   NT* _coeff;
 };
 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
 /// \class RcPolyBase PolyBase.h
 /// \brief RcPolyBase is the base class of polynomial class 
 ///        with reference counting
@@ -203,6 +203,6 @@ protected:
 };
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_POLYBASE_H__*/
+#endif /*__CORE_TWO_POLYBASE_H__*/

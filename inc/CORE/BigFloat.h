@@ -21,13 +21,13 @@
  *
  * $Id: BigFloat.h,v 1.49 2010/11/23 17:58:36 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_BIGFLOAT_H__
-#define __CORE_BIGFLOAT_H__
+#ifndef __CORE_TWO_BIGFLOAT_H__
+#define __CORE_TWO_BIGFLOAT_H__
 
-#include <CORE/Mpfr.h>
-#include <CORE/CoreIO.h>
-#include <CORE/BigRat.h>
-#include <CORE/Wrappers.h>
+#include <CORE_TWO/Mpfr.h>
+#include <CORE_TWO/CoreIO.h>
+#include <CORE_TWO/BigRat.h>
+#include <CORE_TWO/Wrappers.h>
 #include <string>
 #include <cstring>
 #include <iostream>
@@ -65,14 +65,14 @@ std::istream& operator>> (std::istream &, mpfr_ptr);
 /* convert mpfr to string using specified ndigits, base, fmt, rnd, etc.*/
 std::string mpfr2str(mpfr_srcptr, size_t, int, int, rnd_t, bool, bool, bool);
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // constant of default precision for integer, IEEE single and double
 const size_t INT_PREC = sizeof(int)*8;
 const size_t SINGLE_PREC = 24;
 const size_t DOUBLE_PREC = 53;
  
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   typedef RcMpfr BigFloatBase;
 #else
   typedef Mpfr BigFloatBase;
@@ -117,7 +117,7 @@ public:
   BigFloat(const BigRat& x, rnd_t rnd = MPFR_RND)
     : base_cls(x.mp(), (std::max)(count_prec(x), (prec_t)32), rnd) {}
 
-#ifndef CORE_LEVEL_1_NO_WRAPPERS  
+#ifndef CORE_TWO_LEVEL_1_NO_WRAPPERS  
 BigFloat(const DoubleWrapper &wrap, rnd_t rnd = MPFR_RND)
  	: base_cls(wrap.doubleValue(), DOUBLE_PREC, rnd) {
   }
@@ -1752,11 +1752,11 @@ public:
   void nextbelow() 
   { mpfr_nextbelow(mp()); }
 
-#define CORE_PREVENT_MACRO_SUBSTITUTION
+#define CORE_TWO_PREVENT_MACRO_SUBSTITUTION
 
-  void min CORE_PREVENT_MACRO_SUBSTITUTION (const BigFloat& x, const BigFloat& y, rnd_t rnd = MPFR_RND)
+  void min CORE_TWO_PREVENT_MACRO_SUBSTITUTION (const BigFloat& x, const BigFloat& y, rnd_t rnd = MPFR_RND)
   { mpfr_min(mp(), x.mp(), y.mp(), rnd); }
-  void max CORE_PREVENT_MACRO_SUBSTITUTION (const BigFloat& x, const BigFloat& y, rnd_t rnd = MPFR_RND)
+  void max CORE_TWO_PREVENT_MACRO_SUBSTITUTION (const BigFloat& x, const BigFloat& y, rnd_t rnd = MPFR_RND)
   { mpfr_max(mp(), x.mp(), y.mp(), rnd); }
   //@}
 
@@ -2034,7 +2034,7 @@ public: // C++ operators
 public:
 
   operator BigRat() const { return get_q(); }
-#ifndef CORE_DISABLE_OLDNAMES
+#ifndef CORE_TWO_DISABLE_OLDNAMES
   /// \name back-compatiable functions
   //@{ 
   /// Has Exact Division
@@ -2065,8 +2065,8 @@ public:
 
  
 
-#include <CORE/BigFloat.inl>
+#include <CORE_TWO/BigFloat.inl>
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_BIGFLOAT_H__*/
+#endif /*__CORE_TWO_BIGFLOAT_H__*/

@@ -1,13 +1,13 @@
-#ifndef __CORE_POLYFUN_H__
-#define __CORE_POLYFUN_H__
+#ifndef __CORE_TWO_POLYFUN_H__
+#define __CORE_TWO_POLYFUN_H__
 
-//#include <CORE/poly/Poly.h>
-//#include <CORE/BigFloat.h>
-//#include <CORE/Expr.h>
-#include <CORE/Promote.h>
-#include <CORE/CoreAux.h>
+//#include <CORE_TWO/poly/Poly.h>
+//#include <CORE_TWO/BigFloat.h>
+//#include <CORE_TWO/Expr.h>
+#include <CORE_TWO/Promote.h>
+#include <CORE_TWO/CoreAux.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 typedef long extLong;
 
 /// Various forms of evaluation.
@@ -124,7 +124,7 @@ BigFloat2 evalExactSign(Polynomial<NT> &p, const BigFloat& val,
     BigFloat2 rVal = evalApprox(p, val, r);
     if (rVal.isZeroIn()) {
       Expr eVal = eval(p, Expr(val));	// eval gives exact value
-      return ToBigFloat2(eVal, 54, CORE_INFTY);
+      return ToBigFloat2(eVal, 54, CORE_TWO_INFTY);
     } else 
       return rVal;
   } else {
@@ -148,7 +148,7 @@ BigFloat CauchyUpperBound(const Polynomial<NT> &p) {
   }
   Expr e = mx;
   e /= Expr(abs(p.coeff()[deg]));
-  e.approx(CORE_INFTY, 2);
+  e.approx(CORE_TWO_INFTY, 2);
   // get an absolute approximate value with error < 1/4
   return (e.BigFloatValue() + 2);
 }
@@ -191,6 +191,6 @@ moebiusTransform (const Polynomial<BigFloat>& _poly,
 }
 
 //@}
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_POLYFUN_H__*/
+#endif /*__CORE_TWO_POLYFUN_H__*/

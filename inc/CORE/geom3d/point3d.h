@@ -6,7 +6,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -22,9 +22,9 @@
 #ifndef _POINT3D_H
 #define _POINT3D_H
 
-#include <CORE/CORE.h>
-#include <CORE/linearAlgebra.h>
-#include <CORE/geombase.h>
+#include <CORE_TWO/CORE_TWO.h>
+#include <CORE_TWO/linearAlgebra.h>
+#include <CORE_TWO/geombase.h>
 
  // class defination for 3d points
 class Point3d : public GeomObj{

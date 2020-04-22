@@ -1,4 +1,4 @@
-#include "CORE.h"
+#include "CORE_TWO.h"
 
 #include "geometry3d.h"
 #include <iostream.h>
@@ -35,7 +35,7 @@ else
 cout << "T1.toPlane().apply(T2.V1()) = " << result << endl;
 cout << setprecision(50)
 	<< "T2.toPlane().apply( T1.V2()) = "
-	<< result2.approx(1000, CORE_INFTY) << endl;
+	<< result2.approx(1000, CORE_TWO_INFTY) << endl;
 
 cout << "T2.toPlane().contains( Segment3d( T1.V1(), T1.V2() ))? " ;
 

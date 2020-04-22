@@ -21,10 +21,10 @@
  *
  * $Id: Policies.h,v 1.10 2010/05/06 20:49:30 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_POLICIES_H__
-#define __CORE_POLICIES_H__
+#ifndef __CORE_TWO_POLICIES_H__
+#define __CORE_TWO_POLICIES_H__
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // raw version (user need to set precision for result before call)
 template <typename T, typename TL = T, typename TR = T>
@@ -165,6 +165,6 @@ struct AutoArithmeticPolicy {
   { return z.mul(x, y, rnd) == 0; }
 };
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_POLICIES_H__*/
+#endif /*__CORE_TWO_POLICIES_H__*/

@@ -1,16 +1,16 @@
-#ifndef __CORE_POLY_H__
-#define __CORE_POLY_H__
+#ifndef __CORE_TWO_POLY_H__
+#define __CORE_TWO_POLY_H__
 
-#include <CORE/Expr.h>
-#include <CORE/poly/PolyBase.h>
+#include <CORE_TWO/Expr.h>
+#include <CORE_TWO/poly/PolyBase.h>
 #include <string>
 #include <iostream>
 
 // NOTE: This IntervalT.h is  used in evalH and evalCF method(see below)
 //	Vikram, Sept. 2012
-#include "CORE/IntervalT.h"
+#include "CORE_TWO/IntervalT.h"
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class Polynomial Poly.h
 /// \brief A template polynomial class
@@ -67,13 +67,13 @@ inline void strToNT(const char* input, double& output) {
 
 template <typename NT>
 class Polynomial : public 
-#ifndef CORE_DISABLE_REFCOUNTING 
+#ifndef CORE_TWO_DISABLE_REFCOUNTING 
 PolyBase<NT> 
 #else
 RcPolyBase<NT> 		// reference count version
 #endif
 {
-#ifndef CORE_DISABLE_REFCOUNTING 
+#ifndef CORE_TWO_DISABLE_REFCOUNTING 
 typedef PolyBase<NT> base_cls;
 #else
 typedef RcPolyBase<NT> base_cls; // reference count version
@@ -1858,8 +1858,8 @@ BigFloat sepBound(Polynomial<NT> &p) {
   BigFloat e;
   int deg = p.getTrueDegree();
 
-  CORE::pow(d, BigInt(deg), ((deg)+4)/2);
-  e = CORE::power(height(p).getRight()+1, deg);
+  CORE_TWO::pow(d, BigInt(deg), ((deg)+4)/2);
+  e = CORE_TWO::power(height(p).getRight()+1, deg);
 
   return (BigFloat2(1)/(e*2*d)).getLeft();
         // BUG fix: ``return 1/e*2*d'' was wrong
@@ -1943,7 +1943,7 @@ BigFloat sepBound(Polynomial<NT> &p) {
   bool smaleBoundTest(Polynomial<NT> _poly, Polynomial<NT> _poly_derivative, const BigFloat& z){
     //assert(z.isExact());   // the bound only makes sense for exact z
 
-#ifdef CORE_DEBUG_ROOTBOUND
+#ifdef CORE_TWO_DEBUG_ROOTBOUND
     std::cout <<"Computing Smale's bound = " <<  std::endl;
 #endif
     if(evalExactSign(_poly, z).sgn() == 0)// Reached the exact root.
@@ -2054,6 +2054,6 @@ int signVariationofCoeff(const Polynomial<NT> p) {
 }
 
 //@}
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_POLY_H__*/
+#endif /*__CORE_TWO_POLY_H__*/

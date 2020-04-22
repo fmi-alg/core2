@@ -21,10 +21,10 @@
  *
  * $Id: BigInt.h,v 1.18 2010/11/23 17:58:36 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_BIGINT_H__
-#define __CORE_BIGINT_H__
+#ifndef __CORE_TWO_BIGINT_H__
+#define __CORE_TWO_BIGINT_H__
 
-#include <CORE/Gmpz.h>
+#include <CORE_TWO/Gmpz.h>
 #include <string>
 #include <iostream>
 #include <limits>
@@ -32,7 +32,7 @@
 
 extern std::istream& extract(std::istream &i, mpz_ptr z);
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /* _gmp_alloc_cstr */
 struct _gmp_alloc_cstr {
@@ -41,7 +41,7 @@ struct _gmp_alloc_cstr {
   ~_gmp_alloc_cstr() { delete[] str; }
 };
 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   typedef RcGmpz BigIntBase;
 #else
   typedef Gmpz BigIntBase;
@@ -699,7 +699,7 @@ public: // C++ operators
   { div_2exp(*this, ul); return *this; }
   //@}
 
-#ifndef CORE_DISABLE_OLDNAMES
+#ifndef CORE_TWO_DISABLE_OLDNAMES
   /// \name back-compatiable functions
   //@{
   /// Has Exact Division
@@ -1183,7 +1183,7 @@ inline BigInt randomize(const BigInt& a)
 { BigInt r; mpz_urandomm(r.mp(), *getRandstate(), a.mp()); return r; }
 //@}
 
-#ifndef CORE_DISABLE_OLDNAMES 
+#ifndef CORE_TWO_DISABLE_OLDNAMES 
 /// \addtogroup BigIntBackCompatiableFunctions
 //@{
 /// comparison
@@ -1284,6 +1284,6 @@ inline long ceillg(const BigInt& a) { return a.ceillg(); }
 //@}
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_BIGINT_H__*/
+#endif /*__CORE_TWO_BIGINT_H__*/

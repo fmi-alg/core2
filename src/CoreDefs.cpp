@@ -21,11 +21,11 @@
  *
  * $Id: CoreDefs.cpp,v 1.14 2010/05/18 10:56:03 exact Exp $
  ***************************************************************************/
-#include <CORE/Config.h>
-#include <CORE/CoreDefs.h>
-#include <CORE/Mpfr.h>
+#include <CORE_TWO/Config.h>
+#include <CORE_TWO/CoreDefs.h>
+#include <CORE_TWO/Mpfr.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// Floating point filter flag
 bool fpFilterFlag = true;
@@ -37,15 +37,15 @@ int def_output_base = 0;
 
 /// "defAbsPrec" and "defRelPrec" work together, to determine
 ///  the precision to which we approximate a value.
-///  Normally, one of them should be set to CORE_INFTY.
+///  Normally, one of them should be set to CORE_TWO_INFTY.
 /// "defInputDigits" determine the accuracy to convert an input
 ///  constant into an internal representation.   E.g., 1/3 cannot
 ///  be exactly represented, but defInputDigits tells how accurate
 ///  the internal representation should be.  If "defInputDigits" is
 ///  Infinity, then 1/3 would be represented by a BigRat.
-long defAbsPrec = CORE_INFTY;
+long defAbsPrec = CORE_TWO_INFTY;
 long defRelPrec = 52;
-long defInputDigits = CORE_INFTY;
+long defInputDigits = CORE_TWO_INFTY;
 
 /// defBFdivRelPrec is the default rel.precision for BigFloat division
 long defBFdivRelPrec = 54;
@@ -57,7 +57,7 @@ bool WBFenabled = false;
 
 /// cutOffBound is a arbitrary maximum on the rootbound, used
 /// to speed up computation at the expense of accuracy.
-unsigned long cutOffBound = CORE_INFTY;
+unsigned long cutOffBound = CORE_TWO_INFTY;
 // used as transcendental number root bound
 unsigned long escapeBound = 10000;
 
@@ -134,4 +134,4 @@ return i;
 // End core Environment code
 
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE

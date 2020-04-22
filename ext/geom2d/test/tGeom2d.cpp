@@ -1,5 +1,5 @@
-#include "CORE/CORE.h"
-#include "CORE/geometry2d.h"
+#include "CORE_TWO/CORE_TWO.h"
+#include "CORE_TWO/geometry2d.h"
 using namespace std;
 
 int main(){

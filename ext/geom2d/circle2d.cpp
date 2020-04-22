@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -19,8 +19,8 @@
  *****************************************************************/
 
 
-#include <CORE/geom2d/point2d.h>
-#include <CORE/geom2d/circle2d.h>
+#include <CORE_TWO/geom2d/point2d.h>
+#include <CORE_TWO/geom2d/circle2d.h>
 
 Circle2d::Circle2d(const Point2d& P1, const Point2d& P2, const Point2d& P3)   
     : p1(P1), p2(P2), p3(P3), cp(0), rp(0)

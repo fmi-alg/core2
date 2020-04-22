@@ -3,9 +3,9 @@
  * Copyright (c) 1995-2004 Exact Computation Project
  * All rights reserved.
  *
- * This file is part of CORE (http://cs.nyu.edu/exact/core/); you may
+ * This file is part of CORE_TWO (http://cs.nyu.edu/exact/core/); you may
  * redistribute it under the terms of the Q Public License version 1.0.
- * See the file LICENSE.QPL distributed with CORE.
+ * See the file LICENSE.QPL distributed with CORE_TWO.
  *
  * Licensees holding a valid commercial license may use this file in
  * accordance with the commercial license agreement provided with the
@@ -30,16 +30,16 @@
  ***************************************************************************/
 
 
-#ifndef __CORE_COREIO_H__
-#define __CORE_COREIO_H__
+#ifndef __CORE_TWO_CORE_TWOIO_H__
+#define __CORE_TWO_CORE_TWOIO_H__
 
-#include <CORE/Config.h>
-#include <CORE/CoreDefs.h>
-#include <CORE/CoreAux.h>
+#include <CORE_TWO/Config.h>
+#include <CORE_TWO/CoreDefs.h>
+#include <CORE_TWO/CoreAux.h>
 #include <iostream>
 #include <iomanip>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 extern rnd_t def_output_rounding_mode;
 extern int def_output_base;
@@ -153,7 +153,7 @@ inline void hide_pos(std::ostream& os = std::cout)
 inline void set_output_showpos(bool showpos, std::ostream& os = std::cout) 
 { if (showpos) show_pos(os); else hide_pos(os); }
 
-#ifndef CORE_DISABLE_OLDNAMES
+#ifndef CORE_TWO_DISABLE_OLDNAMES
 inline void setPositionalFormat(std::ostream& os = std::cout)
 { set_fixed_output(os); }
 inline void setScientificFormat(std::ostream& os = std::cout)
@@ -164,8 +164,8 @@ inline void setDefaultOutputDigits(long p, std::ostream& o = std::cout)
 /// and the precision for internal computation to the same precision in digits.
 inline void set_def_output_and_computing_digits(long p, std::ostream& o = std::cout)
 {
-  if (p == CORE_INFTY) { // this really should not happen...
-    core_error("DefOutputDigits cannot be CORE_INFTY", __FILE__, __LINE__, false);
+  if (p == CORE_TWO_INFTY) { // this really should not happen...
+    core_error("DefOutputDigits cannot be CORE_TWO_INFTY", __FILE__, __LINE__, false);
     p = bits2digits(defRelPrec);
   }
   setDefaultOutputDigits(p, o);
@@ -175,6 +175,6 @@ inline long getDefaultOutputDigits()
 { return get_output_precision(); }
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_COREIO_H__*/
+#endif /*__CORE_TWO_CORE_TWOIO_H__*/

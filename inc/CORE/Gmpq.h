@@ -21,22 +21,22 @@
  *
  * $Id: Gmpq.h,v 1.6 2006/03/03 17:19:58 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_GMPQ_H__
-#define __CORE_GMPQ_H__
+#ifndef __CORE_TWO_GMPQ_H__
+#define __CORE_TWO_GMPQ_H__
 
 #include <gmp.h>
-#include <CORE/Config.h>
+#include <CORE_TWO/Config.h>
 
-#ifndef CORE_DISABLE_REFCOUNTING
-  #include <CORE/RefCounting.h>
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
+  #include <CORE_TWO/RefCounting.h>
 #endif
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class Gmpq Gmpq.h
 /// \brief Gmpq is a wrapper class of <tt>mpq</tt> in GMP
 class Gmpq 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
   : public RcRepImpl<Gmpq>
 #endif
 {
@@ -95,7 +95,7 @@ private:
   mpq_t m_mp;
 };
 
-#ifndef CORE_DISABLE_REFCOUNTING
+#ifndef CORE_TWO_DISABLE_REFCOUNTING
 /// \class RcGmpq Gmpq.h
 /// \brief RcGmpq is a wrapper class of <tt>Gmpq</tt> with reference counting
 class RcGmpq : public RcImpl<Gmpq> {
@@ -140,6 +140,6 @@ public:
 };
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_GMPQ_H__*/
+#endif /*__CORE_TWO_GMPQ_H__*/

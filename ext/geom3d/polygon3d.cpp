@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -18,7 +18,7 @@
  * $Id: polygon3d.cpp,v 1.1 2006/04/03 18:55:31 exact Exp $
  *****************************************************************/
 
-#include <CORE/geom3d/polygon3d.h>
+#include <CORE_TWO/geom3d/polygon3d.h>
 
 /************************************************************
   *   constructors

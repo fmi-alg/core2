@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -21,8 +21,8 @@
 #ifndef _SEGMENT3D_H_
 #define _SEGMENT3D_H_
 
-#include <CORE/geom3d/point3d.h>
-#include <CORE/geom3d/line3d.h>
+#include <CORE_TWO/geom3d/point3d.h>
+#include <CORE_TWO/geom3d/line3d.h>
 
 /************************************************************
  *  Class Segment3d:

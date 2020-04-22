@@ -26,23 +26,23 @@
  *
  * $Id: CoreAux.h,v 1.31 2010/11/23 17:58:36 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_COREAUX_H__
-#define __CORE_COREAUX_H__
+#ifndef __CORE_TWO_CORE_TWOAUX_H__
+#define __CORE_TWO_CORE_TWOAUX_H__
 
 #include <cmath>
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
 
-#include <CORE/BigRat.h>
+#include <CORE_TWO/BigRat.h>
 
 #ifdef _MSC_VER
 #include <float.h>
 #define ilogb(x) (int)_logb(x)
 #endif
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
-/// Writes out an error or warning message in the local file CORE_DIAGFILE
+/// Writes out an error or warning message in the local file CORE_TWO_DIAGFILE
 /** If last argument (err) is TRUE, then this is considered an error
  *  (not just warning).  In this case, the message is also printed in
  *  std::cerr, using std::perror().  We also print coreErrorMsg.
@@ -427,7 +427,7 @@ inline bool isCompatible(std::string s_1,std::string s_2) {
 }
 
 
-#ifdef CORE_OLDNAMES 
+#ifdef CORE_TWO_OLDNAMES 
 /// \addtogroup GlobalBackCompatiableFunctions
 //@{
 inline long ceilLg(long a) { return ceilLg(BigInt(a)); }
@@ -435,6 +435,6 @@ inline long ceilLg(int a) { return ceilLg(BigInt(a)); }
 //@}
 #endif
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_COREAUX_H__*/
+#endif /*__CORE_TWO_CORE_TWOAUX_H__*/

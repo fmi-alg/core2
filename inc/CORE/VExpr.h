@@ -21,12 +21,12 @@
  *
  * $Id: VExpr.h,v 1.1 2010/01/14 13:53:50 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_EXPR_H__
-#define __CORE_EXPR_H__
+#ifndef __CORE_TWO_EXPR_H__
+#define __CORE_TWO_EXPR_H__
 
-#include <CORE/VExprRep.h>
+#include <CORE_TWO/VExprRep.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// \class ExprT
 /// Kernel -- internal representation 
@@ -58,16 +58,16 @@ public:
   VExprRep* m_rep; ///<- internal representation
 }; // end if ExprT
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
 ///////////////////////////////////////////////////////////////////////////
 // Definition of VExpr
 ///////////////////////////////////////////////////////////////////////////
 
-#include <CORE/RootBounds.h>
-#include <CORE/Filters.h>
+#include <CORE_TWO/RootBounds.h>
+#include <CORE_TWO/Filters.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 // BFMSS-Kary root bound + BFS filter + BigFloat2
 typedef VExprT<BfmsskRootBd_BigFloat<BigFloat2>, BfsFilter<BigFloat2>, BigFloat2> VExpr;
@@ -82,5 +82,5 @@ typedef VExprT<BfmssRootBd<BigFloat2>, BfsFilter<BigFloat2>, BigFloat2> VExpr_ol
 //typedef ExprT<BfmssRootBd<BigFloat2>, DummyRootBd<10>, BigFloat> Expr;
 
 
-CORE_END_NAMESPACE
-#endif // __CORE_EXPR_H__
+CORE_TWO_END_NAMESPACE
+#endif // __CORE_TWO_EXPR_H__

@@ -21,12 +21,12 @@
  *
  * $Id: Promote.h,v 1.8 2010/09/23 20:06:22 exact Exp $
  ***************************************************************************/
-#ifndef __CORE_PROMOTE_H__
-#define __CORE_PROMOTE_H__
+#ifndef __CORE_TWO_PROMOTE_H__
+#define __CORE_TWO_PROMOTE_H__
 
-#include <CORE/Config.h>
+#include <CORE_TWO/Config.h>
 
-CORE_BEGIN_NAMESPACE
+CORE_TWO_BEGIN_NAMESPACE
 
 /// hasExactDivision()
 ///   CHECKING if NT has exact division
@@ -156,7 +156,7 @@ class Promotion<T, T> {
  *	long, unsigned long, 
  *	float, double
  *
- * CORE types: (5)
+ * CORE_TWO types: (5)
  *
  * 	BigInt < BigFloat < BigRat < Real < Expr
  *
@@ -187,6 +187,6 @@ DEFINE_MAX_TYPE(BigFloat, Expr, Expr)
 
 DEFINE_MAX_TYPE(BigRat, Expr, Expr)
 
-CORE_END_NAMESPACE
+CORE_TWO_END_NAMESPACE
 
-#endif /*__CORE_PROMOTE_H__*/
+#endif /*__CORE_TWO_PROMOTE_H__*/

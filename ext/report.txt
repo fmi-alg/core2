@@ -4,7 +4,7 @@
                        Shubin Zhao
                        Summer,2001
 Description
- This Geometry Library is an extension of the CORE library. The library includes 
+ This Geometry Library is an extension of the CORE_TWO library. The library includes 
 2-D and 3-D parts. The library provides basic geometry operations. It also provides
  good 2-d and 3-d intersection functions which can deal with any degeneracy cases.
  These two parts are independent that means the 3-D part is not based on 2-D. All 

@@ -5,7 +5,7 @@
  * Author: Shubin Zhao (shubinz@cs.nyu.edu), 2001.
  *
  *****************************************************************
- * CORE Library Version 1.4 (July 2001)
+ * CORE_TWO Library Version 1.4 (July 2001)
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -21,10 +21,10 @@
 #ifndef _POLYGON3D_H_
 #define _POLYGON3D_H_
 
-#include <CORE/geom3d/point3d.h>
-#include <CORE/geom3d/segment3d.h>
-#include <CORE/geom3d/plane3d.h>
-#include <CORE/geom3d/line3d.h>
+#include <CORE_TWO/geom3d/point3d.h>
+#include <CORE_TWO/geom3d/segment3d.h>
+#include <CORE_TWO/geom3d/plane3d.h>
+#include <CORE_TWO/geom3d/line3d.h>
 
 class Polygon3d : public GeomObj {
 

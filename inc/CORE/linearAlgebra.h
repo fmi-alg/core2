@@ -17,15 +17,15 @@
  * $Id: linearAlgebra.h,v 1.6 2009/02/24 21:30:13 exact Exp $
  *****************************************************************/
 
-#ifndef CORE_LINEAR_ALGEBRA_H
-#define CORE_LINEAR_ALGEBRA_H
+#ifndef CORE_TWO_LINEAR_ALGEBRA_H
+#define CORE_TWO_LINEAR_ALGEBRA_H
 
-#ifndef CORE_LEVEL
-#  define CORE_LEVEL 3
+#ifndef CORE_TWO_LEVEL
+#  define CORE_TWO_LEVEL 3
 #endif
 
 #include <cstdarg>
-#include <CORE/CORE.h>
+#include <CORE_TWO/CORE_TWO.h>
 
 class Vector;
 class Matrix;
