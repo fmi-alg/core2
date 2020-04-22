@@ -27,6 +27,7 @@
 #include <CORE/Mpfr.h>
 #include <CORE/CoreIO.h>
 #include <CORE/BigRat.h>
+#include <CORE/Wrappers.h>
 #include <string>
 #include <cstring>
 #include <iostream>
