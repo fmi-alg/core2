@@ -46,6 +46,8 @@ public:
   //@{
   /// default constructor
   BigRat() {}
+  /// default copy constructor
+  BigRat(BigRat const &) = default;
   /// constructor for <tt>int</tt>
   BigRat(int i) : base_cls(static_cast<long>(i)) {}
   /// constructor for <tt>unsigned int</tt>
