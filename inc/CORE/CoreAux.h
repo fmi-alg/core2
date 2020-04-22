@@ -31,6 +31,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <sstream>
 #include <cstdlib>
 
 #include <CORE/BigRat.h>
