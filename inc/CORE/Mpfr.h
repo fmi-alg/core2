@@ -84,6 +84,9 @@ public:
   /// constructor for <tt>mpfr_srcptr</tt> with specified precision
   explicit Mpfr(mpfr_srcptr x, prec_t prec, rnd_t rnd)
   { mpfr_init2(m_mp, prec); mpfr_set(m_mp, x, rnd); }
+  /// constructor for <tt>mpfr_srcptr</tt>
+  explicit Mpfr(mpfr_srcptr x)
+  { mpfr_init2(m_mp, mpfr_get_prec(x)); mpfr_set(m_mp, x, mpfr_get_default_rounding_mode()); }
   /// constructor for <tt>char*</tt> with specified precision
   explicit Mpfr(const char* s, int base, prec_t prec, rnd_t rnd)
   { mpfr_init2(m_mp, prec); mpfr_set_str(m_mp, s, base, rnd); }
@@ -147,6 +150,9 @@ public:
   /// constructor for <tt>mpfr_srcptr</tt>
   explicit RcMpfr(mpfr_srcptr f, prec_t prec, rnd_t rnd)
     : base_cls(new Mpfr(f, prec, rnd)) {}
+  /// constructor for <tt>mpfr_srcptr</tt>
+  explicit RcMpfr(mpfr_srcptr f)
+    : base_cls(new Mpfr(f)) {}
   /// constructor with value \f$i*2^e\f$ for <tt>long</tt>
   RcMpfr(long i, exp_t e, prec_t prec, rnd_t rnd)
     : base_cls(new Mpfr(i, e, prec, rnd)) {}

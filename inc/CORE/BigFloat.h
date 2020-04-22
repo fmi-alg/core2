@@ -92,6 +92,9 @@ public:
   BigFloat() : base_cls() {}
   /// copy constructor
   BigFloat(const BigFloat& rhs) : base_cls(rhs) {}
+  ///construct from existing mpfr value
+  BigFloat(mpfr_srcptr x)
+   : base_cls(x) {}
   /// constructor for <tt>int</tt> (use INT_PREC by default)
   BigFloat(int i, rnd_t rnd = MPFR_RND)
     : base_cls(static_cast<long>(i), INT_PREC, rnd) {}
