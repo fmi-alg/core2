@@ -376,11 +376,11 @@ class DoubleWrapper {
   static const prec_t UNUSED_PREC = 0;
   static const rnd_t UNUSED_RND = (rnd_t)0;
   /// To handle calls to "approx" for Expressions.
-  DoubleWrapper approx(prec_t arg1=UNUSED_PREC, prec_t arg2=UNUSED_PREC) {
+  DoubleWrapper approx(prec_t /*arg1=UNUSED_PREC*/, prec_t /*arg2=UNUSED_PREC*/) {
     return (*this);
   }
 
-  void pi(prec_t prec = UNUSED_PREC, rnd_t rnd = UNUSED_RND) {
+  void pi(prec_t /*prec = UNUSED_PREC*/, rnd_t /*rnd= UNUSED_RND*/) {
     // This might seem like a bit of a hack, this is taken from the GNU
     // C library header <cmath> . But its not a part of the standard, so
     // we cannot expect it to be present on all systems (and indeed it is

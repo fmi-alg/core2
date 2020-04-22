@@ -94,7 +94,7 @@ std::string mpfr2str(
   int base,         // base
   int fmt,          // format
   mp_rnd_t rnd,     // round mode
-  bool showpoint,   // show decimal point
+  bool /*showpoint*/,   // show decimal point
   bool showpos,     // show '+' sign
   bool uppercase    // show in uppercase
 ) {

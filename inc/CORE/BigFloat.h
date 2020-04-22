@@ -1672,7 +1672,7 @@ public:
   
   static const prec_t UNUSED_PREC = 0;
   /// To handle calls to "approx" for Expressions.
-  BigFloat approx(prec_t arg1=UNUSED_PREC, prec_t arg2=UNUSED_PREC) {
+  BigFloat approx(prec_t /*arg1=UNUSED_PREC*/, prec_t /*arg2=UNUSED_PREC*/) {
     return (*this);
   }
 
