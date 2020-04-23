@@ -39,3 +39,5 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC ${CORE_TWO_COMPILE_DEFINITIONS
 target_compile_options(${PROJECT_NAME} PUBLIC ${CORE_TWO_COMPILE_OPTIONS})
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
 
+add_subdirectory(tests ${PROJECT_NAME}tests)
+
