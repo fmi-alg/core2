@@ -152,9 +152,9 @@ public:
   { assert(_isok); return _r_prec; }
   prec_t get_a_prec() const
   { assert(_isok); return _a_prec; }
-  double r_approx(int prec) const
+  double r_approx(int /*prec*/) const
   { assert(_isok); return fpVal; }
-  double a_approx(int prec) const
+  double a_approx(int /*prec*/) const
   { assert(_isok); return fpVal; }
 
   /// from "Exact Geometric Predicates using Cascaded Computation" P176

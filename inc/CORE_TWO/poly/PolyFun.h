@@ -54,7 +54,7 @@ MAX_TYPE(NT, T) eval(Polynomial<NT> &p,const T& f) {	// evaluation
 //
 template <class NT>
 BigFloat2 evalApprox(Polynomial <NT> &p, const BigFloat& f, 
-	const extLong& r=defRelPrec, const extLong& a=defAbsPrec) {// evaluation
+	const extLong& r=defRelPrec, const extLong& /*a*/=defAbsPrec) {// evaluation
   int deg = p.getTrueDegree();
   
   if (deg == -1)

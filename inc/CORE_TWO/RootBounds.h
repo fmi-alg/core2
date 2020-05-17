@@ -41,12 +41,12 @@ public:
 #endif
   bool is_constructive() const { return false; }
   unsigned long get_bound() const { return bound; }
-  template <typename T> void set(const T& value) {}
-  void neg(const thisClass& child) {}
-  void root(const thisClass& child, unsigned long k) {}
-  void addsub(const thisClass& f, const thisClass& s) {}
-  void mul(const thisClass& f, const thisClass& s) {}
-  void div(const thisClass& f, const thisClass& s) {}
+  template <typename T> void set(const T& /*value*/) {}
+  void neg(const thisClass& /*child*/) {}
+  void root(const thisClass& /*child*/, unsigned long /*k*/) {}
+  void addsub(const thisClass& /*f*/, const thisClass& /*s*/) {}
+  void mul(const thisClass& /*f*/, const thisClass& /*s*/) {}
+  void div(const thisClass& /*f*/, const thisClass& /*s*/) {}
 };
 
 const double log_5 = std::log(double(5)) / std::log(double(2));

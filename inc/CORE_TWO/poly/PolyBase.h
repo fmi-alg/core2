@@ -95,7 +95,7 @@ public:
     }
   }
   /// constructor from <tt>char*</tt> (no implicit conversion)
-  PolyBase(const char* s, char c) { std::cout << "error";}
+  PolyBase(const char* /*s*/, char /*c*/) { std::cout << "error";}
 
   /// assignment operator for <tt>PolyBase</tt>
   PolyBase& operator=(const PolyBase& rhs) {

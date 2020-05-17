@@ -760,7 +760,7 @@ public:
    /// division for <tt>T/BigFloat</tt> (fixed version)
   template <typename T>
   int div(const T& x, const T& y, 
-          prec_t prec = getDefaultBFdivPrec(), rnd_t rnd = MPFR_RND) {
+          prec_t /*prec = getDefaultBFdivPrec()*/, rnd_t /*rnd = MPFR_RND*/) {
     return div(BigFloat(x), BigFloat(y));
   }
   //@}

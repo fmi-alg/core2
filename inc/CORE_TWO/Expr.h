@@ -372,7 +372,7 @@ public:
   // Chee: we use the same trick as for rootOf(...):
   /// radical -- alternative name for root(n,k)
   template<class NT>
-  friend ExprT radical(const ExprT& e, const NT& n, unsigned long k) {
+  friend ExprT radical(const ExprT& /*e*/, const NT& n, unsigned long k) {
     assert(n>=0 && k>=1);
     /*  The following code is slower because root calls MPFR
      *  while this code uses our own Newton iteration.
@@ -391,18 +391,18 @@ public:
   //
   /// helper function for constructing Polynomial node (n-th root of poly p)
   template <class NT>
-  friend ExprT rootOf(const ExprT & e, const Polynomial<NT>& p, int n = 0) {
+  friend ExprT rootOf(const ExprT & /*e*/, const Polynomial<NT>& p, int n = 0) {
     return ExprT(new ConstPolyRepT<RootBd, Filter, Kernel, NT>(p, n));
   }
   /// helper function for constructing Polynomial node witb BFInterval
   template <class NT>
-  friend ExprT rootOf(const ExprT & e, const Polynomial<NT>& p,
+  friend ExprT rootOf(const ExprT & /*e*/, const Polynomial<NT>& p,
 		const BFInterval& I) {
     return ExprT(new ConstPolyRepT<RootBd, Filter, Kernel, NT>(p, I));
   }
   /// helper function for constructing Polynomial node with pair of BigFloats
   template <class NT, class T>
-  friend ExprT rootOf(const ExprT & e, const Polynomial<NT>& p,
+  friend ExprT rootOf(const ExprT & /*e*/, const Polynomial<NT>& p,
 	  const T& x, const T& y) {
     return ExprT(new ConstPolyRepT<RootBd, Filter, Kernel, NT>(p, BFInterval(x, y)));
   }
